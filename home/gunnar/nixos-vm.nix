@@ -3,6 +3,7 @@
 
   imports = [ 
     ./home.nix
+    ./dotfiles
     ../features/cli
     ../features/desktop
     ../common 
@@ -18,6 +19,7 @@
       wayland.enable = true;
       hyprland.enable = true;
       waybar.enable = true;
+      fonts.enable = true;
     };
   };
 

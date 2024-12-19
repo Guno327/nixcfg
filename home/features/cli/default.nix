@@ -29,6 +29,10 @@
     tldr
     zip
     unzip
+    neovim
+    clang
+    rustc
+    cargo
   ];
 
 }
