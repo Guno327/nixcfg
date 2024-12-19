@@ -1,13 +1,6 @@
 {
   description = ''
-    For questions just DM me on X: https://twitter.com/@m3tam3re
-    There is also some NIXOS content on my YT channel: https://www.youtube.com/@m3tam3re
-
-    One of the best ways to learn NIXOS is to read other peoples configurations. I have personally learned a lot from Gabriel Fontes configs:
-    https://github.com/Misterio77/nix-starter-configs
-    https://github.com/Misterio77/nix-config
-
-    Please also check out the starter configs mentioned above.
+    Flake for Guno327's nix installs
   '';
 
   inputs = {
@@ -23,12 +16,18 @@
       url = "github:Guno327/dotfiles";
       flake = false;
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { 
     self,
     dotfiles,
-    home-manager, 
+    home-manager,
+    disko,
     nixpkgs, 
     ... 
     }@inputs: let
@@ -48,14 +47,19 @@
       nixosConfigurations = {
         nixos-vm = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/nixos-vm ];
+          modules = [ 
+            ./hosts/nixos-vm
+            inputs.disko.nixosModules.disko
+          ];
         };
       };
       homeConfigurations = {
         "gunnar@nixos-vm" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/gunnar/nixos-vm.nix ];
+          modules = [ 
+            ./home/gunnar/nixos-vm.nix
+          ];
         };
       };
     };

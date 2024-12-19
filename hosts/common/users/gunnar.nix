@@ -26,5 +26,5 @@
     packages = [inputs.home-manager.packages.${pkgs.system}.default];
   };
   home-manager.users.gunnar =
-    import gunnar/${config.networking.hostName}.nix;
+    import ../../../home/gunnar/${config.networking.hostName}.nix;
 }
