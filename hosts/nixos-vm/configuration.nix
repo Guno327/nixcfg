@@ -80,16 +80,14 @@
     allowSFTP = true;
   };
 
-  # Hyprland
+  programs.ssh.startAgent = true;
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
 
-  # Fish
-  programs.fish = {
-    enable = true;
-  };
+  programs.fish.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -12,6 +12,7 @@
   features = {
     cli = {
       fish.enable = true;
+      git.enable = true;
       fzf.enable = true;
       neofetch.enable = true;
     };

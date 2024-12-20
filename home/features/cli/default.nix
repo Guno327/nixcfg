@@ -3,6 +3,7 @@
     ./fish.nix
     ./fzf.nix
     ./neofetch.nix
+    ./git.nix
   ];  
 
   programs.zoxide = {
