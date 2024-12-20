@@ -16,18 +16,12 @@
       url = "github:Guno327/dotfiles";
       flake = false;
     };
-
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = { 
     self,
     dotfiles,
     home-manager,
-    disko,
     nixpkgs, 
     ... 
     }@inputs: let
@@ -49,7 +43,6 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ 
             ./hosts/nixos-vm
-            inputs.disko.nixosModules.disko
           ];
         };
       };
