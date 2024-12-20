@@ -13,6 +13,14 @@ with lib; let
         enable = true;
 	userName = "Guno327";
 	userEmail = "gunnarhovik@outlook.com";
+
+	extraConfig = {
+	  url = {
+	    "ssh://git@host" = {
+	      insteadOf = "otherhost";
+	    };
+	  };
+	};
       };
     };
 }
