@@ -11,8 +11,10 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      kitty
       hyprshot
       hyprlock
+      brave
       qt6.qtwayland
       waypipe
       wf-recorder
