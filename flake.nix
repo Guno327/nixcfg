@@ -45,6 +45,12 @@
             ./hosts/nixos-vm
           ];
         };
+        nixos-laptop = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [ 
+            ./hosts/nixos-laptop
+          ];
+        };
       };
       homeConfigurations = {
         "gunnar@nixos-vm" = home-manager.lib.homeManagerConfiguration {
@@ -52,6 +58,13 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [ 
             ./home/gunnar/nixos-vm.nix
+          ];
+        };
+        "gunnar@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ 
+            ./home/gunnar/nixos-laptop.nix
           ];
         };
       };
