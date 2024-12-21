@@ -9,6 +9,7 @@
     ./hyprland.nix
     ./fonts.nix
     ./kitty.nix
+    ./minecraft.nix
   ];
 
   home.packages = with pkgs; [
