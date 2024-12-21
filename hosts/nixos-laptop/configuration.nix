@@ -26,6 +26,18 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  
+  # Enable bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
+  # Enable audio
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "America/Denver";
@@ -51,14 +63,25 @@
     variant = "";
   };
 
+  # Graphics
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim
+    lunarvim
     git
+    lutris
+    nvtopPackages.amd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

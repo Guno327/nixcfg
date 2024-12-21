@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -173,67 +172,83 @@ in {
             margin-left: 0px;
         }
       '';
-
       settings = {
         mainbar = {
-          layer = "top";
-          position = "top";
-          mod = "dock";
-          exclusive = true;
-          passthrough = false;
-          gtk-layer-shell = true;
-          height = 0;
-          modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
-          modules-center = ["hyprland/window"];
-          modules-right = [
-            "tray"
-          ];
+        layer = "top";
+        position = "top";
+        mod = "dock";
+        exclusive = true;
+        passthrough = false;
+        gtk-layer-shell = true;
+        height = 0;
+        modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
+        modules-center = ["hyprland/window"];
+        modules-right = ["pulseaudio" "network" "backlight" "battery" "tray"];
 
-          "hyprland/window" = {
-            format = "👉 {}";
+        "hyprland/window" = {
+            format = "> {}";
             seperate-outputs = true;
-          };
-          "hyprland/workspaces" = {
-            disable-scroll = true;
-            all-outputs = true;
-            on-click = "activate";
-            format = " {name} {icon} ";
-            on-scroll-up = "hyprctl dispatch workspace e+1";
-            on-scroll-down = "hyprctl dispatch workspace e-1";
-            format-icons = {
-              "1" = "";
-              "2" = "";
-              "3" = "";
-              "4" = "";
-              "5" = "";
-              "6" = "";
-              "7" = "";
-            };
-            persistent_workspaces = {
-              "1" = [];
-              "2" = [];
-              "3" = [];
-              "4" = [];
-	      "5" = [];
-            };
-          };
-          "custom/weather" = {
-            format = "{}°C";
-            tooltip = true;
-            interval = 3600;
-            exec = "wttrbar --location Pockau-Lengefeld";
-            return-type = "json";
-          };
-          tray = {
-            icon-size = 13;
-            spacing = 10;
-          };
-          clock = {
-            format = " {:%R   %d/%m}";
-            tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        };
+        "hyprland/workspaces" = {
+           disable-scroll = true;
+          all-outputs = true;
+          on-click = "activate";
+          format = " {name} ";
+          on-scroll-up = "hyprctl dispatch workspace e+1";
+          on-scroll-down = "hyprctl dispatch workspace e-1";
+          persistent_workspaces = {
+            "1" = [];
+            "2" = [];
+            "3" = [];
+            "4" = [];
+            "5" = [];
+            "6" = [];
           };
         };
+        "custom/weather" = {
+          format = "{}°F";
+          tooltip = true;
+          interval = 3600;
+          exec = "wttrbar --fahrenheit";
+          return-type = "json";
+        };
+        tray = {
+          icon-size = 13;
+          spacing = 10;
+        };
+        clock = {
+          format = " {:%R   %d/%m}";
+          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+        };
+        pulseaudio = {
+          format = "{icon} {volume}";
+          format-icons = {
+            default = " ";
+            headphone = "󰋋";
+          };
+        };
+        backlight = {
+          format = "󰖨  {percent}";
+        };
+        battery = {
+          format = "{icon} {capacity}";
+          interval = 10;
+          states = {
+            critical = 10;
+            warning = 30;
+            normal = 50;
+            high = 80;
+            full = 95;
+          };
+          format-plugged = "  {capacity}";
+          format-icons = [ " " " " " " " " " " ]; 
+        };
+        network = {
+          format-wifi = "  {essid}";
+          format-ethernet = "󰈀  {essid}";
+        };
       };
+    };
     };
   };
 }

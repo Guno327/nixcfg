@@ -66,8 +66,8 @@ with lib; let
             size = 3;
             passes = 3;
           };
-          active_opacity = 0.9;
-          inactive_opacity = 0.5;
+          active_opacity = 1.0;
+          inactive_opacity = 0.9;
         };
 
         animations = {

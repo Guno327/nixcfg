@@ -15,6 +15,8 @@ in {
       hyprshot
       hyprlock
       brave
+      dunst
+      xdg-desktop-portal
       qt6.qtwayland
       waypipe
       wf-recorder
@@ -22,7 +24,9 @@ in {
       wl-clipboard
       wlogout
       wtype
+      wttrbar
       ydotool
     ];
+
   };
 }
