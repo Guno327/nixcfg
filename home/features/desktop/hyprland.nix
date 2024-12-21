@@ -12,9 +12,6 @@ with lib; let
     config = mkIf cfg.enable {
       home.packages = with pkgs; [
         spotifywm
-        dracula-theme
-        dracula-icon-theme
-        bibata-cursors
         hyprshot
         hyprlock
         brave
@@ -31,6 +28,36 @@ with lib; let
         wttrbar
         ydotool
       ];
+
+      gtk = {
+        enable = true;
+        cursorTheme = {
+          package = pkgs.bibata-cursors;
+          name = "Bibata-Modern-Classic";
+          size = 14;
+        };
+        font = {
+         package = pkgs.fira-code;
+         name = "fira-code";
+         size = 14;
+        };
+        theme = {
+          package = pkgs.dracula-theme;
+          name = "Dracula";
+        };
+        iconTheme = {
+          package = pkgs.dracula-icon-theme;
+          name = "Dracula";
+        };
+      };
+
+      qt = {
+        enable = true;
+        style = {
+          package = pkgs.dracula-qt5-theme;
+          name = "dracula-theme";
+        };
+      };
 
       programs.hyprlock = {
         enable = true;
@@ -84,17 +111,10 @@ with lib; let
           "waybar"
           "hyprpaper"
           "wl-paste -p -t text --watch clipman store -P --histpath=\"~/.local/share/clipman-primary.json\""
-          "hyprctl setcursor Bibata-Modern-Classic"
-        ];
-
-        exec = [
-          "gsettings set org.gnome.desktop.interface gtk-theme 'Dracula'"
-          "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
         ];
 
         env = [
           "WLR_NO_HARDWARE_CURSORS,1"
-          "GTK_THEME,Dracula"
         ];
 
         input = {

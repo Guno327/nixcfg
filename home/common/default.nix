@@ -1,4 +1,4 @@
-{ config, lib, outputs, pkgs, ... }: {
+{ lib, outputs, pkgs, ... }: {
   nixpkgs = {
     # You can add overlays here
     overlays = [
