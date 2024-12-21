@@ -17,7 +17,7 @@ in {
       font.size = 14;
       shellIntegration.enableFishIntegration = true;
       shellIntegration.enableBashIntegration = true;
-      theme = "Dracula";
+      themeFile = "Dracula";
     };
   };
 }

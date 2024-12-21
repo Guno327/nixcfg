@@ -40,6 +40,9 @@
     pulse.enable = true;
   };
 
+  # Security
+  security.pam.services.hyprlock = {};
+  
   # Set your time zone.
   time.timeZone = "America/Denver";
 
@@ -67,10 +70,9 @@
   # Graphics
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   # Environment varibales
