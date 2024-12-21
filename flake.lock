@@ -52,28 +52,11 @@
         "type": "github"
       }
     },
-    "obsidian-vault": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1734066617,
-        "narHash": "sha256-u9BwF3MI0tqWAtpwsRORYAu/zvVq1cDyhhkP1ZcCseg=",
-        "owner": "Guno327",
-        "repo": "Obsidian-Vault",
-        "rev": "9ae1a177fbbc830d9c9c70266aab926194c6d197",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Guno327",
-        "repo": "Obsidian-Vault",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "dotfiles": "dotfiles",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "obsidian-vault": "obsidian-vault",
         "scripts": "scripts"
       }
     },

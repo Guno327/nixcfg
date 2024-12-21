@@ -11,16 +11,17 @@ with lib; let
     config = mkIf cfg.enable {
       programs.git = {
         enable = true;
-	userName = "Guno327";
-	userEmail = "gunnarhovik@outlook.com";
+      	userName = "Guno327";
+	      userEmail = "gunnarhovik@outlook.com";
 
-	extraConfig = {
-	  url = {
-	    "ssh://git@host" = {
-	      insteadOf = "otherhost";
+	      extraConfig = {
+	        url = {
+	          "ssh://git@host" = {
+	          insteadOf = "otherhost";
+	        };
+          init.defaultBranch = "main";
+	      };
 	    };
-	  };
-	};
-      };
     };
+  };
 }
