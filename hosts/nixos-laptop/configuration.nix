@@ -72,16 +72,24 @@
     driSupport32Bit = true;
   };
 
+  # Environment varibales
+  environment.variables = {
+    "FLAKE_BRANCH" = "nixos-laptop";
+  };
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    brightnessctl
     lunarvim
     git
     lutris
     nvtopPackages.amd
+    webcord-vencord
+    obsidian
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -22,6 +22,7 @@
       waybar.enable = true;
       wofi.enable = true;
       fonts.enable = true;
+      kitty.enable = true;
     };
   };
 

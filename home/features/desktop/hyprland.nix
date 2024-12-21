@@ -22,6 +22,11 @@ with lib; let
           "wl-paste -p -t text --watch clipman store -P --histpath=\"~/.local/share/clipman-primary.json\""
         ];
 
+        exec = [
+          "gsettings set org.gnome.desktop.interface gtk-theme 'Dracula'"
+          "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
+        ];
+
         env = [
           "XCURSOR_SIZE,32"
           "WLR_NO_HARDWARE_CURSORS,1"
@@ -50,7 +55,7 @@ with lib; let
           "col.active_border" = "rgba(9742b5ee) rgba(9742b5ee) 45deg";
           "col.inactive_border" = "rgba(595959aa)";
           allow_tearing = false;
-	  layout = "dwindle";
+	        layout = "dwindle";
         };
 
         decoration = {
@@ -130,14 +135,12 @@ with lib; let
 
         bind = [
           "$mainMod, RETURN, exec, kitty -e fish -c 'neofetch; exec fish'"
-          "$mainMod, Escape, exec, wlogout -p layer-shell"
           "$mainMod, P, togglefloating"
           "$mainMod, C, killactive"
-          "$mainMod, M, exit"
+          "$mainMod, M, exec, wlogout -p layer-shell"
           "$mainMod, F, fullscreen"
           "$mainMod, V, togglefloating"
           "$mainMod, D, exec, wofi --show drun --allow-images"
-          "$mainMod, P, exec, wofi-pass"
           "$mainMod SHIFT, P, pseudo"
           "$mainMod, J, togglesplit"
           "$mainMod, left, movefocus, l"
@@ -166,11 +169,19 @@ with lib; let
           "$mainMod SHIFT, 0, movetoworkspace, 10"
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
+          ", XF86MonBrightnessUp, exec, light -A 5"
+          ", XF86MonBrightnessDown, exec, light -A 5"
         ];
 
         bindm = [
           "$mainMod, mouse:272, movewindow"
           "$mainMod, mouse:273, resizewindow"
+        ];
+
+        bindl = [
+          ", XF86AudioPlay, exec, playerctl play-pause"
+          ", XF86AudioNext, exec, playerctl next"
+          ", XF86AudioPrev, exec, playerctl previous"
         ];
 
         windowrulev2 = [
