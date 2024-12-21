@@ -219,6 +219,7 @@ in {
         };
         pulseaudio = {
           format = "{icon} {volume}";
+          format-muted = "󰝟 ";
           format-icons = {
             default = " ";
             headphone = "󰋋";

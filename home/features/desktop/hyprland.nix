@@ -264,8 +264,8 @@ with lib; let
           "$mainMod SHIFT, 0, movetoworkspace, 10"
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
-          ", XF86MonBrightnessUp, exec, light -A 5"
-          ", XF86MonBrightnessDown, exec, light -A 5"
+          ", XF86MonBrightnessUp, exec, brightnessctl --quiet s 10-"
+          ", XF86MonBrightnessDown, exec, brightnessctl --quiet s +10"
         ];
 
         bindm = [
@@ -277,6 +277,12 @@ with lib; let
           ", XF86AudioPlay, exec, playerctl play-pause"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86AudioPrev, exec, playerctl previous"
+        ];
+
+        binde = [
+          ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
+          ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
+          ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ];
 
         windowrulev2 = [
