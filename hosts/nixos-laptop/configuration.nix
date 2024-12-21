@@ -87,8 +87,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     steamcmd
-    steam-tui
     brightnessctl
+    speedtest-cli
     lunarvim
     git
     lutris

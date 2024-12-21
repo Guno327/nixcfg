@@ -149,6 +149,7 @@ in {
 
         #pulseaudio {
             color: #89b4fa;
+            border-radius: 10px 0px 0px 10px;
             border-left: 0px;
             border-right: 0px;
         }
@@ -183,7 +184,7 @@ in {
         height = 0;
         modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
         modules-center = ["hyprland/window"];
-        modules-right = ["pulseaudio" "network" "backlight" "battery" "tray"];
+        modules-right = ["tray" "pulseaudio" "network" "backlight" "battery"];
 
         "hyprland/window" = {
             format = "> {}";
@@ -205,7 +206,7 @@ in {
           format = "{}°F";
           tooltip = true;
           interval = 3600;
-          exec = "wttrbar --fahrenheit";
+          exec = "wttrbar --fahrenheit --location SLC";
           return-type = "json";
         };
         tray = {

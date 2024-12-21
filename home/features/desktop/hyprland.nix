@@ -36,11 +36,6 @@ with lib; let
           name = "Bibata-Modern-Classic";
           size = 14;
         };
-        font = {
-         package = pkgs.fira-code;
-         name = "fira-code";
-         size = 14;
-        };
         theme = {
           package = pkgs.dracula-theme;
           name = "Dracula";
@@ -65,9 +60,10 @@ with lib; let
         settings = {
           general = {
             disable_loading_bar = true;
-            grace = 300;
+            grace = 0;
             hide_cursor = true;
             no_fade_in = false;
+            ignore_empty_input = true;
           };
           background = [
           {
@@ -77,9 +73,9 @@ with lib; let
           }];
           input-field = [
           {
+            monitor = "";
             size = "200, 50";
             position = "0, -80";
-            monitor = "";
             dots_center = true;
             fade_on_empty = false;
             font_color = "rgb(202, 211, 245)";
@@ -88,6 +84,26 @@ with lib; let
             outline_thickness = 5;
             placeholder_text = "Password...";
             shadow_passes = 2;
+          }];
+          image = [
+          {
+            monitor = "";
+            path = "~/Pictures/pfp.jpg";
+            size = 150;
+            rounding = -1;
+            border_size = 5;
+            border_color = "rgb(24, 25, 38)";
+            position = "0, 80";
+            halign = "center";
+            valign = "center";
+          }];
+          label = [
+          {
+            monitor = "";
+            text = "cmd[update:10000] echo '$USER' | tr '[:lower:]' '[:upper:]'";
+            position = "0, -20";
+            halign = "center";
+            valign = "center";
           }];
         };
       };

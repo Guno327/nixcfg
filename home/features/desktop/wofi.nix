@@ -49,18 +49,6 @@ in {
           color: #f8f8f2;
         } 
 
-        #entry.activatable #text {
-          color: #282a36;
-        }
-
-        #entry > * {
-          color: #f8f8f2;
-        }
-
-        #entry:selected {
-          background-color: #44475a;
-        }
-
         #entry:selected #text {
           font-weight: bold;
         }
