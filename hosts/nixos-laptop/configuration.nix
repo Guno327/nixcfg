@@ -82,7 +82,15 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
- 
+
+  # Enable AppImage support
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+    package = pkgs.appimage-run;
+  };
+
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
