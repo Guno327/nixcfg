@@ -79,6 +79,10 @@
   environment.variables = {
     "FLAKE_BRANCH" = "nixos-laptop";
   };
+  
+  # Lid Handling
+  services.logind.lidSwitchExternalPower = "ignore";
+
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

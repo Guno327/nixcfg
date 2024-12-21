@@ -115,7 +115,7 @@ with lib; let
           wallpaper = [ "eDP-1,~/Pictures/wallpaper.png" ];
         };
       };
-
+      
       wayland.windowManager.hyprland = {
         enable = true;
 	      settings = {
