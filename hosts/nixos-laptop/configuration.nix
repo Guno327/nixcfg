@@ -83,12 +83,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    steamcmd
+    steam-tui
     brightnessctl
     lunarvim
     git
     lutris
     nvtopPackages.amd
-    webcord-vencord
+    powertop
+    webcord
     obsidian
   ];
 
@@ -109,6 +112,8 @@
     allowSFTP = true;
   };
 
+  services.tlp.enable = true;
+
   programs.ssh.startAgent = true;
 
   programs.hyprland = {
@@ -117,14 +122,6 @@
   };
 
   programs.fish.enable = true;
-
-  # Steam
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

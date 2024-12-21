@@ -11,10 +11,12 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      bibata-cursors
       hyprshot
       hyprlock
       brave
       dunst
+      nwg-look
       xdg-desktop-portal
       qt6.qtwayland
       waypipe

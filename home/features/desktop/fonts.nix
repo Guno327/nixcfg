@@ -18,6 +18,8 @@ in {
       font-manager
       font-awesome_5
       noto-fonts
+      noto-fonts-cjk-serif
+      noto-fonts-cjk-sans
     ];
   };
 }

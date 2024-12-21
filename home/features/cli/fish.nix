@@ -24,7 +24,8 @@ in {
       ls = "eza";
       grep = "rg";
       ps = "procs";
-      vim = "nvim";
+      vim = "lvim";
+      nvim = "lvim";
       switch = "sudo nixos-rebuild switch --flake /home/gunnar/.nixcfg#$FLAKE_BRANCH";
     };
   };

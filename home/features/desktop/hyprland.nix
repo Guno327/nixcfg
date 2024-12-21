@@ -11,7 +11,7 @@ with lib; let
     config = mkIf cfg.enable {
       wayland.windowManager.hyprland = {
         enable = true;
-	settings = {
+	      settings = {
           xwayland = {
           force_zero_scaling = true;
         };
@@ -20,6 +20,7 @@ with lib; let
           "waybar"
           "hyprpaper"
           "wl-paste -p -t text --watch clipman store -P --histpath=\"~/.local/share/clipman-primary.json\""
+          "hyprctl setcursor Bibata-Modern-Classic"
         ];
 
         exec = [
@@ -28,8 +29,6 @@ with lib; let
         ];
 
         env = [
-          "XCURSOR_SIZE,32"
-          "WLR_NO_HARDWARE_CURSORS,1"
           "GTK_THEME,Dracula"
         ];
 
