@@ -9,37 +9,45 @@ with lib; let
     options.features.desktop.hyprland.enable = mkEnableOption "enable extended fish configuration";
 
     config = mkIf cfg.enable {
-        programs.hyprlock.enable = true;
-        programs.hyprlock.settings = {
-          general = {
-            disable_loading_bar = true;
-            grace = 300;
-            hide_cursor = true;
-            no_fade_in = false;
-          };
-
-          background = [
-          {
-            path = "screenshot";
-            blur_passes = 3;
-            blur_size = 8;
-          }];
-
-          input-field = [
-          {
-            size = "200, 50";
-            position = "0, -80";
-            monitor = "";
-            dots_center = true;
-            fade_on_empty = false;
-            font_color = "rgb(202, 211, 245)";
-            inner_color = "rgb(91, 96, 120)";
-            outer_color = "rgb(24, 25, 38)";
-            outline_thickness = 5;
-            placeholder_text = "Password...";
-            shadow_passes = 2;
-          }];
+      programs.hyprlock.enable = true;
+      programs.hyprlock.settings = {
+        general = {
+          disable_loading_bar = true;
+          grace = 300;
+          hide_cursor = true;
+          no_fade_in = false;
         };
+
+        background = [
+        {
+          path = "screenshot";
+          blur_passes = 3;
+          blur_size = 8;
+        }];
+
+        input-field = [
+        {
+          size = "200, 50";
+          position = "0, -80";
+          monitor = "";
+          dots_center = true;
+          fade_on_empty = false;
+          font_color = "rgb(202, 211, 245)";
+          inner_color = "rgb(91, 96, 120)";
+          outer_color = "rgb(24, 25, 38)";
+          outline_thickness = 5;
+          placeholder_text = "Password...";
+          shadow_passes = 2;
+        }];
+      };
+
+      services.hyprpaper = {
+        enable = true;
+        settings = {
+          preload = [ "~/Pictures/wallpaper.png" ];
+          wallpaper = [ "eDP-1,~/Pictures/wallpaper.png" ];
+        };
+      };
 
       wayland.windowManager.hyprland = {
         enable = true;
@@ -61,6 +69,7 @@ with lib; let
         ];
 
         env = [
+          "WLR_NO_HARDWARE_CURSORS,1"
           "GTK_THEME,Dracula"
         ];
 
@@ -90,12 +99,6 @@ with lib; let
         };
 
         decoration = {
-          "col.shadow" = "rgba(1E202966)";
-          drop_shadow = true;
-          shadow_range = 60;
-          shadow_offset = "1 2";
-          shadow_render_power = 3;
-          shadow_scale = 0.97;
           rounding = 8;
           blur = {
             enabled = true;
@@ -171,7 +174,7 @@ with lib; let
           "$mainMod, M, exec, wlogout -p layer-shell"
           "$mainMod, F, fullscreen"
           "$mainMod, V, togglefloating"
-          "$mainMod, D, exec, wofi --show drun --allow-images"
+          "$mainMod, D, exec, wofi --show drun"
           "$mainMod SHIFT, P, pseudo"
           "$mainMod, J, togglesplit"
           "$mainMod, L, exec, hyprlock"

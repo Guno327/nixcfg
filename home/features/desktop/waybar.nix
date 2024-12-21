@@ -190,19 +190,15 @@ in {
             seperate-outputs = true;
         };
         "hyprland/workspaces" = {
-           disable-scroll = true;
+          disable-scroll = true;
           all-outputs = true;
           on-click = "activate";
           format = " {name} ";
-          on-scroll-up = "hyprctl dispatch workspace e+1";
-          on-scroll-down = "hyprctl dispatch workspace e-1";
           persistent_workspaces = {
             "1" = [];
             "2" = [];
             "3" = [];
             "4" = [];
-            "5" = [];
-            "6" = [];
           };
         };
         "custom/weather" = {

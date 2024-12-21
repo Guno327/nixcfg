@@ -16,7 +16,7 @@ in {
       hyprlock
       brave
       dunst
-      nwg-look
+      nautilus
       xdg-desktop-portal
       qt6.qtwayland
       waypipe
