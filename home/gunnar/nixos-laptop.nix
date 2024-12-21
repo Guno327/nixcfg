@@ -3,7 +3,7 @@
 
   imports = [ 
     ./home.nix
-    ./dotfiles
+    ./repos
     ../features/cli
     ../features/desktop
     ../common 

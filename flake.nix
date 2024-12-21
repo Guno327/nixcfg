@@ -15,11 +15,23 @@
       url = "github:Guno327/dotfiles";
       flake = false;
     };
+
+    obsidian-vault = {
+      url = "github:Guno327/Obsidian-Vault";
+      flake = false;
+    };
+
+    scripts = {
+      url = "github:Guno327/scripts";
+      flake = false;
+    };
   };
 
   outputs = { 
     self,
     dotfiles,
+    obsidian-vault,
+    scripts,
     home-manager,
     nixpkgs, 
     ... 
