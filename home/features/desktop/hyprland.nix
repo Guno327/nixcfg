@@ -65,12 +65,12 @@ with lib; let
           image = [
           {
             monitor = "";
-            path = "~/Pictures/pfp.jpg";
+            path = "~/pictures/pfp.jpg";
             size = 150;
             rounding = -1;
             border_size = 5;
             border_color = "rgb(24, 25, 38)";
-            position = "0, 80";
+            position = "0, 60";
             halign = "center";
             valign = "center";
           }];
@@ -78,7 +78,7 @@ with lib; let
           {
             monitor = "";
             text = "cmd[update:10000] echo '$USER' | tr '[:lower:]' '[:upper:]'";
-            position = "0, -20";
+            position = "0, -35";
             halign = "center";
             valign = "center";
           }];
@@ -88,8 +88,8 @@ with lib; let
       services.hyprpaper = {
         enable = true;
         settings = {
-          preload = [ "~/Pictures/wallpaper.png" ];
-          wallpaper = [ "eDP-1,~/Pictures/wallpaper.png" ];
+          preload = [ "~/pictures/wallpaper.png" ];
+          wallpaper = [ "eDP-1,~/pictures/wallpaper.png" ];
         };
       };
       
