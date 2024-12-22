@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -17,7 +16,6 @@ in {
       font.size = 14;
       shellIntegration.enableFishIntegration = true;
       shellIntegration.enableBashIntegration = true;
-      themeFile = "Dracula";
     };
   };
 }

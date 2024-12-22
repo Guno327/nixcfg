@@ -36,6 +36,8 @@ in {
       };
     };
 
+    programs.kitty.themeFile = "Dracula";
+
     home.file.".config/fcitx5/conf/classicui.conf".text = ''
       Theme=Dracula
       Font="fira-code 14"
