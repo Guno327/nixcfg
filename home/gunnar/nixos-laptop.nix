@@ -23,6 +23,7 @@
       fonts.enable = true;
       kitty.enable = true;
       minecraft.enable = true;
+      dracula-theme.enable = true;
     };
   };
 

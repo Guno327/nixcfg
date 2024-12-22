@@ -146,6 +146,21 @@
 
   programs.fish.enable = true;
 
+  # Japanese IME
+  services.xserver.desktopManager.runXdgAutostartIfNone = true;
+  i18n.inputMethod = {
+    type = "fcitx5";
+    enable = true;
+    fcitx5 = {
+      addons = with pkgs; [
+        fcitx5-mozc-ut
+        fcitx5-gtk
+      ];
+      waylandFrontend = true;
+    };
+  };
+
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];

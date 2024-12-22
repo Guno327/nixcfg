@@ -29,31 +29,6 @@ with lib; let
         ydotool
       ];
 
-      gtk = {
-        enable = true;
-        cursorTheme = {
-          package = pkgs.bibata-cursors;
-          name = "Bibata-Modern-Classic";
-          size = 14;
-        };
-        theme = {
-          package = pkgs.dracula-theme;
-          name = "Dracula";
-        };
-        iconTheme = {
-          package = pkgs.dracula-icon-theme;
-          name = "Dracula";
-        };
-      };
-
-      qt = {
-        enable = true;
-        style = {
-          package = pkgs.dracula-qt5-theme;
-          name = "dracula-theme";
-        };
-      };
-
       programs.hyprlock = {
         enable = true;
         
@@ -127,6 +102,8 @@ with lib; let
           "waybar"
           "hyprpaper"
           "wl-paste -p -t text --watch clipman store -P --histpath=\"~/.local/share/clipman-primary.json\""
+          "fcitx5 -d -r"
+          "fcitx5-remote -r"
         ];
 
         env = [
@@ -223,6 +200,7 @@ with lib; let
           "float, title:^(Picture-in-Picture)$"
           "size 800 600, title:^(Volume Control)$"
           "move 75 44%, title:^(Volume Control)$"
+          "pseudo, fcitx"
         ];
 
         "$mainMod" = "SUPER";
