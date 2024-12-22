@@ -19,7 +19,6 @@
     desktop = {
       hyprland.enable = true;
       waybar.enable = true;
-      wofi.enable = true;
       fonts.enable = true;
       kitty.enable = true;
       minecraft.enable = true;
@@ -43,5 +42,10 @@
       ];
     };
   };
-  
+
+  programs.waybar.settings = {
+    mainbar.modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
+    mainbar.modules-center = ["hyprland/window"];
+    mainbar.modules-right = ["tray" "pulseaudio" "network" "backlight" "battery"];
+  };
 }

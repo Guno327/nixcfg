@@ -29,6 +29,8 @@ with lib; let
         ydotool
       ];
 
+      programs.wofi.enable = true;
+
       programs.hyprlock = {
         enable = true;
         
