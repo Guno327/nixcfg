@@ -8,7 +8,7 @@ with lib; let
   cfg = config.features.desktop.minecraft;
 in {
   options.features.desktop.minecraft.enable =
-    mkEnableOption "install additional fonts for dekstop apps";
+    mkEnableOption "Install minecraft";
 
   config = mkIf cfg.enable {
     programs.java = {

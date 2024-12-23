@@ -11,7 +11,4 @@
     ./minecraft.nix
     ./dracula-theme.nix
   ];
-
-  home.packages = with pkgs; [
-  ];
 }
