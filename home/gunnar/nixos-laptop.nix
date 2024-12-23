@@ -21,6 +21,7 @@
       kitty.enable = true;
       minecraft.enable = true;
       dracula-theme.enable = true;
+      gammastep.enable = true;
     };
   };
 

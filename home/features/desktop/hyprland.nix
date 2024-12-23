@@ -17,7 +17,7 @@ with lib; let
         brave
         dunst
         nautilus
-        xdg-desktop-portal
+        xdg-desktop-portal-hyprland
         qt6.qtwayland
         waypipe
         wf-recorder
