@@ -244,8 +244,8 @@ with lib; let
           "$mainMod SHIFT, 0, movetoworkspace, 10"
           "$mainMod, mouse_down, workspace, e+1"
           "$mainMod, mouse_up, workspace, e-1"
-          ", XF86MonBrightnessUp, exec, brightnessctl --quiet s 10-"
-          ", XF86MonBrightnessDown, exec, brightnessctl --quiet s +10"
+          ", XF86MonBrightnessDown, exec, brightnessctl --quiet s 10-"
+          ", XF86MonBrightnessUp, exec, brightnessctl --quiet s +10"
         ];
 
         bindm = [
