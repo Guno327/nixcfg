@@ -20,6 +20,8 @@
       url = "github:Guno327/scripts";
       flake = false;
     };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs = { 
@@ -27,7 +29,8 @@
     dotfiles,
     scripts,
     home-manager,
-    nixpkgs, 
+    nixpkgs,
+    nixos-hardware,
     ... 
     }@inputs: let
       inherit (self) outputs;
@@ -54,6 +57,9 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ 
             ./hosts/nixos-laptop
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-gpu-amd
+            nixos-hardware.nixosModules.common-pc-laptop
           ];
         };
       };
