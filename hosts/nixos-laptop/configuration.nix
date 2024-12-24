@@ -84,6 +84,8 @@
   environment.variables = {
     "FLAKE_BRANCH" = "nixos-laptop";
   };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   
   # Lid Handling
   services.logind.lidSwitchExternalPower = "ignore";
