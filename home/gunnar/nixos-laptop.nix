@@ -39,8 +39,14 @@
 	      "4, monitor:eDP-1"
 	      "5, monitor:eDP-1"
       ];
+
+      env = [
+        "WLR_DRM_DEVICES,/dev/dri/card2"
+        "AQ_DRM_DEVICES,/dev/dri/card2"
+      ];
     };
   };
+
 
   programs.waybar.settings = {
     mainbar.modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
