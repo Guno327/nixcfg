@@ -73,7 +73,8 @@ in {
             high = 80;
             full = 95;
           };
-          format-plugged = "  {capacity}";
+          format-plugged = " {capacity}";
+          format-charging = "󱐋 {capacity}";
           format-icons = [ " " " " " " " " " " ]; 
         };
         network = {

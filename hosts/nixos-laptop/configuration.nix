@@ -20,8 +20,8 @@
   networking.networkmanager.enable = true;
   
   # Enable bluetooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  hardware.bluetooth.enable = false;
+  services.blueman.enable = false;
 
   # Enable audio
   services.pipewire = {
@@ -84,7 +84,6 @@
   # Environment varibales
   environment.variables = {
     "FLAKE_BRANCH" = "nixos-laptop";
-    "DRI_PRIME" = "pci-0000_03_00_0";
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -111,7 +110,6 @@
     lunarvim
     git
     lshw
-    radeontop
   ];
 
   # Brave
@@ -139,7 +137,19 @@
     allowSFTP = true;
   };
 
-  services.tlp.enable = true;
+  services.tlp = {
+    enable = true;
+    settings = {
+      RADEON_DPM_PERF_LEVEL_ON_BAT = "low";
+      RADEON_DPM_STATE_ON_BAT = "battery";
+      RADEON_POWER_PROFILE_ON_BAT = "low";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+    
+      USB_AUTOSUSPEND_DISABLE = 1;
+    };
+  };
 
   programs.ssh.startAgent = true;
 

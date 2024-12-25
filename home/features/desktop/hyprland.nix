@@ -11,11 +11,11 @@ with lib; let
 
     config = mkIf cfg.enable {
       home.packages = with pkgs; [
+        dunst
         hyprshot
         hyprlock
-        dunst
         nautilus
-        xdg-desktop-portal-hyprland
+        playerctl
         qt6.qtwayland
         waypipe
         wf-recorder
@@ -24,6 +24,8 @@ with lib; let
         wlogout
         wtype
         wttrbar
+        wev
+        xdg-desktop-portal-hyprland
         ydotool
       ];
 
@@ -206,7 +208,7 @@ with lib; let
         "$mainMod" = "SUPER";
 
         bind = [
-          "$mainMod, RETURN, exec, kitty -e fish -c 'neofetch; exec fish'"
+          "$mainMod, RETURN, exec, kitty -e fish -c 'exec fish'"
           "$mainMod, P, togglefloating"
           "$mainMod, C, killactive"
           "$mainMod, M, exec, wlogout -p layer-shell"

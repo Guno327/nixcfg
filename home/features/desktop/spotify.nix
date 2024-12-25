@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -11,8 +10,18 @@ in {
     mkEnableOption "Enable and configure spotify";
 
   config = mkIf cfg.enable {
-    services.spotifyd = {
+    programs.spotify-player = {
       enable = true;
+      settings = {
+        theme = "default";
+        enable_media_control = true;
+        enable_notify = false;
+      };
+      keymaps = [
+        { command = "Shuffle"; key_sequence = "c s"; }
+        { command = "Repeat"; key_sequence = "c r"; }
+        { command = "Quit"; key_sequence = "c c"; }
+      ];
     };
   };
 }

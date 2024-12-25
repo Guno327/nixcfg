@@ -25,7 +25,6 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/nur";
-    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = { 
@@ -36,7 +35,6 @@
     nixpkgs,
     nur,
     nixos-hardware,
-    agenix,
     ... 
     }@inputs: let
       inherit (self) outputs;
@@ -68,7 +66,6 @@
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-pc-laptop
-            agenix.nixosModules.default
           ];
         };
       };

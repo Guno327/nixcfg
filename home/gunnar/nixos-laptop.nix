@@ -46,6 +46,13 @@
         "WLR_DRM_DEVICES,/dev/dri/card2"
         "AQ_DRM_DEVICES,/dev/dri/card2"
       ];
+
+        bindl = [
+          ", Next, exec, playerctl play-pause"
+          ", Prior, exec, playerctl next"
+          "SHIFT, Prior, exec, playerctl previous"
+        ];
+
     };
   };
 
