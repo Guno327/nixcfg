@@ -75,6 +75,7 @@ in {
           };
           format-plugged = " {capacity}";
           format-charging = "󱐋 {capacity}";
+          format-full = "";
           format-icons = [ " " " " " " " " " " ]; 
         };
         network = {
