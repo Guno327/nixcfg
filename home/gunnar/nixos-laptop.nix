@@ -59,7 +59,7 @@
 
   programs.waybar.settings = {
     mainbar.modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
-    mainbar.modules-center = ["hyprland/window"];
-    mainbar.modules-right = ["tray" "pulseaudio" "network" "backlight" "battery"];
+    mainbar.modules-center = [];
+    mainbar.modules-right = ["tray" "mpris" "pulseaudio" "network" "backlight" "battery"];
   };
 }

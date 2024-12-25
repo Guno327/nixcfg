@@ -162,6 +162,7 @@ in {
         #network,
         #workspaces,
         #tray,
+        #mpris,
         #backlight {
             background: #1e1e2e;
             padding: 0px 10px;
@@ -171,6 +172,11 @@ in {
         }
 
         #tray {
+            border-radius: 10px;
+            margin-right: 10px;
+        }
+
+        #mpris {
             border-radius: 10px;
             margin-right: 10px;
         }

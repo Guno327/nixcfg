@@ -81,6 +81,23 @@ in {
           format-wifi = "  {essid}";
           format-ethernet = "󰈀  {essid}";
         };
+        mpris = {
+          format = "{player_icon} {title} - {artist} ({position}/{length})";
+          format-paused = "{player_icon} {status}";
+          player-icons = {
+            default = "▶";
+            mpv = "🎵";
+            spotify_player = " ";
+          };
+          status-icons = {
+            paused = "⏸";
+          };
+          ignored-players = [
+            "firefox"
+            "librewolf"
+            "brave"
+          ];
+        };
       };
     };
     };
