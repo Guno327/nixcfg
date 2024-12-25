@@ -11,10 +11,8 @@ with lib; let
 
     config = mkIf cfg.enable {
       home.packages = with pkgs; [
-        spotifywm
         hyprshot
         hyprlock
-        brave
         dunst
         nautilus
         xdg-desktop-portal-hyprland

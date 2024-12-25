@@ -10,5 +10,7 @@
     ./minecraft.nix
     ./dracula-theme.nix
     ./gammastep.nix
+    ./firefox.nix
+    ./spotify.nix
   ];
 }

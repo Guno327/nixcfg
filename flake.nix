@@ -9,8 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
+    };
+
     dotfiles = {
       url = "github:Guno327/dotfiles";
       flake = false;
@@ -22,6 +24,8 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nur.url = "github:nix-community/nur";
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = { 
@@ -30,7 +34,9 @@
     scripts,
     home-manager,
     nixpkgs,
+    nur,
     nixos-hardware,
+    agenix,
     ... 
     }@inputs: let
       inherit (self) outputs;
@@ -42,9 +48,10 @@
         "x86_64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
-    in {
+    in 
+    {
       packages =
-        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system} );
       overlays = import ./overlays { inherit inputs; };
       nixosConfigurations = {
         nixos-vm = nixpkgs.lib.nixosSystem {
@@ -57,9 +64,11 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ 
             ./hosts/nixos-laptop
+
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-pc-laptop
+            agenix.nixosModules.default
           ];
         };
       };

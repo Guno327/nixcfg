@@ -80,9 +80,11 @@
     enable32Bit = true;
   };
 
+
   # Environment varibales
   environment.variables = {
     "FLAKE_BRANCH" = "nixos-laptop";
+    "DRI_PRIME" = "pci-0000_03_00_0";
   };
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -108,6 +110,17 @@
     speedtest-cli
     lunarvim
     git
+    lshw
+    radeontop
+  ];
+
+  # Brave
+  nixpkgs.overlays = [
+    (self : super :{
+      brave = super.brave.override {
+        commandLineArgs = "";
+      };
+    })
   ];
 
   programs.steam = {

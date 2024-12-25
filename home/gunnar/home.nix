@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   pkgs,
@@ -10,6 +11,15 @@
   home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
 
   home.stateVersion = "24.05"; # DO NOT CHANGE
+
+  nixpkgs = {
+    overlays = [
+      inputs.nur.overlays.default
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
 
   home.packages = with pkgs; [
     cowsay
