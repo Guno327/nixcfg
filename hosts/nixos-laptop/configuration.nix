@@ -112,23 +112,13 @@
     lshw
   ];
 
-  # Brave
-  nixpkgs.overlays = [
-    (self : super :{
-      brave = super.brave.override {
-        commandLineArgs = "";
-      };
-    })
-  ];
-
+  # Steam
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh = {

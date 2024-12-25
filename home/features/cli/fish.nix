@@ -29,6 +29,7 @@ in {
       nvim = "lvim";
       switch = "sudo nixos-rebuild switch --flake /home/gunnar/.nixcfg#$FLAKE_BRANCH";
       trim = "/home/$USER/.scripts/trim-generations.sh 3 0 home-manager";
+      steam = "steam &> /dev/null & disown";
     };
   };
   };
