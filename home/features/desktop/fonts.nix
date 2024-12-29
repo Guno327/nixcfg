@@ -14,7 +14,7 @@ in {
     home.packages = with pkgs; [
       fira-code
       fira-code-symbols
-      nerd-fonts.fira-code
+      fira-code-nerdfont
       font-manager
       font-awesome_5
       noto-fonts

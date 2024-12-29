@@ -95,6 +95,12 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Flatpak
+  services.flatpak.enable = true;
+  services.flatpak.packages = [
+    "io.github.zen_browser.zen"
+  ];
+
   # Enable AppImage support
   programs.appimage = {
     enable = true;

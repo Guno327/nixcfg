@@ -5,12 +5,12 @@
 
   inputs = {
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
+      url = "github:nixos/nixpkgs/nixos-24.11";
     };
 
     dotfiles = {
@@ -25,6 +25,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/nur";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
   outputs = { 
@@ -35,6 +36,7 @@
     nixpkgs,
     nur,
     nixos-hardware,
+    nix-flatpak,
     ... 
     }@inputs: let
       inherit (self) outputs;
@@ -66,6 +68,8 @@
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-pc-laptop
+
+            nix-flatpak.nixosModules.nix-flatpak
           ];
         };
       };

@@ -12,7 +12,7 @@ in {
     mkEnableOption "Install and configure firefox";
 
   config = mkIf cfg.enable {
-    programs.librewolf = {
+    programs.firefox = {
       enable = true;
       profiles= {
         gunnar = {
