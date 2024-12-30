@@ -11,6 +11,7 @@ in {
     mkEnableOption "install additional fonts for dekstop apps";
 
   config = mkIf cfg.enable {
+    fonts.fontconfig.enable = true;
     home.packages = with pkgs; [
       fira-code
       fira-code-symbols
