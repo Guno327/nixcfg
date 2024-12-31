@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "dotfiles": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1734749792,
-        "narHash": "sha256-lGmpRqGnJXHLm+BBaw16ZKfi7ff6nTBSjfnLC6YdIKo=",
-        "owner": "Guno327",
-        "repo": "dotfiles",
-        "rev": "a9d8a2a1829102eed4fa91b47cbb484b6bb91d98",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Guno327",
-        "repo": "dotfiles",
-        "type": "github"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -128,29 +112,11 @@
     },
     "root": {
       "inputs": {
-        "dotfiles": "dotfiles",
         "home-manager": "home-manager",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nur": "nur",
-        "scripts": "scripts",
         "zen-browser": "zen-browser"
-      }
-    },
-    "scripts": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1734816626,
-        "narHash": "sha256-IHtAhiFsGxCxiuyYdaQeg/7H8mHm4q3FHV+ui9DtAsw=",
-        "owner": "Guno327",
-        "repo": "scripts",
-        "rev": "6e9aa105f887079cfe2cdbc80da887aff877a345",
-        "type": "github"
-      },
-      "original": {
-        "owner": "Guno327",
-        "repo": "scripts",
-        "type": "github"
       }
     },
     "treefmt-nix": {

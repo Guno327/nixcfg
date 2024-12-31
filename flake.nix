@@ -13,16 +13,6 @@
       url = "github:nixos/nixpkgs/nixos-24.11";
     };
 
-    dotfiles = {
-      url = "github:Guno327/dotfiles";
-      flake = false;
-    };
-
-    scripts = {
-      url = "github:Guno327/scripts";
-      flake = false;
-    };
-
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -34,8 +24,6 @@
 
   outputs = { 
     self,
-    dotfiles,
-    scripts,
     home-manager,
     nixpkgs,
     nur,
@@ -55,8 +43,7 @@
     in 
     {
       packages =
-        forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system} );
-      overlays = import ./overlays { inherit inputs; };
+        forAllSystems (system: nixpkgs.legacyPackages.${system} );
       nixosConfigurations = {
         nixos-vm = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };

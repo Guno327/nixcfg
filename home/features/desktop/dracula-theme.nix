@@ -1,10 +1,5 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-with lib; let
+{ config, lib, pkgs, ... }: with lib;
+let
   cfg = config.features.desktop.dracula-theme;
 in {
   options.features.desktop.dracula-theme.enable =

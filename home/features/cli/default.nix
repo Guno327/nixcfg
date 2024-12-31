@@ -2,8 +2,8 @@
   imports = [
     ./fish.nix
     ./fzf.nix
-    ./neofetch.nix
     ./git.nix
+    ./lvim.nix
   ];  
 
   programs.zoxide = {
@@ -30,10 +30,14 @@
     tldr
     zip
     unzip
-    neovim
     clang
     rustc
     cargo
+    neofetch
+    brightnessctl
+    speedtest-cli
+    git
+    lshw
   ];
 
 }

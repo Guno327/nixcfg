@@ -1,7 +1,6 @@
 { 
   imports = [ 
     ./home.nix
-    ./repos
     ../features/cli
     ../features/desktop
     ../common 
@@ -12,7 +11,7 @@
       fish.enable = true;
       git.enable = true;
       fzf.enable = true;
-      neofetch.enable = true;
+      lvim.enable = true;
     };
     desktop = {
       hyprland.enable = true;

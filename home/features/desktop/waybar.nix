@@ -1,9 +1,5 @@
-{
-  config,
-  lib,
-  ...
-}:
-with lib; let
+{ config, lib, ... }: with lib;
+let
   cfg = config.features.desktop.waybar;
 in {
   options.features.desktop.waybar.enable = mkEnableOption "waybar config";

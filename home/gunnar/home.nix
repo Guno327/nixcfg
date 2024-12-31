@@ -1,25 +1,8 @@
-{
-  inputs,
-  config,
-  lib,
-  pkgs,
-  ... 
-}:
-{
-  # Home Manager needs a bit of information about you and the paths it should manage
+{ config, lib, pkgs, ... }: {
   home.username = lib.mkDefault "gunnar";
   home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
 
   home.stateVersion = "24.05"; # DO NOT CHANGE
-
-  nixpkgs = {
-    overlays = [
-      inputs.nur.overlays.default
-    ];
-    config = {
-      allowUnfree = true;
-    };
-  };
 
   home.packages = with pkgs; [
     cowsay

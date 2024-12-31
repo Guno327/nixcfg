@@ -1,9 +1,5 @@
-{
-  config,
-  lib,
-  ...
-}:
-with lib; let
+{ config, lib, ... }: with lib;
+let
   cfg = config.features.desktop.spotify;
 in {
   options.features.desktop.spotify.enable =

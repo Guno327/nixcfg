@@ -1,9 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ... 
-}:
-{
+{ pkgs, inputs, ... }: {
   imports =
     [
       ./hardware-configuration.nix
@@ -105,11 +100,6 @@
 
   # Packages
   environment.systemPackages = with pkgs; [
-    brightnessctl
-    speedtest-cli
-    lunarvim
-    git
-    lshw
     inputs.zen-browser.packages.${pkgs.system}.default
   ];
 

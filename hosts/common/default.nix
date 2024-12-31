@@ -1,10 +1,4 @@
-{ 
-  pkgs,
-  lib,
-  inputs,
-  outputs,
-  ... }:
-{
+{ pkgs, lib, inputs, outputs, ... }: {
   imports = [
     ./users
     inputs.home-manager.nixosModules.home-manager
@@ -16,13 +10,6 @@
   };
 
   nixpkgs = {
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.stable-packages
-    ];
-
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;

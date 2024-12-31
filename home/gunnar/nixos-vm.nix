@@ -1,7 +1,6 @@
 {
   imports = [ 
     ./home.nix
-    ./dotfiles
     ../features/cli
     ../features/desktop
     ../common 
