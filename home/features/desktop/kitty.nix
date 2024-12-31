@@ -13,5 +13,6 @@ in {
       shellIntegration.enableFishIntegration = true;
       shellIntegration.enableBashIntegration = true;
     };
+    programs.fish.shellAbbrs = { ssh = "kitten ssh"; };
   };
 }
