@@ -9,5 +9,6 @@
     ./gammastep.nix
     ./firefox.nix
     ./spotify.nix
+    ./virt-manager.nix
   ];
 }

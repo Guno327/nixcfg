@@ -28,6 +28,7 @@
       gammastep.enable = true;
       spotify.enable = true;
       firefox.enable = true;
+      virt-manager.enable = true;
     };
   };
 

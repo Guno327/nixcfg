@@ -75,6 +75,11 @@
     enable32Bit = true;
   };
 
+  # KVM
+  programs.virt-manager.enable = true;
+  users.groups.libvirtd.members = [ "gunnar" ];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 
   # Environment varibales
   environment.variables = {

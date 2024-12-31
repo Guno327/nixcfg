@@ -6,7 +6,6 @@
 
   home.packages = with pkgs; [
     cowsay
-    lutris
     nvtopPackages.amd
     powertop
     webcord
