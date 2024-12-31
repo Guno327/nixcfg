@@ -18,8 +18,6 @@ in {
     shellAbbrs = {
       ".." = "cd ..";
       "..." = "cd ../..";
-      ls = "eza";
-      grep = "rg";
       ps = "procs";
       vim = "lvim";
       nvim = "lvim";
