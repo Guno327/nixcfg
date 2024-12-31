@@ -34,7 +34,10 @@ in {
     programs.kitty.themeFile = "Dracula";
 
     home.file.".config/fcitx5/conf/classicui.conf".text = ''
-      Theme=Dracula
+      UseDarkTheme=True
+      UseAccentColor=True
+      ForceWaylandDPI=1
+      EnableFractionalScale=True
       Font="fira-code 14"
     '';
 
