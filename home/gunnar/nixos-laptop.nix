@@ -16,6 +16,7 @@
       git.enable = true;
       fzf.enable = true;
       lvim.enable = true;
+      trim.enable = true;
     };
     desktop = {
       hyprland.enable = true;
