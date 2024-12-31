@@ -2,6 +2,7 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./srv
     ];
 
   # Bootloader.
@@ -13,7 +14,14 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  
+  networking.firewall.enable = false;
+  networking.nat = {
+    enable = true;
+    internalInterfaces = [ "ve-+" ];
+    externalInterface = "enp1s0";
+    enableIPv6 = false;
+  };
+
   # Security
   security.pam.services.hyprlock = {};
 
@@ -75,8 +83,11 @@
   };
 
   programs.ssh.startAgent = true;
-
   programs.fish.enable = true;
+
+  srv = {
+    test.enable = true;
+  };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
 
