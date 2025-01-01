@@ -1,9 +1,14 @@
-{ 
+{ pkgs, ... }: { 
   imports = [ 
     ./home.nix
     ../features/cli
     ../features/desktop
     ../common 
+  ];
+
+  home.packages = with pkgs; [
+    webcord
+    obsidian
   ];
 
   features = {

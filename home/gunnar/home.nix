@@ -8,10 +8,7 @@
     cowsay
     nvtopPackages.amd
     powertop
-    webcord
-    obsidian
     steamcmd
-    protonup-ng
   ];
 
   home.file = {
