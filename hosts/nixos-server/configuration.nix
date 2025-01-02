@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, lib, ... }: {
   imports =
     [
       ./hardware-configuration.nix
@@ -10,16 +10,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
 
-  networking.hostName = "nixos-server";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-  networking.firewall.enable = false;
-  networking.nat = {
-    enable = true;
-    internalInterfaces = [ "ve-+" ];
-    externalInterface = "enp1s0";
-    enableIPv6 = false;
+  # Setup networking
+  networking = { 
+    hostName = "nixos-server";
+    networkmanager.enable = true;
+    firewall.enable = false;
   };
 
   # Security
@@ -87,6 +82,7 @@
 
   srv = {
     test.enable = true;
+    media.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

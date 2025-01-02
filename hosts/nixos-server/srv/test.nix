@@ -6,9 +6,7 @@ in {
   config = mkIf cfg.enable {
     containers.test = {
       autoStart = true;
-      privateNetwork = true;
-      hostAddress = "192.168.122.86";
-      localAddress = "192.168.122.87";
+      privateNetwork = false;
       
       bindMounts = {
         "/var/www/site" = {
@@ -24,7 +22,10 @@ in {
         };
         
         networking = {
-          firewall.allowedTCPPorts = [ 8787 ];
+          firewall = {
+            enable = true;
+            allowedTCPPorts = [ 8787 ];
+          };
           useHostResolvConf = lib.mkForce false;
         };
 
