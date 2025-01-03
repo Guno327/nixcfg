@@ -19,8 +19,12 @@
   # Setup bridge
   networking = {
     bridges."br0".interfaces = [ "enp1s0" ];
-    useDHCP = false;
-    interfaces."br0".useDHCP = true;
+    interfaces."br0".ipv4.addresses = [{
+      address = "192.168.122.87";
+      prefixLength = 24;
+    }];
+    defaultGateway = "192.168.122.1";
+    nameservers = [ "192.168.122.1" ];
   };
 
   # Set your time zone.
@@ -71,6 +75,7 @@
 
   # Packages
   environment.systemPackages = with pkgs; [
+    mullvad
   ];
 
   # Enable the OpenSSH daemon.
@@ -83,9 +88,12 @@
   programs.ssh.startAgent = true;
   programs.fish.enable = true;
 
+  services.mullvad-vpn.enable = true;
+
   # Containers
   ctrs = {
     test.enable = true;
+    media.enable = true;
   };
   
   system.stateVersion = "24.11"; # DO NOT CHANGE
