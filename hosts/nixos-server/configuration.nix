@@ -1,8 +1,8 @@
-{ pkgs, inputs, lib, ... }: {
+{ pkgs, inputs, ... }: {
   imports =
     [
       ./hardware-configuration.nix
-      ./srv
+      ./ctrs
     ];
 
   # Bootloader.
@@ -13,12 +13,15 @@
   # Setup networking
   networking = { 
     hostName = "nixos-server";
-    networkmanager.enable = true;
     firewall.enable = false;
   };
 
-  # Security
-  security.pam.services.hyprlock = {};
+  # Setup bridge
+  networking = {
+    bridges."br0".interfaces = [ "enp1s0" ];
+    useDHCP = false;
+    interfaces."br0".useDHCP = true;
+  };
 
   # Set your time zone.
   time.timeZone = "America/Denver";
@@ -80,11 +83,11 @@
   programs.ssh.startAgent = true;
   programs.fish.enable = true;
 
-  srv = {
+  # Containers
+  ctrs = {
     test.enable = true;
-    media.enable = true;
   };
-
+  
   system.stateVersion = "24.11"; # DO NOT CHANGE
 
 }
