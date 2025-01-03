@@ -2,7 +2,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./srv
+      ./ctrs
     ];
 
   # Bootloader.
@@ -10,20 +10,22 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
 
-  networking.hostName = "nixos-server";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-  networking.firewall.enable = false;
-  networking.nat = {
-    enable = true;
-    internalInterfaces = [ "ve-+" ];
-    externalInterface = "enp1s0";
-    enableIPv6 = false;
+  # Setup networking
+  networking = { 
+    hostName = "nixos-server";
+    firewall.enable = false;
   };
 
-  # Security
-  security.pam.services.hyprlock = {};
+  # Setup bridge
+  networking = {
+    bridges."br0".interfaces = [ "enp1s0" ];
+    interfaces."br0".ipv4.addresses = [{
+      address = "192.168.122.87";
+      prefixLength = 24;
+    }];
+    defaultGateway = "192.168.122.1";
+    nameservers = [ "192.168.122.1" ];
+  };
 
   # Set your time zone.
   time.timeZone = "America/Denver";
@@ -73,6 +75,7 @@
 
   # Packages
   environment.systemPackages = with pkgs; [
+    mullvad
   ];
 
   # Enable the OpenSSH daemon.
@@ -85,10 +88,14 @@
   programs.ssh.startAgent = true;
   programs.fish.enable = true;
 
-  srv = {
-    test.enable = true;
-  };
+  services.mullvad-vpn.enable = true;
 
+  # Containers
+  ctrs = {
+    test.enable = true;
+    media.enable = true;
+  };
+  
   system.stateVersion = "24.11"; # DO NOT CHANGE
 
 }

@@ -1,14 +1,14 @@
 { config, lib, ... }: with lib;
 let 
-  cfg = config.srv.test;
+  cfg = config.ctrs.test;
 in {
-  options.srv.test.enable = mkEnableOption "Enable test service";
+  options.ctrs.test.enable = mkEnableOption "Enable test container";
   config = mkIf cfg.enable {
     containers.test = {
       autoStart = true;
       privateNetwork = true;
-      hostAddress = "192.168.122.86";
-      localAddress = "192.168.122.87";
+      hostBridge = "br0";
+      localAddress = "192.168.122.88/24";
       
       bindMounts = {
         "/var/www/site" = {
@@ -24,7 +24,10 @@ in {
         };
         
         networking = {
-          firewall.allowedTCPPorts = [ 8787 ];
+          firewall = {
+            enable = true;
+            allowedTCPPorts = [ 8787 ];
+          };
           useHostResolvConf = lib.mkForce false;
         };
 
