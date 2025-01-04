@@ -57,19 +57,27 @@
       env = [
       ];
 
-        bindl = [
-          ", Next, exec, playerctl play-pause"
-          ", Prior, exec, playerctl next"
-          "SHIFT, Prior, exec, playerctl previous"
-        ];
+      bindl = [
+        ", Next, exec, playerctl play-pause"
+        ", Prior, exec, playerctl next"
+        "SHIFT, Prior, exec, playerctl previous"
+      ];
+
+      exec-once = [
+        "[workspace 1 silent] kitty"
+        "[workspace 2 silent] zen"
+        "[workspace 5 silent] webcord"
+      ];
 
     };
   };
 
 
   programs.waybar.settings = {
+    mainbar.output = "DP-1";
+
     mainbar.modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
     mainbar.modules-center = [];
-    mainbar.modules-right = [ "tray" "mpris" "pulseaudio" "network" ];
+    mainbar.modules-right = [ "tray" "mpris" "pulseaudio" "network" "cpu" "memory" ];
   };
 }

@@ -21,6 +21,7 @@ in {
             format = "> {}";
             seperate-outputs = true;
         };
+
         "hyprland/workspaces" = {
           disable-scroll = true;
           all-outputs = true;
@@ -33,6 +34,7 @@ in {
             "4" = [];
           };
         };
+
         "custom/weather" = {
           format = "{}°F";
           tooltip = true;
@@ -40,14 +42,17 @@ in {
           exec = "wttrbar --fahrenheit --location SLC";
           return-type = "json";
         };
+
         tray = {
           icon-size = 13;
           spacing = 10;
         };
+
         clock = {
           format = " {:%R   %d/%m}";
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
         };
+
         pulseaudio = {
           format = "{icon} {volume}";
           format-muted = "󰝟 ";
@@ -56,9 +61,11 @@ in {
             headphone = "󰋋";
           };
         };
+
         backlight = {
           format = "󰖨  {percent}";
         };
+
         battery = {
           format = "{icon} {capacity}";
           interval = 10;
@@ -73,10 +80,12 @@ in {
           format-charging = "󱐋 {capacity}";
           format-icons = [ " " " " " " " " " " ]; 
         };
+
         network = {
           format-wifi = "  {essid}";
-          format-ethernet = "󰈀  {essid}";
+          format-ethernet = "󰈀  {ipaddr}";
         };
+
         mpris = {
           format = "{player_icon} {title} - {artist} ({position}/{length})";
           format-paused = "{player_icon} {status}";
@@ -85,14 +94,24 @@ in {
             mpv = "🎵";
             spotify_player = " ";
           };
+
           status-icons = {
             paused = "⏸";
           };
+
           ignored-players = [
             "firefox"
             "librewolf"
             "brave"
           ];
+        };
+
+        cpu = {
+          format = "  {usage}%";
+        };
+
+        memory = {
+          format = "  {percentage}%";
         };
       };
     };

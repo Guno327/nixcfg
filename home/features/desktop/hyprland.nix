@@ -80,8 +80,14 @@ in {
     services.hyprpaper = {
       enable = true;
       settings = {
-        preload = [ "~/pictures/wallpaper.png" ];
-        wallpaper = [ "eDP-1,~/pictures/wallpaper.png" ];
+        preload = [
+          "~/pictures/wallpaper1.png" 
+          "~/pictures/wallpaper2.png" 
+        ];
+        wallpaper = [
+          "DP-1, ~/pictures/wallpaper1.png"
+          "DP-2 ~/pictures/wallpaper2.png"
+        ];
       };
     };
       
@@ -138,7 +144,7 @@ in {
           passes = 3;
         };
         active_opacity = 1.0;
-        inactive_opacity = 0.9;
+        inactive_opacity = 1.0;
       };
 
       animations = {

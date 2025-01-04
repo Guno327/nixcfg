@@ -95,7 +95,8 @@
 
 
   # Packages
-  environment.systemPackages = [
+  environment.systemPackages = with pkgs; [
+    pavucontrol
     inputs.zen-browser.packages.${pkgs.system}.default
   ];
 

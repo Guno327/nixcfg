@@ -161,6 +161,8 @@ in {
         #workspaces,
         #tray,
         #mpris,
+        #cpu,
+        #memory,
         #backlight {
             background: #1e1e2e;
             padding: 0px 10px;
@@ -221,6 +223,19 @@ in {
 
         #network {
             color: #f9e2af;
+            border-left: 0px;
+            border-right: 0px;
+        }
+
+        #cpu {
+            color: pink;
+            border-left: 0px;
+            border-right: 0px;
+        }
+
+        #memory {
+            color: purple;
+            border-radius: 0px 0px 0px 10px;
             border-left: 0px;
             border-right: 0px;
         }

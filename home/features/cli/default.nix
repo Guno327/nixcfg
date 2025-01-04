@@ -28,6 +28,7 @@
     speedtest-cli
     git
     lshw
+    s-tui
   ];
 
 }
