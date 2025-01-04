@@ -6,6 +6,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      bibata-cursors
       dunst
       hyprshot
       hyprlock
@@ -97,6 +98,7 @@ in {
         "wl-paste -p -t text --watch clipman store -P --histpath=\"~/.local/share/clipman-primary.json\""
         "fcitx5 -d -r"
         "fcitx5-remote -r"
+        "hyprctl setcursor Bibata-Modern-Classic 14"
       ];
 
       env = [
