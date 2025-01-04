@@ -9,7 +9,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
 
-  networking.hostName = "nixos-desktop";
+  networking = {
+    hostName = "nixos-desktop";
+    interfaces."enp7so".ipv4.addresses = [{
+      address = "10.0.0.109";
+      prefixLength = 24;
+    }];
+    defaultGateway = "10.0.0.1";
+    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;
