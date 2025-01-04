@@ -66,7 +66,7 @@
         nixos-desktop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [ 
-            ./hosts/nixos-laptop
+            ./hosts/nixos-desktop
 
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
