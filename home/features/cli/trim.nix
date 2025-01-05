@@ -13,6 +13,6 @@ in {
     };
 
     programs.fish.shellAbbrs = 
-      { trim = "~/.scripts/trim-generations.sh 3 0 home-manager"; };
+      { trim = "~/.scripts/trim-generations.sh 3 0 home-manager && nix-store --gc"; };
   };
 }
