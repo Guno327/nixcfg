@@ -82,8 +82,13 @@
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "no";
+    passwordAuthentication = false;
     allowSFTP = true;
   };
+
+  users.users.gunnar.openssh.authorizedKeys.keys = [
+    "sh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoQThHfSYuA3wptFtXX5tHs1riSdylil3fL+GU/vTkK gunnar@nixos-desktop"
+  ];
 
   programs.ssh.startAgent = true;
   programs.fish.enable = true;
@@ -92,7 +97,7 @@
 
   # Containers
   ctrs = {
-    test.enable = true;
+    test.enable = false;
     media.enable = true;
   };
   

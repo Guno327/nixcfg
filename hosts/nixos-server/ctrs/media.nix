@@ -166,14 +166,16 @@ in {
             gid = 1000;
             members = [
               "media"
-              "transmission"
+              "deluge"
             ];
           };
         };
     
         systemd.tmpfiles.rules = [
-          "d /data/transmission 774 transmission media -"
-          "f /data/transmission/creds 774 transmission media -"
+          "d /data/deluge 774 deluge media -"
+          "f /data/deluge/auth 774 deluge media -"
+          "d /data/deluge/.config 774 deluge media -"
+          "f /data/deluge/.config/deluge/core.conf 774 deluge media"
         ];
 
         time.timeZone = "America/Denver";
@@ -186,21 +188,31 @@ in {
         };
 
         services = {
-          transmission = {
+          deluge = {
             enable = true;
-            openFirewall = true;
-            user = "transmission";
+            user = "deluge";
             group = "media";
-            openPeerPorts = true;
-            credentialsFile = "/data/transmission/creds";
-            
-            settings = {
-              peer-port = 58846;
-              download-dir = "/media/download";
-              incomplete-dir-enabled = false;
+            dataDir = "/data/deluge";
+            authFile = "/data/deluge/auth";
+            openFirewall = true;
+            declarative = true;
+
+            web = {
+              enable = true;
+              openFirewall = true;
+              port = 8080;
+            };
+
+            config = {
+              download_location = "/media/download/";
+              max_upload_speed = "1000.0";
+              share_ratio_limit = "1.0";
+              allow_remote = false;
+              daemon_port = 58846;
+              listen_ports = [ 6881 6889 ];
             };
           };
-          
+
           mullvad-vpn.enable = true;
           resolved.enable = true;
         };

@@ -16,7 +16,6 @@
       "qemu-libvirtd"
     ];
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDusj2sISBxt6QzjiiYQezn3dECHVMxiwytKQDhsmoO3 gunnar@gunnar-laptop-arch"  
     ];
     packages = [inputs.home-manager.packages.${pkgs.system}.default];
   };
