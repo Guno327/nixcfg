@@ -175,6 +175,7 @@ in {
           "d /data/deluge 774 deluge media -"
           "f /data/deluge/auth 774 deluge media -"
           "d /data/deluge/.config 774 deluge media -"
+          "d /data/deluge/.config/deluge 774 deluge media -"
           "f /data/deluge/.config/deluge/core.conf 774 deluge media"
         ];
 

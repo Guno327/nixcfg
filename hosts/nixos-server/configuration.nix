@@ -82,8 +82,10 @@
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "no";
-    passwordAuthentication = false;
     allowSFTP = true;
+    settings = {
+      PasswordAuthentication = false;
+    };
   };
 
   users.users.gunnar.openssh.authorizedKeys.keys = [
