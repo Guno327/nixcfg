@@ -1,8 +1,8 @@
 { config, lib, ... }: with lib;
 let 
-  cfg = config.ctrs.minecraft;
+  cfg = config.srvs.minecraft;
 in {
-  options.ctrs.minecraft.enable = mkEnableOption "Enable minecraft container";
+  options.srvs.minecraft.enable = mkEnableOption "Enable minecraft container";
   
   config = mkIf cfg.enable {
     systemd.tmpfiles.rules = [
