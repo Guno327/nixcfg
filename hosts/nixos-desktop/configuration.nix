@@ -11,7 +11,7 @@
 
   networking = {
     hostName = "nixos-desktop";
-    interfaces."enp7so".ipv4.addresses = [{
+    interfaces."enp7s0".ipv4.addresses = [{
       address = "10.0.0.109";
       prefixLength = 24;
     }];
