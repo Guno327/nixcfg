@@ -100,7 +100,8 @@
   # Containers
   ctrs = {
     test.enable = false;
-    media.enable = true;
+    media.enable = false;
+    minecraft.enable = true;
   };
   
   system.stateVersion = "24.11"; # DO NOT CHANGE
