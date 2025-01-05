@@ -29,7 +29,7 @@ in {
         users.groups.nginx = {};
 
         systemd.tmpfiles.rules = [
-          "f /site/index.html 775 nginx nginx -"
+          "f /site/index.html 775 static-web-server static-web-server -"
         ];
 
         services.static-web-server = {
