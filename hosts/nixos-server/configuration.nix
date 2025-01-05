@@ -103,7 +103,8 @@
     test.enable = false;
     media.enable = false;
     minecraft.enable = false;
-    nginx.enable = true;
+    nginx.enable = false;
+    site.enable = true;
   };
   
   system.stateVersion = "24.11"; # DO NOT CHANGE
