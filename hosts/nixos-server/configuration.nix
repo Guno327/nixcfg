@@ -2,7 +2,7 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./ctrs
+      ./srvs
     ];
 
   # Bootloader.
@@ -75,6 +75,7 @@
 
   # Packages
   environment.systemPackages = with pkgs; [
+    inputs.agenix.packages."${system}".default
     mullvad
   ];
 
@@ -93,11 +94,13 @@
 
   services.mullvad-vpn.enable = true;
 
-  # Containers
-  ctrs = {
+  # Services
+  srvs = {
     test.enable = false;
     media.enable = false;
-    minecraft.enable = true;
+    minecraft.enable = false;
+    nginx.enable = false;
+    site.enable = true;
   };
   
   system.stateVersion = "24.11"; # DO NOT CHANGE

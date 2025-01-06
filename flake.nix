@@ -18,6 +18,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/nur";
   };
@@ -29,6 +34,7 @@
     nur,
     nixos-hardware,
     zen-browser,
+    agenix,
     ... 
     }@inputs: let
       inherit (self) outputs;
@@ -78,6 +84,7 @@
           specialArgs = { inherit inputs outputs; };
           modules = [ 
             ./hosts/nixos-server
+            agenix.nixosModules.default
           ];
         };
       };

@@ -1,8 +1,8 @@
 { config, lib, ... }: with lib;
 let 
-  cfg = config.ctrs.test;
+  cfg = config.srvs.test;
 in {
-  options.ctrs.test.enable = mkEnableOption "Enable test container";
+  options.srvs.test.enable = mkEnableOption "Enable test container";
   config = mkIf cfg.enable {
     containers.test = {
       autoStart = true;

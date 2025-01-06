@@ -1,8 +1,8 @@
 { config, lib, ... }: with lib;
 let 
-  cfg = config.ctrs.media;
+  cfg = config.srvs.media;
 in {
-  options.ctrs.media.enable = mkEnableOption "Enable media service";
+  options.srvs.media.enable = mkEnableOption "Enable media service";
   
   config = mkIf cfg.enable {
     systemd.tmpfiles.rules = [
