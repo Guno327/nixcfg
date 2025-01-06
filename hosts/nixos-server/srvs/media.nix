@@ -15,7 +15,7 @@ in {
       autoStart = true;
       privateNetwork = true;
       hostBridge = "br0";
-      localAddress = "192.168.122.89/24";
+      localAddress = "10.0.0.4/24";
       
       bindMounts = {
         "/data" = {
@@ -80,8 +80,8 @@ in {
         networking = {
           firewall.enable = false;
           useHostResolvConf = lib.mkForce false;
-          defaultGateway = "192.168.122.1";
-          nameservers = [ "192.168.122.1" ];
+          defaultGateway = "10.0.0.1";
+          nameservers = [ "10.0.0.1" ];
         };
     
         services = {
@@ -141,7 +141,7 @@ in {
       autoStart = true;
       privateNetwork = true;
       hostBridge = "br0";
-      localAddress = "192.168.122.90/24";
+      localAddress = "10.0.0.5/24";
       
       bindMounts = {
         "/data" = {
@@ -184,8 +184,8 @@ in {
         networking = {
           firewall.enable = false;
           useHostResolvConf = lib.mkForce false;
-          defaultGateway = "192.168.122.1";
-          nameservers = [ "192.168.122.1" ];
+          defaultGateway = "10.0.0.1";
+          nameservers = [ "10.0.0.1" ];
         };
 
         services = {

@@ -12,7 +12,7 @@ in {
       autoStart = true;
       privateNetwork = true;
       hostBridge = "br0";
-      localAddress = "192.168.122.92/24";
+      localAddress = "10.0.0.6/24";
       
       bindMounts = {
         "/site" = {

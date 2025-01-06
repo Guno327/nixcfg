@@ -9,22 +9,23 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
-
+  
   # Setup networking
   networking = { 
     hostName = "nixos-server";
+    hostId = "00000001";
     firewall.enable = false;
   };
 
   # Setup bridge
   networking = {
-    bridges."br0".interfaces = [ "enp1s0" ];
+    bridges."br0".interfaces = [ "eno1" ];
     interfaces."br0".ipv4.addresses = [{
-      address = "192.168.122.87";
+      address = "10.0.0.3";
       prefixLength = 24;
     }];
-    defaultGateway = "192.168.122.1";
-    nameservers = [ "192.168.122.1" ];
+    defaultGateway = "10.0.0.1";
+    nameservers = [ "10.0.0.1" ];
   };
 
   # Set your time zone.
@@ -90,7 +91,7 @@
   };
 
   users.users.gunnar.openssh.authorizedKeys.keys = [
-    "sh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoQThHfSYuA3wptFtXX5tHs1riSdylil3fL+GU/vTkK gunnar@nixos-desktop"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoQThHfSYuA3wptFtXX5tHs1riSdylil3fL+GU/vTkK gunnar@nixos-desktop"
   ];
 
   programs.ssh.startAgent = true;
@@ -101,9 +102,9 @@
   # Services
   srvs = {
     test.enable = false;
-    media.enable = false;
-    minecraft.enable = false;
-    nginx.enable = false;
+    media.enable = true;
+    minecraft.enable = true;
+    nginx.enable = true;
     site.enable = true;
   };
   

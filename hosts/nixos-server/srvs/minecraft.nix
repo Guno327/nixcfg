@@ -15,7 +15,7 @@ in {
       autoStart = true;
       privateNetwork = true;
       hostBridge = "br0";
-      localAddress = "192.168.122.91/24";
+      localAddress = "10.0.0.6/24";
       
       bindMounts = {
         "/var/lib/pufferpanel/servers" = {
@@ -51,8 +51,8 @@ in {
         networking = {
           firewall.enable = false;
           useHostResolvConf = lib.mkForce false;
-          defaultGateway = "192.168.122.1";
-          nameservers = [ "192.168.122.1" ];
+          defaultGateway = "10.0.0.1";
+          nameservers = [ "10.0.0.1" ];
         };
 
         services.resolved.enable = true;
