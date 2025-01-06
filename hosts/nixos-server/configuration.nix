@@ -88,10 +88,6 @@
     };
   };
 
-  users.users.gunnar.openssh.authorizedKeys.keys = [
-    "sh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoQThHfSYuA3wptFtXX5tHs1riSdylil3fL+GU/vTkK gunnar@nixos-desktop"
-  ];
-
   programs.ssh.startAgent = true;
   programs.fish.enable = true;
 
