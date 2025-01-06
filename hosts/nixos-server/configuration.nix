@@ -78,12 +78,13 @@
   environment.systemPackages = with pkgs; [
     inputs.agenix.packages."${system}".default
     mullvad
+    tmux
   ];
 
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    settings.PermitRootLogin = "no";
+    settings.PermitRootLogin = "yes";
     allowSFTP = true;
     settings = {
       PasswordAuthentication = false;
