@@ -66,28 +66,28 @@
 
           nvf.nixosModules.default
         ];
-        nixos-desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./hosts/nixos-desktop
+      };
+      nixos-desktop = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/nixos-desktop
 
-            nixos-hardware.nixosModules.common-cpu-amd
-            nixos-hardware.nixosModules.common-gpu-amd
-            nixos-hardware.nixosModules.common-pc-ssd
-          
-            nvf.nixosModules.default
-          ];
-        };
+          nixos-hardware.nixosModules.common-cpu-amd
+          nixos-hardware.nixosModules.common-gpu-amd
+          nixos-hardware.nixosModules.common-pc-ssd
 
-        nixos-server = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./hosts/nixos-server
-            agenix.nixosModules.default
+          nvf.nixosModules.default
+        ];
+      };
 
-            nvf.nixosModules.default
-          ];
-        };
+      nixos-server = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./hosts/nixos-server
+          agenix.nixosModules.default
+
+          nvf.nixosModules.default
+        ];
       };
     };
 
