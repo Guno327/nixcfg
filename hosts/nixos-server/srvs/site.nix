@@ -21,7 +21,7 @@ in {
         };
       };
 
-      config = { config, pkgs, lib, ... }:{
+      config = { lib, ... }:{
         users.users.nginx = {
           isSystemUser = true;
           group = "nginx";

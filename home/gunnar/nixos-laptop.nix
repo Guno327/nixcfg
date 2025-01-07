@@ -21,7 +21,6 @@
       eza.enable = true;
       git.enable = true;
       fzf.enable = true;
-      lvim.enable = true;
       trim.enable = true;
     };
     desktop = {
@@ -69,9 +68,11 @@
 
 
   programs.waybar.settings = {
-    mainbar.modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
-    mainbar.modules-center = [];
-    mainbar.modules-right = ["tray" "mpris" "pulseaudio" "network" "backlight" "battery"];
+    mainbar = {
+      modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
+      modules-center = [];
+      modules-right = ["tray" "mpris" "pulseaudio" "network" "backlight" "battery"];
+    };
   };
     
   programs.hyprlock = {

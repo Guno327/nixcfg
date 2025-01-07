@@ -28,7 +28,7 @@ in {
         };
       };
 
-      config = { config, pkgs, lib, ... }:{
+      config = { config, lib, ... }:{
         users = {
           users.media = {
             uid = 1000;
@@ -154,7 +154,7 @@ in {
         };
       };
 
-      config = { config, pkgs, lib, ... }:{
+      config = { config, lib, ... }:{
         users = {
           users.media = {
             uid = 1000;

@@ -7,7 +7,6 @@
     ./fish.nix
     ./fzf.nix
     ./git.nix
-    ./lvim.nix
     ./trim.nix
   ];  
 

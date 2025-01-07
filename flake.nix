@@ -23,18 +23,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/nur";
-    nvf.url = "github:notashelf/nvf";
   };
 
   outputs = { 
     self,
     home-manager,
     nixpkgs,
-    nur,
     nixos-hardware,
-    zen-browser,
     agenix,
     nvf,
     ... 
@@ -52,10 +54,6 @@
     {
       packages =
         forAllSystems (system: nixpkgs.legacyPackages.${system});
-      defaultPackage."x86_64-linux" = (nvf.lib.neovimConfiguration {
-         pkgs = nixpkgs.legacyPackages."x86_64-linux";
-         modules = [ ./nvf-configuration.nix ];
-      }).neovim; 
 
       nixosConfigurations = {
         nixos-laptop = nixpkgs.lib.nixosSystem {
@@ -83,26 +81,8 @@
             nvf.nixosModules.default
           ];
         };
-
-        nixos-server = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./hosts/nixos-server
-            agenix.nixosModules.default
-          
-            nvf.nixosModules.default
-          ];
-        };
       };
       homeConfigurations = {
-        "gunnar@nixos-vm" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."x86_64-linux";
-          extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./home/gunnar/nixos-vm.nix
-          ];
-        };
-
         "gunnar@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };

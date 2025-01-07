@@ -17,7 +17,7 @@ in {
         };
       };
 
-      config = { config, pkgs, lib, ... }:{
+      config = { lib, ... }:{
         services.static-web-server = {
           enable = true;
           root = "/var/www/site";

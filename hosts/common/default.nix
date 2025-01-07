@@ -2,6 +2,7 @@
   imports = [
     ./users
     inputs.home-manager.nixosModules.home-manager
+    ./nvf-configuration.nix
   ];
 
   home-manager = {
@@ -13,7 +14,7 @@
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 

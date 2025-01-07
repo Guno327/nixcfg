@@ -24,7 +24,7 @@ in {
         };
       };
 
-      config = { config, pkgs, lib, ... }:{
+      config = { pkgs, lib, ... }:{
         services.pufferpanel = {
           enable = true;
           environment = {

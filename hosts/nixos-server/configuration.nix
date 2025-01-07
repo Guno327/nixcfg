@@ -6,9 +6,11 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader ={
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+    systemd-boot.configurationLimit = 5;
+  };
 
   # Setup networking
   networking = { 
@@ -32,24 +34,41 @@
   time.timeZone = "America/Denver";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_US.UTF-8";
+      LC_IDENTIFICATION = "en_US.UTF-8";
+      LC_MEASUREMENT = "en_US.UTF-8";
+      LC_MONETARY = "en_US.UTF-8";
+      LC_NAME = "en_US.UTF-8";
+      LC_NUMERIC = "en_US.UTF-8";
+      LC_PAPER = "en_US.UTF-8";
+      LC_TELEPHONE = "en_US.UTF-8";
+      LC_TIME = "en_US.UTF-8";
+    };
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  #services
+  services = {
+    # Configure keymap in X11
+    xserver.xkb = {
+      layout = "us";
+      variant = "";
+    };
+  
+    # Enable the OpenSSH daemon.
+    openssh = {
+      enable = true;
+      settings.PermitRootLogin = "no";
+      allowSFTP = true;
+      settings = {
+        PasswordAuthentication = false;
+      };
+    };
+  
+    mullvad-vpn.enable = true;
   };
 
   # Auto upgrade
@@ -66,39 +85,27 @@
     ];
   };
 
-  # Environment varibales
-  environment.variables = {
-    "FLAKE_BRANCH" = "nixos-server";
+  # Environment
+  environment = {
+    variables = {
+      "FLAKE_BRANCH" = "nixos-server";
+    };
+  
+    # Packages
+   systemPackages = with pkgs; [
+      inputs.agenix.packages."${system}".default
+      mullvad
+      tmux
+   ];
   };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Packages
-  environment.systemPackages = with pkgs; [
-    inputs.agenix.packages."${system}".default
-    mullvad
-    tmux
-  ];
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings.PermitRootLogin = "no";
-    allowSFTP = true;
-    settings = {
-      PasswordAuthentication = false;
-    };
+  programs = {
+    ssh.startAgent = true;
+    fish.enable = true;
   };
-
-  users.users.gunnar.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBoQThHfSYuA3wptFtXX5tHs1riSdylil3fL+GU/vTkK gunnar@nixos-desktop"
-  ];
-
-  programs.ssh.startAgent = true;
-  programs.fish.enable = true;
-
-  services.mullvad-vpn.enable = true;
 
   # Services
   srvs = {

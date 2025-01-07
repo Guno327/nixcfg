@@ -73,11 +73,12 @@
 
 
   programs.waybar.settings = {
-    mainbar.output = "DP-1";
-
-    mainbar.modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
-    mainbar.modules-center = [];
-    mainbar.modules-right = [ "tray" "mpris" "pulseaudio" "network" "cpu" "memory" ];
+    mainbar = {
+      output = "DP-1";
+      modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
+      modules-center = [];
+      modules-right = [ "tray" "mpris" "pulseaudio" "network" "cpu" "memory" ];
+    };
   };
 
   programs.hyprlock = {
