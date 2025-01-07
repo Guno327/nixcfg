@@ -106,6 +106,7 @@
   environment.systemPackages = with pkgs; [
     pavucontrol
     inputs.zen-browser.packages.${pkgs.system}.default
+    mullvad
   ];
 
   # Steam
@@ -131,6 +132,7 @@
   };
 
   programs.fish.enable = true;
+  services.mullvad-vpn.enable = true;
 
   # Japanese IME
   services.xserver.desktopManager.runXdgAutostartIfNone = true;

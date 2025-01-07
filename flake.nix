@@ -25,6 +25,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/nur";
+    nvf.url = "github:notashelf/nvf";
   };
 
   outputs = { 
@@ -35,6 +36,7 @@
     nixos-hardware,
     zen-browser,
     agenix,
+    nvf,
     ... 
     }@inputs: let
       inherit (self) outputs;
@@ -49,15 +51,13 @@
     in 
     {
       packages =
-        forAllSystems (system: nixpkgs.legacyPackages.${system} );
-      nixosConfigurations = {
-        nixos-vm = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./hosts/nixos-vm
-          ];
-        };
+        forAllSystems (system: nixpkgs.legacyPackages.${system}) //
+        (nvf.lib.neovimConfiguration {
+           pkgs = nixpkgs.legacyPackages."x86_64-linux";
+            modules = [ ./nvf-configuration.nix ];
+        }).neovim; 
 
+      nixosConfigurations = {
         nixos-laptop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           modules = [ 
@@ -66,6 +66,8 @@
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-pc-laptop
+          
+            nvf.nixosModules.default
           ];
         };
 
@@ -77,6 +79,8 @@
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-pc-ssd
+          
+            nvf.nixosModules.default
           ];
         };
 
@@ -85,6 +89,8 @@
           modules = [ 
             ./hosts/nixos-server
             agenix.nixosModules.default
+          
+            nvf.nixosModules.default
           ];
         };
       };

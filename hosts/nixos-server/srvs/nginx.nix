@@ -48,10 +48,12 @@ in {
       };
     };
 
+    
+    environment.systemPackages = [ pkgs.dns-update ];
     age.secrets.secret1.file = ../../../secrets/secret1.age;
-    environment.etc."scripts/dns-update.py".text = ''
-      #!/usr/bin/python
-
+    pkgs.writers.writePython3Bin "dns-update" {
+      libraries = [ ];
+    } ''
       import http.client
       import json
 

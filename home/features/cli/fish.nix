@@ -15,8 +15,6 @@ in {
       ".." = "cd ..";
       "..." = "cd ../..";
       ps = "procs";
-      vim = "lvim";
-      nvim = "lvim";
       switch = "sudo nixos-rebuild switch --flake /home/gunnar/.nixcfg#$FLAKE_BRANCH";
       steam = "steam &> /dev/null & disown";
     };
