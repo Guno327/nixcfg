@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./home.nix
     ../features/cli
@@ -54,7 +53,7 @@
         "6, monitor:DP-2"
       ];
 
-      env = [ ];
+      env = [];
 
       bindl = [
         ", Next, exec, playerctl play-pause"
@@ -67,7 +66,6 @@
         "[workspace 2 silent] zen"
         "[workspace 5 silent] webcord"
       ];
-
     };
   };
 
@@ -79,7 +77,7 @@
         "custom/weather"
         "hyprland/workspaces"
       ];
-      modules-center = [ ];
+      modules-center = [];
       modules-right = [
         "tray"
         "mpris"

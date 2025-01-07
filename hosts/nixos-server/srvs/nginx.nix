@@ -1,9 +1,14 @@
-{ pkgs, config, lib, ... }: with lib;
-let 
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+with lib; let
   cfg = config.srvs.nginx;
 in {
   options.srvs.nginx.enable = mkEnableOption "Enable nginx container";
-  
+
   config = mkIf cfg.enable {
     systemd.tmpfiles.rules = [
       "d /home/nginx 774 root root -"
@@ -12,12 +17,12 @@ in {
     ];
     virtualisation.docker.enable = true;
     virtualisation.oci-containers = {
-    backend = "docker";
+      backend = "docker";
       containers = {
         proxy-manager = {
           autoStart = true;
           image = "jc21/nginx-proxy-manager:latest";
-          ports = [ "80:80" "81:81" "443:443" ];
+          ports = ["80:80" "81:81" "443:443"];
           volumes = [
             "/home/nginx/data:/data"
             "/home/nginx/letsencrypt:/etc/letsencrypt"
@@ -26,18 +31,18 @@ in {
       };
     };
     systemd.timers."dns-update-timer" = {
-      wantedBy = [ "timers.target" ];
+      wantedBy = ["timers.target"];
       timerConfig = {
         OnCalendar = "daily";
         Unit = "dns-update.service";
         Persistent = true;
       };
     };
-    
+
     systemd.services."dns-update" = {
       description = "Tyco DNS Update";
-      requires = [ "network-online.target" ];     
-      after = [ "network-online.target" ];
+      requires = ["network-online.target"];
+      after = ["network-online.target"];
       serviceConfig = {
         Type = "oneshot";
         User = "root";
@@ -58,7 +63,7 @@ in {
         api_key = file.readline().rstrip()
       headers = {
           'Content-Type': "application/json",
-          'Authorization': "Bearer %s" %(api_key) 
+          'Authorization': "Bearer %s" %(api_key)
           }
       # Get sender ip from web
       def get_ip():
@@ -67,20 +72,20 @@ in {
           respo = iphost.getresponse()
           ip_addr = respo.read()
           return ip_addr.decode("utf-8")
-      # Get record IP 
+      # Get record IP
       def get_cloudflare_ip(cfheaders):
           cfhost = http.client.HTTPSConnection("api.cloudflare.com")
           cfhost.request("GET", "/client/v4/zones/%s/dns_records/%s" %(zone_id, identifier), headers=headers)
           cfresponse = cfhost.getresponse()
           cfresponse = cfresponse.read()
           cfresponse = cfresponse.decode("utf-8")
-          cfresponse = json.loads(cfresponse)    
+          cfresponse = json.loads(cfresponse)
           return cfresponse["result"]["content"]
       # Change the IP
       def update_cloudflare_ip(heads, ip_addr, web_addr, zone, ident ):
           conn = http.client.HTTPSConnection("api.cloudflare.com")
           payload = "{\n  \"content\": \"%s\",\n  \"name\": \"%s\",\n  \"proxied\": false,\n  \"type\": \"A\",\n  \"comment\": \"Domain verification record\",\n  \"ttl\": 3600\n}" %(ip_addr, web_addr)
-          conn.request("PUT", "/client/v4/zones/%s/dns_records/%s/" %(zone, ident), payload, heads) 
+          conn.request("PUT", "/client/v4/zones/%s/dns_records/%s/" %(zone, ident), payload, heads)
           res = conn.getresponse()
           data = res.read()
           data = data.decode("utf-8")

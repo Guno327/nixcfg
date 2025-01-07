@@ -1,1 +1,1 @@
-{ imports = [ ./gunnar.nix ]; }
+{imports = [./gunnar.nix];}

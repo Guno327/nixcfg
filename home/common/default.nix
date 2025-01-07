@@ -3,10 +3,9 @@
   inputs,
   pkgs,
   ...
-}:
-{
+}: {
   nixpkgs = {
-    overlays = [ inputs.nur.overlays.default ];
+    overlays = [inputs.nur.overlays.default];
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;

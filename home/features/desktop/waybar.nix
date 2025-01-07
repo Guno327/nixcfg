@@ -1,9 +1,11 @@
-{ config, lib, ... }:
-with lib;
-let
-  cfg = config.features.desktop.waybar;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.features.desktop.waybar;
+in {
   options.features.desktop.waybar.enable = mkEnableOption "waybar config";
 
   config = mkIf cfg.enable {
@@ -30,10 +32,10 @@ in
             on-click = "activate";
             format = " {name} ";
             persistent_workspaces = {
-              "1" = [ ];
-              "2" = [ ];
-              "3" = [ ];
-              "4" = [ ];
+              "1" = [];
+              "2" = [];
+              "3" = [];
+              "4" = [];
             };
           };
 

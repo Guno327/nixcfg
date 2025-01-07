@@ -4,11 +4,9 @@
   lib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.features.cli.trim;
-in
-{
+in {
   options.features.cli.trim.enable = mkEnableOption "enable extended fish configuration";
   config = mkIf cfg.enable {
     home.file.".scripts/trim-generations.sh" = {

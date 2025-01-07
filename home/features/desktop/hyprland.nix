@@ -4,11 +4,9 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.features.desktop.hyprland;
-in
-{
+in {
   options.features.desktop.hyprland.enable = mkEnableOption "enable and configure hyprland";
 
   config = mkIf cfg.enable {
@@ -35,13 +33,13 @@ in
     programs.wofi.enable = true;
 
     programs.fish.loginShellInit = ''
-            set -x NIX_PATH nixpkgs=channel:nixos-unstable
-            set -x NIX_LOG info
-            set -x TERMINAL kitty
+       set -x NIX_PATH nixpkgs=channel:nixos-unstable
+       set -x NIX_LOG info
+       set -x TERMINAL kitty
 
-      	    if test (tty) = "/dev/tty1"
-              exec Hyprland &> /dev/null
-            end
+      if test (tty) = "/dev/tty1"
+         exec Hyprland &> /dev/null
+       end
     '';
 
     services.hyprpaper = {
@@ -74,7 +72,7 @@ in
           "hyprctl setcursor Bibata-Modern-Classic 14"
         ];
 
-        env = [ "WLR_NO_HARDWARE_CURSORS,1" ];
+        env = ["WLR_NO_HARDWARE_CURSORS,1"];
 
         input = {
           kb_layout = "us";
@@ -130,7 +128,7 @@ in
           preserve_split = true;
         };
 
-        master = { };
+        master = {};
 
         gestures = {
           workspace_swipe = false;
@@ -230,7 +228,7 @@ in
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ];
 
-        windowrulev2 = [ ];
+        windowrulev2 = [];
       };
     };
   };

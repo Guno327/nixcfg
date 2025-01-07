@@ -1,6 +1,9 @@
-{ pkgs, inputs, ... }:
 {
-  imports = [ ./hardware-configuration.nix ];
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [./hardware-configuration.nix];
 
   # Bootloader.
   boot.loader = {
@@ -44,7 +47,7 @@
       };
 
       # Graphics
-      videoDrivers = [ "amdgpu" ];
+      videoDrivers = ["amdgpu"];
 
       desktopManager.runXdgAutostartIfNone = true;
     };
@@ -58,7 +61,7 @@
   };
 
   # Security
-  security.pam.services.hyprlock = { };
+  security.pam.services.hyprlock = {};
 
   # Set your time zone.
   time.timeZone = "America/Denver";
@@ -151,14 +154,14 @@
   };
 
   # Graphics
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = ["amdgpu"];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
 
   # KVM
-  users.groups.libvirtd.members = [ "gunnar" ];
+  users.groups.libvirtd.members = ["gunnar"];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
 

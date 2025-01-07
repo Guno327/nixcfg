@@ -4,11 +4,9 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.features.desktop.fonts;
-in
-{
+in {
   options.features.desktop.fonts.enable = mkEnableOption "install additional fonts for dekstop apps";
 
   config = mkIf cfg.enable {

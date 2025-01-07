@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./home.nix
     ../features/cli
@@ -63,7 +62,6 @@
         ", Prior, exec, playerctl next"
         "SHIFT, Prior, exec, playerctl previous"
       ];
-
     };
   };
 
@@ -74,7 +72,7 @@
         "custom/weather"
         "hyprland/workspaces"
       ];
-      modules-center = [ ];
+      modules-center = [];
       modules-right = [
         "tray"
         "mpris"

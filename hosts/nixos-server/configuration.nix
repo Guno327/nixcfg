@@ -1,5 +1,8 @@
-{ pkgs, inputs, ... }:
 {
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./srvs
@@ -21,7 +24,7 @@
 
   # Setup bridge
   networking = {
-    bridges."br0".interfaces = [ "eno1" ];
+    bridges."br0".interfaces = ["eno1"];
     interfaces."br0".ipv4.addresses = [
       {
         address = "10.0.0.3";
@@ -29,7 +32,7 @@
       }
     ];
     defaultGateway = "10.0.0.1";
-    nameservers = [ "10.0.0.1" ];
+    nameservers = ["10.0.0.1"];
   };
 
   # Set your time zone.
@@ -119,5 +122,4 @@
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
-
 }

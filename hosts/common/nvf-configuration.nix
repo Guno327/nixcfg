@@ -1,12 +1,9 @@
-{ inputs, ... }:
-let
+{inputs, ...}: let
   inherit (inputs.nvf.lib.nvim.dag) entryAnywhere;
-in
-{
+in {
   programs.nvf = {
     enable = true;
     settings = {
-
       vim = {
         statusline.lualine.enable = true;
         autopairs.nvim-autopairs.enable = true;
@@ -32,7 +29,7 @@ in
           context.enable = true;
           indent = {
             enable = true;
-            disable = [ "yaml" ];
+            disable = ["yaml"];
           };
           highlight = {
             enable = true;
@@ -50,7 +47,6 @@ in
             enable = true;
             setupOpts.intergration.nvim-tree.enable = true;
           };
-
         };
 
         languages = {
@@ -89,7 +85,6 @@ in
           style = "solid";
         };
       };
-
     };
   };
 }

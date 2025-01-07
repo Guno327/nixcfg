@@ -4,11 +4,9 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.features.desktop.dracula-theme;
-in
-{
+in {
   options.features.desktop.dracula-theme.enable = mkEnableOption "Theme most apps with dracula theme";
 
   config = mkIf cfg.enable {
@@ -83,7 +81,7 @@ in
           margin: 5px;
           border: none;
           color: #f8f8f2;
-        } 
+        }
 
         #entry:selected #text {
           font-weight: bold;
@@ -275,5 +273,4 @@ in
       '';
     };
   };
-
 }

@@ -1,9 +1,11 @@
-{ config, lib, ... }:
-with lib;
-let
-  cfg = config.features.cli.eza;
-in
 {
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.features.cli.eza;
+in {
   options.features.cli.eza.enable = mkEnableOption "Enable and alias eza";
   config = mkIf cfg.enable {
     programs.eza = {
