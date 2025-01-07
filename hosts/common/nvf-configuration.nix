@@ -1,15 +1,13 @@
-{
+{ inputs, ... } : let
+  inherit (inputs.nvf.lib.nvim.dag) entryAnywhere;
+in {
   programs.nvf = {  
     enable = true;
     settings = {
-      vim = {
+
+    vim = {
         statusline.lualine.enable = true;
         autopairs.nvim-autopairs.enable = true;
-
-        ui.colorizer = {
-          enable = true;
-          filetypes = { "*" = { }; };
-        };
 
         theme = {
           enable = true;
@@ -19,7 +17,10 @@
 
         lsp = {
           enable = true;
-          otter-nvim.enable = true;
+          otter-nvim = {
+            enable = true;
+            mappings.toggle = "<C-l>";
+          };
         };
 
         treesitter ={
