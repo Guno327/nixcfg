@@ -36,8 +36,8 @@ in {
     xdg.desktopEntries.spotify = {
       name = "Spotify";
       genericName = "spotify_player";
-      exec = "kitty -e spotify_player";
-      terminal = false;
+      exec = "${pkgs.kitty}/bin/run -e spotify_player";
+      terminal = true;
     };
   };
 }

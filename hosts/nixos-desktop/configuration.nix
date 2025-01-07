@@ -119,6 +119,7 @@
       xwayland.enable = true;
     };
 
+    wireshark.enable = true;
     fish.enable = true;
     ssh.startAgent = true;
   };
@@ -136,6 +137,7 @@
       pavucontrol
       inputs.zen-browser.packages.${pkgs.system}.default
       mullvad
+      termshark
     ];
   };
 
