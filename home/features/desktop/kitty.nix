@@ -1,9 +1,10 @@
-{ config, lib, ... }: with lib;
+{ config, lib, ... }:
+with lib;
 let
   cfg = config.features.desktop.kitty;
-in {
-  options.features.desktop.kitty.enable =
-    mkEnableOption "Configure kitty";
+in
+{
+  options.features.desktop.kitty.enable = mkEnableOption "Configure kitty";
 
   config = mkIf cfg.enable {
     programs.kitty = {
@@ -13,6 +14,8 @@ in {
       shellIntegration.enableFishIntegration = true;
       shellIntegration.enableBashIntegration = true;
     };
-    programs.fish.shellAbbrs = { ssh = "kitten ssh"; };
+    programs.fish.shellAbbrs = {
+      ssh = "kitten ssh";
+    };
   };
 }

@@ -1,7 +1,14 @@
-{ pkgs, config, lib, ... }: with lib;
-let 
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+with lib;
+let
   cfg = config.features.cli.trim;
-in {
+in
+{
   options.features.cli.trim.enable = mkEnableOption "enable extended fish configuration";
   config = mkIf cfg.enable {
     home.file.".scripts/trim-generations.sh" = {
@@ -12,7 +19,8 @@ in {
       executable = true;
     };
 
-    programs.fish.shellAbbrs = 
-      { trim = "~/.scripts/trim-generations.sh 3 0 home-manager && nix-store --gc"; };
+    programs.fish.shellAbbrs = {
+      trim = "~/.scripts/trim-generations.sh 3 0 home-manager && nix-store --gc";
+    };
   };
 }

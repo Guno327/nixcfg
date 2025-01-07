@@ -1,8 +1,8 @@
-{ 
-  imports = [ 
+{
+  imports = [
     ./home.nix
     ../features/cli
-    ../common 
+    ../common
   ];
 
   features = {

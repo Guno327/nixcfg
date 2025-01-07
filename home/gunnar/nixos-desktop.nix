@@ -1,9 +1,10 @@
-{ pkgs, ... }: { 
-  imports = [ 
+{ pkgs, ... }:
+{
+  imports = [
     ./home.nix
     ../features/cli
     ../features/desktop
-    ../common 
+    ../common
   ];
 
   home.packages = with pkgs; [
@@ -53,8 +54,7 @@
         "6, monitor:DP-2"
       ];
 
-      env = [
-      ];
+      env = [ ];
 
       bindl = [
         ", Next, exec, playerctl play-pause"
@@ -71,19 +71,29 @@
     };
   };
 
-
   programs.waybar.settings = {
     mainbar = {
       output = "DP-1";
-      modules-left = ["clock" "custom/weather" "hyprland/workspaces"];
-      modules-center = [];
-      modules-right = [ "tray" "mpris" "pulseaudio" "network" "cpu" "memory" ];
+      modules-left = [
+        "clock"
+        "custom/weather"
+        "hyprland/workspaces"
+      ];
+      modules-center = [ ];
+      modules-right = [
+        "tray"
+        "mpris"
+        "pulseaudio"
+        "network"
+        "cpu"
+        "memory"
+      ];
     };
   };
 
   programs.hyprlock = {
     enable = true;
-      
+
     settings = {
       general = {
         disable_loading_bar = true;
@@ -92,42 +102,50 @@
         no_fade_in = false;
         ignore_empty_input = true;
       };
-      background = [{
-        path = "screenshot";
-        blur_passes = 3;
-        blur_size = 8;
-      }];
-      input-field = [{
-        monitor = "DP-1";
-        size = "200, 50";
-        position = "0, -80";
-        dots_center = true;
-        fade_on_empty = false;
-        font_color = "rgb(202, 211, 245)";
-        inner_color = "rgb(91, 96, 120)";
-        outer_color = "rgb(24, 25, 38)";
-        outline_thickness = 5;
-        placeholder_text = "Password...";
-        shadow_passes = 2;
-      }];
-      image = [{
-        monitor = "DP-1";
-        path = "~/pictures/pfp.jpg";
-        size = 150;
-        rounding = -1;
-        border_size = 5;
-        border_color = "rgb(24, 25, 38)";
-        position = "0, 60";
-        halign = "center";
-        valign = "center";
-      }];
-      label = [{
-        monitor = "DP-1";
-        text = "cmd[update:10000] echo '$USER' | tr '[:lower:]' '[:upper:]'";
-        position = "0, -35";
-        halign = "center";
-        valign = "center";
-      }];
+      background = [
+        {
+          path = "screenshot";
+          blur_passes = 3;
+          blur_size = 8;
+        }
+      ];
+      input-field = [
+        {
+          monitor = "DP-1";
+          size = "200, 50";
+          position = "0, -80";
+          dots_center = true;
+          fade_on_empty = false;
+          font_color = "rgb(202, 211, 245)";
+          inner_color = "rgb(91, 96, 120)";
+          outer_color = "rgb(24, 25, 38)";
+          outline_thickness = 5;
+          placeholder_text = "Password...";
+          shadow_passes = 2;
+        }
+      ];
+      image = [
+        {
+          monitor = "DP-1";
+          path = "~/pictures/pfp.jpg";
+          size = 150;
+          rounding = -1;
+          border_size = 5;
+          border_color = "rgb(24, 25, 38)";
+          position = "0, 60";
+          halign = "center";
+          valign = "center";
+        }
+      ];
+      label = [
+        {
+          monitor = "DP-1";
+          text = "cmd[update:10000] echo '$USER' | tr '[:lower:]' '[:upper:]'";
+          position = "0, -35";
+          halign = "center";
+          valign = "center";
+        }
+      ];
     };
   };
 }

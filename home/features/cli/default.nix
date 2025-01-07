@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./eza.nix
     ./zoxide.nix
@@ -8,7 +9,7 @@
     ./fzf.nix
     ./git.nix
     ./trim.nix
-  ];  
+  ];
 
   home.packages = with pkgs; [
     coreutils

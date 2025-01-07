@@ -1,8 +1,6 @@
-{ pkgs, inputs, ... }: {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+{ pkgs, inputs, ... }:
+{
+  imports = [ ./hardware-configuration.nix ];
 
   # Bootloader.
   boot.loader = {
@@ -13,17 +11,22 @@
 
   networking = {
     hostName = "nixos-desktop";
-    interfaces."enp7s0".ipv4.addresses = [{
-      address = "10.0.0.109";
-      prefixLength = 24;
-    }];
+    interfaces."enp7s0".ipv4.addresses = [
+      {
+        address = "10.0.0.109";
+        prefixLength = 24;
+      }
+    ];
     defaultGateway = "10.0.0.1";
-    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
   };
 
   # Networking
   networking.networkmanager.enable = true;
-  
+
   # Services
   services = {
     pipewire = {
@@ -32,20 +35,20 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-  
+
     xserver = {
       # Configure keymap in X11
       xkb = {
         layout = "us";
         variant = "";
       };
-  
+
       # Graphics
       videoDrivers = [ "amdgpu" ];
-    
+
       desktopManager.runXdgAutostartIfNone = true;
     };
-  
+
     # Enable the OpenSSH daemon.
     openssh = {
       enable = true;
@@ -55,7 +58,7 @@
   };
 
   # Security
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   # Set your time zone.
   time.timeZone = "America/Denver";
@@ -74,7 +77,7 @@
       LC_TELEPHONE = "en_US.UTF-8";
       LC_TIME = "en_US.UTF-8";
     };
-  
+
     # Japanese IME
     inputMethod = {
       type = "fcitx5";
@@ -92,7 +95,7 @@
   # Programs
   programs = {
     virt-manager.enable = true;
-  
+
     # Enable AppImage support
     appimage = {
       enable = true;
@@ -125,7 +128,7 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
-  
+
     systemPackages = with pkgs; [
       pavucontrol
       inputs.zen-browser.packages.${pkgs.system}.default

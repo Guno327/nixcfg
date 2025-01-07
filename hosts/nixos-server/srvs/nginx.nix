@@ -1,9 +1,16 @@
-{ pkgs, config, lib, ... }: with lib;
-let 
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+with lib;
+let
   cfg = config.srvs.nginx;
-in {
+in
+{
   options.srvs.nginx.enable = mkEnableOption "Enable nginx container";
-  
+
   config = mkIf cfg.enable {
     systemd = {
       tmpfiles.rules = [
@@ -11,7 +18,7 @@ in {
         "d /home/nginx/data 774 root root -"
         "d /home/nginx/letsencrypt 774 root root -"
       ];
-    
+
       timers."dns-update-timer" = {
         wantedBy = [ "timers.target" ];
         timerConfig = {
@@ -20,10 +27,10 @@ in {
           Persistent = true;
         };
       };
-    
+
       services."dns-update" = {
         description = "Tyco DNS Update";
-        requires = [ "network-online.target" ];     
+        requires = [ "network-online.target" ];
         after = [ "network-online.target" ];
         serviceConfig = {
           Type = "oneshot";
@@ -34,15 +41,18 @@ in {
       };
     };
 
-
     virtualisation.docker.enable = true;
     virtualisation.oci-containers = {
-    backend = "docker";
+      backend = "docker";
       containers = {
         proxy-manager = {
           autoStart = true;
           image = "jc21/nginx-proxy-manager:latest";
-          ports = [ "80:80" "81:81" "443:443" ];
+          ports = [
+            "80:80"
+            "81:81"
+            "443:443"
+          ];
           volumes = [
             "/home/nginx/data:/data"
             "/home/nginx/letsencrypt:/etc/letsencrypt"
@@ -51,11 +61,12 @@ in {
       };
     };
 
-    
     age.secrets.secret1.file = ../../../secrets/secret1.age;
-    environment.systemPackages = [ 
+    environment.systemPackages = [
       pkgs.dns-update
-      pkgs.writers.writePython3Bin "dns-update" /*python*/''
+      pkgs.writers.writePython3Bin
+      "dns-update" # python
+      ''
         import http.client
         import json
 

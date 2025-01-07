@@ -1,11 +1,13 @@
-{ inputs, ... } : let
+{ inputs, ... }:
+let
   inherit (inputs.nvf.lib.nvim.dag) entryAnywhere;
-in {
-  programs.nvf = {  
+in
+{
+  programs.nvf = {
     enable = true;
     settings = {
 
-    vim = {
+      vim = {
         statusline.lualine.enable = true;
         autopairs.nvim-autopairs.enable = true;
 
@@ -23,7 +25,7 @@ in {
           };
         };
 
-        treesitter ={
+        treesitter = {
           enable = true;
           addDefaultGrammars = true;
           autotagHtml = true;
@@ -48,7 +50,7 @@ in {
             enable = true;
             setupOpts.intergration.nvim-tree.enable = true;
           };
-          
+
         };
 
         languages = {
@@ -64,7 +66,7 @@ in {
           java.enable = true;
           html.enable = true;
           css.enable = true;
-          rust.enable = true;        
+          rust.enable = true;
           markdown.enable = true;
         };
 

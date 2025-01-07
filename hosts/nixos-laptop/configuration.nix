@@ -1,8 +1,6 @@
-{ pkgs, inputs, ... }: {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+{ pkgs, inputs, ... }:
+{
+  imports = [ ./hardware-configuration.nix ];
 
   # Bootloader.
   boot.loader = {
@@ -16,7 +14,7 @@
   # Enable networking
   networking.networkmanager.enable = true;
   hardware.bluetooth.enable = false;
-  
+
   # Services
   services = {
     pipewire = {
@@ -25,27 +23,27 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
-  
+
     xserver = {
       # Configure keymap in X11
       xkb = {
         layout = "us";
         variant = "";
       };
-  
+
       # Graphics
       videoDrivers = [ "amdgpu" ];
-    
+
       desktopManager.runXdgAutostartIfNone = true;
     };
-  
+
     # Enable the OpenSSH daemon.
     openssh = {
       enable = true;
       settings.PermitRootLogin = "no";
       allowSFTP = true;
     };
-  
+
     # tlp
     tlp = {
       enable = true;
@@ -56,15 +54,14 @@
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      
+
         USB_AUTOSUSPEND_DISABLE = 1;
       };
     };
 
-  
     blueman.enable = false;
   };
-  
+
   # Select internationalisation properties.
   i18n = {
     defaultLocale = "en_US.UTF-8";
@@ -79,7 +76,7 @@
       LC_TELEPHONE = "en_US.UTF-8";
       LC_TIME = "en_US.UTF-8";
     };
-  
+
     # Japanese IME
     inputMethod = {
       type = "fcitx5";
@@ -93,11 +90,11 @@
       };
     };
   };
-  
+
   # Programs
   programs = {
     virt-manager.enable = true;
-  
+
     # Enable AppImage support
     appimage = {
       enable = true;
@@ -121,7 +118,7 @@
     fish.enable = true;
     ssh.startAgent = true;
   };
-  
+
   # Environment
   environment = {
     variables = {
@@ -130,7 +127,7 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
-  
+
     systemPackages = with pkgs; [
       pavucontrol
       inputs.zen-browser.packages.${pkgs.system}.default
@@ -139,7 +136,7 @@
   };
 
   # Security
-  security.pam.services.hyprlock = {};
+  security.pam.services.hyprlock = { };
 
   # Set your time zone.
   time.timeZone = "America/Denver";
@@ -169,7 +166,7 @@
   users.groups.libvirtd.members = [ "gunnar" ];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-  
+
   # Lid Handling
   services.logind.lidSwitchExternalPower = "ignore";
 

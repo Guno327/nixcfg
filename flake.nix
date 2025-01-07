@@ -8,7 +8,7 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     nixpkgs = {
       url = "github:nixos/nixpkgs/nixos-24.11";
     };
@@ -30,17 +30,20 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/nur";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
   };
 
-  outputs = { 
-    self,
-    home-manager,
-    nixpkgs,
-    nixos-hardware,
-    agenix,
-    nvf,
-    ... 
-    }@inputs: let
+  outputs =
+    {
+      self,
+      home-manager,
+      nixpkgs,
+      nixos-hardware,
+      nvf,
+      treefmt-nix,
+      ...
+    }@inputs:
+    let
       inherit (self) outputs;
       systems = [
         "aarch64-linux"
@@ -50,34 +53,39 @@
         "x86_64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
-    in 
+      eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
+      treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
+    in
     {
-      packages =
-        forAllSystems (system: nixpkgs.legacyPackages.${system});
+      packages = forAllSystems (system: nixpkgs.legacyPackages.${system});
+      formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
+      checks = eachSystem (pkgs: {
+        formatting = treefmtEval.${pkgs.system}.config.build.check self;
+      });
 
       nixosConfigurations = {
         nixos-laptop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ 
+          modules = [
             ./hosts/nixos-laptop
 
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-pc-laptop
-          
+
             nvf.nixosModules.default
           ];
         };
 
         nixos-desktop = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ 
+          modules = [
             ./hosts/nixos-desktop
 
             nixos-hardware.nixosModules.common-cpu-amd
             nixos-hardware.nixosModules.common-gpu-amd
             nixos-hardware.nixosModules.common-pc-ssd
-          
+
             nvf.nixosModules.default
           ];
         };
@@ -86,25 +94,19 @@
         "gunnar@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./home/gunnar/nixos-laptop.nix
-          ];
+          modules = [ ./home/gunnar/nixos-laptop.nix ];
         };
 
         "gunnar@nixos-desktop" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./home/gunnar/nixos-desktop.nix
-          ];
+          modules = [ ./home/gunnar/nixos-desktop.nix ];
         };
 
         "gunnar@nixos-server" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ 
-            ./home/gunnar/nixos-server.nix
-          ];
+          modules = [ ./home/gunnar/nixos-server.nix ];
         };
       };
     };

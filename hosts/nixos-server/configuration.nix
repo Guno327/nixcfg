@@ -1,19 +1,19 @@
-{ pkgs, inputs, ... }: {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./srvs
-    ];
+{ pkgs, inputs, ... }:
+{
+  imports = [
+    ./hardware-configuration.nix
+    ./srvs
+  ];
 
   # Bootloader.
-  boot.loader ={
+  boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
     systemd-boot.configurationLimit = 5;
   };
 
   # Setup networking
-  networking = { 
+  networking = {
     hostName = "nixos-server";
     hostId = "00000001";
     firewall.enable = false;
@@ -22,10 +22,12 @@
   # Setup bridge
   networking = {
     bridges."br0".interfaces = [ "eno1" ];
-    interfaces."br0".ipv4.addresses = [{
-      address = "10.0.0.3";
-      prefixLength = 24;
-    }];
+    interfaces."br0".ipv4.addresses = [
+      {
+        address = "10.0.0.3";
+        prefixLength = 24;
+      }
+    ];
     defaultGateway = "10.0.0.1";
     nameservers = [ "10.0.0.1" ];
   };
@@ -57,7 +59,7 @@
       layout = "us";
       variant = "";
     };
-  
+
     # Enable the OpenSSH daemon.
     openssh = {
       enable = true;
@@ -67,7 +69,7 @@
         PasswordAuthentication = false;
       };
     };
-  
+
     mullvad-vpn.enable = true;
   };
 
@@ -90,13 +92,13 @@
     variables = {
       "FLAKE_BRANCH" = "nixos-server";
     };
-  
+
     # Packages
-   systemPackages = with pkgs; [
+    systemPackages = with pkgs; [
       inputs.agenix.packages."${system}".default
       mullvad
       tmux
-   ];
+    ];
   };
 
   # Allow unfree packages
