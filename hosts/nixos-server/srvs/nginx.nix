@@ -5,6 +5,7 @@ in {
   options.srvs.nginx.enable = mkEnableOption "Enable nginx container";
   
   config = mkIf cfg.enable {
+    age.secrets.secret1.file = ../../../secrets/secret1.age;
     systemd = {
       tmpfiles.rules = [
         "d /home/nginx 774 root root -"
@@ -20,7 +21,7 @@ in {
           Persistent = true;
         };
       };
-    
+        
       services."dns-update" = {
         description = "Tyco DNS Update";
         requires = [ "network-online.target" ];     
@@ -29,11 +30,10 @@ in {
           Type = "oneshot";
           User = "root";
           Restart = "no";
-          ExecStart = "${pkgs.dns-update}/bin/dns-update";
+          ExecStart = "${pkgs.python3}/bin/python /etc/scripts/dns-update.py";
         };
       };
     };
-
 
     virtualisation.docker.enable = true;
     virtualisation.oci-containers = {
@@ -51,29 +51,19 @@ in {
       };
     };
 
-    
-    age.secrets.secret1.file = ../../../secrets/secret1.age;
-    environment.systemPackages = [ 
-      pkgs.dns-update
-      pkgs.writers.writePython3Bin "dns-update" /*python*/''
+      environment.etc."scripts/dns-update.py".text = ''
         import http.client
         import json
-
         # Address and other api info
-
         addr = 'gamer.projecttyco.net'
         zone_id ='acedd06459615553d5e5fcada17cf813'
         identifier='be55c246e3e5276867dac9da7b4f8d4b'
-
         with open('${config.age.secrets.secret1.path}', 'r') as file:
           api_key = file.readline().rstrip()
-
-
         headers = {
             'Content-Type': "application/json",
             'Authorization': "Bearer %s" %(api_key) 
             }
-
         # Get sender ip from web
         def get_ip():
             iphost = http.client.HTTPSConnection("ipapi.co")
@@ -81,8 +71,6 @@ in {
             respo = iphost.getresponse()
             ip_addr = respo.read()
             return ip_addr.decode("utf-8")
-
-
         # Get record IP 
         def get_cloudflare_ip(cfheaders):
             cfhost = http.client.HTTPSConnection("api.cloudflare.com")
@@ -92,31 +80,24 @@ in {
             cfresponse = cfresponse.decode("utf-8")
             cfresponse = json.loads(cfresponse)    
             return cfresponse["result"]["content"]
-
         # Change the IP
         def update_cloudflare_ip(heads, ip_addr, web_addr, zone, ident ):
             conn = http.client.HTTPSConnection("api.cloudflare.com")
             payload = "{\n  \"content\": \"%s\",\n  \"name\": \"%s\",\n  \"proxied\": false,\n  \"type\": \"A\",\n  \"comment\": \"Domain verification record\",\n  \"ttl\": 3600\n}" %(ip_addr, web_addr)
             conn.request("PUT", "/client/v4/zones/%s/dns_records/%s/" %(zone, ident), payload, heads) 
-
             res = conn.getresponse()
             data = res.read()
             data = data.decode("utf-8")
             data = json.loads(data)
             data_ip = data["result"]["content"]
             print('DNS record updated to IP:', data_ip)
-
-
-
         # Compare two IPs to test for match
         ip = get_ip()
         cfip = get_cloudflare_ip(headers)
-
         if cfip != ip:
             update_cloudflare_ip(headers, ip, addr, zone_id, identifier)
         else:
             print("IP addresses match, no DNS update needed")
-      ''
-    ];
+      '';
   };
 }
