@@ -51,11 +51,11 @@
     in 
     {
       packages =
-        forAllSystems (system: nixpkgs.legacyPackages.${system}) //
-        (nvf.lib.neovimConfiguration {
-           pkgs = nixpkgs.legacyPackages."x86_64-linux";
-            modules = [ ./nvf-configuration.nix ];
-        }).neovim; 
+        forAllSystems (system: nixpkgs.legacyPackages.${system});
+      defaultPackage."x86_64-linux" = (nvf.lib.neovimConfiguration {
+         pkgs = nixpkgs.legacyPackages."x86_64-linux";
+         modules = [ ./nvf-configuration.nix ];
+      }).neovim; 
 
       nixosConfigurations = {
         nixos-laptop = nixpkgs.lib.nixosSystem {
