@@ -1,5 +1,9 @@
-{ config, lib, ... }: with lib;
-let
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
   cfg = config.features.desktop.virt-manager;
 in {
   options.features.desktop.virt-manager.enable =

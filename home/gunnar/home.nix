@@ -1,21 +1,25 @@
-{ config, lib, pkgs, ... }: {
-  home.username = lib.mkDefault "gunnar";
-  home.homeDirectory = lib.mkDefault "/home/${config.home.username}";
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  home = {
+    username = lib.mkDefault "gunnar";
+    homeDirectory = lib.mkDefault "/home/${config.home.username}";
 
-  home.stateVersion = "24.05"; # DO NOT CHANGE
+    stateVersion = "24.05"; # DO NOT CHANGE
 
-  home.packages = with pkgs; [
-    cowsay
-    nvtopPackages.amd
-    powertop
-    steamcmd
-  ];
+    packages = with pkgs; [
+      cowsay
+      nvtopPackages.amd
+      powertop
+      steamcmd
+    ];
 
-  home.file = {
-  };
-
-  home.sessionVariables = {
-    EDITOR = "lvim";
+    sessionVariables = {
+      EDITOR = "nvim";
+    };
   };
 
   programs.home-manager.enable = true;

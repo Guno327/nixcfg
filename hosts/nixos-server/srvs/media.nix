@@ -1,9 +1,13 @@
-{ config, lib, ... }: with lib;
-let 
-  cfg = config.ctrs.media;
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.srvs.media;
 in {
-  options.ctrs.media.enable = mkEnableOption "Enable media service";
-  
+  options.srvs.media.enable = mkEnableOption "Enable media service";
+
   config = mkIf cfg.enable {
     systemd.tmpfiles.rules = [
       "d /home/media 774 gunnar users -"
@@ -15,8 +19,8 @@ in {
       autoStart = true;
       privateNetwork = true;
       hostBridge = "br0";
-      localAddress = "192.168.122.89/24";
-      
+      localAddress = "10.0.0.4/24";
+
       bindMounts = {
         "/data" = {
           hostPath = "/home/media/data";
@@ -28,7 +32,11 @@ in {
         };
       };
 
-      config = { config, pkgs, lib, ... }:{
+      config = {
+        config,
+        lib,
+        ...
+      }: {
         users = {
           users.media = {
             uid = 1000;
@@ -36,7 +44,7 @@ in {
             description = "media";
             group = "media";
           };
-          groups.media = { 
+          groups.media = {
             gid = 1000;
             members = [
               "media"
@@ -49,7 +57,7 @@ in {
             ];
           };
         };
-    
+
         systemd.tmpfiles.rules = [
           "d /media 774 jellyfin media -"
           "d /media/movie 774 jellyfin media -"
@@ -61,7 +69,7 @@ in {
           "d /data/radarr 774 radarr media -"
           "d /data/sonarr 774 sonarr media -"
           "d /data/ombi 774 ombi media -"
-          
+
           "d /data/jellyfin 774 jellyfin media -"
           "d /data/jellyfin/data 774 jellyfin media -"
           "d /data/jellyfin/log 774 jellyfin media -"
@@ -74,16 +82,15 @@ in {
           "aspnetcore-runtime-6.0.36"
         ];
 
-
         time.timeZone = "America/Denver";
-        
+
         networking = {
           firewall.enable = false;
           useHostResolvConf = lib.mkForce false;
-          defaultGateway = "192.168.122.1";
-          nameservers = [ "192.168.122.1" ];
+          defaultGateway = "10.0.0.1";
+          nameservers = ["10.0.0.1"];
         };
-    
+
         services = {
           jellyfin = {
             enable = true;
@@ -106,11 +113,11 @@ in {
           };
 
           radarr = {
-           enable = true;
-           openFirewall = true;
-           dataDir = "/data/radarr";
-           user = "radarr";
-           group = "media";
+            enable = true;
+            openFirewall = true;
+            dataDir = "/data/radarr";
+            user = "radarr";
+            group = "media";
           };
 
           sonarr = {
@@ -141,8 +148,8 @@ in {
       autoStart = true;
       privateNetwork = true;
       hostBridge = "br0";
-      localAddress = "192.168.122.90/24";
-      
+      localAddress = "10.0.0.5/24";
+
       bindMounts = {
         "/data" = {
           hostPath = "/home/media/data";
@@ -154,7 +161,11 @@ in {
         };
       };
 
-      config = { config, pkgs, lib, ... }:{
+      config = {
+        config,
+        lib,
+        ...
+      }: {
         users = {
           users.media = {
             uid = 1000;
@@ -162,49 +173,65 @@ in {
             description = "media";
             group = "media";
           };
-          groups.media = { 
+          groups.media = {
             gid = 1000;
             members = [
               "media"
-              "transmission"
+              "deluge"
             ];
           };
         };
-    
+
         systemd.tmpfiles.rules = [
-          "d /data/transmission 774 transmission media -"
-          "f /data/transmission/creds 774 transmission media -"
+          "d /data/deluge 774 deluge media -"
+          "f /data/deluge/auth 774 deluge media -"
+          "d /data/deluge/.config 774 deluge media -"
+          "d /data/deluge/.config/deluge 774 deluge media -"
+          "f /data/deluge/.config/deluge/core.conf 774 deluge media"
         ];
 
         time.timeZone = "America/Denver";
-        
+
         networking = {
           firewall.enable = false;
           useHostResolvConf = lib.mkForce false;
-          defaultGateway = "192.168.122.1";
-          nameservers = [ "192.168.122.1" ];
+          defaultGateway = "10.0.0.1";
+          nameservers = ["10.0.0.1"];
         };
 
         services = {
-          transmission = {
+          deluge = {
             enable = true;
-            openFirewall = true;
-            user = "transmission";
+            user = "deluge";
             group = "media";
-            openPeerPorts = true;
-            credentialsFile = "/data/transmission/creds";
-            
-            settings = {
-              peer-port = 58846;
-              download-dir = "/media/download";
-              incomplete-dir-enabled = false;
+            dataDir = "/data/deluge";
+            authFile = "/data/deluge/auth";
+            openFirewall = true;
+            declarative = true;
+
+            web = {
+              enable = true;
+              openFirewall = true;
+              port = 8080;
+            };
+
+            config = {
+              download_location = "/media/download/";
+              max_upload_speed = "1000.0";
+              share_ratio_limit = "1.0";
+              allow_remote = false;
+              daemon_port = 58846;
+              listen_ports = [
+                6881
+                6889
+              ];
             };
           };
-          
+
           mullvad-vpn.enable = true;
           resolved.enable = true;
         };
-        
+
         system.stateVersion = "24.11";
       };
     };

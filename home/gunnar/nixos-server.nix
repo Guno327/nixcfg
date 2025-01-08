@@ -1,8 +1,8 @@
-{ 
-  imports = [ 
+{
+  imports = [
     ./home.nix
     ../features/cli
-    ../common 
+    ../common
   ];
 
   features = {
@@ -14,7 +14,6 @@
       eza.enable = true;
       git.enable = true;
       fzf.enable = true;
-      lvim.enable = true;
       trim.enable = true;
     };
   };

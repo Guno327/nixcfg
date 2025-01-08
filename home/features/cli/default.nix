@@ -7,9 +7,8 @@
     ./fish.nix
     ./fzf.nix
     ./git.nix
-    ./lvim.nix
     ./trim.nix
-  ];  
+  ];
 
   home.packages = with pkgs; [
     coreutils
@@ -28,6 +27,7 @@
     speedtest-cli
     git
     lshw
+    stress
+    s-tui
   ];
-
 }

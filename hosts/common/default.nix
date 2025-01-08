@@ -1,7 +1,14 @@
-{ pkgs, lib, inputs, outputs, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
+}: {
   imports = [
     ./users
     inputs.home-manager.nixosModules.home-manager
+    ./nvf-configuration.nix
   ];
 
   home-manager = {
@@ -13,7 +20,7 @@
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = _: true;
     };
   };
 
@@ -24,7 +31,7 @@
       trusted-users = [
         "root"
         "gunnar"
-      ]; 
+      ];
     };
 
     gc = {
@@ -32,9 +39,10 @@
       options = "--delete-older-than 7d";
     };
     optimise.automatic = true;
-    registry = (lib.mapAttrs (_: flake: { inherit flake; }))
-      ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-    nixPath = [ "/etc/nix/path" ];
+    registry = (lib.mapAttrs (_: flake: {inherit flake;})) (
+      (lib.filterAttrs (_: lib.isType "flake")) inputs
+    );
+    nixPath = ["/etc/nix/path"];
   };
   users.defaultUserShell = pkgs.fish;
 }

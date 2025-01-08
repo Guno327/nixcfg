@@ -1,9 +1,13 @@
-{ config, lib, pkgs, ... }: with lib;
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.features.desktop.dracula-theme;
 in {
-  options.features.desktop.dracula-theme.enable =
-    mkEnableOption "Theme most apps with dracula theme";
+  options.features.desktop.dracula-theme.enable = mkEnableOption "Theme most apps with dracula theme";
 
   config = mkIf cfg.enable {
     gtk = {
@@ -31,8 +35,6 @@ in {
       };
     };
 
-    programs.kitty.themeFile = "Dracula";
-
     home.file.".config/fcitx5/conf/classicui.conf".text = ''
       UseDarkTheme=True
       UseAccentColor=True
@@ -41,7 +43,10 @@ in {
       Font="fira-code 14"
     '';
 
-    programs.wofi.style = ''
+    programs = {
+      kitty.themeFile = "Dracula";
+
+      wofi.style = ''
         window {
           margin: 0px;
           border: 1px solid #bd93f9;
@@ -76,14 +81,14 @@ in {
           margin: 5px;
           border: none;
           color: #f8f8f2;
-        } 
+        }
 
         #entry:selected #text {
           font-weight: bold;
         }
       '';
 
-      programs.waybar.style = ''
+      waybar.style = ''
         @define-color background-darker rgba(30, 31, 41, 230);
         @define-color background #282a36;
         @define-color selection #44475a;
@@ -161,6 +166,8 @@ in {
         #workspaces,
         #tray,
         #mpris,
+        #cpu,
+        #memory,
         #backlight {
             background: #1e1e2e;
             padding: 0px 10px;
@@ -225,6 +232,19 @@ in {
             border-right: 0px;
         }
 
+        #cpu {
+            color: pink;
+            border-left: 0px;
+            border-right: 0px;
+        }
+
+        #memory {
+            color: purple;
+            border-radius: 0px 0px 0px 10px;
+            border-left: 0px;
+            border-right: 0px;
+        }
+
         #pulseaudio {
             color: #89b4fa;
             border-radius: 10px 0px 0px 10px;
@@ -251,6 +271,6 @@ in {
             margin-left: 0px;
         }
       '';
+    };
   };
-
 }

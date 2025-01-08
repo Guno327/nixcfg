@@ -1,15 +1,19 @@
-{ config, lib, ... }: with lib;
-let 
-  cfg = config.ctrs.test;
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.srvs.test;
 in {
-  options.ctrs.test.enable = mkEnableOption "Enable test container";
+  options.srvs.test.enable = mkEnableOption "Enable test container";
   config = mkIf cfg.enable {
     containers.test = {
       autoStart = true;
       privateNetwork = true;
       hostBridge = "br0";
       localAddress = "192.168.122.88/24";
-      
+
       bindMounts = {
         "/var/www/site" = {
           hostPath = "/home/test";
@@ -17,16 +21,16 @@ in {
         };
       };
 
-      config = { config, pkgs, lib, ... }:{
+      config = {lib, ...}: {
         services.static-web-server = {
           enable = true;
           root = "/var/www/site";
         };
-        
+
         networking = {
           firewall = {
             enable = true;
-            allowedTCPPorts = [ 8787 ];
+            allowedTCPPorts = [8787];
           };
           useHostResolvConf = lib.mkForce false;
         };

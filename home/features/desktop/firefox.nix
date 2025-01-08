@@ -1,15 +1,19 @@
-{ config, lib, pkgs, ... }: with lib;
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.features.desktop.firefox;
   downloadDir = "${config.home.homeDirectory}/downloads";
 in {
-  options.features.desktop.firefox.enable =
-    mkEnableOption "Install and configure firefox";
+  options.features.desktop.firefox.enable = mkEnableOption "Install and configure firefox";
 
   config = mkIf cfg.enable {
     programs.firefox = {
       enable = true;
-      profiles= {
+      profiles = {
         gunnar = {
           id = 0;
           isDefault = true;
@@ -18,19 +22,21 @@ in {
           search = {
             force = true;
             default = "Brave";
-            engines = {        
+            engines = {
               "Brave" = {
                 urls = [
-                {
-                  template = "https://search.brave.com/search?";
-                  params = [
                   {
-                    name = "q";
-                    value = "{searchTerms}";
-                  }];
-                }];
+                    template = "https://search.brave.com/search?";
+                    params = [
+                      {
+                        name = "q";
+                        value = "{searchTerms}";
+                      }
+                    ];
+                  }
+                ];
               };
-            }; 
+            };
           };
 
           extensions = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -45,7 +51,7 @@ in {
 
           settings = {
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-            
+
             "browser.in-content.dark-mode" = true;
             "browser.toolbars.bookmaks.visibility" = "never";
             "browser.startup.couldRestoreSession.count" = 2;

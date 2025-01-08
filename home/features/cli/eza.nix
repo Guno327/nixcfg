@@ -1,5 +1,9 @@
-{ config, lib, ... }: with lib;
-let 
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
   cfg = config.features.cli.eza;
 in {
   options.features.cli.eza.enable = mkEnableOption "Enable and alias eza";
@@ -8,9 +12,16 @@ in {
       enable = true;
       enableFishIntegration = true;
       enableBashIntegration = true;
-      extraOptions = ["-l" "--icons" "--git" "-a"];
+      extraOptions = [
+        "-l"
+        "--icons"
+        "--git"
+        "-a"
+      ];
     };
 
-    programs.fish.shellAbbrs = { ls = "eza"; };
+    programs.fish.shellAbbrs = {
+      ls = "eza";
+    };
   };
 }

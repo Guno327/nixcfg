@@ -1,9 +1,13 @@
-{ config, lib, ... }: with lib;
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
   cfg = config.features.desktop.spotify;
 in {
-  options.features.desktop.spotify.enable =
-    mkEnableOption "Enable and configure spotify";
+  options.features.desktop.spotify.enable = mkEnableOption "Enable and configure spotify";
 
   config = mkIf cfg.enable {
     programs.spotify-player = {
@@ -14,10 +18,26 @@ in {
         enable_notify = false;
       };
       keymaps = [
-        { command = "Shuffle"; key_sequence = "c s"; }
-        { command = "Repeat"; key_sequence = "c r"; }
-        { command = "Quit"; key_sequence = "c c"; }
+        {
+          command = "Shuffle";
+          key_sequence = "c s";
+        }
+        {
+          command = "Repeat";
+          key_sequence = "c r";
+        }
+        {
+          command = "Quit";
+          key_sequence = "c c";
+        }
       ];
+    };
+
+    xdg.desktopEntries.spotify = {
+      name = "Spotify";
+      genericName = "spotify_player";
+      exec = "kitty -e spotify_player";
+      terminal = false;
     };
   };
 }

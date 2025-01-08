@@ -1,5 +1,9 @@
-{ config, lib, ... }: with lib;
-let 
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
   cfg = config.features.cli.fzf;
 in {
   options.features.cli.fzf.enable = mkEnableOption "enable fuzzy finder";
@@ -11,7 +15,7 @@ in {
 
       defaultOptions = [
         "--preview='bat --color=always -n {}"
-	      "--bind 'ctrl-/:toggle-preview"
+        "--bind 'ctrl-/:toggle-preview"
       ];
 
       defaultCommand = "fd --type f --exclude .git --follow --hidden";
