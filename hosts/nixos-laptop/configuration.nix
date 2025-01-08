@@ -13,7 +13,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  
+  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+
   # Enable bluetooth
   hardware.bluetooth.enable = false;
   services.blueman.enable = false;
