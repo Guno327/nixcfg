@@ -45,6 +45,7 @@
     );
     nixPath = ["/etc/nix/path"];
   };
+  programs.nix-ld.enable = true;
   
   users.defaultUserShell = pkgs.fish;
 }
