@@ -10,6 +10,7 @@
     webcord
     obsidian
     feh
+    prusa-slicer
   ];
 
   features = {

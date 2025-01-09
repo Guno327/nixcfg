@@ -1,4 +1,4 @@
-{...}: {
+{ pkgs, ...}: {
   imports = [
     ./waybar.nix
     ./hyprland.nix
@@ -10,5 +10,9 @@
     ./firefox.nix
     ./spotify.nix
     ./virt-manager.nix
+  ];
+
+  home.packages = with pkgs; [
+    rpi-imager
   ];
 }

@@ -138,6 +138,8 @@
       inputs.zen-browser.packages.${pkgs.system}.default
       mullvad
       termshark
+      rpi-imager
+      xorg.xhost
     ];
   };
 

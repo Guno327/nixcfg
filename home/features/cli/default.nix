@@ -16,7 +16,6 @@
     btop
     httpie
     procs
-    tldr
     zip
     unzip
     clang
@@ -29,5 +28,6 @@
     lshw
     stress
     s-tui
+    tealdeer
   ];
 }
