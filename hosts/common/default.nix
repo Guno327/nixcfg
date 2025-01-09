@@ -46,13 +46,5 @@
     nixPath = ["/etc/nix/path"];
   };
   
-  programs = {
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      enableFishIntegration = true;
-    };
-  };
-
   users.defaultUserShell = pkgs.fish;
 }

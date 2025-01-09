@@ -23,5 +23,11 @@ in {
         steam = "steam &> /dev/null & disown";
       };
     };
+
+    programs.direnv = {
+      enable = true;
+      enableFishIntegration = true;
+      nix-direnv.enable = true;
+    };
   };
 }
