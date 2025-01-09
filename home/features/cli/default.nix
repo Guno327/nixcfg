@@ -14,13 +14,9 @@
     coreutils
     fd
     btop
-    httpie
     procs
     zip
     unzip
-    clang
-    rustc
-    cargo
     neofetch
     brightnessctl
     speedtest-cli
