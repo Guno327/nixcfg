@@ -1,6 +1,4 @@
-{inputs, ...}: let
-  inherit (inputs.nvf.lib.nvim.dag) entryAnywhere;
-in {
+{
   programs.nvf = {
     enable = true;
     settings = {
@@ -64,6 +62,7 @@ in {
           css.enable = true;
           rust.enable = true;
           markdown.enable = true;
+          clang.enable = true;
         };
 
         autocomplete.nvim-cmp = {
