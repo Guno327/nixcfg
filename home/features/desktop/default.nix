@@ -10,6 +10,7 @@
     ./firefox.nix
     ./spotify.nix
     ./virt-manager.nix
+    ./ghostty.nix
   ];
 
   home.packages = with pkgs; [

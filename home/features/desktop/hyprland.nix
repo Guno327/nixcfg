@@ -32,17 +32,6 @@ in {
 
     programs.wofi.enable = true;
 
-    programs.fish.loginShellInit = ''
-       set -x NIX_PATH nixpkgs=channel:nixos-unstable
-       set -x NIX_LOG info
-       set -x TERMINAL kitty
-       direnv hook fish | source
-
-      if test (tty) = "/dev/tty1"
-         exec Hyprland &> /dev/null
-       end
-    '';
-
     services.hyprpaper = {
       enable = true;
       settings = {
@@ -171,7 +160,6 @@ in {
         "$mainMod" = "SUPER";
 
         bind = [
-          "$mainMod, RETURN, exec, kitty -e fish -c 'exec fish'"
           "$mainMod, P, togglefloating"
           "$mainMod, C, killactive"
           "$mainMod, M, exec, wlogout -p layer-shell"

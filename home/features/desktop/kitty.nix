@@ -19,5 +19,8 @@ in {
     programs.fish.shellAbbrs = {
       ssh = "kitten ssh";
     };
+    wayland.windowManager.hyprland.settings = {
+      bind = [ "$mainMod, RETURN, exec, kitty -e fish -c 'exec fish'" ];
+    };
   };
 }

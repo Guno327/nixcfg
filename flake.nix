@@ -5,12 +5,12 @@
 
   inputs = {
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-24.11";
+      url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
     zen-browser = {
@@ -30,6 +30,7 @@
     
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/nur";
+    ghostty.url = "github:ghostty-org/ghostty";
   };
 
   outputs = {
@@ -39,6 +40,7 @@
     nixos-hardware,
     nvf,
     agenix,
+    ghostty,
     ...
   } @ inputs: let
     inherit (self) outputs;
