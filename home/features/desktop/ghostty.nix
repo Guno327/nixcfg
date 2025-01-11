@@ -1,8 +1,6 @@
 {
   config,
   lib,
-  inputs,
-  pkgs,
   ...
 }:
 with lib; let
@@ -11,8 +9,17 @@ in {
   options.features.desktop.ghostty.enable = mkEnableOption "Configure ghostty";
 
   config = mkIf cfg.enable {
+    programs.ghostty = {
+      enable = true;
+      enableFishIntegration = true;
+      settings = {
+        font-family = "FiraCode Nerd Font";
+        font-size = 14;
+        theme = "Dracula";
+      };
+    };
     wayland.windowManager.hyprland.settings = {
-      bind = [ "$mainMod, RETURN, exec, ghostty -e fish -c 'exec fish'" ];
+      bind = [ "$mainMod, RETURN, exec, ghostty -e fish" ];
     };
   };
 }
