@@ -70,7 +70,9 @@
           rust.enable = true;
           markdown.enable = true;
           clang.enable = true;
-          haskell.enable = true;
+          haskell = {
+            enable = true;
+          };
 
         };
 
