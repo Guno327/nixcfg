@@ -36,7 +36,7 @@ in {
     xdg.desktopEntries.spotify = {
       name = "Spotify";
       genericName = "spotify_player";
-      exec = "ghostty -e spotify_player";
+      exec = "$TERMINAL -e spotify_player";
       terminal = false;
     };
   };
