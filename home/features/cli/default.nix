@@ -25,5 +25,9 @@
     stress
     s-tui
     tealdeer
+    ncdu
+    termshark
+    traceroute
+    mullvad
   ];
 }
