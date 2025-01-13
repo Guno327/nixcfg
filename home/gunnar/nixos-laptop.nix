@@ -68,10 +68,10 @@
     
   services.hyprpaper.settings = {
     preload = [
-      "~/pictures/wallpaper1.png"
+      "~/pictures/wallpaper.png"
     ];
     wallpaper = [
-      "eDP-1, ~/pictures/wallpaper1.png"
+      "eDP-1, ~/pictures/wallpaper.png"
     ];
   };
 
