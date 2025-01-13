@@ -28,7 +28,7 @@
       hyprland.enable = true;
       waybar.enable = true;
       fonts.enable = true;
-      kitty.enable = true;
+      ghostty.enable = true;
       minecraft.enable = true;
       dracula-theme.enable = true;
       gammastep.enable = true;
@@ -65,6 +65,16 @@
       ];
     };
   };
+    
+  services.hyprpaper.settings = {
+    preload = [
+      "~/pictures/wallpaper1.png"
+    ];
+    wallpaper = [
+      "eDP-1, ~/pictures/wallpaper1.png"
+    ];
+  };
+
 
   programs = {
     waybar.settings = {
@@ -96,8 +106,7 @@
          exec Hyprland &> /dev/null
        end
     '';
-
-
+    
     hyprlock = {
       enable = true;
 
