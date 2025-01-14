@@ -29,5 +29,6 @@
     termshark
     traceroute
     mullvad
+    dig
   ];
 }
