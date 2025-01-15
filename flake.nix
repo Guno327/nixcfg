@@ -61,10 +61,11 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/nixos-laptop
-
+          
           nixos-hardware.nixosModules.common-cpu-amd
           nixos-hardware.nixosModules.common-gpu-amd
           nixos-hardware.nixosModules.common-pc-laptop
+
 
           nvf.nixosModules.default
         ];

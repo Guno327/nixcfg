@@ -31,20 +31,7 @@ in {
     ];
 
     programs.wofi.enable = true;
-
-    services.hyprpaper = {
-      enable = true;
-      settings = {
-        preload = [
-          "~/pictures/wallpaper1.png"
-          "~/pictures/wallpaper2.png"
-        ];
-        wallpaper = [
-          "DP-1, ~/pictures/wallpaper1.png"
-          "DP-2 ~/pictures/wallpaper2.png"
-        ];
-      };
-    };
+    services.hyprpaper.enable = true;
 
     wayland.windowManager.hyprland = {
       enable = true;

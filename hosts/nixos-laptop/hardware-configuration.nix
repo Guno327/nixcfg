@@ -17,9 +17,7 @@
       "usb_storage"
       "sd_mod"
     ];
-    initrd.kernelModules = [];
     kernelModules = ["kvm-amd"];
-    extraModulePackages = [];
   };
 
   fileSystems = {
