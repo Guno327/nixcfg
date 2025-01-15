@@ -141,6 +141,7 @@
       inputs.zen-browser.packages.${pkgs.system}.default
       rpi-imager
       xorg.xhost
+      gamescope
     ];
   };
 
