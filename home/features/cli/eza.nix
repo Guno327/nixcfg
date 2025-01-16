@@ -16,12 +16,13 @@ in {
         "-l"
         "--icons"
         "--git"
-        "-a"
       ];
     };
 
     programs.fish.shellAbbrs = {
       ls = "eza";
+      la = "eza -a";
+      lt = "eza --tree";
     };
   };
 }
