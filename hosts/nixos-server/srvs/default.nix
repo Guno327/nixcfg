@@ -2,7 +2,7 @@
   imports = [
     ./test.nix
     ./media.nix
-    ./minecraft.nix
+    ./pufferpanel.nix
     ./nginx.nix
     ./site.nix
   ];

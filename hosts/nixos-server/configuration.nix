@@ -116,7 +116,7 @@
   srvs = {
     test.enable = false;
     media.enable = true;
-    minecraft.enable = true;
+    pufferpanel.enable = true;
     nginx.enable = true;
     site.enable = true;
   };

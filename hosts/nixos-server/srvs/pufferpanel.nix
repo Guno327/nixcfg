@@ -4,18 +4,18 @@
   ...
 }:
 with lib; let
-  cfg = config.srvs.minecraft;
+  cfg = config.srvs.pufferpanel;
 in {
-  options.srvs.minecraft.enable = mkEnableOption "Enable minecraft container";
+  options.srvs.pufferpanel.enable = mkEnableOption "Enable minecraft container";
 
   config = mkIf cfg.enable {
     systemd.tmpfiles.rules = [
-      "d /home/minecraft 774 gunnar users -"
-      "d /home/minecraft/servers 774 gunnar users -"
-      "d /home/minecraft/logs 774 gunnar users -"
+      "d /home/pufferpanel 774 gunnar users -"
+      "d /home/pufferpanel/servers 774 gunnar users -"
+      "d /home/pufferpanel/logs 774 gunnar users -"
     ];
 
-    containers.minecraft = {
+    containers.pufferpanel = {
       autoStart = true;
       privateNetwork = true;
       hostBridge = "br0";
@@ -23,7 +23,7 @@ in {
 
       bindMounts = {
         "/var/lib/pufferpanel/servers" = {
-          hostPath = "/home/minecraft";
+          hostPath = "/home/pufferpanel";
           isReadOnly = false;
         };
       };
@@ -42,11 +42,20 @@ in {
           };
         };
 
+        nixpkgs.config.allowUnfree = true;
         environment.systemPackages = with pkgs; [
           jdk21
           jdk17
           jdk8
           pufferpanel
+          steamcmd
+        ];
+
+        programs.nix-ld.enable = true;
+        programs.nix-ld.libraries = with pkgs; [
+          jdk21
+          jdk17
+          jdk8
         ];
 
         environment.etc."/scripts/pufferpanel_user.sh" = {
