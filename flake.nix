@@ -30,7 +30,6 @@
     
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nur.url = "github:nix-community/nur";
-    ghostty.url = "github:ghostty-org/ghostty";
   };
 
   outputs = {
@@ -40,7 +39,6 @@
     nixos-hardware,
     nvf,
     agenix,
-    ghostty,
     ...
   } @ inputs: let
     inherit (self) outputs;
