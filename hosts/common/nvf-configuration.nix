@@ -72,7 +72,10 @@
           markdown.enable = true;
           clang.enable = true;
           haskell.enable = true;
-          python.enable = true;
+          python = {
+            enable = true;
+            lsp.server = "pyright";
+          };
         };
 
         autocomplete.nvim-cmp = {
