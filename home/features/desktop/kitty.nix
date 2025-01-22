@@ -15,6 +15,9 @@ in {
       font.size = 14;
       shellIntegration.enableFishIntegration = true;
       shellIntegration.enableBashIntegration = true;
+      settings = {
+        enabled_layouts = "tall:bias=50;full_size=1;mirrored=false";
+      };
     };
     programs.fish.shellAbbrs = {
       ssh = "kitten ssh";
