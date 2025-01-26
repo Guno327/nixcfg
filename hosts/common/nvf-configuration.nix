@@ -22,6 +22,7 @@
 
         lsp = {
           enable = true;
+          formatOnSave = true;
           otter-nvim = {
             enable = true;
             mappings.toggle = "<C-l>";

@@ -12,23 +12,22 @@
       efi.canTouchEfiVariables = true;
       systemd-boot.configurationLimit = 5;
     };
-    kernelPackages = pkgs.linuxPackages_zen;
-  };
-
-  networking = {
-    hostName = "nixos-desktop";
-    interfaces."enp7s0".ipv4.addresses = [
-      {
-        address = "10.0.0.109";
-        prefixLength = 24;
-      }
-    ];
-    defaultGateway = "10.0.0.1";
-    nameservers = [ "10.0.0.1" ];
   };
 
   # Networking
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "nixos-desktop";
+    networkmanager.enable = true;
+  };
+
+  # Bluetooth
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    xpadneo.enable = true;
+  };
 
   # Services
   services = {
@@ -58,6 +57,8 @@
       settings.PermitRootLogin = "no";
       allowSFTP = true;
     };
+
+    blueman.enable = true;
   };
 
   # Security
@@ -112,7 +113,7 @@
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-      extraCompatPackages = with pkgs; [ proton-ge-bin ];
+      extraCompatPackages = with pkgs; [proton-ge-bin];
     };
 
     hyprland = {

@@ -79,12 +79,11 @@ in {
         decoration = {
           rounding = 8;
           blur = {
-            enabled = true;
+            enabled = false;
             size = 3;
             passes = 3;
+            ignore_opacity = true;
           };
-          active_opacity = 1.0;
-          inactive_opacity = 1.0;
         };
 
         animations = {
@@ -204,7 +203,8 @@ in {
           ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ];
 
-        windowrulev2 = [];
+        windowrulev2 = [
+        ];
       };
     };
   };

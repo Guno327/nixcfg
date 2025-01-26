@@ -28,7 +28,8 @@
       hyprland.enable = true;
       waybar.enable = true;
       fonts.enable = true;
-      ghostty.enable = true;
+      ghostty.enable = false;
+      kitty.enable = true;
       minecraft.enable = true;
       dracula-theme.enable = true;
       gammastep.enable = true;
