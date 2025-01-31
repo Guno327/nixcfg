@@ -34,11 +34,10 @@
       dracula-theme.enable = true;
       gammastep.enable = true;
       spotify.enable = true;
-      firefox.enable = true;
       virt-manager.enable = true;
     };
   };
-  
+
   services.hyprpaper.settings = {
     preload = [
       "~/pictures/wallpaper1.png"
@@ -81,7 +80,7 @@
       ];
     };
   };
-  
+
   programs = {
     fish.loginShellInit = ''
        set -x NIX_PATH nixpkgs=channel:nixos-unstable
@@ -93,7 +92,6 @@
          exec Hyprland &> /dev/null
        end
     '';
-
 
     waybar.settings = {
       mainbar = {
