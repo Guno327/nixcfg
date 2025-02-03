@@ -31,5 +31,7 @@
     mullvad
     dig
     ventoy
+    nix-prefetch-git
+    nix-prefetch-github
   ];
 }

@@ -17,6 +17,13 @@
   };
 
   nixpkgs = {
+    overlays = [
+      # Add overlays from flake
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.stable-packages
+    ];
+
     # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
@@ -34,7 +41,6 @@
       ];
     };
 
-
     gc = {
       automatic = true;
       options = "--delete-older-than 7d";
@@ -46,6 +52,6 @@
     nixPath = ["/etc/nix/path"];
   };
   programs.nix-ld.enable = true;
-  
+
   users.defaultUserShell = pkgs.fish;
 }

@@ -11,6 +11,7 @@
     obsidian
     feh
     prusa-slicer
+    discord
   ];
 
   features = {
@@ -35,6 +36,7 @@
       gammastep.enable = true;
       spotify.enable = true;
       virt-manager.enable = true;
+      ee2.enable = true;
     };
   };
 
@@ -74,9 +76,13 @@
       ];
 
       exec-once = [
-        "[workspace 1 silent] ghostty"
+        "[workspace 1 silent] kitty"
         "[workspace 2 silent] zen"
-        "[workspace 5 silent] webcord"
+        "[workspace 5 silent] discord"
+      ];
+
+      windowrule = [
+        "workspace 5, discord"
       ];
     };
   };

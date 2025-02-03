@@ -1,4 +1,4 @@
-{ pkgs, ...}: {
+{pkgs, ...}: {
   imports = [
     ./waybar.nix
     ./hyprland.nix
@@ -11,6 +11,7 @@
     ./spotify.nix
     ./virt-manager.nix
     ./ghostty.nix
+    ./ee2.nix
   ];
 
   home.packages = with pkgs; [

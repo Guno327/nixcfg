@@ -1,11 +1,18 @@
 {
   lib,
-  inputs,
   pkgs,
+  outputs,
   ...
 }: {
   nixpkgs = {
-    overlays = [inputs.nur.overlays.default];
+    # configure overlays from flake
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.stable-packages
+    ];
+
+    # Configure your nixpkgs instance
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;

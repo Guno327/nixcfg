@@ -141,6 +141,7 @@
       rpi-imager
       xorg.xhost
       gamescope
+      wine
     ];
   };
 
@@ -165,16 +166,16 @@
     enable32Bit = true;
   };
 
-  # KVM
+  # Virt
   users.groups.libvirtd.members = ["gunnar"];
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation = {
+    libvirtd.enable = true;
+    spiceUSBRedirection.enable = true;
+    docker.enable = true;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # Steam
-  services.mullvad-vpn.enable = true;
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
 }

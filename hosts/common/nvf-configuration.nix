@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 {
   programs.nvf = {
     enable = true;
@@ -12,17 +11,16 @@
           name = "dracula";
           style = "dark";
         };
-        
+
         options = {
           tabstop = 2;
           shiftwidth = 2;
           backup = false;
         };
 
-
         lsp = {
           enable = true;
-          formatOnSave = true;
+          formatOnSave = false;
           otter-nvim = {
             enable = true;
             mappings.toggle = "<C-l>";
@@ -82,9 +80,9 @@
         autocomplete.nvim-cmp = {
           enable = true;
           mappings = {
-            confirm = "<Tab>";
-            next = "<Down>";
-            previous = "<Up>";
+            confirm = "<C-f>";
+            next = "<Tab>";
+            previous = "<S-Tab>";
             close = "<Esc";
             scrollDocsUp = "<C-Up>";
             scrollDocsDown = "<C-Down>";
