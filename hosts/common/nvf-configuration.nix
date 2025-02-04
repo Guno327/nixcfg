@@ -20,7 +20,7 @@
 
         lsp = {
           enable = true;
-          formatOnSave = false;
+          formatOnSave = true;
           otter-nvim = {
             enable = true;
             mappings.toggle = "<C-l>";
