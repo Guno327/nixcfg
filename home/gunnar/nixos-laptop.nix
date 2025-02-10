@@ -23,6 +23,7 @@
       git.enable = true;
       fzf.enable = true;
       trim.enable = true;
+      mpv.enable = true;
     };
     desktop = {
       hyprland.enable = true;
@@ -34,7 +35,6 @@
       dracula-theme.enable = true;
       gammastep.enable = true;
       spotify.enable = true;
-      firefox.enable = true;
       virt-manager.enable = true;
     };
   };
@@ -66,7 +66,7 @@
       ];
     };
   };
-    
+
   services.hyprpaper.settings = {
     preload = [
       "~/pictures/wallpaper.png"
@@ -75,7 +75,6 @@
       "eDP-1, ~/pictures/wallpaper.png"
     ];
   };
-
 
   programs = {
     waybar.settings = {
@@ -107,7 +106,7 @@
          exec Hyprland &> /dev/null
        end
     '';
-    
+
     hyprlock = {
       enable = true;
 
