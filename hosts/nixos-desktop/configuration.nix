@@ -145,20 +145,6 @@
     ];
   };
 
-  # Auto upgrade
-  system.autoUpgrade = {
-    enable = true;
-    flake = inputs.self.outPath;
-    persistent = true;
-    dates = "daily";
-    flags = [
-      "-L"
-      "--update-input"
-      "nixpkgs"
-      "--commit-lock-file"
-    ];
-  };
-
   # Graphics
   boot.initrd.kernelModules = ["amdgpu"];
   hardware.graphics = {

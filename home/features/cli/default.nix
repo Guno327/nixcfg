@@ -8,6 +8,7 @@
     ./fzf.nix
     ./git.nix
     ./trim.nix
+    ./mpv.nix
   ];
 
   home.packages = with pkgs; [
@@ -33,5 +34,9 @@
     ventoy
     nix-prefetch-git
     nix-prefetch-github
+    p7zip
+    unrar
+    android-file-transfer
+    usbutils
   ];
 }
