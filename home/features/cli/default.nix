@@ -38,5 +38,6 @@
     unrar
     android-file-transfer
     usbutils
+    octave
   ];
 }
