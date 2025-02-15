@@ -142,6 +142,7 @@
       xorg.xhost
       gamescope
       wine
+      docker-compose
     ];
   };
 
