@@ -39,5 +39,6 @@
     android-file-transfer
     usbutils
     phoronix-test-suite
+    octave
   ];
 }
