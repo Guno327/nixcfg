@@ -9,6 +9,7 @@
     ./git.nix
     ./trim.nix
     ./mpv.nix
+    ./monitor.nix
   ];
 
   home.packages = with pkgs; [
@@ -23,8 +24,6 @@
     speedtest-cli
     git
     lshw
-    stress
-    s-tui
     tealdeer
     ncdu
     termshark
@@ -38,7 +37,6 @@
     unrar
     android-file-transfer
     usbutils
-    phoronix-test-suite
     octave
   ];
 }

@@ -12,8 +12,6 @@
 
     packages = with pkgs; [
       cowsay
-      nvtopPackages.amd
-      powertop
       steamcmd
     ];
 

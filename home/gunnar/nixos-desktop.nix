@@ -25,6 +25,7 @@
       fzf.enable = true;
       trim.enable = true;
       mpv.enable = true;
+      monitor.enable = true;
     };
     desktop = {
       hyprland.enable = true;
