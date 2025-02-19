@@ -16,6 +16,12 @@
         useOSProber = true;
         gfxmodeBios = "auto";
         theme = "${pkgs.minimal-grub-theme}";
+        extraEntries = ''
+           #UEFI
+           menuentry 'UEFI Firmware Settings' --id 'uefi-firmware' {
+           fwsetup
+          }
+        '';
       };
     };
   };
