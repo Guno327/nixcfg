@@ -12,6 +12,7 @@
     ./virt-manager.nix
     ./ghostty.nix
     ./ee2.nix
+    ./poetrade.nix
   ];
 
   home.packages = with pkgs; [

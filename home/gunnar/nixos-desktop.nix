@@ -39,6 +39,7 @@
       spotify.enable = true;
       virt-manager.enable = true;
       ee2.enable = true;
+      poetrade.enable = true;
     };
   };
 
