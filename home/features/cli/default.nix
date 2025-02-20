@@ -38,5 +38,6 @@
     android-file-transfer
     usbutils
     octave
+    ntfs3g
   ];
 }
