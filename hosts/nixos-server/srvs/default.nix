@@ -5,5 +5,6 @@
     ./pufferpanel.nix
     ./nginx.nix
     ./site.nix
+    ./gitlab.nix
   ];
 }

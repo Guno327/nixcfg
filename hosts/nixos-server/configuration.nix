@@ -119,6 +119,7 @@
     pufferpanel.enable = true;
     nginx.enable = true;
     site.enable = true;
+    gitlab.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
