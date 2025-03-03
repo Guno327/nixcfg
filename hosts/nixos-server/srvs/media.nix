@@ -228,6 +228,15 @@ in {
             };
           };
 
+          bitmagnet = {
+            enable = true;
+            settings = {
+              http_server.port = ":80";
+              dht_server.port = 8000;
+            };
+            openFirewall = true;
+          };
+
           mullvad-vpn.enable = true;
           resolved.enable = true;
         };
