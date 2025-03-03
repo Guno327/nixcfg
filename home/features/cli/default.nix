@@ -28,7 +28,6 @@
     ncdu
     termshark
     traceroute
-    mullvad
     dig
     ventoy
     nix-prefetch-git
@@ -39,5 +38,7 @@
     usbutils
     octave
     ntfs3g
+    nix-index
+    rclone
   ];
 }

@@ -50,6 +50,16 @@
       pulse.enable = true;
     };
 
+    flatpak = {
+      enable = true;
+      packages = [
+        {
+          appId = "community.pathofbuilding.PathOfBuilding";
+          origin = "flathub";
+        }
+      ];
+    };
+
     xserver = {
       # Configure keymap in X11
       xkb = {

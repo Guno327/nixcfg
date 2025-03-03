@@ -28,6 +28,7 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
   outputs = {
@@ -37,6 +38,7 @@
     nixos-hardware,
     nvf,
     agenix,
+    nix-flatpak,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -76,6 +78,7 @@
           nixos-hardware.nixosModules.common-pc-ssd
 
           nvf.nixosModules.default
+          nix-flatpak.nixosModules.nix-flatpak
         ];
       };
 
