@@ -183,7 +183,7 @@ in {
           "$mainMod, mouse_up, workspace, e-1"
           ", XF86MonBrightnessDown, exec, brightnessctl --quiet s 10-"
           ", XF86MonBrightnessUp, exec, brightnessctl --quiet s +10"
-          ", Print, exec, hyprshot -m region"
+          ", Print, exec, hyprshot -m region -o /home/gunnar/pictures/screenshots"
         ];
 
         bindm = [
