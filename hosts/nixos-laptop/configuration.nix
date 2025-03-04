@@ -149,7 +149,6 @@
     systemPackages = with pkgs; [
       pavucontrol
       inputs.zen-browser.packages.${pkgs.system}.default
-      mullvad
     ];
   };
 

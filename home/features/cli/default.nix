@@ -40,5 +40,6 @@
     ntfs3g
     nix-index
     rclone
+    mullvad
   ];
 }
