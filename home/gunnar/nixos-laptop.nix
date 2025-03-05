@@ -31,7 +31,6 @@
       ghostty.enable = false;
       kitty.enable = true;
       minecraft.enable = true;
-      dracula-theme.enable = false;
       gammastep.enable = true;
       spotify.enable = true;
       virt-manager.enable = true;
@@ -80,18 +79,24 @@
     waybar.settings = {
       mainbar = {
         modules-left = [
-          "clock"
-          "custom/weather"
+          "custom/sep"
           "hyprland/workspaces"
+          "custom/sep"
+          "hyprland/window"
         ];
         modules-center = [];
         modules-right = [
-          "tray"
           "mpris"
+          "custom/sep"
+          "tray"
+          "custom/sep"
           "pulseaudio"
           "network"
           "backlight"
           "battery"
+          "custom/sep"
+          "clock"
+          "custom/weather"
         ];
       };
     };

@@ -22,7 +22,7 @@ in {
       wf-recorder
       wl-mirror
       wl-clipboard
-      wlogout
+      wleave
       wtype
       wttrbar
       wev
@@ -146,7 +146,7 @@ in {
         bind = [
           "$mainMod, P, togglefloating"
           "$mainMod, C, killactive"
-          "$mainMod, M, exec, wlogout -p layer-shell"
+          "$mainMod, M, exec, wleave -p layer-shell"
           "$mainMod, F, fullscreen"
           "$mainMod, V, togglefloating"
           "$mainMod, D, exec, wofi --show drun"

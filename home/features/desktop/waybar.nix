@@ -22,29 +22,20 @@ in {
           height = 0;
 
           "hyprland/window" = {
-            format = "> {}";
+            format = "{}";
             seperate-outputs = true;
           };
 
-          "hyprland/workspaces" = {
-            disable-scroll = true;
-            all-outputs = true;
-            on-click = "activate";
-            format = " {name} ";
-            persistent_workspaces = {
-              "1" = [];
-              "2" = [];
-              "3" = [];
-              "4" = [];
-            };
-          };
-
           "custom/weather" = {
-            format = "{}°F";
+            format = "{}°C";
             tooltip = true;
             interval = 3600;
-            exec = "wttrbar --fahrenheit --location SLC";
+            exec = "wttrbar --location SLC";
             return-type = "json";
+          };
+
+          "custom/sep" = {
+            format = " | ";
           };
 
           tray = {
@@ -60,7 +51,7 @@ in {
           };
 
           pulseaudio = {
-            format = "{icon} {volume}";
+            format = " {icon} {volume}";
             format-muted = "󰝟 ";
             format-icons = {
               default = " ";
