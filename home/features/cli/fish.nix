@@ -19,7 +19,6 @@ in {
         ".." = "cd ..";
         "..." = "cd ../..";
         ps = "procs";
-        switch = "sudo nixos-rebuild switch --flake /home/gunnar/.nixcfg#$FLAKE_BRANCH";
         steam = "steam &> /dev/null & disown";
       };
     };

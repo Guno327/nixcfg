@@ -80,6 +80,16 @@
       allowSFTP = true;
     };
 
+    printing = {
+      enable = true;
+      drivers = [pkgs.hplip pkgs.gutenprint];
+    };
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
+
     blueman.enable = true;
   };
 
@@ -151,7 +161,7 @@
   # Environment
   environment = {
     variables = {
-      "FLAKE_BRANCH" = "nixos-desktop";
+      "FLAKE" = "/home/gunnar/.nixcfg";
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
@@ -165,6 +175,7 @@
       gamescope
       wine
       docker-compose
+      nh
     ];
   };
 
