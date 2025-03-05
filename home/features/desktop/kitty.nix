@@ -11,8 +11,6 @@ in {
   config = mkIf cfg.enable {
     programs.kitty = {
       enable = true;
-      font.name = "fira-code";
-      font.size = 14;
       shellIntegration.enableFishIntegration = true;
       shellIntegration.enableBashIntegration = true;
       settings = {
@@ -23,7 +21,7 @@ in {
       ssh = "kitten ssh";
     };
     wayland.windowManager.hyprland.settings = {
-      bind = [ "$mainMod, RETURN, exec, kitty -e fish -c 'exec fish'" ];
+      bind = ["$mainMod, RETURN, exec, kitty -e fish -c 'exec fish'"];
     };
   };
 }

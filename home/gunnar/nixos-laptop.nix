@@ -31,7 +31,7 @@
       ghostty.enable = false;
       kitty.enable = true;
       minecraft.enable = true;
-      dracula-theme.enable = true;
+      dracula-theme.enable = false;
       gammastep.enable = true;
       spotify.enable = true;
       virt-manager.enable = true;

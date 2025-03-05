@@ -20,5 +20,11 @@
     };
   };
 
+  gtk.iconTheme = {
+    package = pkgs.dracula-icon-theme;
+    name = "Dracula";
+  };
+  stylix.targets.hyprlock.enable = false;
+
   programs.home-manager.enable = true;
 }

@@ -29,6 +29,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    stylix.url = "github:danth/stylix";
   };
 
   outputs = {
@@ -39,6 +40,7 @@
     nvf,
     agenix,
     nix-flatpak,
+    stylix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -66,6 +68,7 @@
           nixos-hardware.nixosModules.common-pc-laptop
 
           nvf.nixosModules.default
+          stylix.nixosModules.stylix
         ];
       };
       nixos-desktop = nixpkgs.lib.nixosSystem {
@@ -79,6 +82,7 @@
 
           nvf.nixosModules.default
           nix-flatpak.nixosModules.nix-flatpak
+          stylix.nixosModules.stylix
         ];
       };
 
@@ -89,6 +93,7 @@
           agenix.nixosModules.default
 
           nvf.nixosModules.default
+          stylix.nixosModules.stylix
         ];
       };
     };

@@ -70,8 +70,6 @@ in {
           gaps_in = 0;
           gaps_out = 0;
           border_size = 2;
-          "col.active_border" = "rgba(9742b5ee) rgba(9742b5ee) 45deg";
-          "col.inactive_border" = "rgba(595959aa)";
           allow_tearing = false;
           layout = "dwindle";
         };
