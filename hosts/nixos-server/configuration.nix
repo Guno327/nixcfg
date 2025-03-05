@@ -101,6 +101,7 @@
       inputs.agenix.packages."${system}".default
       mullvad
       tmux
+      nh
     ];
   };
 

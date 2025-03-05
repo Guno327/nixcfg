@@ -160,9 +160,6 @@
 
   # Environment
   environment = {
-    variables = {
-      "FLAKE" = "/home/gunnar/.nixcfg";
-    };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };

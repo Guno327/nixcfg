@@ -139,15 +139,13 @@
 
   # Environment
   environment = {
-    variables = {
-      "FLAKE_BRANCH" = "nixos-laptop";
-    };
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
 
     systemPackages = with pkgs; [
       pavucontrol
+      nh
       inputs.zen-browser.packages.${pkgs.system}.default
     ];
   };

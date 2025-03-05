@@ -54,4 +54,8 @@
   programs.nix-ld.enable = true;
 
   users.defaultUserShell = pkgs.fish;
+
+  environment.variables = {
+    "FLAKE" = "/home/gunnar/.nixcfg";
+  };
 }

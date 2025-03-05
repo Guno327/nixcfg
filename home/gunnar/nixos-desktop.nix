@@ -23,7 +23,6 @@
       eza.enable = true;
       git.enable = true;
       fzf.enable = true;
-      trim.enable = true;
       mpv.enable = true;
       monitor.enable = true;
     };
