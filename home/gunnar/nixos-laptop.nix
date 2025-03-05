@@ -36,6 +36,7 @@
       gammastep.enable = true;
       spotify.enable = true;
       virt-manager.enable = true;
+      ee2.enable = true;
     };
   };
 
