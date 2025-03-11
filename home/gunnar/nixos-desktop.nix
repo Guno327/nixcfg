@@ -104,18 +104,19 @@
       mainbar = {
         output = "DP-1";
         modules-left = [
-          "clock"
-          "custom/weather"
           "hyprland/workspaces"
+          "custom/sep"
+          "hyprland/window"
         ];
-        modules-center = [];
+        modules-center = ["mpris"];
         modules-right = [
           "tray"
-          "mpris"
           "pulseaudio"
           "network"
           "cpu"
           "memory"
+          "clock"
+          "custom/weather"
         ];
       };
     };

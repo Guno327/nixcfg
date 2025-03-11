@@ -40,5 +40,6 @@
     nix-index
     rclone
     mullvad
+    sshfs
   ];
 }

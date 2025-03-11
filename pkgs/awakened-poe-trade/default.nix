@@ -3,13 +3,14 @@
   appimageTools,
   fetchurl,
   makeDesktopItem,
+  nix-update-script,
 }: let
-  version = "3.25.102";
+  version = "3.25.104";
   pname = "awakened-poe-trade";
 
   src = fetchurl {
     url = "https://github.com/SnosMe/awakened-poe-trade/releases/download/v${version}/Awakened-PoE-Trade-${version}.AppImage";
-    sha256 = "0iimm2k59fgknaxcmv3zyjnr4i3qkspyzznb6ar0jdbww0klmiwm";
+    sha256 = "sha256-Xzi9ojq+30zFI10GZ3AxYncuYyTArPYNVh0uX7SQVtc=";
   };
 
   appimageContents = appimageTools.extract {
@@ -32,6 +33,8 @@ in
       install -m 444 -D ${appimageContents}/usr/share/icons/hicolor/512x512/apps/awakened-poe-trade.png \
          $out/share/icons/hicolor/512x512/apps/awakened-poe-trade.png
     '';
+
+    passthru.updateScript = nix-update-script {};
 
     meta = {
       description = "Path of Exile overlay program for price checking items, among many other loved features.";
