@@ -6,5 +6,6 @@
     ./nginx.nix
     ./site.nix
     ./gitlab.nix
+    ./steam.nix
   ];
 }

@@ -102,6 +102,8 @@
       mullvad
       tmux
       nh
+      rclone
+      bash
     ];
   };
 
@@ -117,7 +119,8 @@
   srvs = {
     test.enable = false;
     media.enable = true;
-    pufferpanel.enable = true;
+    pufferpanel.enable = false;
+    steam.enable = true;
     nginx.enable = true;
     site.enable = true;
     gitlab.enable = true;
