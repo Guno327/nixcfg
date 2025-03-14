@@ -56,6 +56,10 @@
           appId = "community.pathofbuilding.PathOfBuilding";
           origin = "flathub";
         }
+        {
+          appId = "com.valvesoftware.Steam";
+          origin = "flathub";
+        }
       ];
     };
 
@@ -161,6 +165,7 @@
   environment = {
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
+      STEAM_APP_DIR = "/home/gunnar/ssd/SteamLibrary/steamapps";
     };
 
     systemPackages = with pkgs; [
