@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -74,6 +75,7 @@
     };
 
     mullvad-vpn.enable = true;
+    pcscd.enable = true;
   };
 
   # Auto upgrade
@@ -98,7 +100,6 @@
 
     # Packages
     systemPackages = with pkgs; [
-      inputs.agenix.packages."${system}".default
       mullvad
       tmux
       nh
@@ -111,6 +112,7 @@
       openresolv
       wireguard-tools
       wg-netmanager
+      git-crypt
     ];
   };
 
@@ -120,6 +122,10 @@
   programs = {
     ssh.startAgent = true;
     fish.enable = true;
+    gnupg.agent = {
+      enable = true;
+      pinentryPackage = pkgs.pinentry-gtk2;
+    };
   };
 
   # Docker
@@ -142,6 +148,12 @@
       enable = true;
       satisfactory.enable = false;
       unturned.enable = true;
+    };
+    minecraft = {
+      enable = true;
+      name = "stonedblock";
+      type = "AUTO_CURSEFORGE";
+      id = "ftb-stoneblock-3";
     };
   };
 

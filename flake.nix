@@ -17,11 +17,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,7 +33,6 @@
     nixpkgs,
     nixos-hardware,
     nvf,
-    agenix,
     nix-flatpak,
     stylix,
     ...
@@ -90,7 +84,6 @@
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./hosts/nixos-server
-          agenix.nixosModules.default
 
           nvf.nixosModules.default
           stylix.nixosModules.stylix

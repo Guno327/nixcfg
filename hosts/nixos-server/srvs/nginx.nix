@@ -49,7 +49,6 @@ in {
       };
     };
 
-    age.secrets.secret1.file = ../../../secrets/secret1.age;
     environment.etc."scripts/dns-update.py".text = ''
       #!/usr/bin/python
       import http.client
@@ -58,8 +57,7 @@ in {
       addr = 'gamer.projecttyco.net'
       zone_id ='acedd06459615553d5e5fcada17cf813'
       identifier='be55c246e3e5276867dac9da7b4f8d4b'
-      with open('${config.age.secrets.secret1.path}', 'r') as file:
-        api_key = file.readline().rstrip()
+      api_key = ""
       headers = {
           'Content-Type': "application/json",
           'Authorization': "Bearer %s" %(api_key)
