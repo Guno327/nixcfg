@@ -70,7 +70,7 @@ in {
           VERSION = cfg.version;
           CF_SLUG = cfg.id;
           FTB_MODPACK_ID = cfg.id;
-          CF_API_KEY = "";
+          CF_API_KEY = builtins.readFile ../../../secrets/cf-api.key;
         };
       };
     };

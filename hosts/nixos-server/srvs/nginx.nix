@@ -57,7 +57,7 @@ in {
       addr = 'gamer.projecttyco.net'
       zone_id ='acedd06459615553d5e5fcada17cf813'
       identifier='be55c246e3e5276867dac9da7b4f8d4b'
-      api_key = ""
+      api_key = '${lib.replaceStrings ["\n"] [""] (builtins.readFile ../../../secrets/dns-api.key)}'
       headers = {
           'Content-Type': "application/json",
           'Authorization': "Bearer %s" %(api_key)
