@@ -138,6 +138,11 @@
   srvs = {
     nginx.enable = true;
     media.enable = true;
+    steam = {
+      enable = true;
+      satisfactory.enable = false;
+      unturned.enable = true;
+    };
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
