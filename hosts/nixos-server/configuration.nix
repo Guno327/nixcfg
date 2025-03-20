@@ -104,6 +104,13 @@
       nh
       rclone
       bash
+      dive
+      docker-compose
+      curl
+      jq
+      openresolv
+      wireguard-tools
+      wg-netmanager
     ];
   };
 
@@ -115,15 +122,22 @@
     fish.enable = true;
   };
 
+  # Docker
+  virtualisation.docker = {
+    enable = true;
+    storageDriver = "zfs";
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+  users.extraUsers.gunnar.extraGroups = ["docker" "media"];
+  virtualisation.oci-containers.backend = "docker";
+
   # Services
   srvs = {
-    test.enable = false;
-    media.enable = true;
-    pufferpanel.enable = false;
-    steam.enable = true;
     nginx.enable = true;
-    site.enable = true;
-    gitlab.enable = true;
+    media.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

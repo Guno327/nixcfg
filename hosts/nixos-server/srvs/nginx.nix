@@ -10,46 +10,45 @@ in {
   options.srvs.nginx.enable = mkEnableOption "Enable nginx container";
 
   config = mkIf cfg.enable {
-    systemd.tmpfiles.rules = [
-      "d /home/nginx 774 root root -"
-      "d /home/nginx/data 774 root root -"
-      "d /home/nginx/letsencrypt 774 root root -"
-    ];
-    virtualisation.docker.enable = true;
-    virtualisation.oci-containers = {
-      backend = "docker";
-      containers = {
-        proxy-manager = {
-          autoStart = true;
-          image = "jc21/nginx-proxy-manager:latest";
-          ports = ["80:80" "81:81" "443:443"];
-          volumes = [
-            "/home/nginx/data:/data"
-            "/home/nginx/letsencrypt:/etc/letsencrypt"
-          ];
+    virtualisation.oci-containers.containers.proxy-manager = {
+      autoStart = true;
+      image = "jc21/nginx-proxy-manager:latest";
+      ports = ["80:80" "81:81" "443:443"];
+      volumes = [
+        "/home/nginx/data:/data"
+        "/home/nginx/letsencrypt:/etc/letsencrypt"
+      ];
+    };
+
+    systemd = {
+      tmpfiles.rules = [
+        "d /home/nginx 774 root root -"
+        "d /home/nginx/data 774 root root -"
+        "d /home/nginx/letsencrypt 774 root root -"
+      ];
+
+      timers."dns-update-timer" = {
+        wantedBy = ["timers.target"];
+        timerConfig = {
+          OnCalendar = "daily";
+          Unit = "dns-update.service";
+          Persistent = true;
+        };
+      };
+
+      services."dns-update" = {
+        description = "Tyco DNS Update";
+        requires = ["network-online.target"];
+        after = ["network-online.target"];
+        serviceConfig = {
+          Type = "oneshot";
+          User = "root";
+          Restart = "no";
+          ExecStart = "${pkgs.python3Full}/bin/python /etc/scripts/dns-update.py";
         };
       };
     };
-    systemd.timers."dns-update-timer" = {
-      wantedBy = ["timers.target"];
-      timerConfig = {
-        OnCalendar = "daily";
-        Unit = "dns-update.service";
-        Persistent = true;
-      };
-    };
 
-    systemd.services."dns-update" = {
-      description = "Tyco DNS Update";
-      requires = ["network-online.target"];
-      after = ["network-online.target"];
-      serviceConfig = {
-        Type = "oneshot";
-        User = "root";
-        Restart = "no";
-        ExecStart = "${pkgs.python3Full}/bin/python /etc/scripts/dns-update.py";
-      };
-    };
     age.secrets.secret1.file = ../../../secrets/secret1.age;
     environment.etc."scripts/dns-update.py".text = ''
       #!/usr/bin/python
