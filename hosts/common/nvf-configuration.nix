@@ -5,12 +5,6 @@
       vim = {
         autopairs.nvim-autopairs.enable = true;
 
-        theme = {
-          enable = true;
-          name = "dracula";
-          style = "dark";
-        };
-
         options = {
           tabstop = 2;
           shiftwidth = 2;

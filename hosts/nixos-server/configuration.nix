@@ -142,7 +142,7 @@
       satisfactory.enable = false;
     };
     minecraft = {
-      enable = true;
+      enable = false;
       name = "ftb-skies";
       type = "FTBA";
       id = "103";
