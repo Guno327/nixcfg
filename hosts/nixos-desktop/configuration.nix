@@ -159,14 +159,8 @@
       xwayland.enable = true;
     };
 
-    gnupg.agent = {
-      enable = true;
-      pinentryPackage = pkgs.pinentry-gtk2;
-    };
-
     wireshark.enable = true;
     fish.enable = true;
-    ssh.startAgent = true;
   };
 
   # Environment

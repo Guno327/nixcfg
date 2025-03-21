@@ -138,7 +138,6 @@
     };
 
     fish.enable = true;
-    ssh.startAgent = true;
   };
 
   # Environment

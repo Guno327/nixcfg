@@ -24,7 +24,6 @@
       fzf.enable = true;
       mpv.enable = true;
       monitor.enable = true;
-      ssh.enable = true;
     };
     desktop = {
       hyprland.enable = true;

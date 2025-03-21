@@ -119,7 +119,6 @@
   nixpkgs.config.allowUnfree = true;
 
   programs = {
-    ssh.startAgent = true;
     fish.enable = true;
     gnupg.agent = {
       enable = true;

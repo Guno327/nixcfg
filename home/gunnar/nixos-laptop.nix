@@ -23,7 +23,6 @@
       git.enable = true;
       fzf.enable = true;
       mpv.enable = true;
-      ssh.enable = true;
     };
     desktop = {
       hyprland.enable = true;
