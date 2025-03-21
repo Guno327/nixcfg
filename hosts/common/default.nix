@@ -66,6 +66,13 @@
     pinentryPackage = pkgs.pinentry-gtk2;
   };
 
+  networking.hosts = {
+    "10.0.0.3" = ["server"];
+    "10.0.0.2" = ["idrac"];
+    "10.0.0.1" = ["router"];
+    "10.0.0.100" = ["desktop"];
+  };
+
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
