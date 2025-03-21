@@ -57,6 +57,7 @@
 
   environment.variables = {
     "FLAKE" = "/home/gunnar/.nixcfg";
+    GPG_TTY = "$(tty)";
   };
 
   programs.gnupg.agent = {
