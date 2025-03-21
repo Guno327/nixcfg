@@ -33,6 +33,9 @@ in {
           user = "gunnar";
           identityFile = key_path;
         };
+        "*" = {
+          identityFile = key_path;
+        };
       };
     };
   };
