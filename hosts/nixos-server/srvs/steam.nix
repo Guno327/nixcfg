@@ -43,19 +43,6 @@ in {
           STEAMBETA = "false";
         };
       };
-
-      unturned = mkIf cfg.unturned.enable {
-        autoStart = true;
-        image = "imperialplugins/unturned";
-        ports = ["27015:27015" "27106:27016"];
-        volumes = ["/home/steam/unturned:/unturned"];
-        environment = {
-          SERVER_TYPE = "";
-          GAME_INSTALL_DIR = "/unturned";
-          SERVER_NAME = "project_tyco";
-          GAME_ID = "1110390";
-        };
-      };
     };
   };
 }
