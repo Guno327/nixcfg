@@ -9,6 +9,7 @@
     ./git.nix
     ./mpv.nix
     ./monitor.nix
+    ./ssh.nix
   ];
 
   home.packages = with pkgs; [
@@ -41,5 +42,7 @@
     rclone
     mullvad
     sshfs
+    pandoc
+    texliveTeTeX
   ];
 }

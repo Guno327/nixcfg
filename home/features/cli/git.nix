@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -11,16 +12,12 @@ in {
   config = mkIf cfg.enable {
     programs.git = {
       enable = true;
-      userName = "Guno327";
+      userName = "gunnar";
       userEmail = "gunnarhovik@outlook.com";
-
       extraConfig = {
-        url = {
-          "ssh://git@host" = {
-            insteadOf = "otherhost";
-          };
-          init.defaultBranch = "main";
-        };
+        commit.gpgsign = true;
+        gpg.program = "${pkgs.gnupg}/bin/gpg";
+        user.signingKey = "gunnarhovik@outlook.com";
       };
     };
   };

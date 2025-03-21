@@ -132,6 +132,11 @@
       xwayland.enable = true;
     };
 
+    gnupg.agent = {
+      enable = true;
+      pinentryPackage = pkgs.pinentry-gtk2;
+    };
+
     fish.enable = true;
     ssh.startAgent = true;
   };
@@ -145,6 +150,7 @@
     systemPackages = with pkgs; [
       pavucontrol
       nh
+      git-crypt
       inputs.zen-browser.packages.${pkgs.system}.default
     ];
   };

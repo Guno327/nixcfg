@@ -31,6 +31,9 @@
     networkmanager.enable = true;
   };
 
+  # Local time for dual boot
+  time.hardwareClockInLocalTime = true;
+
   # Bluetooth
   hardware = {
     bluetooth = {
@@ -156,6 +159,11 @@
       xwayland.enable = true;
     };
 
+    gnupg.agent = {
+      enable = true;
+      pinentryPackage = pkgs.pinentry-gtk2;
+    };
+
     wireshark.enable = true;
     fish.enable = true;
     ssh.startAgent = true;
@@ -177,6 +185,7 @@
       wine
       docker-compose
       nh
+      git-crypt
     ];
   };
 

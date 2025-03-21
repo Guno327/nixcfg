@@ -3,7 +3,6 @@
     enable = true;
     settings = {
       vim = {
-        statusline.lualine.enable = true;
         autopairs.nvim-autopairs.enable = true;
 
         theme = {
@@ -16,6 +15,26 @@
           tabstop = 2;
           shiftwidth = 2;
           backup = false;
+        };
+
+        utility = {
+          images.image-nvim = {
+            enable = true;
+            setupOpts = {
+              backend = "kitty";
+              integrations.markdown = {
+                enable = true;
+                downloadRemoteImages = true;
+                onlyRenderAtCursor = true;
+              };
+            };
+          };
+          preview.markdownPreview = {
+            enable = true;
+            autoClose = true;
+            autoStart = true;
+            customPort = "1111";
+          };
         };
 
         lsp = {
@@ -46,12 +65,7 @@
           cinnamon-nvim.enable = true;
           indent-blankline.enable = true;
           nvim-cursorline.enable = true;
-          nvim-web-devicons.enable = true;
-
-          fidget-nvim = {
-            enable = true;
-            setupOpts.intergration.nvim-tree.enable = true;
-          };
+          fidget-nvim.enable = true;
         };
 
         languages = {
