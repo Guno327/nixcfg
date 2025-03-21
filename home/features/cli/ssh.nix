@@ -12,11 +12,11 @@ in {
       enable = true;
       matchBlocks = {
         server = {
-          hostname = "gamer.projecttyco.net";
+          hostname = "10.0.0.3";
           user = "gunnar";
         };
         desktop = {
-          hostname = "10.0.0.109";
+          hostname = "10.0.0.100";
           user = "gunnar";
         };
       };
