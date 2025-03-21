@@ -132,11 +132,6 @@
       xwayland.enable = true;
     };
 
-    gnupg.agent = {
-      enable = true;
-      pinentryPackage = pkgs.pinentry-gtk2;
-    };
-
     fish.enable = true;
   };
 
