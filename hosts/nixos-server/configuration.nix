@@ -18,21 +18,20 @@
   # Setup networking
   networking = {
     hostName = "nixos-server";
-    hostId = "00000001";
+    hostId = "85eef91f";
     firewall.enable = false;
   };
 
   # Setup bridge
   networking = {
-    bridges."br0".interfaces = ["eno1"];
-    interfaces."br0".ipv4.addresses = [
+    interfaces."eno1".ipv4.addresses = [
       {
         address = "10.0.0.3";
         prefixLength = 24;
       }
     ];
     defaultGateway = "10.0.0.1";
-    nameservers = ["10.0.0.1"];
+    nameservers = ["10.0.0.3" "10.0.0.1"];
   };
 
   # Set your time zone.
@@ -120,10 +119,6 @@
 
   programs = {
     fish.enable = true;
-    gnupg.agent = {
-      enable = true;
-      pinentryPackage = pkgs.pinentry-gtk2;
-    };
   };
 
   # Docker
@@ -145,14 +140,14 @@
     steam = {
       enable = true;
       satisfactory.enable = false;
-      unturned.enable = true;
     };
     minecraft = {
       enable = true;
-      name = "stonedblock";
-      type = "AUTO_CURSEFORGE";
-      id = "ftb-stoneblock-3";
+      name = "ftb-skies";
+      type = "FTBA";
+      id = "103";
     };
+    pihole.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
