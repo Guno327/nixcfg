@@ -78,22 +78,17 @@
     waybar.settings = {
       mainbar = {
         modules-left = [
-          "custom/sep"
           "hyprland/workspaces"
           "custom/sep"
           "hyprland/window"
         ];
-        modules-center = [];
+        modules-center = ["mpris"];
         modules-right = [
-          "mpris"
-          "custom/sep"
           "tray"
-          "custom/sep"
           "pulseaudio"
           "network"
           "backlight"
           "battery"
-          "custom/sep"
           "clock"
           "custom/weather"
         ];
