@@ -1,8 +1,12 @@
-{
+{lib, ...}: {
   programs.nvf = {
     enable = true;
     settings = {
       vim = {
+        theme = lib.mkForce {
+          enable = true;
+          name = "dracula";
+        };
         autopairs.nvim-autopairs.enable = true;
 
         options = {
