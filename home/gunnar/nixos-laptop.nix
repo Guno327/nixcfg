@@ -22,7 +22,6 @@
       eza.enable = true;
       git.enable = true;
       fzf.enable = true;
-      mpv.enable = true;
     };
     desktop = {
       hyprland.enable = true;

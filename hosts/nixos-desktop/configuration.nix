@@ -28,22 +28,19 @@
   # Networking
   networking = {
     hostName = "nixos-desktop";
-    networkmanager.enable = true;
 
     interfaces.enp7s0 = {
       ipv4.addresses = [
         {
           address = "10.0.0.100";
-          prefixLength = 24;
+          prefixLength = 16;
         }
       ];
     };
 
-    defaultGateway = {
-      address = "10.0.0.1";
-      interface = "enp7s0";
-    };
-    nameservers = ["10.0.0.3" "10.0.0.1"];
+    defaultGateway = "10.0.0.1";
+    nameservers = ["10.0.0.1"];
+    useDHCP = false;
   };
 
   # Local time for dual boot

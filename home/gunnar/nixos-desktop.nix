@@ -11,6 +11,8 @@
     feh
     prusa-slicer
     discord
+    gale
+    r2modman
   ];
 
   features = {
@@ -22,7 +24,6 @@
       eza.enable = true;
       git.enable = true;
       fzf.enable = true;
-      mpv.enable = true;
       monitor.enable = true;
       ssh.enable = true;
     };

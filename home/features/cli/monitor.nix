@@ -10,7 +10,6 @@ in {
   options.features.cli.monitor.enable = mkEnableOption "enable tools for hw monitoring";
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      nvtopPackages.full
       btop
       glances
       stress
