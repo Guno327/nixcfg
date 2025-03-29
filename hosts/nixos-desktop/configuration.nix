@@ -43,9 +43,6 @@
     useDHCP = false;
   };
 
-  # Local time for dual boot
-  time.hardwareClockInLocalTime = true;
-
   # Bluetooth
   hardware = {
     bluetooth = {
@@ -111,6 +108,9 @@
     blueman.enable = true;
   };
 
+      boot.initrd.services.udev.rules = ''
+        ATTRS{idVendor}=="6964", ATTRS{idProduct}=="0080", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+      '';
   # Security
   security.pam.services.hyprlock = {};
 

@@ -73,7 +73,10 @@
           enableLSP = true;
           enableTreesitter = true;
 
-          nix.enable = true;
+          nix = {
+            enable = true;
+            lsp.server = "nixd";
+          };
           csharp.enable = true;
           bash.enable = true;
           java.enable = true;

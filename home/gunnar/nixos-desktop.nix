@@ -13,6 +13,7 @@
     discord
     gale
     r2modman
+    brave
   ];
 
   features = {
@@ -80,11 +81,11 @@
       exec-once = [
         "[workspace 1 silent] kitty"
         "[workspace 2 silent] zen"
-        "[workspace 5 silent] discord"
+        "[workspace 5 silent] webcord"
       ];
 
       windowrule = [
-        "workspace 5, discord"
+        "workspace 5, title:webcord"
       ];
     };
   };
@@ -119,6 +120,12 @@
           "clock"
           "custom/weather"
         ];
+      };
+      clockbar = {
+        output = "DP-2";
+        modules-left = ["hyprland/workspaces"];
+        modules-center = ["clock"];
+        modules-right = ["custom/weather"];
       };
     };
 
