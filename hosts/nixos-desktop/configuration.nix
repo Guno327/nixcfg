@@ -28,19 +28,10 @@
   # Networking
   networking = {
     hostName = "nixos-desktop";
-
-    interfaces.enp7s0 = {
-      ipv4.addresses = [
-        {
-          address = "10.0.0.100";
-          prefixLength = 16;
-        }
-      ];
-    };
+    networkmanager.enable = true;
 
     defaultGateway = "10.0.0.1";
     nameservers = ["10.0.0.1"];
-    useDHCP = false;
   };
 
   # Bluetooth

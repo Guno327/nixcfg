@@ -14,6 +14,7 @@
     gale
     r2modman
     brave
+    godot
   ];
 
   features = {
