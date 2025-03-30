@@ -3,6 +3,13 @@
     enable = true;
     settings = {
       vim = {
+        extraLuaFiles = [
+          (builtins.path {
+            path = ./nvim/nvim-config.lua;
+            name = "nvim-config";
+          })
+        ];
+
         theme = lib.mkForce {
           enable = true;
           name = "dracula";
