@@ -28,6 +28,7 @@ in {
       wev
       xdg-desktop-portal-hyprland
       ydotool
+      wdisplays
     ];
 
     programs.wofi.enable = true;
