@@ -38,6 +38,7 @@
   };
 
   wayland.windowManager.hyprland = {
+    xwayland.enable = true;
     settings = {
       monitor = [
         "eDP-1,1920x1080@240,0x0,1"
@@ -53,8 +54,6 @@
       ];
 
       env = [
-        "WLR_DRM_DEVICES,/dev/dri/card2"
-        "AQ_DRM_DEVICES,/dev/dri/card2"
       ];
 
       bindl = [
@@ -96,10 +95,10 @@
     };
 
     fish.loginShellInit = ''
-       set -x NIX_PATH nixpkgs=channel:nixos-unstable
-       set -x NIX_LOG info
-       set -x TERMINAL kitty
-       direnv hook fish | source
+      set -x NIX_PATH nixpkgs=channel:nixos-unstable
+      set -x NIX_LOG info
+      set -x TERMINAL kitty
+      direnv hook fish | source
 
       if test (tty) = "/dev/tty1"
          exec Hyprland &> /dev/null

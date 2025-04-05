@@ -29,7 +29,15 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  hardware.bluetooth.enable = false;
+
+  # Bluetooth
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    xpadneo.enable = true;
+  };
 
   # Services
   services = {
@@ -146,6 +154,7 @@
       nh
       git-crypt
       inputs.zen-browser.packages.${pkgs.system}.default
+      blueman
     ];
   };
 
