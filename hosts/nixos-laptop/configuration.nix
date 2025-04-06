@@ -153,7 +153,7 @@
       pavucontrol
       nh
       git-crypt
-      inputs.zen-browser.packages.${pkgs.system}.default
+      inputs.zen-browser.packages.${pkgs.system}.twilight
       blueman
     ];
   };
