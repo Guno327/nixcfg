@@ -44,14 +44,14 @@ in {
           };
 
           clock = {
-            format = " {:%R   %m/%d/%y}";
+            format = " {:%R   %m/%d/%y} ";
             tooltip-format = ''
               <big>{:%Y %B}</big>
               <tt><small>{calendar}</small></tt>'';
           };
 
           pulseaudio = {
-            format = " {icon} {volume}";
+            format = " {icon}{volume} ";
             format-muted = "󰝟 ";
             format-icons = {
               default = " ";
@@ -60,11 +60,11 @@ in {
           };
 
           backlight = {
-            format = "󰖨  {percent}";
+            format = "󰖨 {percent} ";
           };
 
           battery = {
-            format = "{icon} {capacity}";
+            format = "{icon}{capacity} ";
             interval = 10;
             states = {
               critical = 10;
@@ -73,8 +73,8 @@ in {
               high = 80;
               full = 95;
             };
-            format-plugged = " {capacity}";
-            format-charging = "󱐋 {capacity}";
+            format-plugged = "{capacity} ";
+            format-charging = "󱐋{capacity} ";
             format-icons = [
               " "
               " "
@@ -85,13 +85,13 @@ in {
           };
 
           network = {
-            format-wifi = "  {essid}";
-            format-ethernet = "󰈀  {ipaddr}";
+            format-wifi = " {essid} ";
+            format-ethernet = "󰈀 {ipaddr} ";
           };
 
           mpris = {
-            format = "{player_icon} {title} - {artist} ({position}/{length})";
-            format-paused = "{player_icon} {status}";
+            format = "{player_icon} {title} - {artist} ({position}/{length}) ";
+            format-paused = "{player_icon} {status} ";
             player-icons = {
               default = "▶";
               mpv = "🎵";
@@ -110,11 +110,11 @@ in {
           };
 
           cpu = {
-            format = "  {usage}%";
+            format = " {usage}% ";
           };
 
           memory = {
-            format = "  {percentage}%";
+            format = " {percentage}% ";
           };
         };
       };

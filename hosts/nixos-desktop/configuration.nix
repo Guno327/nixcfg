@@ -196,6 +196,7 @@
       wine64
       wine-wayland
       winetricks
+      gamemode
     ];
   };
 

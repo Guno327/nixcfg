@@ -7,8 +7,7 @@
   ];
 
   home.packages = with pkgs; [
-    webcord
-    obsidian
+    discord
     feh
     prusa-slicer
   ];

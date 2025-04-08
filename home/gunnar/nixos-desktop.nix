@@ -7,13 +7,10 @@
   ];
 
   home.packages = with pkgs; [
-    webcord
     feh
     prusa-slicer
     discord
-    gale
     r2modman
-    brave
     godot
   ];
 
@@ -82,7 +79,7 @@
       exec-once = [
         "[workspace 1 silent] kitty"
         "[workspace 2 silent] zen"
-        "[workspace 5 silent] webcord"
+        "[workspace 5 silent] discord"
       ];
 
       windowrule = [
