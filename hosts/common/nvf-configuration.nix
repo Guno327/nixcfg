@@ -3,6 +3,13 @@
     enable = true;
     settings = {
       vim = {
+        extraLuaFiles = [
+          (builtins.path {
+            path = ./nvim/nvim-config.lua;
+            name = "nvim-config";
+          })
+        ];
+
         theme = lib.mkForce {
           enable = true;
           name = "dracula";
@@ -73,7 +80,10 @@
           enableLSP = true;
           enableTreesitter = true;
 
-          nix.enable = true;
+          nix = {
+            enable = true;
+            lsp.server = "nixd";
+          };
           csharp.enable = true;
           bash.enable = true;
           java.enable = true;

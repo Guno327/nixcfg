@@ -28,6 +28,7 @@ in {
       wev
       xdg-desktop-portal-hyprland
       ydotool
+      wdisplays
     ];
 
     programs.wofi.enable = true;
@@ -109,36 +110,36 @@ in {
         };
 
         windowrule = [
-          "float, file_progress"
-          "float, confirm"
-          "float, dialog"
-          "float, download"
-          "float, notification"
-          "float, error"
-          "float, splash"
-          "float, confirmreset"
+          "float, title:file_progress"
+          "float, title:confirm"
+          "float, title:dialog"
+          "float, title:download"
+          "float, title:notification"
+          "float, title:error"
+          "float, title:splash"
+          "float, title:confirmreset"
           "float, title:Open File"
           "float, title:branchdialog"
-          "float, Lxappearance"
-          "float, Wofi"
-          "float, dunst"
-          "animation none,Wofi"
-          "float,viewnior"
-          "float,feh"
-          "float, pavucontrol-qt"
-          "float, pavucontrol"
-          "float, file-roller"
-          "fullscreen, wlogout"
+          "float, title:Lxappearance"
+          "float, title:Wofi"
+          "float, title:dunst"
+          "animation none, title:Wofi"
+          "float, title:viewnior"
+          "float, title:feh"
+          "float, title:pavucontrol-qt"
+          "float, title:pavucontrol"
+          "float, title:file-roller"
+          "fullscreen, title:wlogout"
           "float, title:wlogout"
           "fullscreen, title:wlogout"
-          "idleinhibit focus, mpv"
-          "idleinhibit fullscreen, firefox"
+          "idleinhibit focus, title:mpv"
+          "idleinhibit fullscreen, title:firefox"
           "float, title:^(Media viewer)$"
           "float, title:^(Volume Control)$"
           "float, title:^(Picture-in-Picture)$"
           "size 800 600, title:^(Volume Control)$"
           "move 75 44%, title:^(Volume Control)$"
-          "pseudo, fcitx"
+          "pseudo, title:fcitx"
         ];
 
         "$mainMod" = "SUPER";

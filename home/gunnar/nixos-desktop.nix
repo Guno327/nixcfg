@@ -7,12 +7,11 @@
   ];
 
   home.packages = with pkgs; [
-    webcord
     feh
     prusa-slicer
     discord
-    gale
     r2modman
+    godot
   ];
 
   features = {
@@ -84,7 +83,7 @@
       ];
 
       windowrule = [
-        "workspace 5, discord"
+        "workspace 5, title:webcord"
       ];
     };
   };
@@ -119,6 +118,12 @@
           "clock"
           "custom/weather"
         ];
+      };
+      clockbar = {
+        output = "DP-2";
+        modules-left = ["hyprland/workspaces"];
+        modules-center = ["clock"];
+        modules-right = ["custom/weather"];
       };
     };
 

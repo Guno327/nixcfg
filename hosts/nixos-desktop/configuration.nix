@@ -28,23 +28,21 @@
   # Networking
   networking = {
     hostName = "nixos-desktop";
-
-    interfaces.enp7s0 = {
-      ipv4.addresses = [
-        {
-          address = "10.0.0.100";
-          prefixLength = 16;
-        }
-      ];
-    };
-
-    defaultGateway = "10.0.0.1";
-    nameservers = ["10.0.0.1"];
+    networkmanager.enable = false;
     useDHCP = false;
   };
 
-  # Local time for dual boot
-  time.hardwareClockInLocalTime = true;
+  systemd.network = {
+    enable = true;
+    networks = {
+      "10-wan" = {
+        matchConfig.Name = "enp7s0";
+        address = ["10.0.0.100/24"];
+        routes = [{Gateway = "10.0.0.1";}];
+        linkConfig.RequiredForOnline = "routable";
+      };
+    };
+  };
 
   # Bluetooth
   hardware = {
@@ -111,6 +109,9 @@
     blueman.enable = true;
   };
 
+  boot.initrd.services.udev.rules = ''
+    ATTRS{idVendor}=="6964", ATTRS{idProduct}=="0080", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+  '';
   # Security
   security.pam.services.hyprlock = {};
 
@@ -184,7 +185,7 @@
 
     systemPackages = with pkgs; [
       pavucontrol
-      inputs.zen-browser.packages.${pkgs.system}.default
+      inputs.zen-browser.packages.${pkgs.system}.twilight
       rpi-imager
       xorg.xhost
       gamescope
@@ -192,6 +193,10 @@
       docker-compose
       nh
       git-crypt
+      wine64
+      wine-wayland
+      winetricks
+      gamemode
     ];
   };
 

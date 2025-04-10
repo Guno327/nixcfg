@@ -51,9 +51,10 @@
     );
     nixPath = ["/etc/nix/path"];
   };
-  programs.nix-ld.enable = true;
 
+  programs.nix-ld.enable = true;
   users.defaultUserShell = pkgs.fish;
+  boot.kernelPackages = pkgs.linuxPackages_6_6;
 
   environment.variables = {
     "FLAKE" = "/home/gunnar/.nixcfg";
