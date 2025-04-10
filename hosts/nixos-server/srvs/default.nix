@@ -5,5 +5,6 @@
     ./steam.nix
     ./minecraft.nix
     ./pihole.nix
+    ./mail.nix
   ];
 }

@@ -150,6 +150,7 @@
       id = "103";
     };
     pihole.enable = false;
+    mail.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
