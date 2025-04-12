@@ -83,7 +83,7 @@
       ];
 
       windowrule = [
-        "workspace 5, title:webcord"
+        "workspace 5, title:discord"
       ];
     };
   };
