@@ -20,6 +20,7 @@ in {
         environment = {
           TZ = "America/Denver";
           FTLCONF_dns_listeningMode = "all";
+          FTLCONF_webserver_api_password = "";
         };
       };
     };

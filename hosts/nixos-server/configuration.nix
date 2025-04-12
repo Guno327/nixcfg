@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  lib,
   ...
 }: {
   imports = [
@@ -31,7 +32,7 @@
       }
     ];
     defaultGateway = "10.0.0.1";
-    nameservers = ["10.0.0.3" "10.0.0.1"];
+    nameservers = ["10.0.0.1"];
   };
 
   # Set your time zone.
@@ -119,6 +120,7 @@
 
   programs = {
     fish.enable = true;
+    gnupg.agent.pinentryPackage = lib.mkForce pkgs.pinentry-gtk2;
   };
 
   # Docker
@@ -147,7 +149,8 @@
       type = "FTBA";
       id = "103";
     };
-    pihole.enable = true;
+    pihole.enable = false;
+    mail.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

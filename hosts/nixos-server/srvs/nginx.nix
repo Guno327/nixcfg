@@ -54,9 +54,9 @@ in {
       import http.client
       import json
       # Address and other api info
-      addr = 'gamer.projecttyco.net'
-      zone_id ='acedd06459615553d5e5fcada17cf813'
-      identifier='be55c246e3e5276867dac9da7b4f8d4b'
+      addr = 'ghov.net'
+      zone_id ='9249ad5939000723023cbfe532542eb0'
+      identifier='a5958113bf3bed6819dff3036f958731'
       api_key = '${lib.replaceStrings ["\n"] [""] (builtins.readFile ../../../secrets/dns-api.key)}'
       headers = {
           'Content-Type': "application/json",
