@@ -12,6 +12,7 @@
     discord
     r2modman
     godot
+    protonup-qt
   ];
 
   features = {
