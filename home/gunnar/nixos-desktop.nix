@@ -11,8 +11,8 @@
     prusa-slicer
     discord
     r2modman
-    godot
     protonup-qt
+    pkgs.stable.godot_4
   ];
 
   features = {
@@ -39,6 +39,7 @@
       virt-manager.enable = true;
       ee2.enable = true;
       poetrade.enable = true;
+      recording.enable = true;
     };
   };
 

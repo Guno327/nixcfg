@@ -12,6 +12,7 @@
     ./ghostty.nix
     ./ee2.nix
     ./poetrade.nix
+    ./recording.nix
   ];
 
   home.packages = with pkgs; [
