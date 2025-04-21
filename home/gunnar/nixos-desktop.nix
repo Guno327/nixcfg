@@ -13,6 +13,7 @@
     r2modman
     protonup-qt
     pkgs.stable.godot_4
+    osu-lazer-bin
   ];
 
   features = {

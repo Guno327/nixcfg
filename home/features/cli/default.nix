@@ -10,6 +10,7 @@
     ./mpv.nix
     ./monitor.nix
     ./ssh.nix
+    ./ai.nix
   ];
 
   home.packages = with pkgs; [
@@ -44,5 +45,6 @@
     sshfs
     pandoc
     texliveTeTeX
+    aria2
   ];
 }

@@ -53,6 +53,16 @@
     xpadneo.enable = true;
   };
 
+  # Tablet Drivers
+  hardware.opentabletdriver = {
+    enable = true;
+    daemon.enable = true;
+    blacklistedKernelModules = [
+      "hid-uclogic"
+      "wacom"
+    ];
+  };
+
   # Services
   services = {
     pipewire = {

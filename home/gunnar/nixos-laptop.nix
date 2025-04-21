@@ -21,6 +21,7 @@
       eza.enable = true;
       git.enable = true;
       fzf.enable = true;
+      ai.enable = true;
     };
     desktop = {
       hyprland.enable = true;
