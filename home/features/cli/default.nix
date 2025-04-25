@@ -11,6 +11,7 @@
     ./monitor.nix
     ./ssh.nix
     ./ai.nix
+    ./gpg.nix
   ];
 
   home.packages = with pkgs; [

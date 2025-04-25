@@ -120,7 +120,6 @@
 
   programs = {
     fish.enable = true;
-    gnupg.agent.pinentryPackage = lib.mkForce pkgs.pinentry-gtk2;
   };
 
   # Docker

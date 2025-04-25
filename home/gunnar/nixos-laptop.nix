@@ -28,7 +28,7 @@
       waybar.enable = true;
       fonts.enable = true;
       ghostty.enable = false;
-      kitty.enable = true;
+      foot.enable = true;
       minecraft.enable = true;
       gammastep.enable = true;
       spotify.enable = true;
@@ -97,7 +97,7 @@
     fish.loginShellInit = ''
       set -x NIX_PATH nixpkgs=channel:nixos-unstable
       set -x NIX_LOG info
-      set -x TERMINAL kitty
+      set -x TERM xterm-256color
       direnv hook fish | source
 
       if test (tty) = "/dev/tty1"

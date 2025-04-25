@@ -61,12 +61,6 @@
     GPG_TTY = "$(tty)";
   };
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-    pinentryPackage = pkgs.pinentry-qt;
-  };
-
   networking.hosts = {
     "10.0.0.3" = ["server"];
     "10.0.0.2" = ["idrac"];

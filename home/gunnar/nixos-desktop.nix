@@ -27,13 +27,13 @@
       fzf.enable = true;
       monitor.enable = true;
       ssh.enable = true;
+      gpg.enable = true;
     };
     desktop = {
       hyprland.enable = true;
       waybar.enable = true;
       fonts.enable = true;
-      ghostty.enable = false;
-      kitty.enable = true;
+      foot.enable = true;
       minecraft.enable = true;
       gammastep.enable = true;
       spotify.enable = true;
@@ -80,7 +80,7 @@
       ];
 
       exec-once = [
-        "[workspace 1 silent] kitty"
+        "[workspace 1 silent] foot"
         "[workspace 2 silent] zen"
         "[workspace 5 silent] discord"
       ];
@@ -95,7 +95,6 @@
     fish.loginShellInit = ''
        set -x NIX_PATH nixpkgs=channel:nixos-unstable
        set -x NIX_LOG info
-       set -x TERMINAL ghostty
        direnv hook fish | source
 
       if test (tty) = "/dev/tty1"
