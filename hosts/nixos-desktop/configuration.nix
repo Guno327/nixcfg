@@ -195,7 +195,7 @@
 
     systemPackages = with pkgs; [
       pavucontrol
-      inputs.zen-browser.packages.${pkgs.system}.twilight
+      inputs.zen-browser.packages.${pkgs.system}.beta
       rpi-imager
       xorg.xhost
       gamescope

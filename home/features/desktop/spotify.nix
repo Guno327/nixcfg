@@ -12,7 +12,6 @@ in {
     programs.spotify-player = {
       enable = true;
       settings = {
-        theme = "default";
         enable_media_control = true;
         enable_notify = false;
       };
@@ -35,7 +34,7 @@ in {
     xdg.desktopEntries.spotify = {
       name = "Spotify";
       genericName = "spotify_player";
-      exec = "ghostty -e spotify_player";
+      exec = "foot -e spotify_player";
       terminal = false;
     };
   };

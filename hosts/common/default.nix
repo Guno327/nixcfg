@@ -57,7 +57,7 @@
   boot.kernelPackages = pkgs.linuxPackages_6_6;
 
   environment.variables = {
-    "FLAKE" = "/home/gunnar/.nixcfg";
+    "NH_FLAKE" = "/home/gunnar/.nixcfg";
     GPG_TTY = "$(tty)";
   };
 
