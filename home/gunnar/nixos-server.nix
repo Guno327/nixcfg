@@ -15,6 +15,7 @@
       git.enable = true;
       fzf.enable = true;
       ssh.enable = true;
+      gpg.enable = true;
     };
   };
 }

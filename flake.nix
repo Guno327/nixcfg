@@ -25,6 +25,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     stylix.url = "github:danth/stylix";
+    mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
   };
 
   outputs = {
@@ -35,6 +36,7 @@
     nvf,
     nix-flatpak,
     stylix,
+    mailserver,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -87,6 +89,7 @@
 
           nvf.nixosModules.default
           stylix.nixosModules.stylix
+          mailserver.nixosModule
         ];
       };
     };

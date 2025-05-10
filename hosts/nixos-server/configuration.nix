@@ -112,6 +112,7 @@
       wireguard-tools
       wg-netmanager
       git-crypt
+      p7zip
     ];
   };
 
@@ -138,15 +139,16 @@
   srvs = {
     nginx.enable = true;
     media.enable = true;
-    steam = {
+    games = {
       enable = true;
       satisfactory.enable = false;
+      factorio.enable = true;
     };
     minecraft = {
-      enable = false;
-      name = "ftb-skies";
-      type = "FTBA";
-      id = "103";
+      enable = true;
+      name = "bmc4";
+      type = "AUTO_CURSEFORGE";
+      id = "better-mc-forge-bmc4";
     };
     pihole.enable = false;
     mail.enable = true;

@@ -31,6 +31,11 @@ in {
   };
 
   config = mkIf cfg.enable {
+    services.cron = {
+      enable = true;
+      systemCronJobs = ["0 4 * * * docker restart minecraft >/dev/null 2>&1"];
+    };
+
     users = {
       users.minecraft = {
         uid = 2556;
