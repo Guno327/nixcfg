@@ -6,12 +6,12 @@
   nix-update-script,
 }:
 let
-  version = "0.9.3";
+  version = "0.9.4";
   pname = "exiled-exchange-2";
 
   src = fetchurl {
     url = "https://github.com/Kvan7/Exiled-Exchange-2/releases/download/v${version}/Exiled-Exchange-2-${version}.AppImage";
-    sha256 = "sha256-wSjziXbuo59+7plj1Rwy3gkQIUtrJd9+637Tm+TzuHc=";
+    sha256 = "sha256-RhidU7W5aIvl1958FIoQlmni9JLYe/iKI7gkfqO5oEs=";
   };
 
   appimageContents = appimageTools.extract { inherit pname version src; };

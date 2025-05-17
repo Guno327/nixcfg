@@ -31,7 +31,6 @@
     termshark
     traceroute
     dig
-    ventoy
     nix-prefetch-git
     nix-prefetch-github
     p7zip
@@ -47,5 +46,7 @@
     pandoc
     texliveTeTeX
     aria2
+    comma
+    android-udev-rules
   ];
 }

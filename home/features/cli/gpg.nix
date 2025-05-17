@@ -18,7 +18,7 @@ in {
       enable = true;
       enableFishIntegration = true;
       enableSshSupport = true;
-      pinentryPackage = pkgs.pinentry-curses;
+      pinentry.package = pkgs.pinentry-curses;
       extraConfig = ''
         allow-loopback-pinentry
       '';

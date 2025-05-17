@@ -184,6 +184,7 @@
 
     wireshark.enable = true;
     fish.enable = true;
+    adb.enable = true;
   };
 
   # Environment
@@ -207,6 +208,7 @@
       wine-wayland
       winetricks
       gamemode
+      chromium
     ];
   };
 
