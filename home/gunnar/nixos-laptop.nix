@@ -20,6 +20,7 @@
       zoxide.enable = true;
       eza.enable = true;
       git.enable = true;
+      gpg.enable = true;
       fzf.enable = true;
       ai.enable = true;
     };
