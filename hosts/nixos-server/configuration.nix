@@ -1,7 +1,6 @@
 {
   pkgs,
   inputs,
-  lib,
   ...
 }: {
   imports = [
@@ -36,7 +35,7 @@
   };
 
   # Set your time zone.
-  time.timeZone = "America/Denver";
+  time.timeZone = "America/New_York";
 
   # Select internationalisation properties.
   i18n = {
@@ -142,10 +141,10 @@
     games = {
       enable = true;
       satisfactory.enable = false;
-      factorio.enable = true;
+      factorio.enable = false;
     };
     minecraft = {
-      enable = true;
+      enable = false;
       name = "bmc4";
       type = "AUTO_CURSEFORGE";
       id = "better-mc-forge-bmc4";

@@ -31,6 +31,11 @@
     };
   };
 
+  services.tailscale = {
+    enable = true;
+    authKeyFile = "/home/gunnar/.nixcfg/secrets/tailscale.key";
+  };
+
   nix = {
     settings = {
       experimental-features = "nix-command flakes";

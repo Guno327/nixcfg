@@ -18,7 +18,7 @@ in {
         ports = ["53:53/udp" "53:53/tcp" "8888:80/tcp" "442:443/tcp"];
         volumes = ["/home/pihole:/etc/pihole"];
         environment = {
-          TZ = "America/Denver";
+          TZ = "America/New_York";
           FTLCONF_dns_listeningMode = "all";
           FTLCONF_webserver_api_password = "";
         };
