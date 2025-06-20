@@ -55,6 +55,8 @@
       ];
 
       env = [
+        "WLR_DRM_DEVICES,/dev/dri/card2"
+        "AQ_DRM_DEVICES,/dev/dri/card2"
       ];
 
       bindl = [

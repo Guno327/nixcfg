@@ -48,19 +48,6 @@
       pulse.enable = true;
     };
 
-    xserver = {
-      # Configure keymap in X11
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-
-      # Graphics
-      videoDrivers = ["amdgpu"];
-
-      desktopManager.runXdgAutostartIfNone = true;
-    };
-
     # Enable the OpenSSH daemon.
     openssh = {
       enable = true;
@@ -155,6 +142,7 @@
       git-crypt
       inputs.zen-browser.packages.${pkgs.system}.beta
       blueman
+      nvtopPackages.amd
     ];
   };
 
@@ -169,6 +157,11 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+  };
+
+  hardware.nvidia.prime = {
+    amdgpuBusId = "pci@0000:06:00.0";
+    nvidiaBusId = "pci@0000:03:00.0";
   };
 
   # KVM
