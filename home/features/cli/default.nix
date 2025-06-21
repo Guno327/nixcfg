@@ -48,5 +48,6 @@
     aria2
     comma
     android-udev-rules
+    ventoy
   ];
 }

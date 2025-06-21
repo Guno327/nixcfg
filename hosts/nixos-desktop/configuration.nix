@@ -28,8 +28,17 @@
   # Networking
   networking = {
     hostName = "nixos-desktop";
-    networkmanager.enable = false;
-    useDHCP = false;
+    interfaces.enp7s0 = {
+      ipv4.adresses = [
+        {
+          address = "10.0.0.100";
+          prefixLength = 24;
+        }
+      ];
+    };
+    defaultGateway = "10.0.0.1";
+    nameservers = ["1.1.1.1" "8.8.8.8"];
+    enableIPv6 = false;
   };
 
   systemd.network = {
