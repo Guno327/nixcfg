@@ -32,7 +32,6 @@
     desktop = {
       hyprland.enable = true;
       waybar.enable = true;
-      fonts.enable = true;
       foot.enable = true;
       minecraft.enable = true;
       gammastep.enable = true;

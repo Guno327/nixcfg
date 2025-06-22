@@ -74,14 +74,27 @@
       enable = true;
       packages = [
         {
-          appId = "community.pathofbuilding.PathOfBuilding";
+          appId = "community.pathofbuilding.PathOfBuildin";
           origin = "flathub";
         }
         {
           appId = "com.valvesoftware.Steam";
           origin = "flathub";
         }
+        {
+          appId = "app.zen_browser.zen";
+          origin = "flathub";
+        }
       ];
+      overrides = {
+        global = {
+          Context.filesystems = [
+            "/home"
+            "/run/current-system/sw/bin:ro"
+            "/nix/store:ro"
+          ];
+        };
+      };
     };
 
     xserver = {
@@ -124,7 +137,7 @@
   security.pam.services.hyprlock = {};
 
   # Set your time zone.
-  time.timeZone = "America/Denver";
+  time.timeZone = "America/New_York";
 
   # Select internationalisation properties.
   i18n = {
@@ -194,7 +207,6 @@
 
     systemPackages = with pkgs; [
       pavucontrol
-      inputs.zen-browser.packages.${pkgs.system}.beta
       rpi-imager
       xorg.xhost
       gamescope

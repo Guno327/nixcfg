@@ -48,6 +48,24 @@
       pulse.enable = true;
     };
 
+    flatpak = {
+      enable = true;
+      packages = [
+        {
+          appId = "community.pathofbuilding.PathOfBuilding";
+          origin = "flathub";
+        }
+        {
+          appId = "com.valvesoftware.Steam";
+          origin = "flathub";
+        }
+        {
+          addId = "app.zen_browser.zen";
+          origin = "flathub";
+        }
+      ];
+    };
+
     # Enable the OpenSSH daemon.
     openssh = {
       enable = true;
@@ -114,14 +132,6 @@
     };
 
     # Steam
-    steam = {
-      enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-      extraCompatPackages = with pkgs; [proton-ge-bin];
-    };
-
     hyprland = {
       enable = true;
       xwayland.enable = true;
@@ -140,7 +150,6 @@
       pavucontrol
       nh
       git-crypt
-      inputs.zen-browser.packages.${pkgs.system}.beta
       blueman
       nvtopPackages.amd
     ];

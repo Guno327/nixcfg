@@ -73,13 +73,28 @@
     "10.0.0.100" = ["desktop"];
   };
 
+  fonts = {
+    fontDir.enable = true;
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      fira-code
+      fira-code-symbols
+      nerd-fonts.fira-code
+      font-manager
+      font-awesome_5
+      noto-fonts
+      noto-fonts-cjk-serif
+      noto-fonts-cjk-sans
+    ];
+  };
+
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
     polarity = "dark";
 
     cursor = {
-      package = pkgs.bibata-cursors;
+      package = pkgs.stable.bibata-cursors;
       name = "Bibata-Modern-Classic";
       size = 16;
     };

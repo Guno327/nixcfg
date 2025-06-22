@@ -27,7 +27,6 @@
     desktop = {
       hyprland.enable = true;
       waybar.enable = true;
-      fonts.enable = true;
       ghostty.enable = false;
       foot.enable = true;
       minecraft.enable = true;

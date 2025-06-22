@@ -12,11 +12,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -65,6 +60,7 @@
 
           nvf.nixosModules.default
           stylix.nixosModules.stylix
+          nix-flatpak.nixosModules.nix-flatpak
         ];
       };
       nixos-desktop = nixpkgs.lib.nixosSystem {
@@ -77,8 +73,8 @@
           nixos-hardware.nixosModules.common-pc-ssd
 
           nvf.nixosModules.default
-          nix-flatpak.nixosModules.nix-flatpak
           stylix.nixosModules.stylix
+          nix-flatpak.nixosModules.nix-flatpak
         ];
       };
 

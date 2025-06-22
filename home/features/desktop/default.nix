@@ -2,7 +2,6 @@
   imports = [
     ./waybar.nix
     ./hyprland.nix
-    ./fonts.nix
     ./kitty.nix
     ./minecraft.nix
     ./gammastep.nix
