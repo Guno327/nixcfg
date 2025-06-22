@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [./hardware-configuration.nix];
 
   # Bootloader.
@@ -25,9 +21,8 @@
     };
   };
 
-  networking.hostName = "nixos-laptop";
-
   # Enable networking
+  networking.hostName = "nixos-laptop";
   networking.networkmanager.enable = true;
 
   # Bluetooth
@@ -52,7 +47,7 @@
       enable = true;
       packages = [
         {
-          appId = "community.pathofbuilding.PathOfBuilding";
+          appId = "community.pathofbuilding.PathOfBuildin";
           origin = "flathub";
         }
         {
@@ -60,10 +55,19 @@
           origin = "flathub";
         }
         {
-          addId = "app.zen_browser.zen";
+          appId = "app.zen_browser.zen";
           origin = "flathub";
         }
       ];
+      overrides = {
+        global = {
+          Context.filesystems = [
+            "/home"
+            "/run/current-system/sw/bin:ro"
+            "/nix/store:ro"
+          ];
+        };
+      };
     };
 
     # Enable the OpenSSH daemon.
