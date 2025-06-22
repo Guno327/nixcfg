@@ -49,5 +49,6 @@
     comma
     android-udev-rules
     nixos-anywhere
+    tmux
   ];
 }

@@ -13,7 +13,7 @@ in {
     home.packages = with pkgs; [
       dunst
       hyprshot
-      hyprlock
+      hyprcursor
       nautilus
       playerctl
       qt6.qtwayland
@@ -48,7 +48,11 @@ in {
           "fcitx5-remote -r"
         ];
 
-        env = ["WLR_NO_HARDWARE_CURSORS,1"];
+        env = [
+          "WLR_NO_HARDWARE_CURSORS,1"
+          "HYPRCURSOR_THEME,Bibata-Modern-Classic"
+          "HYPRCURSOR_SIZE,16"
+        ];
 
         input = {
           kb_layout = "us";
