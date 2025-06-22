@@ -20,6 +20,8 @@
     hostName = "nixos-server";
     hostId = "85eef91f";
     firewall.enable = false;
+    useDHCP = false;
+    enableIPv6 = false;
   };
 
   # Setup bridge
