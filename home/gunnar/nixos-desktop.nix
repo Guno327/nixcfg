@@ -79,13 +79,17 @@
       ];
 
       exec-once = [
+        # Primary Monitor Work-around
+        "wlr-randr --output DP-2 --off && sleep 3 && wlr-randr --output DP-2 --on --pos 0,0"
+
+        # Autostart applications
         "[workspace 1 silent] foot"
-        "[workspace 2 silent] zen"
+        "[workspace 2 silent] flatpak run app.zen_browser.zen"
         "[workspace 5 silent] discord"
       ];
 
       windowrule = [
-        "workspace 5, title:discord"
+        "workspace 5, class:discord"
       ];
     };
   };
