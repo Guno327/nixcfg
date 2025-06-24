@@ -139,6 +139,7 @@
   # Services
   srvs = {
     cloudflared.enable = true;
+    website.enable = true;
     media.enable = true;
     games = {
       enable = true;

@@ -6,5 +6,6 @@
     ./minecraft.nix
     ./pihole.nix
     ./mail.nix
+    ./website.nix
   ];
 }
