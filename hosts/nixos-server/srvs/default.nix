@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./media.nix
-    ./nginx.nix
+    ./cloudflared.nix
     ./games.nix
     ./minecraft.nix
     ./pihole.nix

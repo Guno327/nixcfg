@@ -138,7 +138,7 @@
 
   # Services
   srvs = {
-    nginx.enable = true;
+    cloudflared.enable = true;
     media.enable = true;
     games = {
       enable = true;
