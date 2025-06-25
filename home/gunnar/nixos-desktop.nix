@@ -14,6 +14,8 @@
     protonup-qt
     pkgs.stable.godot_4
     osu-lazer-bin
+    wlr-randr
+    xdg-desktop-portal-gtk
   ];
 
   features = {

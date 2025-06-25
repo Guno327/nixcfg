@@ -11,7 +11,7 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      dunst
+      swaynotificationcenter
       hyprshot
       hyprcursor
       nautilus
@@ -46,6 +46,7 @@ in {
           ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''
           "fcitx5 -d -r"
           "fcitx5-remote -r"
+          "swaync"
         ];
 
         env = [
@@ -124,7 +125,7 @@ in {
           "float, title:branchdialog"
           "float, title:Lxappearance"
           "float, title:Wofi"
-          "float, title:dunst"
+          "float, title:swaync"
           "animation none, title:Wofi"
           "float, title:viewnior"
           "float, title:feh"
@@ -153,6 +154,7 @@ in {
           "$mainMod, F, fullscreen"
           "$mainMod, V, togglefloating"
           "$mainMod, D, exec, wofi --show drun"
+          "$mainMod, N, exec, swaync-client -t -sw"
           "$mainMod SHIFT, P, pseudo"
           "$mainMod, J, togglesplit"
           "$mainMod, L, exec, hyprlock"
