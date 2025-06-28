@@ -74,7 +74,7 @@
       enable = true;
       packages = [
         {
-          appId = "community.pathofbuilding.PathOfBuildin";
+          appId = "community.pathofbuilding.PathOfBuilding";
           origin = "flathub";
         }
         {
