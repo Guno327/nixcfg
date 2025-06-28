@@ -148,12 +148,13 @@
     };
     minecraft = {
       enable = false;
-      name = "bmc4";
-      type = "AUTO_CURSEFORGE";
-      id = "better-mc-forge-bmc4";
+      name = "ftb-genesis";
+      type = "FTBA";
+      id = "120";
     };
     pihole.enable = false;
-    mail.enable = true;
+    mail.enable = false;
+    playit.enable = false;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

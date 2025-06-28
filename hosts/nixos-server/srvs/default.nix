@@ -7,5 +7,6 @@
     ./pihole.nix
     ./mail.nix
     ./website.nix
+    ./playit.nix
   ];
 }
