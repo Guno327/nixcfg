@@ -50,5 +50,6 @@
     android-udev-rules
     nixos-anywhere
     tmux
+    mtpfs
   ];
 }
