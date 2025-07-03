@@ -141,11 +141,6 @@
     cloudflared.enable = true;
     website.enable = true;
     media.enable = true;
-    games = {
-      enable = true;
-      satisfactory.enable = false;
-      factorio.enable = false;
-    };
     minecraft = {
       enable = false;
       name = "ftb-genesis";
@@ -155,6 +150,10 @@
     pihole.enable = false;
     mail.enable = false;
     playit.enable = false;
+    satisfactory = {
+      enable = true;
+      launchOptions = "-multihome=0.0.0.0";
+    };
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
