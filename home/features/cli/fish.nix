@@ -20,6 +20,7 @@ in {
         "..." = "cd ../..";
         ps = "procs";
         steam = "steam &> /dev/null & disown";
+        dcp = "rsync -r --partial --info=progress2";
       };
     };
 
