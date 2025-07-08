@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib; let
@@ -10,7 +11,7 @@ in {
   options.features.desktop.ee2.enable = mkEnableOption "Enable and configure exiled exchange";
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [exiled-exchange-2];
+    home.packages = with pkgs; [inputs.exiled-exchange-2.packages."${system}".exiled-exchange-2];
 
     xdg.desktopEntries.exiled-exchange-2 = {
       name = "Exiled Exchange 2";

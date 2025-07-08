@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 with lib; let
@@ -10,7 +11,7 @@ in {
   options.features.desktop.poetrade.enable = mkEnableOption "Enable and configure awakened poe trade";
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [awakened-poe-trade];
+    home.packages = with pkgs; [inputs.awakened-poe-trade.packages."${system}".awakened-poe-trade];
 
     xdg.desktopEntries.awakened-poe-trade = {
       name = "Awakened Poe Trade";

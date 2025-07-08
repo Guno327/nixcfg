@@ -18,9 +18,6 @@
 
   nixpkgs = {
     overlays = [
-      # Add overlays from flake
-      outputs.overlays.additions
-      outputs.overlays.modifications
       outputs.overlays.stable-packages
     ];
 

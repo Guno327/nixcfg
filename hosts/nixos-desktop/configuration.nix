@@ -219,6 +219,7 @@
       winetricks
       gamemode
       chromium
+      inputs.satisfactory-modeler.packages."${system}".satisfactory-modeler
     ];
   };
 

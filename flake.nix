@@ -22,6 +22,10 @@
     stylix.url = "github:danth/stylix";
     mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
+
+    satisfactory-modeler.url = "github:guno327/satisfactory-modeler-flake";
+    exiled-exchange-2.url = "github:guno327/exiled-exchange-2-flake";
+    awakened-poe-trade.url = "github:guno327/awakened-poe-trade-flake";
   };
 
   outputs = {
@@ -46,7 +50,7 @@
     ];
     forAllSystems = nixpkgs.lib.genAttrs systems;
   in {
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    packages = forAllSystems (system: nixpkgs.legacyPackages.${system});
     overlays = import ./overlays {inherit inputs;};
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
 
