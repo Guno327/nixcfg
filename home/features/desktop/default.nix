@@ -19,5 +19,7 @@
     rpi-imager
     wireshark
     libreoffice-still
+    freecad
+    orca-slicer
   ];
 }

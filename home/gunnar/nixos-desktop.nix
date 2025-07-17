@@ -12,7 +12,6 @@
 
   home.packages = with pkgs; [
     feh
-    prusa-slicer
     discord
     r2modman
     protonup-qt

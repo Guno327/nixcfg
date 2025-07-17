@@ -14,6 +14,6 @@ in {
       enable = true;
     };
 
-    home.packages = with pkgs; [prismlauncher];
+    home.packages = with pkgs; [stable.prismlauncher];
   };
 }
