@@ -22,6 +22,7 @@
     stylix.url = "github:danth/stylix";
     mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
+    nixarr.url = "github:rasmus-kirk/nixarr";
 
     satisfactory-modeler.url = "github:guno327/satisfactory-modeler-flake";
     exiled-exchange-2.url = "github:guno327/exiled-exchange-2-flake";
@@ -38,6 +39,7 @@
     stylix,
     mailserver,
     playit-nixos-module,
+    nixarr,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -93,6 +95,7 @@
           stylix.nixosModules.stylix
           mailserver.nixosModule
           playit-nixos-module.nixosModules.default
+          nixarr.nixosModules.default
         ];
       };
     };

@@ -6,119 +6,51 @@
 with lib; let
   cfg = config.srvs.media;
 in {
-  options.srvs.media.enable = mkEnableOption "Enable media service";
+  options.srvs.media = {
+    enable = mkEnableOption "Setup and configure Nixarr";
+  };
 
   config = mkIf cfg.enable {
-    users = {
-      users.media = {
-        uid = 8096;
-        name = "media";
-        isSystemUser = true;
-        home = "/home/media";
-        group = "media";
-      };
-      groups.media = {
-        gid = 8096;
-        name = "media";
-      };
-    };
-    systemd.tmpfiles.rules = [
-      "d /home/media 774 media media -"
-      "d /home/media/jellyfin 774 media media -"
-      "d /home/media/jackett 774 media media -"
-      "d /home/media/radarr 774 media media -"
-      "d /home/media/sonarr 774 media media -"
-      "d /home/media/torrent 774 media media -"
-      "d /home/media/media 774 media media -"
-    ];
+    nixarr = {
+      enable = true;
+      mediaDir = "/var/lib/media";
+      stateDir = "/var/lib/media/.state/nixarr";
 
-    virtualisation.oci-containers.containers = {
+      vpn = {
+        enable = true;
+        wgConf = "/home/gunnar/.nixcfg/secrets/wg0.conf";
+      };
+
       jellyfin = {
-        autoStart = true;
-        image = "lscr.io/linuxserver/jellyfin:latest";
-        ports = ["8096:8096"];
-        volumes = [
-          "/home/media/jellyfin:/config"
-          "/home/media/media:/data"
-        ];
-        environment = {
-          PUID = "8096";
-          PGID = "8096";
-          TZ = "America/Denver";
-        };
+        enable = true;
       };
 
-      jackett = {
-        autoStart = true;
-        image = "lscr.io/linuxserver/jackett:latest";
-        ports = ["9117:9117"];
-        volumes = ["/home/media/jackett:/config"];
-        environment = {
-          PUID = "8096";
-          PGID = "8096";
-          TZ = "America/Denver";
-          AUTO_UPDATE = "true";
-        };
-      };
-
-      radarr = {
-        autoStart = true;
-        image = "lscr.io/linuxserver/radarr:latest";
-        ports = ["7878:7878"];
-        volumes = [
-          "/home/media/radarr:/config"
-          "/home/media/media:/media"
-        ];
-        environment = {
-          PUID = "8096";
-          PGID = "8096";
-          TZ = "America/Denver";
-        };
+      transmission = {
+        enable = true;
+        vpn.enable = true;
+        peerPort = 8999;
       };
 
       sonarr = {
-        autoStart = true;
-        image = "lscr.io/linuxserver/sonarr:latest";
-        ports = ["8989:8989"];
-        volumes = [
-          "/home/media/sonarr:/config"
-          "/home/media/media:/media"
-        ];
-        environment = {
-          PUID = "8096";
-          PGID = "8096";
-          TZ = "America/Denver";
-        };
+        enable = true;
       };
 
-      ombi = {
-        autoStart = true;
-        image = "lscr.io/linuxserver/ombi:latest";
-        ports = ["3579:3579"];
-        volumes = ["/home/media/ombi:/config"];
-        environment = {
-          PUID = "8096";
-          PGID = "8096";
-          TZ = "America/Denver";
-        };
+      radarr = {
+        enable = true;
       };
 
-      torrent = {
-        autoStart = true;
-        privileged = true;
-        image = "dyonr/qbittorrentvpn";
-        ports = ["8080:8080" "8999:8999"];
-        volumes = [
-          "/home/media/torrent:/config"
-          "/home/media/media:/media"
-        ];
-        environment = {
-          VPN_ENABLED = "yes";
-          VPN_TYPE = "wireguard";
-          LAN_NETWORK = "10.0.0.0/24";
-          PUID = "8096";
-          PGID = "8096";
-        };
+      bazarr = {
+        enable = true;
+      };
+
+      prowlarr = {
+        enable = true;
+        port = 9117;
+      };
+
+      jellyseerr = {
+        enable = true;
+        port = 5000;
       };
     };
   };
