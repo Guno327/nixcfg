@@ -20,6 +20,8 @@
     wireshark
     libreoffice-still
     freecad
-    orca-slicer
+    stable.orca-slicer
+    stable.gimp
+    qFlipper
   ];
 }
