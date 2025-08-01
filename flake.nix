@@ -28,6 +28,8 @@
     mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
     nixarr.url = "github:rasmus-kirk/nixarr";
+
+    mineflake.url = "github:guno327/mineflake";
   };
 
   outputs = {
@@ -41,6 +43,7 @@
     mailserver,
     playit-nixos-module,
     nixarr,
+    mineflake,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -97,6 +100,8 @@
           mailserver.nixosModule
           playit-nixos-module.nixosModules.default
           nixarr.nixosModules.default
+
+          mineflake.nixosModules.mineflake
         ];
       };
     };

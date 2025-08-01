@@ -141,12 +141,7 @@
     cloudflared.enable = true;
     website.enable = true;
     media.enable = true;
-    minecraft = {
-      enable = false;
-      name = "ftb-genesis";
-      type = "FTBA";
-      id = "120";
-    };
+    minecraft.enable = true;
     pihole.enable = false;
     mail.enable = false;
     playit.enable = false;
