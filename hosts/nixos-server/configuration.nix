@@ -142,10 +142,10 @@
     website.enable = true;
     media.enable = true;
     minecraft = {
-      enable = false;
-      name = "ftb-genesis";
-      type = "FTBA";
-      id = "120";
+      enable = true;
+      name = "test";
+      type = "vanilla";
+      version = "latest";
     };
     pihole.enable = false;
     mail.enable = false;
@@ -154,6 +154,7 @@
       enable = true;
       launchOptions = "-multihome=0.0.0.0";
     };
+    github-runner.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
