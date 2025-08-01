@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    custom-pkgs = {
+      url = "github:guno327/pkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
@@ -24,9 +29,7 @@
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
     nixarr.url = "github:rasmus-kirk/nixarr";
 
-    satisfactory-modeler.url = "github:guno327/satisfactory-modeler-flake";
-    exiled-exchange-2.url = "github:guno327/exiled-exchange-2-flake";
-    awakened-poe-trade.url = "github:guno327/awakened-poe-trade-flake";
+    mineflake.url = "github:guno327/mineflake";
   };
 
   outputs = {
@@ -40,6 +43,7 @@
     mailserver,
     playit-nixos-module,
     nixarr,
+    mineflake,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -96,6 +100,8 @@
           mailserver.nixosModule
           playit-nixos-module.nixosModules.default
           nixarr.nixosModules.default
+
+          mineflake.nixosModules.mineflake
         ];
       };
     };

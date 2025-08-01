@@ -72,6 +72,12 @@
 
     flatpak = {
       enable = true;
+      remotes = [
+        {
+          name = "flathub-beta";
+          location = "https://flathub.org/beta-repo/flathub-beta.flatpakrepo";
+        }
+      ];
       packages = [
         {
           appId = "community.pathofbuilding.PathOfBuilding";
@@ -219,7 +225,8 @@
       winetricks
       gamemode
       chromium
-      inputs.satisfactory-modeler.packages."${system}".satisfactory-modeler
+      inputs.custom-pkgs.packages."${system}".satisfactory-modeler
+      inputs.custom-pkgs.packages."${system}".orca-slicer-nightly
     ];
   };
 

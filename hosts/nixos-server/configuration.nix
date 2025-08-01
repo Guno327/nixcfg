@@ -141,12 +141,7 @@
     cloudflared.enable = true;
     website.enable = true;
     media.enable = true;
-    minecraft = {
-      enable = true;
-      name = "test";
-      type = "vanilla";
-      version = "latest";
-    };
+    minecraft.enable = true;
     pihole.enable = false;
     mail.enable = false;
     playit.enable = false;
