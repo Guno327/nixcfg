@@ -149,6 +149,7 @@
       enable = true;
       launchOptions = "-multihome=0.0.0.0";
     };
+    github-runner.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
