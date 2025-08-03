@@ -22,6 +22,12 @@
           backup = false;
         };
 
+        spellcheck = {
+          enable = true;
+          languages = ["en"];
+          programmingWordlist.enable = true;
+        };
+
         utility = {
           images.image-nvim = {
             enable = true;
@@ -92,6 +98,8 @@
           markdown.enable = true;
           clang.enable = true;
           haskell.enable = true;
+          go.enable = true;
+          ts.enable = true;
           python = {
             enable = true;
             lsp.server = "pyright";
