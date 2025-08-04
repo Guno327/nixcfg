@@ -339,11 +339,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1754087996,
-        "narHash": "sha256-NGpmBPpa7GeP3V10ctuBrSd59EkLztMZQlt130y1aq8=",
+        "lastModified": 1754092711,
+        "narHash": "sha256-8Dv6tfCJVF9QYXZ9xHFRWKC96zrORVoXaz8Sm8vnSzE=",
         "owner": "guno327",
         "repo": "mineflake",
-        "rev": "e013c33811097166c69191c62cdfe7440d0d4009",
+        "rev": "76b68a8ec064505dd679fcaacae6ccd4336f192a",
         "type": "github"
       },
       "original": {

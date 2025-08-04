@@ -101,7 +101,7 @@
           playit-nixos-module.nixosModules.default
           nixarr.nixosModules.default
 
-          mineflake.nixosModules.mineflake
+          mineflake.nixosModules.vanilla
         ];
       };
     };

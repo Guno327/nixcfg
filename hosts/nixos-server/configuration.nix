@@ -141,7 +141,7 @@
     cloudflared.enable = true;
     website.enable = true;
     media.enable = true;
-    minecraft.enable = true;
+    minecraft.enable = false;
     pihole.enable = false;
     mail.enable = false;
     playit.enable = false;
