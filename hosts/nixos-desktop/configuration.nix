@@ -127,13 +127,9 @@
       enable = true;
       drivers = [pkgs.hplip pkgs.gutenprint];
     };
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
 
     blueman.enable = true;
+    resolved.enable = true;
   };
 
   boot.initrd.services.udev.rules = ''
