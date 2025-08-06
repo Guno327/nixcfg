@@ -40,11 +40,11 @@
       foot.enable = true;
       minecraft.enable = true;
       gammastep.enable = true;
-      spotify.enable = true;
       virt-manager.enable = true;
       ee2.enable = true;
       poetrade.enable = true;
       recording.enable = true;
+      spotify.enable = true;
     };
   };
 

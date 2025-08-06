@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -9,33 +10,13 @@ in {
   options.features.desktop.spotify.enable = mkEnableOption "Enable and configure spotify";
 
   config = mkIf cfg.enable {
-    programs.spotify-player = {
-      enable = true;
-      settings = {
-        enable_media_control = true;
-        enable_notify = false;
-      };
-      keymaps = [
-        {
-          command = "Shuffle";
-          key_sequence = "c s";
-        }
-        {
-          command = "Repeat";
-          key_sequence = "c r";
-        }
-        {
-          command = "Quit";
-          key_sequence = "c c";
-        }
-      ];
-    };
+    home.packages = with pkgs; [spotify-qt spotifyd];
 
-    xdg.desktopEntries.spotify = {
-      name = "Spotify";
-      genericName = "spotify_player";
-      exec = "foot -e spotify_player";
-      terminal = false;
+    services.spotifyd = {
+      settings.global = {
+        username = "gunnarhovik-us";
+        password = builtins.replaceStrings ["\n"] [""] (builtins.readFile ../../../secrets/spotify.password);
+      };
     };
   };
 }

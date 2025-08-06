@@ -95,7 +95,7 @@ in {
             player-icons = {
               default = "▶";
               mpv = "🎵";
-              spotify_player = " ";
+              spotifyd = " ";
             };
 
             status-icons = {
