@@ -208,6 +208,10 @@ in {
 
         windowrulev2 = [
         ];
+
+        debug = {
+          disable_logs = false;
+        };
       };
     };
   };

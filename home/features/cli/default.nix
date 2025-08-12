@@ -53,5 +53,6 @@
     mtpfs
     arp-scan
     nmap
+    wget
   ];
 }

@@ -42,8 +42,6 @@
           };
           preview.markdownPreview = {
             enable = true;
-            autoClose = true;
-            autoStart = true;
             customPort = "1111";
           };
         };

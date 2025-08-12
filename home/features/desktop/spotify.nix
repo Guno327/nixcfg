@@ -10,6 +10,6 @@ in {
   options.features.desktop.spotify.enable = mkEnableOption "Enable and configure spotify";
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [psst];
+    home.packages = with pkgs; [spotify];
   };
 }
