@@ -38,6 +38,9 @@ in {
         preload = [
           "/home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
         ];
+        wallpaper = [
+          ", /home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
+        ];
       };
     };
 

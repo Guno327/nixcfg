@@ -48,11 +48,6 @@
     };
   };
 
-  services.hyprpaper.settings.wallpaper = [
-    "DP-1, /home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
-    "DP-2, /home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
-  ];
-
   wayland.windowManager.hyprland = {
     settings = {
       monitor = [

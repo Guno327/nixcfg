@@ -65,10 +65,6 @@
     };
   };
 
-  services.hyprpaper.settings.wallpaper = [
-    "eDP-1, /home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
-  ];
-
   programs = {
     waybar.settings = {
       mainbar = {
