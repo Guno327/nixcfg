@@ -163,7 +163,7 @@
   security.pam.services.hyprlock = {};
 
   # Set your time zone.
-  time.timeZone = "America/Denver";
+  time.timeZone = "America/New_York";
 
   # Graphics
   boot.initrd.kernelModules = ["amdgpu"];
