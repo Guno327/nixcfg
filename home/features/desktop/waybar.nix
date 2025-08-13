@@ -27,10 +27,10 @@ in {
           };
 
           "custom/weather" = {
-            format = "{}°C";
+            format = "{}°F";
             tooltip = true;
             interval = 3600;
-            exec = "wttrbar --location SLC";
+            exec = "wttrbar --fahrenheit";
             return-type = "json";
           };
 

@@ -65,14 +65,9 @@
     };
   };
 
-  services.hyprpaper.settings = {
-    preload = [
-      "~/pictures/wallpaper.png"
-    ];
-    wallpaper = [
-      "eDP-1, ~/pictures/wallpaper.png"
-    ];
-  };
+  services.hyprpaper.settings.wallpaper = [
+    "eDP-1, /home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
+  ];
 
   programs = {
     waybar.settings = {

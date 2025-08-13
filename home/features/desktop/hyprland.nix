@@ -31,7 +31,15 @@ in {
     ];
 
     programs.wofi.enable = true;
-    services.hyprpaper.enable = true;
+
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        preload = [
+          "/home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
+        ];
+      };
+    };
 
     wayland.windowManager.hyprland = {
       enable = true;

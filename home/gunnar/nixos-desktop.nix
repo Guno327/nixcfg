@@ -48,16 +48,10 @@
     };
   };
 
-  services.hyprpaper.settings = {
-    preload = [
-      "~/pictures/wallpaper1.png"
-      "~/pictures/wallpaper2.png"
-    ];
-    wallpaper = [
-      "DP-1, ~/pictures/wallpaper1.png"
-      "DP-2 ~/pictures/wallpaper2.png"
-    ];
-  };
+  services.hyprpaper.settings.wallpaper = [
+    "DP-1, /home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
+    "DP-2, /home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
+  ];
 
   wayland.windowManager.hyprland = {
     settings = {
