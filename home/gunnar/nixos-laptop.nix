@@ -65,15 +65,6 @@
     };
   };
 
-  services.hyprpaper.settings = {
-    preload = [
-      "~/pictures/wallpaper.png"
-    ];
-    wallpaper = [
-      "eDP-1, ~/pictures/wallpaper.png"
-    ];
-  };
-
   programs = {
     waybar.settings = {
       mainbar = {

@@ -48,17 +48,6 @@
     };
   };
 
-  services.hyprpaper.settings = {
-    preload = [
-      "~/pictures/wallpaper1.png"
-      "~/pictures/wallpaper2.png"
-    ];
-    wallpaper = [
-      "DP-1, ~/pictures/wallpaper1.png"
-      "DP-2 ~/pictures/wallpaper2.png"
-    ];
-  };
-
   wayland.windowManager.hyprland = {
     settings = {
       monitor = [
