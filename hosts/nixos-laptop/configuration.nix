@@ -45,19 +45,13 @@
 
     flatpak = {
       enable = true;
+      update.onActivation = true;
+      uninstallUnmanaged = true;
       packages = [
-        {
-          appId = "community.pathofbuilding.PathOfBuildin";
-          origin = "flathub";
-        }
-        {
-          appId = "com.valvesoftware.Steam";
-          origin = "flathub";
-        }
-        {
-          appId = "app.zen_browser.zen";
-          origin = "flathub";
-        }
+        "community.pathofbuilding.PathOfBuilding"
+        "com.valvesoftware.Steam"
+        "app.zen_browser.zen"
+        "org.vinegarhq.Sober"
       ];
       overrides = {
         global = {

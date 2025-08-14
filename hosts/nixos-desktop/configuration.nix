@@ -72,25 +72,13 @@
 
     flatpak = {
       enable = true;
-      remotes = [
-        {
-          name = "flathub-beta";
-          location = "https://flathub.org/beta-repo/flathub-beta.flatpakrepo";
-        }
-      ];
+      update.onActivation = true;
+      uninstallUnmanaged = true;
       packages = [
-        {
-          appId = "community.pathofbuilding.PathOfBuilding";
-          origin = "flathub";
-        }
-        {
-          appId = "com.valvesoftware.Steam";
-          origin = "flathub";
-        }
-        {
-          appId = "app.zen_browser.zen";
-          origin = "flathub";
-        }
+        "community.pathofbuilding.PathOfBuilding"
+        "com.valvesoftware.Steam"
+        "app.zen_browser.zen"
+        "org.vinegarhq.Sober"
       ];
       overrides = {
         global = {
@@ -221,6 +209,7 @@
       winetricks
       gamemode
       chromium
+      vinegar
       inputs.custom-pkgs.packages."${system}".satisfactory-modeler
       inputs.custom-pkgs.packages."${system}".orca-slicer-nightly
     ];
