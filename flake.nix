@@ -29,7 +29,7 @@
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
     nixarr.url = "github:rasmus-kirk/nixarr";
 
-    mineflake.url = "github:guno327/mineflake";
+    mineflake.url = "path:/home/gunnar/mineflake/flake";
   };
 
   outputs = {

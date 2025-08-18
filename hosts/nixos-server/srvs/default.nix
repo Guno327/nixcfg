@@ -9,5 +9,7 @@
     ./playit.nix
     ./satisfactory.nix
     ./github-runner.nix
+    ./nvidia.nix
+    ./nextcloud.nix
   ];
 }

@@ -139,17 +139,18 @@
   # Services
   srvs = {
     cloudflared.enable = true;
-    website.enable = true;
     media.enable = true;
-    minecraft.enable = false;
+    nvidia.enable = true;
+    minecraft.enable = true;
     pihole.enable = false;
     mail.enable = false;
-    playit.enable = false;
+    playit.enable = true;
     satisfactory = {
-      enable = true;
+      enable = false;
       launchOptions = "-multihome=0.0.0.0";
     };
     github-runner.enable = true;
+    nextcloud.enable = false;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

@@ -13,6 +13,15 @@ in {
   config = mkIf cfg.enable {
     mineflake.vanilla = {
       enable = true;
+      eula = "true";
+      serverProperties = {
+        gamemode = "creative";
+        difficulty = "hard";
+        max-players = 5;
+        allow-flight = true;
+        motd = "Sup Loser";
+        force-gamemode = true;
+      };
     };
   };
 }
