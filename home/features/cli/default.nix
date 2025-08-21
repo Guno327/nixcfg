@@ -54,5 +54,6 @@
     arp-scan
     nmap
     wget
+    efibootmgr
   ];
 }
