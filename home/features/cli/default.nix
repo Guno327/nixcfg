@@ -55,5 +55,6 @@
     nmap
     wget
     efibootmgr
+    smartmontools
   ];
 }

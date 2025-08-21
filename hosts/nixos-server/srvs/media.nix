@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -11,6 +12,19 @@ in {
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      jellyfin-ffmpeg
+    ];
+
+    users.users.jellyfin.extraGroups = [
+      "video"
+    ];
+
+    services.flaresolverr = {
+      enable = true;
+      port = 8191;
+    };
+
     nixarr = {
       enable = true;
       mediaDir = "/var/lib/media";
