@@ -11,7 +11,7 @@ in {
     services.cloudflared = {
       enable = true;
       tunnels.nixos-server = {
-        credentialsFile = "/home/gunnar/.nixcfg/secrets/tunnel.json";
+        credentialsFile = "/flake/secrets/tunnel.json";
         default = "http_status:404";
       };
     };

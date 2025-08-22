@@ -54,6 +54,7 @@
     arp-scan
     nmap
     wget
+    efibootmgr
     smartmontools
   ];
 }

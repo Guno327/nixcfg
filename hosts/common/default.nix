@@ -30,7 +30,7 @@
 
   services.tailscale = {
     enable = true;
-    authKeyFile = "/home/gunnar/.nixcfg/secrets/tailscale.key";
+    authKeyFile = "/flake/secrets/tailscale.key";
   };
 
   nix = {
@@ -59,7 +59,7 @@
   boot.kernelPackages = pkgs.linuxPackages_6_6;
 
   environment.variables = {
-    "NH_FLAKE" = "/home/gunnar/.nixcfg";
+    "NH_FLAKE" = "/flake";
     GPG_TTY = "$(tty)";
   };
 
