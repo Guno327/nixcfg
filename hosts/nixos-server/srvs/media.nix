@@ -32,7 +32,7 @@ in {
 
       vpn = {
         enable = true;
-        wgConf = "/home/gunnar/.nixcfg/secrets/wg0.conf";
+        wgConf = "/flake/secrets/wg0.conf";
       };
 
       jellyfin = {

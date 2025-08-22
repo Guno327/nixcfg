@@ -15,7 +15,7 @@ in {
       enable = true;
       hostName = "data";
       config = {
-        adminpassFile = "/home/gunnar/.nixcfg/secrets/nextcloud.pass";
+        adminpassFile = "/flake/secrets/nextcloud.pass";
         dbtype = "sqlite";
       };
       settings = {

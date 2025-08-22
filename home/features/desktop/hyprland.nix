@@ -36,10 +36,10 @@ in {
       enable = true;
       settings = {
         preload = [
-          "/home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
+          "/flake/home/gunnar/wallpaper.png"
         ];
         wallpaper = [
-          ", /home/gunnar/.nixcfg/home/gunnar/wallpaper.png"
+          ", /flake/home/gunnar/wallpaper.png"
         ];
       };
     };

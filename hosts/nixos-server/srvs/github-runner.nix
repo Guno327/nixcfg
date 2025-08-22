@@ -28,7 +28,7 @@ in {
       workDir = "/var/lib/github-runners/pkgs-runner";
       user = "github";
       url = "https://github.com/Guno327/pkgs";
-      tokenFile = "/home/gunnar/.nixcfg/secrets/pkgs-runner.token";
+      tokenFile = "/flake/secrets/pkgs-runner.token";
       extraPackages = [pkgs.nix-update];
     };
   };
