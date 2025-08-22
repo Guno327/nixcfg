@@ -233,5 +233,14 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Mineflake testing
+  mineflake.curseforge = {
+    enable = true;
+    pack = "skyfactory-4";
+    version = "3565687";
+    name = "test";
+    eula = "true";
+  };
+
   system.stateVersion = "24.11"; # DO NOT CHANGE
 }

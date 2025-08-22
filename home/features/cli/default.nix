@@ -56,5 +56,6 @@
     wget
     efibootmgr
     smartmontools
+    parted
   ];
 }
