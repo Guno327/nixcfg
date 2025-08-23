@@ -82,20 +82,7 @@
 
     mullvad-vpn.enable = true;
     pcscd.enable = true;
-  };
-
-  # Auto upgrade
-  system.autoUpgrade = {
-    enable = true;
-    flake = inputs.self.outPath;
-    persistent = true;
-    dates = "daily";
-    flags = [
-      "-L"
-      "--update-input"
-      "nixpkgs"
-      "--commit-lock-file"
-    ];
+    zfs.autoScrub.enable = true;
   };
 
   # Environment

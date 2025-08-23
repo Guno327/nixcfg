@@ -57,5 +57,6 @@
     efibootmgr
     smartmontools
     parted
+    lsof
   ];
 }

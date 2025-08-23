@@ -20,6 +20,10 @@ in {
       "video"
     ];
 
+    users.users.gunnar.extraGroups = [
+      "media"
+    ];
+
     services.flaresolverr = {
       enable = true;
       port = 8191;
