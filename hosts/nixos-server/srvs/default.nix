@@ -2,7 +2,6 @@
   imports = [
     ./media.nix
     ./cloudflared.nix
-    ./minecraft.nix
     ./pihole.nix
     ./mail.nix
     ./website.nix

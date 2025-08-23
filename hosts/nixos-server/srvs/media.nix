@@ -27,7 +27,7 @@ in {
 
     nixarr = {
       enable = true;
-      mediaDir = "/var/lib/media";
+      mediaDir = "/storage";
       stateDir = "/var/lib/media/.state/nixarr";
 
       vpn = {

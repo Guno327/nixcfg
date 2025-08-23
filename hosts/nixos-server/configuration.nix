@@ -112,7 +112,6 @@
       rclone
       bash
       dive
-      docker-compose
       curl
       jq
       openresolv
@@ -120,6 +119,7 @@
       wg-netmanager
       git-crypt
       p7zip
+      zfs
     ];
   };
 
@@ -130,24 +130,11 @@
     fish.enable = true;
   };
 
-  # Docker
-  virtualisation.docker = {
-    enable = true;
-    storageDriver = "zfs";
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
-  };
-  users.extraUsers.gunnar.extraGroups = ["docker" "media"];
-  virtualisation.oci-containers.backend = "docker";
-
   # Services
   srvs = {
     cloudflared.enable = true;
     media.enable = true;
     nvidia.enable = true;
-    minecraft.enable = true;
     pihole.enable = false;
     mail.enable = false;
     playit.enable = true;
