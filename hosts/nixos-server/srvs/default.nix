@@ -10,5 +10,6 @@
     ./github-runner.nix
     ./nvidia.nix
     ./nextcloud.nix
+    ./homepage.nix
   ];
 }

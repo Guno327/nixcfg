@@ -131,6 +131,7 @@
     };
     github-runner.enable = true;
     nextcloud.enable = false;
+    homepage.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
