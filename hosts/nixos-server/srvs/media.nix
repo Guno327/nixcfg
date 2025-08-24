@@ -47,6 +47,8 @@ in {
         enable = true;
         vpn.enable = true;
         peerPort = 8999;
+        extraAllowedIps = ["100.64.0.*" "10.0.0.*"];
+        credentialsFile = "/flake/secrets/transmission.json";
       };
 
       sonarr = {
