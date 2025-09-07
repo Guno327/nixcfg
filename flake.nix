@@ -22,6 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     stylix.url = "github:danth/stylix";
@@ -41,6 +42,7 @@
     mailserver,
     playit-nixos-module,
     nixarr,
+    chaotic,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -70,6 +72,10 @@
           nvf.nixosModules.default
           stylix.nixosModules.stylix
           nix-flatpak.nixosModules.nix-flatpak
+
+          chaotic.nixosModules.nyx-cache
+          chaotic.nixosModules.nyx-overlay
+          chaotic.nixosModules.nyx-registry
         ];
       };
       nixos-desktop = nixpkgs.lib.nixosSystem {
@@ -84,6 +90,10 @@
           nvf.nixosModules.default
           stylix.nixosModules.stylix
           nix-flatpak.nixosModules.nix-flatpak
+
+          chaotic.nixosModules.nyx-cache
+          chaotic.nixosModules.nyx-overlay
+          chaotic.nixosModules.nyx-registry
         ];
       };
 
@@ -97,6 +107,10 @@
           mailserver.nixosModule
           playit-nixos-module.nixosModules.default
           nixarr.nixosModules.default
+
+          chaotic.nixosModules.nyx-cache
+          chaotic.nixosModules.nyx-overlay
+          chaotic.nixosModules.nyx-registry
         ];
       };
     };
