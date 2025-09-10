@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  imports = [./hardware-configuration.nix ./gnome.nix];
+  imports = [./hardware-configuration.nix ../common/gnome.nix];
 
   # Bootloader.
   boot = {
@@ -175,9 +175,6 @@
   users.groups.libvirtd.members = ["gunnar"];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-
-  # Lid Handling
-  services.logind.lidSwitchExternalPower = "ignore";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
