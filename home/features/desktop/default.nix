@@ -13,6 +13,7 @@
     ./poetrade.nix
     ./recording.nix
     ./foot.nix
+    ./gnome.nix
   ];
 
   home.packages = with pkgs; [

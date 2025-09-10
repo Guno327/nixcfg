@@ -56,7 +56,7 @@
 
   programs.nix-ld.enable = true;
   users.defaultUserShell = pkgs.fish;
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   environment.variables = {
     "NH_FLAKE" = "/flake";

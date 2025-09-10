@@ -20,6 +20,10 @@ in {
         mouse = {
           hide-when-typing = true;
         };
+
+        csd = {
+          preferred = "none";
+        };
       };
     };
     wayland.windowManager.hyprland.settings = {
