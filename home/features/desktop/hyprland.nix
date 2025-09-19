@@ -119,10 +119,6 @@ in {
 
         master = {};
 
-        gestures = {
-          workspace_swipe = false;
-        };
-
         windowrule = [
           "float, title:file_progress"
           "float, title:confirm"

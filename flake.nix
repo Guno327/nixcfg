@@ -3,6 +3,18 @@
     Flake for Guno327's nix installs
   '';
 
+  # binary caches
+  nixConfig = {
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://chaotic-nyx.cachix.org/"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+    ];
+  };
+
   inputs = {
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -28,6 +40,7 @@
     mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
     nixarr.url = "github:rasmus-kirk/nixarr";
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
   outputs = {
@@ -41,6 +54,7 @@
     mailserver,
     playit-nixos-module,
     nixarr,
+    chaotic,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -70,6 +84,7 @@
           nvf.nixosModules.default
           stylix.nixosModules.stylix
           nix-flatpak.nixosModules.nix-flatpak
+          chaotic.nixosModules.default
         ];
       };
       nixos-desktop = nixpkgs.lib.nixosSystem {
@@ -84,6 +99,7 @@
           nvf.nixosModules.default
           stylix.nixosModules.stylix
           nix-flatpak.nixosModules.nix-flatpak
+          chaotic.nixosModules.default
         ];
       };
 
@@ -97,6 +113,7 @@
           mailserver.nixosModule
           playit-nixos-module.nixosModules.default
           nixarr.nixosModules.default
+          chaotic.nixosModules.default
         ];
       };
     };

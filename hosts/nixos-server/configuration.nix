@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./srvs
@@ -10,6 +6,7 @@
 
   # Bootloader.
   boot = {
+    kernelPackages = pkgs.linuxPackages_cachyos-server;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
