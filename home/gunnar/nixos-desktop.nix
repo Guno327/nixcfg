@@ -33,6 +33,7 @@
       monitor.enable = true;
       ssh.enable = true;
       gpg.enable = true;
+      dev.enable = true;
     };
     desktop = {
       hyprland.enable = true;
@@ -92,7 +93,6 @@
     fish.loginShellInit = ''
        set -x NIX_PATH nixpkgs=channel:nixos-unstable
        set -x NIX_LOG info
-       direnv hook fish | source
 
       if test (tty) = "/dev/tty1"
          exec Hyprland &> /dev/null

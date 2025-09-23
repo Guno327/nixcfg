@@ -23,11 +23,5 @@ in {
         dcp = "rsync -r --partial --info=progress2";
       };
     };
-
-    programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      silent = true;
-    };
   };
 }

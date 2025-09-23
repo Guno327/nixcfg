@@ -37,6 +37,5 @@
     set -x NIX_PATH nixpkgs=channel:nixos-unstable
     set -x NIX_LOG info
     set -x TERM xterm-256color
-    direnv hook fish | source
   '';
 }

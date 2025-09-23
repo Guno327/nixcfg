@@ -21,6 +21,7 @@
     initrd.kernelModules = [];
     kernelModules = ["kvm-amd"];
     extraModulePackages = [];
+    tmp.tmpfsSize = "75%";
   };
 
   fileSystems = {

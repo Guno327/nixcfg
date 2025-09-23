@@ -12,6 +12,7 @@
     ./ssh.nix
     ./ai.nix
     ./gpg.nix
+    ./dev.nix
   ];
 
   home.packages = with pkgs; [

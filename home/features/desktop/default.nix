@@ -23,5 +23,6 @@
     freecad
     stable.gimp
     qFlipper
+    audacity
   ];
 }
