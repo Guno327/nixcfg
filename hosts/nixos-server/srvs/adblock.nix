@@ -25,12 +25,10 @@ in {
         };
         blocking = {
           blackLists = {
-            ads = ["https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" "https://easylist.to/easylist/easylist.txt"];
-            cookies = ["https://secure.fanboy.co.nz/fanboy-annoyance.txt"];
-            privacy = ["https://easylist.to/easylist/easyprivacy.txt"];
+            ads = ["https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt"];
           };
           clientGroupsBlock = {
-            default = ["ads" "cookies" "privacy"];
+            default = ["ads"];
           };
         };
         caching = {
