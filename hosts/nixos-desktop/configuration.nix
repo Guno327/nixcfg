@@ -202,7 +202,6 @@
       xorg.xhost
       gamescope
       wine
-      docker-compose
       nh
       git-crypt
       wine64
@@ -228,7 +227,6 @@
   virtualisation = {
     libvirtd.enable = true;
     spiceUSBRedirection.enable = true;
-    docker.enable = true;
   };
 
   # Allow unfree packages

@@ -59,5 +59,6 @@
     smartmontools
     parted
     lsof
+    plocate
   ];
 }
