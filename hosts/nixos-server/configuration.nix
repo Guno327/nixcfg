@@ -119,14 +119,13 @@
     cloudflared.enable = true;
     media.enable = true;
     nvidia.enable = true;
-    pihole.enable = false;
     mail.enable = false;
-    playit.enable = true;
+    adblock.enable = true;
     satisfactory = {
       enable = false;
       launchOptions = "-multihome=0.0.0.0";
     };
-    github-runner.enable = true;
+    github-runner.enable = false;
     nextcloud.enable = false;
     homepage.enable = true;
   };

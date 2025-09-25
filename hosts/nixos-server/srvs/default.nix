@@ -2,7 +2,7 @@
   imports = [
     ./media.nix
     ./cloudflared.nix
-    ./pihole.nix
+    ./adblock.nix
     ./mail.nix
     ./website.nix
     ./playit.nix
