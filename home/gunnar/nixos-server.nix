@@ -16,6 +16,7 @@
       fzf.enable = true;
       ssh.enable = true;
       gpg.enable = true;
+      dev.enable = true;
     };
   };
 }

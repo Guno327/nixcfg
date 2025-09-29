@@ -17,6 +17,7 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
+  boot.zfs.extraPools = ["storage"];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/c0dc0d5d-4120-48b0-819f-6a0767c91833";
