@@ -24,6 +24,7 @@
       sonarr = {};
 
       sshcontrol = {
+        owner = "gunnar";
         path = "/home/gunnar/.gnupg/sshcontrol";
       };
 
