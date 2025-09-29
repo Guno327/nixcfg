@@ -19,7 +19,7 @@ in {
       enable = true;
       lfs.enable = true;
       userName = "gunnar";
-      userEmail = "gunnarhovik@outlook.com";
+      userEmail = "accounts@ghov.net";
       extraConfig = {
         commit.gpgsign = true;
         gpg.program = "${pkgs.gnupg}/bin/gpg";

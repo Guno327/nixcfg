@@ -80,6 +80,7 @@
         "com.valvesoftware.Steam"
         "app.zen_browser.zen"
         "org.vinegarhq.Sober"
+        "com.adamcake.Bolt"
       ];
       overrides = {
         global = {
