@@ -29,6 +29,11 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
+    chaotic = {
+      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -45,7 +50,6 @@
     mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
     nixarr.url = "github:rasmus-kirk/nixarr";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
   };
 
   outputs = {
