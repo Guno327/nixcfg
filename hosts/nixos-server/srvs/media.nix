@@ -36,7 +36,7 @@ in {
 
       vpn = {
         enable = true;
-        wgConf = "/flake/secrets/wg0.conf";
+        wgConf = config.sops.secrets.wireguard.path;
       };
 
       jellyfin = {
@@ -48,7 +48,7 @@ in {
         vpn.enable = true;
         peerPort = 8999;
         extraAllowedIps = ["100.64.0.*" "10.0.0.*"];
-        credentialsFile = "/flake/secrets/transmission.json";
+        credentialsFile = config.sops.secrets.transmission.path;
       };
 
       sonarr = {

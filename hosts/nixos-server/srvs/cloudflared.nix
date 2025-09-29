@@ -11,7 +11,7 @@ in {
     services.cloudflared = {
       enable = true;
       tunnels.nixos-server = {
-        credentialsFile = "/flake/secrets/tunnel.json";
+        credentialsFile = config.sops.secrets.tunnel.path;
         default = "http_status:404";
       };
     };
