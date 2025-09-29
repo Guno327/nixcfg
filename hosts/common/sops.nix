@@ -24,8 +24,11 @@
       sonarr = {};
 
       sshcontrol = {
+        sopsFile = ../../secrets/sshcontrol;
+        format = "binary";
         owner = "gunnar";
         path = "/home/gunnar/.gnupg/sshcontrol";
+        mode = "0600";
       };
 
       playit = {

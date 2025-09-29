@@ -1,15 +1,14 @@
 keys:
   - &gunnar 8821c0948c4286beb2fe9308bf48b4e0c22b5c18
-  - &desktop age16uvc50ez4kau2jdjfugvdvs9nmv2p6urh3d4ncgl7a3v2lprzspqnjdqrl
-  - &laptop age186panqyu4eemzj9qtlqag96gnkgfk8nvkjqmvx0guejnwck7zucqjfxzfh
-  - &server age1tyuqg8x27rjnx20fyzvfac3sd2dwmqklxz8nlvmkk0ve6weyweaqsy0pyx
+  - &desktop f021f5f60e993f115362836c0d1a8be167f278f0
+  - &laptop 9c90c0448548448e6196f45165be5ff6fd0d1044
+  - &server 82ebfa5acba24f8fae0790237c900009c28e265f
 
 creation_rules:
-  - path_regex: secrets/[^/]+\.[^/]+$
+  - path_regex: secrets/[^/]+$
     key_groups:
       - pgp:
         - *gunnar
-      - age:
         - *desktop
         - *laptop
         - *server
