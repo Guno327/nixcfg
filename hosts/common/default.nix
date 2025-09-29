@@ -3,12 +3,14 @@
   lib,
   inputs,
   outputs,
+  config,
   ...
 }: {
   imports = [
     ./users
     inputs.home-manager.nixosModules.home-manager
     ./nvf-configuration.nix
+    ./sops.nix
   ];
 
   home-manager = {
@@ -30,7 +32,7 @@
 
   services.tailscale = {
     enable = true;
-    authKeyFile = "/flake/secrets/tailscale.key";
+    authKeyFile = config.sops.secrets.tailscale.path;
   };
 
   nix = {
@@ -84,6 +86,7 @@
     ];
   };
 
+  # Stylix
   stylix = {
     enable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";

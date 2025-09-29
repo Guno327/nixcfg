@@ -6,7 +6,7 @@
 }:
 with lib; let
   cfg = config.features.cli.ai;
-  api-key = builtins.replaceStrings ["\n"] [""] (builtins.readFile ../../../secrets/gemini-api.key);
+  api-key = builtins.replaceStrings ["\n"] [""] (builtins.readFile config.sops.secrets.gemini.path);
 in {
   options.features.cli.ai.enable = mkEnableOption "enable gemini ai for fish";
   config = mkIf cfg.enable {

@@ -34,6 +34,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     stylix.url = "github:danth/stylix";
@@ -55,6 +60,7 @@
     playit-nixos-module,
     nixarr,
     chaotic,
+    sops-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -85,6 +91,7 @@
           stylix.nixosModules.stylix
           nix-flatpak.nixosModules.nix-flatpak
           chaotic.nixosModules.default
+          sops-nix.nixosModules.sops
         ];
       };
       nixos-desktop = nixpkgs.lib.nixosSystem {
@@ -100,6 +107,7 @@
           stylix.nixosModules.stylix
           nix-flatpak.nixosModules.nix-flatpak
           chaotic.nixosModules.default
+          sops-nix.nixosModules.sops
         ];
       };
 
@@ -114,6 +122,7 @@
           playit-nixos-module.nixosModules.default
           nixarr.nixosModules.default
           chaotic.nixosModules.default
+          sops-nix.nixosModules.sops
         ];
       };
     };
