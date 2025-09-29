@@ -19,6 +19,9 @@
     osu-lazer-bin
     wlr-randr
     xdg-desktop-portal-gtk
+    inputs.custom-pkgs.packages."${system}".balatro-mobile-maker
+    syncthing
+    runelite
   ];
 
   features = {
