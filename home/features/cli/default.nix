@@ -10,7 +10,6 @@
     ./mpv.nix
     ./monitor.nix
     ./ssh.nix
-    ./ai.nix
     ./gpg.nix
     ./dev.nix
   ];

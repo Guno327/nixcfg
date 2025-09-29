@@ -15,7 +15,7 @@ in {
       enable = true;
       hostName = "data";
       config = {
-        adminpassFile = "/flake/secrets/nextcloud.pass";
+        adminpassFile = config.sops.secrets.nextcloud.path;
         dbtype = "sqlite";
       };
       settings = {

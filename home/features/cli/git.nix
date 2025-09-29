@@ -10,11 +10,6 @@ in {
   options.features.cli.git.enable = mkEnableOption "enable extended git configuration";
 
   config = mkIf cfg.enable {
-    home.file.sshcontrol = {
-      text = builtins.readFile ../../../secrets/sshcontrol;
-      target = "${config.home.homeDirectory}/.gnupg/sshcontrol";
-    };
-
     programs.git = {
       enable = true;
       lfs.enable = true;

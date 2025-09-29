@@ -125,9 +125,7 @@
       enable = false;
       launchOptions = "-multihome=0.0.0.0";
     };
-    github-runner.enable = false;
     nextcloud.enable = false;
-    homepage.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

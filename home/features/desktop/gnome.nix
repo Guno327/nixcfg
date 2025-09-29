@@ -81,6 +81,10 @@ in {
           num-workspaces = uint 4;
           focus-mode = "mouse";
         };
+        "org/gnome/desktop/peripherals/mouse" = {
+          accel-profile = "flat";
+          speed = 0.7;
+        };
         "org/gnome/desktop/wm/keybindings" = {
           activate-window-menu = "disabled";
           toggle-message-tray = "disabled";
