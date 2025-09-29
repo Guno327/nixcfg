@@ -21,7 +21,6 @@
       git.enable = true;
       gpg.enable = true;
       fzf.enable = true;
-      ai.enable = true;
     };
     desktop = {
       gnome.enable = true;
