@@ -13,7 +13,6 @@ in {
       loginShellInit = ''
         set -x NIX_PATH nixpkgs=channel:nixos-unstable
         set -x NIX_LOG info
-        set -x SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
         direnv hook fish | source
       '';
       shellAbbrs = {
