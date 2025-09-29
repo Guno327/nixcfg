@@ -2,8 +2,13 @@
   lib,
   pkgs,
   outputs,
+  inputs,
   ...
 }: {
+  imports = [
+    inputs.sops-nix.homeManagerModules.sops
+  ];
+
   nixpkgs = {
     # configure overlays from flake
     overlays = [
