@@ -16,17 +16,14 @@ in {
   config = mkMerge [
     (mkIf cfg.enable {
       home.packages = with pkgs; [
-        swaynotificationcenter
         hyprshot
         hyprcursor
         nautilus
-        playerctl
         qt6.qtwayland
         waypipe
         wf-recorder
         wl-mirror
         wl-clipboard
-        wleave
         wtype
         wttrbar
         wev
@@ -43,12 +40,9 @@ in {
           };
 
           exec-once = [
-            "waybar"
-            "hyprpaper"
             ''wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"''
             "fcitx5 -d -r"
             "fcitx5-remote -r"
-            "swaync"
           ];
 
           env = [
@@ -148,11 +142,8 @@ in {
           bind = [
             "$mainMod, P, togglefloating"
             "$mainMod, C, killactive"
-            "$mainMod, M, exec, wleave -p layer-shell"
             "$mainMod, F, fullscreen"
             "$mainMod, V, togglefloating"
-            "$mainMod, D, exec, wofi --show drun"
-            "$mainMod, N, exec, swaync-client -t -sw"
             "$mainMod SHIFT, P, pseudo"
             "$mainMod, J, togglesplit"
             "$mainMod, L, exec, hyprlock"
@@ -192,12 +183,6 @@ in {
             "$mainMod, mouse:273, resizewindow"
           ];
 
-          bindl = [
-            ", XF86AudioPlay, exec, playerctl play-pause"
-            ", XF86AudioNext, exec, playerctl next"
-            ", XF86AudioPrev, exec, playerctl previous"
-          ];
-
           binde = [
             ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+"
             ", XF86AudioLowerVolume, exec, wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-"
@@ -231,12 +216,6 @@ in {
           ];
 
           env = [];
-
-          bindl = [
-            ", Next, exec, playerctl play-pause"
-            ", Prior, exec, playerctl next"
-            "SHIFT, Prior, exec, playerctl previous"
-          ];
 
           exec-once = [
             # Primary Monitor Work-around
@@ -274,12 +253,6 @@ in {
           env = [
             "WLR_DRM_DEVICES,/dev/dri/card2"
             "AQ_DRM_DEVICES,/dev/dri/card2"
-          ];
-
-          bindl = [
-            ", Next, exec, playerctl play-pause"
-            ", Prior, exec, playerctl next"
-            "SHIFT, Prior, exec, playerctl previous"
           ];
         };
       };
