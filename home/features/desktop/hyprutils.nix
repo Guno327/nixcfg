@@ -35,7 +35,7 @@ in {
 
         bind = [
           "$mainMod, M, exec, wleave -p layer-shell"
-          "$mainMod, D, exec, wofi --show-drun"
+          "$mainMod, D, exec, wofi --show drun"
           "$mainMod, N, exec, swaync-client -t -sw"
         ];
 
@@ -232,13 +232,6 @@ in {
       };
     })
     (mkIf cfg.desktop {
-      wayland.windowManager.hyprland.settings = {
-        bindl = [
-          ", Next, exec, playerctl play-pause"
-          ", Prior, exec, playerctl next"
-          "SHIFT, Prior, playerctl previous"
-        ];
-      };
       programs.waybar.settings = {
         mainbar = {
           output = "DP-1";
