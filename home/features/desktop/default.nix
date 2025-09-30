@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./waybar.nix
+    ./hyprutils.nix
     ./hyprland.nix
     ./kitty.nix
     ./minecraft.nix
