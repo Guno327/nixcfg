@@ -130,6 +130,12 @@ in {
       };
     })
     (mkIf cfg.laptop {
-      })
+      wayland.windowManager.hyprland.settings = {
+        bindl = [
+          ", XF86MonBrightnessDown, exec, fish -c 'caelestia shell brightness set $(math max $(caelestia shell brightness get) - 0.1, 0.0)'"
+          ", XF86MonBrightnessUp, exec, fish -c 'caelestia shell brightness set $(math min $(caelestia shell brightness get) + 0.1, 1.0)'"
+        ];
+      };
+    })
   ];
 }

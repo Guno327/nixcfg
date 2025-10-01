@@ -149,8 +149,6 @@ in {
             "Super, right, movefocus, r"
             "Super, up, movefocus, u"
             "Super, down, movefocus, d"
-            ", XF86MonBrightnessDown, exec, brightnessctl --quiet s 10-"
-            ", XF86MonBrightnessUp, exec, brightnessctl --quiet s +10"
             ", Print, exec, hyprshot -m region -o /home/gunnar/pictures/screenshots"
             "Super, 1, workspace, 1"
             "Super, 2, workspace, 2"

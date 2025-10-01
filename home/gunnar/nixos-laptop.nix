@@ -21,9 +21,19 @@
       git.enable = true;
       gpg.enable = true;
       fzf.enable = true;
+      dev.enable = true;
     };
     desktop = {
-      gnome.enable = true;
+      hyprland = {
+        enable = true;
+        laptop = true;
+      };
+
+      quickshell = {
+        enable = true;
+        laptop = true;
+      };
+
       foot.enable = true;
       minecraft.enable = true;
       spotify.enable = true;
@@ -33,8 +43,11 @@
   };
 
   programs.fish.loginShellInit = ''
-    set -x NIX_PATH nixpkgs=channel:nixos-unstable
-    set -x NIX_LOG info
-    set -x TERM xterm-256color
+     set -x NIX_PATH nixpkgs=channel:nixos-unstable
+     set -x NIX_LOG info
+
+    if test (tty) = "/dev/tty1"
+       exec Hyprland &> /dev/null
+     end
   '';
 }
