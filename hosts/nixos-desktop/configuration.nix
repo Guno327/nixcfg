@@ -77,7 +77,6 @@
       uninstallUnmanaged = true;
       packages = [
         "community.pathofbuilding.PathOfBuilding"
-        "com.valvesoftware.Steam"
         "app.zen_browser.zen"
         "org.vinegarhq.Sober"
         "com.adamcake.Bolt"
@@ -171,9 +170,16 @@
       package = pkgs.appimage-run;
     };
 
+    # Gamescope
+    gamescope = {
+      enable = true;
+      capSysNice = true;
+    };
+
     # Steam
     steam = {
       enable = true;
+      gamescopeSession.enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers

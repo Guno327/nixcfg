@@ -3,13 +3,6 @@
     enable = true;
     settings = {
       vim = {
-        extraLuaFiles = [
-          (builtins.path {
-            path = ./nvim/nvim-config.lua;
-            name = "nvim-config";
-          })
-        ];
-
         theme = lib.mkForce {
           enable = true;
           name = "catppuccin";
@@ -105,23 +98,9 @@
           };
         };
 
-        autocomplete.nvim-cmp = {
+        autocomplete.blink-cmp = {
           enable = true;
-          mappings = {
-            confirm = "<C-f>";
-            next = "<Tab>";
-            previous = "<S-Tab>";
-            close = "<Esc";
-            scrollDocsUp = "<C-Up>";
-            scrollDocsDown = "<C-Down>";
-          };
-        };
-      };
-
-      vim.ui.borders.plugins = {
-        nvim-cmp = {
-          enable = true;
-          style = "solid";
+          friendly-snippets.enable = true;
         };
       };
     };
