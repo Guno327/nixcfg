@@ -12,7 +12,8 @@
 
         theme = lib.mkForce {
           enable = true;
-          name = "dracula";
+          name = "catppuccin";
+          style = "mocha";
         };
         autopairs.nvim-autopairs.enable = true;
 

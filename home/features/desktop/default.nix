@@ -14,6 +14,7 @@
     ./recording.nix
     ./foot.nix
     ./gnome.nix
+    ./quickshell.nix
   ];
 
   home.packages = with pkgs; [

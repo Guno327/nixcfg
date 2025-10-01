@@ -42,11 +42,12 @@
         enable = true;
         desktop = true;
       };
-      hyprutils = {
+
+      quickshell = {
         enable = true;
         desktop = true;
-        lockMonitor = "DP-1";
       };
+
       foot.enable = true;
       minecraft.enable = true;
       gammastep.enable = true;

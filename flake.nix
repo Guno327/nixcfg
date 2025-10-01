@@ -44,6 +44,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     stylix.url = "github:danth/stylix";

@@ -34,9 +34,9 @@ in {
         ];
 
         bind = [
-          "$mainMod, M, exec, wleave -p layer-shell"
-          "$mainMod, D, exec, wofi --show drun"
-          "$mainMod, N, exec, swaync-client -t -sw"
+          "Super, M, exec, wleave -p layer-shell"
+          "Super, D, exec, wofi --show drun"
+          "Super, N, exec, swaync-client -t -sw"
         ];
 
         bindl = [
