@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-    ./waybar.nix
+    ./hyprutils.nix
     ./hyprland.nix
     ./kitty.nix
     ./minecraft.nix
@@ -14,6 +14,7 @@
     ./recording.nix
     ./foot.nix
     ./gnome.nix
+    ./quickshell.nix
   ];
 
   home.packages = with pkgs; [

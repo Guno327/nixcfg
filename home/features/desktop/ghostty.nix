@@ -19,7 +19,7 @@ in {
       };
     };
     wayland.windowManager.hyprland.settings = {
-      bind = [ "$mainMod, RETURN, exec, ghostty" ];
+      bind = ["Super, RETURN, exec, ghostty"];
     };
   };
 }

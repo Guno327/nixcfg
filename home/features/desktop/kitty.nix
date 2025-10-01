@@ -21,7 +21,7 @@ in {
       ssh = "kitten ssh";
     };
     wayland.windowManager.hyprland.settings = {
-      bind = ["$mainMod, RETURN, exec, kitty -e fish -c 'exec fish'"];
+      bind = ["Super, RETURN, exec, kitty -e fish -c 'exec fish'"];
     };
   };
 }

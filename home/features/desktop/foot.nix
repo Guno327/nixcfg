@@ -27,7 +27,7 @@ in {
       };
     };
     wayland.windowManager.hyprland.settings = {
-      bind = ["$mainMod, RETURN, exec, foot -e fish -c 'exec fish'"];
+      bind = ["Super, RETURN, exec, foot -e fish -c 'exec fish'"];
     };
   };
 }

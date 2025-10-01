@@ -83,14 +83,20 @@
       noto-fonts
       noto-fonts-cjk-serif
       noto-fonts-cjk-sans
+      material-symbols
+      material-icons
     ];
   };
 
-  # Stylix
+  boot.loader.grub.theme = "${pkgs.catppuccin-grub}";
+
   stylix = {
     enable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/dracula.yaml";
+    autoEnable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     polarity = "dark";
+
+    targets.grub.enable = false;
 
     cursor = {
       package = pkgs.stable.bibata-cursors;
