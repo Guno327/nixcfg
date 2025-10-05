@@ -233,14 +233,4 @@
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
-
-  # MINEFLAKE
-  mineflake.curseforge = {
-    enable = true;
-    pack = "craftoria";
-    version = "6796012";
-
-    name = "craftoria";
-    eula = "true";
-  };
 }
