@@ -20,7 +20,9 @@
     wlr-randr
     xdg-desktop-portal-gtk
     inputs.custom-pkgs.packages."${system}".balatro-mobile-maker
+    inputs.custom-pkgs.packages."${system}".balatro-multiplayer
     syncthing
+    tor-browser
   ];
 
   features = {

@@ -6,7 +6,7 @@
 
   # Bootloader.
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos-server;
+    kernelPackages = pkgs.linuxPackages_cachyos-lts;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
@@ -126,6 +126,7 @@
       launchOptions = "-multihome=0.0.0.0";
     };
     nextcloud.enable = false;
+    playit.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

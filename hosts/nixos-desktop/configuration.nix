@@ -170,16 +170,9 @@
       package = pkgs.appimage-run;
     };
 
-    # Gamescope
-    gamescope = {
-      enable = true;
-      capSysNice = true;
-    };
-
     # Steam
     steam = {
       enable = true;
-      gamescopeSession.enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
@@ -240,4 +233,14 @@
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
+
+  # MINEFLAKE
+  mineflake.curseforge = {
+    enable = true;
+    pack = "craftoria";
+    version = "6796012";
+
+    name = "craftoria";
+    eula = "true";
+  };
 }

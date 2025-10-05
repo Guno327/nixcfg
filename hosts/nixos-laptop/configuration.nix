@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  imports = [./hardware-configuration.nix];
+  imports = [./hardware-configuration.nix ../common/gnome.nix];
 
   # Bootloader.
   boot = {
@@ -37,8 +37,6 @@
 
   # Services
   services = {
-    upower.enable = true;
-
     pipewire = {
       enable = true;
       alsa.enable = true;

@@ -260,13 +260,6 @@ in {
       };
     })
     (mkIf cfg.laptop {
-      wayland.windowManager.hyprland.settings = {
-        bindl = [
-          ", XF86MonBrightnessDown, exec, brightnessctl --quiet s 10-"
-          ", XF86MonBrightnessUp, exec, brightnessctl --quiet s +10"
-        ];
-      };
-
       programs.waybar.settings = {
         mainbar = {
           modules-left = [

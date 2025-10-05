@@ -34,6 +34,8 @@
       playit = {
         sopsFile = ../../secrets/playit.toml;
         format = "binary";
+        owner = "playit";
+        mode = "0600";
       };
 
       wireguard = {

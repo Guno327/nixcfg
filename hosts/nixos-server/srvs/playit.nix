@@ -12,7 +12,7 @@ in {
       enable = true;
       user = "playit";
       group = "playit";
-      secretPath = config.sops.secrets.playit.path;
+      secretPath = "${config.sops.secrets.playit.path}";
     };
   };
 }
