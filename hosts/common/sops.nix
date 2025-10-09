@@ -11,6 +11,7 @@
       gemini = {};
       github = {};
       tailscale = {};
+      cf = {};
       sshcontrol = {
         sopsFile = ../../secrets/sshcontrol;
         format = "binary";

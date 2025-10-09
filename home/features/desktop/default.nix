@@ -20,7 +20,6 @@
   home.packages = with pkgs; [
     rpi-imager
     wireshark
-    libreoffice-still
     freecad
     stable.gimp
     qFlipper
