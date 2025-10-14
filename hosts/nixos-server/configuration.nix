@@ -126,7 +126,7 @@
       enable = false;
       launchOptions = "-multihome=0.0.0.0";
     };
-    nextcloud.enable = false;
+    nextcloud.enable = true;
     playit.enable = true;
   };
 
