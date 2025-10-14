@@ -101,7 +101,6 @@
 
       # Graphics
       videoDrivers = ["amdgpu"];
-
       desktopManager.runXdgAutostartIfNone = true;
     };
 
@@ -210,13 +209,10 @@
       gamemode
       chromium
       vinegar
-      inputs.custom-pkgs.packages."${system}".satisfactory-modeler
-      inputs.custom-pkgs.packages."${system}".orca-slicer-nightly
     ];
   };
 
   # Graphics
-  boot.initrd.kernelModules = ["amdgpu"];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;

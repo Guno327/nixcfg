@@ -19,7 +19,7 @@
       "sd_mod"
     ];
     initrd.kernelModules = [];
-    kernelModules = ["kvm-amd"];
+    kernelModules = ["amdgpu"];
     extraModulePackages = [];
     tmp.tmpfsSize = "75%";
   };
