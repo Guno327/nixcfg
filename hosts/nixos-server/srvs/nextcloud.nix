@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
@@ -13,6 +14,8 @@ in {
   config = mkIf cfg.enable {
     services.nextcloud = {
       enable = true;
+      package = pkgs.nextcloud31;
+      datadir = "/storage/nextcloud";
       hostName = "data";
       config = {
         adminpassFile = config.sops.secrets.nextcloud.path;
