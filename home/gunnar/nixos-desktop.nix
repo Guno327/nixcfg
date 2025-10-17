@@ -23,6 +23,7 @@
     inputs.custom-pkgs.packages."${system}".balatro-multiplayer
     syncthing
     tor-browser
+    waydroid-helper
   ];
 
   features = {

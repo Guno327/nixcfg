@@ -2,7 +2,7 @@ keys:
   - &gunnar 8821c0948c4286beb2fe9308bf48b4e0c22b5c18
   - &desktop f021f5f60e993f115362836c0d1a8be167f278f0
   - &laptop 9c90c0448548448e6196f45165be5ff6fd0d1044
-  - &server 82ebfa5acba24f8fae0790237c900009c28e265f
+  - &server ef9ecff4db2e0da521624600ce5e3e8f09cc709a
 
 creation_rules:
   - path_regex: secrets/[^/]+$

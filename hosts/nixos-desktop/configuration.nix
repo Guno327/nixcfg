@@ -222,6 +222,7 @@
   users.groups.libvirtd.members = ["gunnar"];
   virtualisation = {
     libvirtd.enable = true;
+    waydroid.enable = true;
     spiceUSBRedirection.enable = true;
   };
 
