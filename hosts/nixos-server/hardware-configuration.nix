@@ -20,12 +20,12 @@
   boot.zfs.extraPools = ["storage"];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/c0dc0d5d-4120-48b0-819f-6a0767c91833";
+    device = "/dev/disk/by-uuid/98ae9690-fe34-4fe6-a8d9-6bc97d083d26";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/7FFE-F06D";
+    device = "/dev/disk/by-uuid/455C-EF79";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };
