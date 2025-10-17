@@ -38,6 +38,7 @@
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
+      accept-flake-config = true;
       # Set users allowed to use flake command
       trusted-users = [
         "root"
