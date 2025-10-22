@@ -8,6 +8,8 @@
   # Bootloader.
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos-lts;
+    supportedFilesystems = ["zfs"];
+    zfs.forceImportRoot = false;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
@@ -128,6 +130,7 @@
     };
     nextcloud.enable = true;
     playit.enable = true;
+    minecraft.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

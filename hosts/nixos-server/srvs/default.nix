@@ -9,5 +9,6 @@
     ./satisfactory.nix
     ./nvidia.nix
     ./nextcloud.nix
+    ./minecraft.nix
   ];
 }

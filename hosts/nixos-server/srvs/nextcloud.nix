@@ -14,7 +14,7 @@ in {
   config = mkIf cfg.enable {
     services.nextcloud = {
       enable = true;
-      package = pkgs.nextcloud31;
+      package = pkgs.nextcloud32;
       datadir = "/storage/nextcloud";
       hostName = "data";
       config = {

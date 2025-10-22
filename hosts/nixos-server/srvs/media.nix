@@ -16,13 +16,14 @@ in {
       jellyfin-ffmpeg
     ];
 
-    users.users.jellyfin.extraGroups = [
-      "video"
-    ];
-
-    users.users.gunnar.extraGroups = [
-      "media"
-    ];
+    users.users = {
+      jellyfin.extraGroups = ["video" "media"];
+      sonarr.extraGroups = ["media"];
+      radarr.extraGroups = ["media"];
+      bazarr.extraGroups = ["media"];
+      transmission.extraGroups = ["media"];
+      gunnar.extraGroups = ["media"];
+    };
 
     services.flaresolverr = {
       enable = true;
@@ -47,7 +48,7 @@ in {
         enable = true;
         vpn.enable = true;
         peerPort = 8999;
-        extraAllowedIps = ["100.64.0.*" "10.0.0.*"];
+        extraAllowedIps = ["*"];
         credentialsFile = config.sops.secrets.transmission.path;
       };
 

@@ -55,6 +55,7 @@
     mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
     nixarr.url = "github:rasmus-kirk/nixarr";
+    flakecraft.url = "github:guno327/flakecraft";
   };
 
   outputs = {
@@ -70,6 +71,7 @@
     nixarr,
     chaotic,
     sops-nix,
+    flakecraft,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -132,6 +134,7 @@
           nixarr.nixosModules.default
           chaotic.nixosModules.default
           sops-nix.nixosModules.sops
+          flakecraft.nixosModules.default
         ];
       };
     };
