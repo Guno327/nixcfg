@@ -13,12 +13,14 @@ in {
     programs.git = {
       enable = true;
       lfs.enable = true;
-      userName = "gunnar";
-      userEmail = "accounts@ghov.net";
-      extraConfig = {
+      settings = {
         commit.gpgsign = true;
         gpg.program = "${pkgs.gnupg}/bin/gpg";
-        user.signingKey = "BF48B4E0C22B5C18";
+        user = {
+          name = "guno327";
+          email = "accounts@ghov.net";
+          signingKey = "BF48B4E0C22B5C18";
+        };
       };
     };
   };
