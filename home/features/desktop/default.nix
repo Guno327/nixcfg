@@ -18,7 +18,6 @@
   ];
 
   home.packages = with pkgs; [
-    rpi-imager
     wireshark
     freecad
     stable.gimp

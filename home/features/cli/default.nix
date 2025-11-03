@@ -47,7 +47,6 @@
     texliveTeTeX
     aria2
     comma
-    android-udev-rules
     nixos-anywhere
     tmux
     mtpfs

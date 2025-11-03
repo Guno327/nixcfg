@@ -197,7 +197,6 @@
 
     systemPackages = with pkgs; [
       pavucontrol
-      rpi-imager
       xorg.xhost
       gamescope
       wine
