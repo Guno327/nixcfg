@@ -141,7 +141,7 @@
   # Security
   security.pam.services = {
     hyprlock = {};
-    i3lock-pixeled.enable = true;
+    i3lock-color.enable = true;
   };
 
   # Set your time zone.

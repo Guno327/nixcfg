@@ -25,7 +25,7 @@ in {
         xorg.xrandr
         maim
         xclip
-        i3lock-pixeled
+        i3lock-color
         feh
         status
       ];
@@ -104,7 +104,7 @@ in {
               "${mod}+r" = "reload";
               "${mod}+Shift+r" = "restart";
 
-              "${mod}+l" = "exec i3lock-pixeled";
+              "${mod}+l" = "exec i3lock --screen 1 --blur 5 --clock --indicator --inside-color='#ffffff22'";
               "${mod}+Return" = "exec ${cfg.term}";
             };
         };
