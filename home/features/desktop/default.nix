@@ -15,6 +15,7 @@
     ./foot.nix
     ./gnome.nix
     ./quickshell.nix
+    ./i3.nix
   ];
 
   home.packages = with pkgs; [

@@ -19,11 +19,12 @@
     osu-lazer-bin
     wlr-randr
     xdg-desktop-portal-gtk
-    inputs.custom-pkgs.packages."${system}".balatro-mobile-maker
-    inputs.custom-pkgs.packages."${system}".balatro-multiplayer
+    inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-mobile-maker
+    inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-multiplayer
     syncthing
     tor-browser
     waydroid-helper
+    rusty-path-of-building
   ];
 
   features = {
@@ -41,17 +42,12 @@
       dev.enable = true;
     };
     desktop = {
-      hyprland = {
+      i3 = {
         enable = true;
         desktop = true;
+        term = "kitty";
       };
-
-      quickshell = {
-        enable = true;
-        desktop = true;
-      };
-
-      foot.enable = true;
+      kitty.enable = true;
       minecraft.enable = true;
       gammastep.enable = true;
       virt-manager.enable = true;
@@ -68,7 +64,7 @@
        set -x NIX_LOG info
 
       if test (tty) = "/dev/tty1"
-         exec Hyprland &> /dev/null
+         exec startx &> /dev/null
        end
     '';
   };

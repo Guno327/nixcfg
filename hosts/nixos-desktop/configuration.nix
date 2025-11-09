@@ -1,5 +1,6 @@
 {
   pkgs,
+  lib,
   inputs,
   ...
 }: {
@@ -7,7 +8,7 @@
 
   # Boot.
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos-lts;
+    kernelPackages = pkgs.linuxPackages_cachyos-lts.cachyOverride {mArch = "GENERIC_V3";};
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
@@ -62,8 +63,20 @@
     ];
   };
 
+  # xdg
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal];
+    config.common.default = ["gtk"];
+  };
+
   # Services
   services = {
+    displayManager = {
+      defaultSession = "i3";
+      ly.enable = true;
+    };
+
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -76,9 +89,7 @@
       update.onActivation = true;
       uninstallUnmanaged = true;
       packages = [
-        "community.pathofbuilding.PathOfBuilding"
         "app.zen_browser.zen"
-        "org.vinegarhq.Sober"
         "com.adamcake.Bolt"
       ];
       overrides = {
@@ -93,6 +104,10 @@
     };
 
     xserver = {
+      # i3
+      enable = true;
+      windowManager.i3.enable = true;
+
       # Configure keymap in X11
       xkb = {
         layout = "us";
@@ -124,7 +139,10 @@
     ATTRS{idVendor}=="6964", ATTRS{idProduct}=="0080", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
   '';
   # Security
-  security.pam.services.hyprlock = {};
+  security.pam.services = {
+    hyprlock = {};
+    i3lock-pixeled.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -176,11 +194,6 @@
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
       extraCompatPackages = with pkgs; [proton-ge-bin];
-    };
-
-    hyprland = {
-      enable = true;
-      xwayland.enable = true;
     };
 
     wireshark.enable = true;
