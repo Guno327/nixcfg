@@ -28,6 +28,7 @@ in {
         i3lock-color
         feh
         status
+        playerctl
       ];
 
       services.picom = {
@@ -78,6 +79,10 @@ in {
               "XF86AudioRaiseVolume" = "exec wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+";
               "XF86AudioLowerVolume" = "exec wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK 5%-";
               "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+              "XF86AudioPlay" = "exec playerctl play-pause";
+              "XF86AudioPause" = "exec playerctl play-pause";
+              "XF86AudioNext" = "exec playerctl next";
+              "XF86AudioPrev" = "exec player previous";
               "Print" = "exec maim -s | xclip -selection clipboard -t image/png";
 
               "${mod}+1" = "workspace number 1";

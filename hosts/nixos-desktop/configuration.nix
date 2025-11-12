@@ -116,7 +116,18 @@
 
       # Graphics
       videoDrivers = ["amdgpu"];
+      enableTearFree = true;
       desktopManager.runXdgAutostartIfNone = true;
+
+      # Disable sleep
+      config = lib.mkAfter ''
+        Section "ServerFlags"
+          Option "BlankTime" "10"
+          Option "StandbyTime" "0"
+          Option "SuspendTime" "0"
+          Option "OffTime" "0"
+        EndSection
+      '';
     };
 
     # Enable the OpenSSH daemon.
