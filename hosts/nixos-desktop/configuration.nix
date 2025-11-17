@@ -1,14 +1,13 @@
 {
   pkgs,
   lib,
-  inputs,
   ...
 }: {
   imports = [./hardware-configuration.nix];
 
   # Boot.
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos-lts.cachyOverride {mArch = "GENERIC_V3";};
+    kernelPackages = pkgs.linuxPackages_cachyos-lts;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
