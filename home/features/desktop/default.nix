@@ -25,5 +25,8 @@
     stable.gimp
     qFlipper
     audacity
+    xclicker
+    steam-tui
+    steamcmd
   ];
 }

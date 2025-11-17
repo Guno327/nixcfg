@@ -45,9 +45,9 @@
       i3 = {
         enable = true;
         desktop = true;
-        term = "kitty";
+        term = "alacritty";
       };
-      kitty.enable = true;
+      alacritty.enable = true;
       minecraft.enable = true;
       gammastep.enable = true;
       virt-manager.enable = true;

@@ -31,11 +31,7 @@ in {
         playerctl
       ];
 
-      services.picom = {
-        enable = true;
-        vSync = true;
-      };
-
+      services.picom.enable = true;
       xsession.windowManager.i3 = {
         enable = true;
         config = {
