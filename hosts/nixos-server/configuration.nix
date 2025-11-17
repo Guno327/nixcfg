@@ -124,7 +124,6 @@
     };
     nextcloud.enable = true;
     playit.enable = true;
-    minecraft.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
