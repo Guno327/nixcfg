@@ -64,12 +64,6 @@
 
   #services
   services = {
-    # Configure keymap in X11
-    xserver.xkb = {
-      layout = "us";
-      variant = "";
-    };
-
     # Enable the OpenSSH daemon.
     openssh = {
       enable = true;
