@@ -55,7 +55,10 @@
       poetrade.enable = true;
       recording.enable = true;
       spotify.enable = true;
-      mpv.enable = true;
+      mpv = {
+        enable = true;
+        jellyfin.enable = true;
+      };
       zen.enable = true;
     };
   };
