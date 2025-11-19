@@ -43,7 +43,7 @@ in {
           };
 
           assigns = {
-            "2" = [{class = "zen";}];
+            "2" = [{class = "zen";} {class = "zen-twilight";} {class = "zen-beta";}];
             "3" = [{class = "steam";}];
             "6" = [{class = "discord";}];
           };
@@ -201,7 +201,7 @@ in {
             notification = false;
           }
           {command = "discord";}
-          {command = "flatpak run app.zen_browser.zen";}
+          {command = "zen";}
         ];
         bars = [
           {

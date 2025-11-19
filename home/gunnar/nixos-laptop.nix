@@ -29,6 +29,7 @@
       spotify.enable = true;
       virt-manager.enable = true;
       ee2.enable = true;
+      zen.enable = true;
     };
   };
 
