@@ -44,27 +44,6 @@
       pulse.enable = true;
     };
 
-    flatpak = {
-      enable = true;
-      update.onActivation = true;
-      uninstallUnmanaged = true;
-      packages = [
-        "community.pathofbuilding.PathOfBuilding"
-        "com.valvesoftware.Steam"
-        "app.zen_browser.zen"
-        "org.vinegarhq.Sober"
-      ];
-      overrides = {
-        global = {
-          Context.filesystems = [
-            "/home"
-            "/run/current-system/sw/bin:ro"
-            "/nix/store:ro"
-          ];
-        };
-      };
-    };
-
     # Enable the OpenSSH daemon.
     openssh = {
       enable = true;

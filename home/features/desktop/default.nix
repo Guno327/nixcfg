@@ -18,6 +18,7 @@
     ./i3.nix
     ./alacritty.nix
     ./mpv.nix
+    ./zen.nix
   ];
 
   home.packages = with pkgs; [

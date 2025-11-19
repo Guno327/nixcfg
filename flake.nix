@@ -49,8 +49,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+      };
+    };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     stylix.url = "github:danth/stylix";
     mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
@@ -64,7 +71,6 @@
     nixpkgs,
     nixos-hardware,
     nvf,
-    nix-flatpak,
     stylix,
     mailserver,
     playit-nixos-module,
@@ -100,7 +106,6 @@
 
           nvf.nixosModules.default
           stylix.nixosModules.stylix
-          nix-flatpak.nixosModules.nix-flatpak
           chaotic.nixosModules.default
           sops-nix.nixosModules.sops
         ];
@@ -116,7 +121,6 @@
 
           nvf.nixosModules.default
           stylix.nixosModules.stylix
-          nix-flatpak.nixosModules.nix-flatpak
           chaotic.nixosModules.default
           sops-nix.nixosModules.sops
         ];

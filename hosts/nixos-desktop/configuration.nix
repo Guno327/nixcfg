@@ -83,25 +83,6 @@
       pulse.enable = true;
     };
 
-    flatpak = {
-      enable = true;
-      update.onActivation = true;
-      uninstallUnmanaged = true;
-      packages = [
-        "app.zen_browser.zen"
-        "com.adamcake.Bolt"
-      ];
-      overrides = {
-        global = {
-          Context.filesystems = [
-            "/home"
-            "/run/current-system/sw/bin:ro"
-            "/nix/store:ro"
-          ];
-        };
-      };
-    };
-
     xserver = {
       # i3
       enable = true;
