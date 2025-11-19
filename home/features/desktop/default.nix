@@ -17,6 +17,7 @@
     ./quickshell.nix
     ./i3.nix
     ./alacritty.nix
+    ./mpv.nix
   ];
 
   home.packages = with pkgs; [

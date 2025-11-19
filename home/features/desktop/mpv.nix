@@ -5,27 +5,25 @@
   ...
 }:
 with lib; let
-  cfg = config.features.cli.mpv;
+  cfg = config.features.desktop.mpv;
 in {
-  options.features.cli.mpv.enable = mkEnableOption "enable extended mpv configuration";
+  options.features.desktop.mpv.enable = mkEnableOption "enable extended mpv configuration";
   config = mkIf cfg.enable {
+    services.jellyfin-mpv-shim.enable = true;
     programs.mpv = {
       enable = true;
       config = {
         profile = "gpu-hq";
         force-window = true;
-        ytdl-format = "bestvideo+bestaudio";
         cache-default = 4000000;
 
         save-position-on-quit = true;
         resume-playback = true;
+        osc = "no";
       };
       scripts = with pkgs.mpvScripts; [
         mpris
-        modernz
-        smartskip
-        memo
-        autosub
+        mpv-osc-modern
       ];
     };
   };

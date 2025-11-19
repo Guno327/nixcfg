@@ -7,7 +7,6 @@
     ./fish.nix
     ./fzf.nix
     ./git.nix
-    ./mpv.nix
     ./monitor.nix
     ./ssh.nix
     ./gpg.nix

@@ -36,6 +36,7 @@ in {
         enable = true;
         config = {
           bars = [];
+          window.titlebar = false;
           gaps = {
             inner = 0;
             outer = 0;
@@ -69,6 +70,14 @@ in {
               "${mod}+Shift+Right" = "move right";
               "${mod}+Shift+Up" = "move up";
               "${mod}+Shift+Down" = "move down";
+              "${mod}+Control+Up" = "resize grow height 10 px or 10 ppt";
+              "${mod}+Control+Down" = "resize shrink height 10 px or 10 ppt";
+              "${mod}+Control+Left" = "resize grow width 10 px or 10 ppt";
+              "${mod}+Control+Right" = "resize shrink width 1 px or 1 ppt";
+              "${mod}+Control+Shift+Up" = "resize grow height 1 px or 1 ppt";
+              "${mod}+Control+Shift+Down" = "resize shrink height 1 px or 1 ppt";
+              "${mod}+Control+Shift+Left" = "resize grow width 1 px or 1 ppt";
+              "${mod}+Control+Shift+Right" = "resize shrink width 1 px or 1 ppt";
 
               "XF86MonBrightnessDown" = "exec brightnessctl --quiet s 10-";
               "XF86MonBrightnessUp" = "exec brightnessctl --quiet s +10";
