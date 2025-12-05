@@ -21,6 +21,7 @@
     initrd.kernelModules = [];
     kernelModules = ["amdgpu"];
     extraModulePackages = [];
+    supportedFilesystems = ["ntfs"];
     tmp.tmpfsSize = "75%";
   };
 
@@ -40,8 +41,9 @@
     };
 
     "/home/gunnar/ssd" = {
-      device = "/dev/disk/by-uuid/95a58ad4-8246-4471-bf88-6204a10d3321";
-      fsType = "ext4";
+      device = "/dev/disk/by-id/ata-Samsung_SSD_860_QVO_2TB_S4PHNF0M701338E-part1";
+      fsType = "ntfs-3g";
+      options = ["rw" "uid=1000"];
     };
   };
 
