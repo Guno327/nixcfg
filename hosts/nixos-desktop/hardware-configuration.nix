@@ -46,7 +46,7 @@
       ];
     };
 
-    "/home/gunnar/ssd" = {
+    "/ssd" = {
       device = "/dev/disk/by-label/SSD";
       fsType = "ntfs-3g";
       options = ["rw" "uid=1000"];

@@ -10,17 +10,20 @@
     kernelPackages = pkgs.linuxPackages_cachyos-lts;
     loader = {
       efi.canTouchEfiVariables = true;
-      grub = {
+      limine = {
         enable = true;
-        device = "nodev";
         efiSupport = true;
-        useOSProber = true;
-        gfxmodeBios = "auto";
+        maxGenerations = 3;
+        secureBoot.enable = true;
         extraEntries = ''
-           #UEFI
-           menuentry 'UEFI Firmware Settings' --id 'uefi-firmware' {
-           fwsetup
-          }
+          # Begin User Entries
+          /Windows
+          comment: Windows Boot Manager
+          protocol: efi
+          path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+
+          # End User Entries
+
         '';
       };
     };
