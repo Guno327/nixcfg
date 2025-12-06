@@ -10,6 +10,7 @@ in {
   options.features.desktop.zen.enable = mkEnableOption "Install and configure zen";
 
   config = mkIf cfg.enable {
+    stylix.targets.zen-browser.profileNames = ["Default Profile"];
     programs.zen-browser = {
       enable = true;
       nativeMessagingHosts = [pkgs.firefoxpwa];

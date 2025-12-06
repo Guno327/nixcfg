@@ -16,6 +16,10 @@
   };
 
   inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,9 +29,6 @@
       url = "github:guno327/pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
     chaotic = {
       url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
@@ -57,12 +58,25 @@
       };
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    stylix.url = "github:danth/stylix";
-    mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver";
-    playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
-    nixarr.url = "github:rasmus-kirk/nixarr";
-    flakecraft.url = "github:guno327/flakecraft";
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    playit-nixos-module = {
+      url = "github:pedorich-n/playit-nixos-module";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixarr = {
+      url = "github:rasmus-kirk/nixarr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flakecraft = {
+      url = "github:guno327/flakecraft";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -72,7 +86,6 @@
     nixos-hardware,
     nvf,
     stylix,
-    mailserver,
     playit-nixos-module,
     nixarr,
     chaotic,
@@ -81,18 +94,11 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    systems = [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {inherit system;};
   in {
-    packages = forAllSystems (system: nixpkgs.legacyPackages.${system});
     overlays = import ./overlays {inherit inputs;};
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    formatter."${system}" = pkgs.nixfmt-rfc-style;
 
     nixosConfigurations = {
       nixos-laptop = nixpkgs.lib.nixosSystem {
@@ -133,7 +139,6 @@
 
           nvf.nixosModules.default
           stylix.nixosModules.stylix
-          mailserver.nixosModule
           playit-nixos-module.nixosModules.default
           nixarr.nixosModules.default
           chaotic.nixosModules.default
