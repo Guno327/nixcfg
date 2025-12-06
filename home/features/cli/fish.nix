@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.cli.fish;
-in {
+in
+{
   options.features.cli.fish.enable = mkEnableOption "enable extended fish configuration";
   config = mkIf cfg.enable {
     programs.fish = {

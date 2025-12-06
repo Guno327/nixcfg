@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.kitty;
-in {
+in
+{
   options.features.desktop.kitty.enable = mkEnableOption "Configure kitty";
 
   config = mkIf cfg.enable {
@@ -21,7 +23,7 @@ in {
       ssh = "kitten ssh";
     };
     wayland.windowManager.hyprland.settings = {
-      bind = ["Super, RETURN, exec, kitty -e fish -c 'exec fish'"];
+      bind = [ "Super, RETURN, exec, kitty -e fish -c 'exec fish'" ];
     };
   };
 }

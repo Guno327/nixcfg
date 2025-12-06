@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.gammastep;
-in {
+in
+{
   options.features.desktop.gammastep.enable = mkEnableOption "Enable and configure gammastep";
 
   config = mkIf cfg.enable {

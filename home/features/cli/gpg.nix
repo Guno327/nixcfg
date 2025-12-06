@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.cli.gpg;
-in {
+in
+{
   options.features.cli.gpg.enable = mkEnableOption "enable extended gpg configuration";
   config = mkIf cfg.enable {
     programs.gpg = {

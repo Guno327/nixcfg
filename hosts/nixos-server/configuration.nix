@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
     ./srvs
@@ -8,7 +9,7 @@
   # Bootloader.
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos-lts;
-    supportedFilesystems = ["zfs"];
+    supportedFilesystems = [ "zfs" ];
     zfs.forceImportRoot = false;
     loader = {
       efi.canTouchEfiVariables = true;
@@ -39,7 +40,7 @@
       }
     ];
     defaultGateway = "10.0.0.1";
-    nameservers = ["10.0.0.1"];
+    nameservers = [ "10.0.0.1" ];
   };
 
   # Set your time zone.

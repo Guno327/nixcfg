@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.cli.git;
-in {
+in
+{
   options.features.cli.git.enable = mkEnableOption "enable extended git configuration";
 
   config = mkIf cfg.enable {

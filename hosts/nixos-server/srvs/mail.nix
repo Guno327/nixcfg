@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.mail;
-in {
+in
+{
   options.srvs.mail = {
     enable = mkEnableOption "Enable mail service";
   };
@@ -13,7 +15,7 @@ in {
   config = mkIf cfg.enable {
     mailserver = {
       fqdn = "mail.ghov.net";
-      domains = ["ghov.net"];
+      domains = [ "ghov.net" ];
     };
   };
 }

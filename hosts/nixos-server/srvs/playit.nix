@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.playit;
-in {
+in
+{
   options.srvs.playit.enable = mkEnableOption "Enable playit tunnel";
   config = mkIf cfg.enable {
     services.playit = {

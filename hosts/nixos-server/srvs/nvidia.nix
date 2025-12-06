@@ -4,16 +4,18 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.nvidia;
-in {
+in
+{
   options.srvs.nvidia = {
     enable = mkEnableOption "Setup and configure nvidia drivers for transcoding";
   };
 
   config = mkIf cfg.enable {
     hardware.graphics.enable = true;
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = [ "nvidia" ];
 
     hardware.nvidia = {
       modesetting.enable = true;

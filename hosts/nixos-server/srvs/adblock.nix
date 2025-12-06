@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.adblock;
-in {
+in
+{
   options.srvs.adblock = {
     enable = mkEnableOption "Enable blocky service";
   };
@@ -21,14 +23,17 @@ in {
         ];
         bootstrapDns = {
           upstream = "https://one.one.one.one/dns-query";
-          ips = ["1.1.1.1" "1.0.0.1"];
+          ips = [
+            "1.1.1.1"
+            "1.0.0.1"
+          ];
         };
         blocking = {
           blackLists = {
-            ads = ["https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt"];
+            ads = [ "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt" ];
           };
           clientGroupsBlock = {
-            default = ["ads"];
+            default = [ "ads" ];
           };
         };
         caching = {

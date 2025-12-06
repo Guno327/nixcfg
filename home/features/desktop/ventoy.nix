@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.cli.ventoy;
-in {
+in
+{
   options.features.cli.ventoy.enable = mkEnableOption "enable ventoy configuration";
   config = mkIf cfg.enable {
     home.packages = with pkgs; [

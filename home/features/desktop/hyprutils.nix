@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.hyprutils;
-in {
+in
+{
   options.features.desktop.hyprutils = {
     enable = mkEnableOption "enable config for hyrputils";
     desktop = mkEnableOption "configure for desktop use";
@@ -178,7 +180,7 @@ in {
             "custom/sep"
             "hyprland/window"
           ];
-          modules-center = ["mpris"];
+          modules-center = [ "mpris" ];
           modules-right = [
             "tray"
             "pulseaudio"
@@ -191,9 +193,9 @@ in {
         };
         clockbar = {
           output = "DP-2";
-          modules-left = ["hyprland/workspaces"];
-          modules-center = ["clock"];
-          modules-right = ["custom/weather"];
+          modules-left = [ "hyprland/workspaces" ];
+          modules-center = [ "clock" ];
+          modules-right = [ "custom/weather" ];
         };
       };
     })
@@ -205,7 +207,7 @@ in {
             "custom/sep"
             "hyprland/window"
           ];
-          modules-center = ["mpris"];
+          modules-center = [ "mpris" ];
           modules-right = [
             "tray"
             "pulseaudio"

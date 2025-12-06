@@ -4,12 +4,14 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.spotify;
-in {
+in
+{
   options.features.desktop.spotify.enable = mkEnableOption "Enable and configure spotify";
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [spotify];
+    home.packages = with pkgs; [ spotify ];
   };
 }

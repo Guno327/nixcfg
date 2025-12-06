@@ -4,10 +4,12 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.firefox;
   downloadDir = "${config.home.homeDirectory}/downloads";
-in {
+in
+{
   options.features.desktop.firefox.enable = mkEnableOption "Install and configure firefox";
 
   config = mkIf cfg.enable {

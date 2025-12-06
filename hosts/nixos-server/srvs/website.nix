@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.website;
-in {
+in
+{
   options.srvs.website.enable = mkEnableOption "Enable static web server";
   config = mkIf cfg.enable {
     environment.etc."www/index.html" = {

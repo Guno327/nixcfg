@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.cloudflared;
-in {
+in
+{
   options.srvs.cloudflared.enable = mkEnableOption "Enable cloudflared tunnel";
   config = mkIf cfg.enable {
     services.cloudflared = {

@@ -79,93 +79,96 @@
     };
   };
 
-  outputs = {
-    self,
-    home-manager,
-    nixpkgs,
-    nixos-hardware,
-    nvf,
-    stylix,
-    playit-nixos-module,
-    nixarr,
-    chaotic,
-    sops-nix,
-    flakecraft,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {inherit system;};
-  in {
-    overlays = import ./overlays {inherit inputs;};
-    formatter."${system}" = pkgs.nixfmt-rfc-style;
+  outputs =
+    {
+      self,
+      home-manager,
+      nixpkgs,
+      nixos-hardware,
+      nvf,
+      stylix,
+      playit-nixos-module,
+      nixarr,
+      chaotic,
+      sops-nix,
+      flakecraft,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+    in
+    {
+      overlays = import ./overlays { inherit inputs; };
+      formatter."${system}" = pkgs.nixfmt-tree;
 
-    nixosConfigurations = {
-      nixos-laptop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/nixos-laptop
+      nixosConfigurations = {
+        nixos-laptop = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/nixos-laptop
 
-          nixos-hardware.nixosModules.common-cpu-amd
-          nixos-hardware.nixosModules.common-gpu-amd
-          nixos-hardware.nixosModules.common-pc-laptop
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-gpu-amd
+            nixos-hardware.nixosModules.common-pc-laptop
 
-          nvf.nixosModules.default
-          stylix.nixosModules.stylix
-          chaotic.nixosModules.default
-          sops-nix.nixosModules.sops
-        ];
+            nvf.nixosModules.default
+            stylix.nixosModules.stylix
+            chaotic.nixosModules.default
+            sops-nix.nixosModules.sops
+          ];
+        };
+        nixos-desktop = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/nixos-desktop
+
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-gpu-amd
+            nixos-hardware.nixosModules.common-pc-ssd
+
+            nvf.nixosModules.default
+            stylix.nixosModules.stylix
+            chaotic.nixosModules.default
+            sops-nix.nixosModules.sops
+          ];
+        };
+
+        nixos-server = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/nixos-server
+
+            nvf.nixosModules.default
+            stylix.nixosModules.stylix
+            playit-nixos-module.nixosModules.default
+            nixarr.nixosModules.default
+            chaotic.nixosModules.default
+            sops-nix.nixosModules.sops
+            flakecraft.nixosModules.default
+          ];
+        };
       };
-      nixos-desktop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/nixos-desktop
 
-          nixos-hardware.nixosModules.common-cpu-amd
-          nixos-hardware.nixosModules.common-gpu-amd
-          nixos-hardware.nixosModules.common-pc-ssd
+      homeConfigurations = {
+        "gunnar@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/gunnar/nixos-laptop.nix ];
+        };
 
-          nvf.nixosModules.default
-          stylix.nixosModules.stylix
-          chaotic.nixosModules.default
-          sops-nix.nixosModules.sops
-        ];
-      };
+        "gunnar@nixos-desktop" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/gunnar/nixos-desktop.nix ];
+        };
 
-      nixos-server = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/nixos-server
-
-          nvf.nixosModules.default
-          stylix.nixosModules.stylix
-          playit-nixos-module.nixosModules.default
-          nixarr.nixosModules.default
-          chaotic.nixosModules.default
-          sops-nix.nixosModules.sops
-          flakecraft.nixosModules.default
-        ];
+        "gunnar@nixos-server" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages."x86_64-linux";
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [ ./home/gunnar/nixos-server.nix ];
+        };
       };
     };
-
-    homeConfigurations = {
-      "gunnar@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/gunnar/nixos-laptop.nix];
-      };
-
-      "gunnar@nixos-desktop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/gunnar/nixos-desktop.nix];
-      };
-
-      "gunnar@nixos-server" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/gunnar/nixos-server.nix];
-      };
-    };
-  };
 }

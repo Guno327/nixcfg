@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.quickshell;
-in {
+in
+{
   options.features.desktop.quickshell = {
     enable = mkEnableOption "enable config for quickshell";
     desktop = mkEnableOption "enable config for desktop use";
@@ -20,7 +22,7 @@ in {
         systemd = {
           enable = false;
           target = "graphical-session.target";
-          environment = [];
+          environment = [ ];
         };
 
         settings = {
@@ -35,56 +37,78 @@ in {
                 name = "Calculator";
                 icon = "calculate";
                 description = "Do maths";
-                command = ["autocomplete" "calc"];
+                command = [
+                  "autocomplete"
+                  "calc"
+                ];
                 enabled = true;
               }
               {
                 name = "Scheme";
                 icon = "palette";
                 description = "Change color theme";
-                command = ["autocomplete" "scheme"];
+                command = [
+                  "autocomplete"
+                  "scheme"
+                ];
                 enabled = true;
               }
               {
                 name = "Wallpaper";
                 icon = "image";
                 description = "Change wallpaper";
-                command = ["autocomplete" "wallpaper"];
+                command = [
+                  "autocomplete"
+                  "wallpaper"
+                ];
                 enabled = true;
               }
               {
                 name = "Variant";
                 icon = "colors";
                 description = "Change theme variant";
-                command = ["autocomplete" "variant"];
+                command = [
+                  "autocomplete"
+                  "variant"
+                ];
                 enabled = true;
               }
               {
                 name = "Shutdown";
                 icon = "power_settings_new";
                 description = "Power off";
-                command = ["systemctl" "poweroff"];
+                command = [
+                  "systemctl"
+                  "poweroff"
+                ];
                 enabled = true;
               }
               {
                 name = "Logout";
                 icon = "exit_to_app";
                 description = "Exit shell";
-                command = ["loginctl" "terminate-user" ""];
+                command = [
+                  "loginctl"
+                  "terminate-user"
+                  ""
+                ];
                 enabled = true;
               }
               {
                 name = "Reboot";
                 icon = "cached";
                 description = "Reboot system";
-                command = ["systemctl" "reboot"];
+                command = [
+                  "systemctl"
+                  "reboot"
+                ];
                 enabled = true;
               }
               {
                 name = "Lock";
                 icon = "lock";
                 description = "Lock shell";
-                command = ["hyprlock"];
+                command = [ "hyprlock" ];
                 enabled = true;
               }
             ];
@@ -201,6 +225,6 @@ in {
       };
     })
     (mkIf cfg.laptop {
-      })
+    })
   ];
 }

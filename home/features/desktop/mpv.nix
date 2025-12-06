@@ -4,11 +4,14 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.mpv;
-in {
+in
+{
   options.features.desktop.mpv.enable = mkEnableOption "enable extended mpv configuration";
-  options.features.desktop.mpv.jellyfin.enable = mkEnableOption "enable jellyfin-mpv-shim configuration";
+  options.features.desktop.mpv.jellyfin.enable =
+    mkEnableOption "enable jellyfin-mpv-shim configuration";
   config = mkMerge [
     (mkIf cfg.enable {
       programs.mpv = {
@@ -29,7 +32,7 @@ in {
       };
     })
     (mkIf cfg.jellyfin.enable {
-      home.packages = with pkgs; [jellyfin-mpv-shim];
+      home.packages = with pkgs; [ jellyfin-mpv-shim ];
       services.jellyfin-mpv-shim = {
         enable = true;
         settings = {

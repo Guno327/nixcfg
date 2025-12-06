@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.cli.monitor;
-in {
+in
+{
   options.features.cli.monitor.enable = mkEnableOption "enable tools for hw monitoring";
   config = mkIf cfg.enable {
     home.packages = with pkgs; [

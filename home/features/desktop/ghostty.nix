@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.ghostty;
-in {
+in
+{
   options.features.desktop.ghostty.enable = mkEnableOption "Configure ghostty";
 
   config = mkIf cfg.enable {
@@ -19,7 +21,7 @@ in {
       };
     };
     wayland.windowManager.hyprland.settings = {
-      bind = ["Super, RETURN, exec, ghostty"];
+      bind = [ "Super, RETURN, exec, ghostty" ];
     };
   };
 }

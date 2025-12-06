@@ -4,7 +4,8 @@
   outputs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.sops-nix.homeManagerModules.sops
     inputs.caelestia-shell.homeManagerModules.default

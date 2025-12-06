@@ -4,10 +4,17 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.i3;
-  status = pkgs.bumblebee-status.override {plugins = p: [p.nic p.pipewire];};
-in {
+  status = pkgs.bumblebee-status.override {
+    plugins = p: [
+      p.nic
+      p.pipewire
+    ];
+  };
+in
+{
   options.features.desktop.i3 = {
     enable = mkEnableOption "enable and configure i3";
     desktop = mkEnableOption "enable i3 for desktop use";
@@ -35,7 +42,7 @@ in {
       xsession.windowManager.i3 = {
         enable = true;
         config = {
-          bars = [];
+          bars = [ ];
           window.titlebar = false;
           gaps = {
             inner = 0;
@@ -43,21 +50,29 @@ in {
           };
 
           assigns = {
-            "2" = [{class = "zen";} {class = "zen-twilight";} {class = "zen-beta";}];
-            "3" = [{class = "steam";}];
-            "6" = [{class = "discord";}];
+            "2" = [
+              { class = "zen"; }
+              { class = "zen-twilight"; }
+              { class = "zen-beta"; }
+            ];
+            "3" = [ { class = "steam"; } ];
+            "6" = [ { class = "discord"; } ];
           };
 
           fonts = mkOptionDefault {
-            names = ["FiraCode Nerd Font" "Material Icons"];
+            names = [
+              "FiraCode Nerd Font"
+              "Material Icons"
+            ];
             style = "SemiBold";
             size = 12.0;
           };
 
           modifier = "Mod4";
-          keybindings = let
-            mod = config.xsession.windowManager.i3.config.modifier;
-          in
+          keybindings =
+            let
+              mod = config.xsession.windowManager.i3.config.modifier;
+            in
             mkOptionDefault {
               "${mod}+v" = "floating toggle";
               "${mod}+c" = "kill";
@@ -169,8 +184,8 @@ in {
             command = "feh --bg-center ${config.home.homeDirectory}/Pictures/Wallpapers/bg-0.png --bg-center ${config.home.homeDirectory}/Pictures/Wallpapers/bg-1.png";
             notification = false;
           }
-          {command = "discord";}
-          {command = "zen";}
+          { command = "discord"; }
+          { command = "zen"; }
         ];
         bars = [
           {
@@ -184,7 +199,10 @@ in {
             '';
             extraConfig = "output primary";
             fonts = {
-              names = ["FiraCode Nerd Font" "Material Icons"];
+              names = [
+                "FiraCode Nerd Font"
+                "Material Icons"
+              ];
               style = "Regular";
               size = 12.0;
             };
@@ -199,7 +217,10 @@ in {
             '';
             extraConfig = "output nonprimary";
             fonts = {
-              names = ["FiraCode Nerd Font" "Material Icons"];
+              names = [
+                "FiraCode Nerd Font"
+                "Material Icons"
+              ];
               style = "Regular";
               size = 12.0;
             };
@@ -208,6 +229,6 @@ in {
       };
     })
     (mkIf cfg.laptop {
-      })
+    })
   ];
 }

@@ -1,16 +1,17 @@
-{...}: {
+{ ... }:
+{
   sops.secrets = {
-    cloudflare = {};
-    dns = {};
-    web = {};
-    nextcloud = {};
+    cloudflare = { };
+    dns = { };
+    web = { };
+    nextcloud = { };
 
-    bazarr = {};
-    jellyfin = {};
-    jellyseerr = {};
-    prowlarr = {};
-    radarr = {};
-    sonarr = {};
+    bazarr = { };
+    jellyfin = { };
+    jellyseerr = { };
+    prowlarr = { };
+    radarr = { };
+    sonarr = { };
 
     playit = {
       sopsFile = ../../secrets/playit.toml;

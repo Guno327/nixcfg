@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.foot;
-in {
+in
+{
   options.features.desktop.foot.enable = mkEnableOption "Configure foot";
 
   config = mkIf cfg.enable {
@@ -27,7 +29,7 @@ in {
       };
     };
     wayland.windowManager.hyprland.settings = {
-      bind = ["Super, RETURN, exec, foot -e fish -c 'exec fish'"];
+      bind = [ "Super, RETURN, exec, foot -e fish -c 'exec fish'" ];
     };
   };
 }

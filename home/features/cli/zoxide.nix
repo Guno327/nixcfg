@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.cli.zoxide;
-in {
+in
+{
   options.features.cli.zoxide.enable = mkEnableOption "Enable and alias zoxide";
 
   config = mkIf cfg.enable {

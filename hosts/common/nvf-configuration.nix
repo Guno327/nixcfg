@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   programs.nvf = {
     enable = true;
     settings = {
@@ -18,7 +19,7 @@
 
         spellcheck = {
           enable = true;
-          languages = ["en"];
+          languages = [ "en" ];
           programmingWordlist.enable = true;
         };
 
@@ -61,7 +62,7 @@
           context.enable = true;
           indent = {
             enable = true;
-            disable = ["yaml"];
+            disable = [ "yaml" ];
           };
           highlight = {
             enable = true;

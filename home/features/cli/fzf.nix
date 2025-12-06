@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.cli.fzf;
-in {
+in
+{
   options.features.cli.fzf.enable = mkEnableOption "enable fuzzy finder";
 
   config = mkIf cfg.enable {

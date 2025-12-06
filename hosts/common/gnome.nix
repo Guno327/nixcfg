@@ -2,7 +2,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   qt = {
     enable = true;
     platformTheme = "qt5ct";
@@ -22,11 +23,14 @@
       games.enable = false;
     };
 
-    udev.packages = with pkgs; [gnome-settings-daemon];
+    udev.packages = with pkgs; [ gnome-settings-daemon ];
   };
 
   environment = {
-    gnome.excludePackages = with pkgs; [gnome-tour gnome-user-docs];
+    gnome.excludePackages = with pkgs; [
+      gnome-tour
+      gnome-user-docs
+    ];
     systemPackages = with pkgs; [
       gnomeExtensions.pop-shell
       gnomeExtensions.appindicator

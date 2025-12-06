@@ -3,10 +3,12 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.gnome;
   uint = lib.gvariant.mkUint32;
-in {
+in
+{
   options.features.desktop.gnome.enable = mkEnableOption "enable extended gnome configuration";
 
   config = mkIf cfg.enable {
@@ -42,11 +44,11 @@ in {
           hint-color-rgba = "rgba(138,255,128)";
           stacking-with-mouse = false;
 
-          tile-enter = ["<Super>t"];
-          focus-left = ["<Super>Left"];
-          focus-right = ["<Super>Right"];
-          focus-up = ["<Super>Up"];
-          focus-down = ["<Super>Down"];
+          tile-enter = [ "<Super>t" ];
+          focus-left = [ "<Super>Left" ];
+          focus-right = [ "<Super>Right" ];
+          focus-up = [ "<Super>Up" ];
+          focus-down = [ "<Super>Down" ];
         };
         "org/gnome/desktop/interface" = {
           clock-show-seconds = true;
@@ -88,7 +90,7 @@ in {
         "org/gnome/desktop/wm/keybindings" = {
           activate-window-menu = "disabled";
           toggle-message-tray = "disabled";
-          close = ["<Super>c"];
+          close = [ "<Super>c" ];
           maximize = "disabled";
           move-to-monitor-down = "disabled";
           move-to-monitor-left = "disabled";
@@ -96,18 +98,18 @@ in {
           move-to-monitor-up = "disabled";
           move-to-workspace-down = "disabled";
           move-to-workspace-up = "disabled";
-          toggle-maximized = ["<Super>f"];
+          toggle-maximized = [ "<Super>f" ];
           unmaximize = "disabled";
 
-          move-to-workspace-1 = ["<Shift><Super>1"];
-          move-to-workspace-2 = ["<Shift><Super>2"];
-          move-to-workspace-3 = ["<Shift><Super>3"];
-          move-to-workspace-4 = ["<Shift><Super>4"];
+          move-to-workspace-1 = [ "<Shift><Super>1" ];
+          move-to-workspace-2 = [ "<Shift><Super>2" ];
+          move-to-workspace-3 = [ "<Shift><Super>3" ];
+          move-to-workspace-4 = [ "<Shift><Super>4" ];
 
-          switch-to-workspace-1 = ["<Super>1"];
-          switch-to-workspace-2 = ["<Super>2"];
-          switch-to-workspace-3 = ["<Super>3"];
-          switch-to-workspace-4 = ["<Super>4"];
+          switch-to-workspace-1 = [ "<Super>1" ];
+          switch-to-workspace-2 = [ "<Super>2" ];
+          switch-to-workspace-3 = [ "<Super>3" ];
+          switch-to-workspace-4 = [ "<Super>4" ];
 
           switch-to-application-1 = "disabled";
           switch-to-application-2 = "disabled";
@@ -119,7 +121,7 @@ in {
           two-finger-scrolling-enabled = true;
         };
         "org/gnome/settings-daemon/plugins/media-keys" = {
-          screensaver = ["<Super>l"];
+          screensaver = [ "<Super>l" ];
           custom-keybindings = [
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
           ];

@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.hyprland;
-in {
+in
+{
   options.features.desktop.hyprland = {
     enable = mkEnableOption "enable and configure hyprland";
     desktop = mkEnableOption "enable hyprland for desktop use";
@@ -164,7 +166,7 @@ in {
             preserve_split = true;
           };
 
-          master = {};
+          master = { };
 
           windowrule = [
             "float, title:file_progress"
@@ -277,7 +279,7 @@ in {
             "0, monitor:DP-2"
           ];
 
-          env = [];
+          env = [ ];
 
           exec-once = [
             # Primary Monitor Work-around

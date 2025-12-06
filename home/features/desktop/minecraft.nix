@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.features.desktop.minecraft;
-in {
+in
+{
   options.features.desktop.minecraft.enable = mkEnableOption "Install minecraft";
 
   config = mkIf cfg.enable {
@@ -14,6 +16,6 @@ in {
       enable = true;
     };
 
-    home.packages = with pkgs; [stable.prismlauncher];
+    home.packages = with pkgs; [ stable.prismlauncher ];
   };
 }

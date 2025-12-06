@@ -2,8 +2,9 @@
   pkgs,
   lib,
   ...
-}: {
-  imports = [./hardware-configuration.nix];
+}:
+{
+  imports = [ ./hardware-configuration.nix ];
 
   # Boot.
   boot = {
@@ -38,7 +39,10 @@
       ];
     };
     defaultGateway = "10.0.0.1";
-    nameservers = ["1.1.1.1" "8.8.8.8"];
+    nameservers = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
     enableIPv6 = false;
   };
 
@@ -64,8 +68,8 @@
   # xdg
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal];
-    config.common.default = ["gtk"];
+    extraPortals = [ pkgs.xdg-desktop-portal ];
+    config.common.default = [ "gtk" ];
   };
 
   # Services
@@ -94,7 +98,7 @@
       };
 
       # Graphics
-      videoDrivers = ["amdgpu"];
+      videoDrivers = [ "amdgpu" ];
       enableTearFree = true;
       desktopManager.runXdgAutostartIfNone = true;
 
@@ -148,7 +152,10 @@
 
     printing = {
       enable = true;
-      drivers = [pkgs.hplip pkgs.gutenprint];
+      drivers = [
+        pkgs.hplip
+        pkgs.gutenprint
+      ];
     };
 
     blueman.enable = true;
@@ -161,7 +168,7 @@
   # Security
   security = {
     pam.services = {
-      hyprlock = {};
+      hyprlock = { };
       i3lock-color.enable = true;
     };
 
@@ -224,7 +231,7 @@
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-      extraCompatPackages = with pkgs; [proton-ge-bin];
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
 
     wireshark.enable = true;
@@ -262,7 +269,7 @@
   };
 
   # Virt
-  users.groups.libvirtd.members = ["gunnar"];
+  users.groups.libvirtd.members = [ "gunnar" ];
   virtualisation = {
     libvirtd.enable = true;
     waydroid.enable = true;

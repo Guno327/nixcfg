@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.nextcloud;
-in {
+in
+{
   options.srvs.nextcloud = {
     enable = mkEnableOption "Enable nextcloud service";
   };

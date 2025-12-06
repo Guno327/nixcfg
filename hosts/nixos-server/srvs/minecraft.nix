@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.minecraft;
-in {
+in
+{
   options.srvs.minecraft = {
     enable = mkEnableOption "Enable minecraft service";
   };

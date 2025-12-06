@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.satisfactory;
-in {
+in
+{
   options.srvs.satisfactory = {
     enable = mkEnableOption "Satisfactory Dedicated Server";
 
@@ -41,26 +43,28 @@ in {
   };
 
   config = mkIf cfg.enable {
-    systemd.services.satisfactory = let
-      steamcmd = "${cfg.steamcmdPackage}/bin/steamcmd";
-      steam-run = "${pkgs.steam-run}/bin/steam-run";
-    in {
-      description = "Satisfactory Dedicated Server";
-      wantedBy = ["multi-user.target"];
-      after = ["network.target"];
+    systemd.services.satisfactory =
+      let
+        steamcmd = "${cfg.steamcmdPackage}/bin/steamcmd";
+        steam-run = "${pkgs.steam-run}/bin/steam-run";
+      in
+      {
+        description = "Satisfactory Dedicated Server";
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" ];
 
-      serviceConfig = {
-        TimeoutSec = "15min";
-        ExecStart = "${steam-run} ${cfg.dataDir}/FactoryServer.sh ${cfg.launchOptions}";
-        Restart = "always";
-        User = "satisfactory";
-        WorkingDirectory = cfg.dataDir;
+        serviceConfig = {
+          TimeoutSec = "15min";
+          ExecStart = "${steam-run} ${cfg.dataDir}/FactoryServer.sh ${cfg.launchOptions}";
+          Restart = "always";
+          User = "satisfactory";
+          WorkingDirectory = cfg.dataDir;
+        };
+
+        preStart = ''
+          ${steamcmd} +force_install_dir "${cfg.dataDir}" +login anonymous +app_update 1690800 validate +quit
+        '';
       };
-
-      preStart = ''
-        ${steamcmd} +force_install_dir "${cfg.dataDir}" +login anonymous +app_update 1690800 validate +quit
-      '';
-    };
 
     users.users.satisfactory = {
       description = "Satisfactory server service user";
@@ -69,11 +73,14 @@ in {
       isSystemUser = true;
       group = "satisfactory";
     };
-    users.groups.satisfactory = {};
+    users.groups.satisfactory = { };
 
     networking.firewall = mkIf cfg.openFirewall {
-      allowedUDPPorts = [7777 8888];
-      allowedTCPPorts = [7777];
+      allowedUDPPorts = [
+        7777
+        8888
+      ];
+      allowedTCPPorts = [ 7777 ];
     };
   };
 }
