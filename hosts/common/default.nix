@@ -5,8 +5,7 @@
   outputs,
   config,
   ...
-}:
-{
+}: {
   imports = [
     ./users
     inputs.home-manager.nixosModules.home-manager
@@ -16,7 +15,7 @@
 
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs outputs; };
+    extraSpecialArgs = {inherit inputs outputs;};
   };
 
   nixpkgs = {
@@ -40,6 +39,7 @@
     settings = {
       experimental-features = "nix-command flakes";
       accept-flake-config = true;
+      auto-optimise-store = true;
       # Set users allowed to use flake command
       trusted-users = [
         "root"
@@ -49,13 +49,14 @@
 
     gc = {
       automatic = true;
+      dates = "weekly";
       options = "--delete-older-than 7d";
     };
     optimise.automatic = true;
-    registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
+    registry = (lib.mapAttrs (_: flake: {inherit flake;})) (
       (lib.filterAttrs (_: lib.isType "flake")) inputs
     );
-    nixPath = [ "/etc/nix/path" ];
+    nixPath = ["/etc/nix/path"];
   };
 
   programs.nix-ld.enable = true;
@@ -67,10 +68,10 @@
   };
 
   networking.hosts = {
-    "10.0.0.3" = [ "server" ];
-    "10.0.0.2" = [ "idrac" ];
-    "10.0.0.1" = [ "router" ];
-    "10.0.0.100" = [ "desktop" ];
+    "10.0.0.3" = ["server"];
+    "10.0.0.2" = ["idrac"];
+    "10.0.0.1" = ["router"];
+    "10.0.0.100" = ["desktop"];
   };
 
   fonts = {
