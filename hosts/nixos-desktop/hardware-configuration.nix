@@ -12,6 +12,7 @@
   boot = {
     initrd.availableKernelModules = [
       "nvme"
+      "cryptd"
       "xhci_pci"
       "ahci"
       "usbhid"
@@ -27,7 +28,7 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/3e395b47-af45-4a78-b87e-a23586793b6a";
+      device = "/dev/disk/by-label/NIXOS-ROOT";
       fsType = "ext4";
     };
 
@@ -46,6 +47,9 @@
       options = ["rw" "uid=1000"];
     };
   };
+
+  swapDevices = [{device = "/dev/disk/by-label/NIXOS-SWAP";}];
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS-ENCRYPTED";
 
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
