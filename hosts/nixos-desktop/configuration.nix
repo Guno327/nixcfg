@@ -16,14 +16,10 @@
         maxGenerations = 3;
         secureBoot.enable = true;
         extraEntries = ''
-          # Begin User Entries
           /Windows
           comment: Windows Boot Manager
           protocol: efi
           path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
-
-          # End User Entries
-
         '';
       };
     };
@@ -163,9 +159,17 @@
     ATTRS{idVendor}=="6964", ATTRS{idProduct}=="0080", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
   '';
   # Security
-  security.pam.services = {
-    hyprlock = {};
-    i3lock-color.enable = true;
+  security = {
+    pam.services = {
+      hyprlock = {};
+      i3lock-color.enable = true;
+    };
+
+    tpm2 = {
+      enable = true;
+      pkcs11.enable = true;
+      tctiEnvironment.enable = true;
+    };
   };
 
   # Set your time zone.
@@ -244,7 +248,7 @@
       winetricks
       gamemode
       chromium
-      vinegar
+      tpm2-tss
     ];
   };
 
