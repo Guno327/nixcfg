@@ -28,12 +28,17 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-label/NIXOS-ROOT";
+      device = "/dev/disk/by-label/NIXROOT";
+      fsType = "ext4";
+    };
+
+    "/home" = {
+      device = "/dev/disk/by-label/NIXHOME";
       fsType = "ext4";
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/D829-A283";
+      device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";
       options = [
         "fmask=0077"
@@ -42,14 +47,14 @@
     };
 
     "/home/gunnar/ssd" = {
-      device = "/dev/disk/by-id/ata-Samsung_SSD_860_QVO_2TB_S4PHNF0M701338E-part1";
+      device = "/dev/disk/by-label/SSD";
       fsType = "ntfs-3g";
       options = ["rw" "uid=1000"];
     };
   };
 
-  swapDevices = [{device = "/dev/disk/by-label/NIXOS-SWAP";}];
-  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXOS-ENCRYPTED";
+  swapDevices = [{device = "/dev/disk/by-label/NIXSWAP";}];
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-label/NIXENCRYPTED";
 
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
