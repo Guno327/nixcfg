@@ -30,11 +30,6 @@
     };
   };
 
-  services.tailscale = {
-    enable = true;
-    authKeyFile = config.sops.secrets.tailscale.path;
-  };
-
   nix = {
     settings = {
       experimental-features = "nix-command flakes";

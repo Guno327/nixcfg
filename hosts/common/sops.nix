@@ -10,7 +10,6 @@
     secrets = {
       gemini = {};
       github = {};
-      tailscale = {};
       cf = {};
 
       "nebula/desktop.key" = {owner = "nebula-mesh";};
