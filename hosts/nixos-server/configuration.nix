@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./srvs
@@ -9,7 +8,7 @@
   # Bootloader.
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos-lts;
-    supportedFilesystems = [ "zfs" ];
+    supportedFilesystems = ["zfs"];
     zfs.forceImportRoot = false;
     loader = {
       efi.canTouchEfiVariables = true;
@@ -40,7 +39,7 @@
       }
     ];
     defaultGateway = "10.0.0.1";
-    nameservers = [ "10.0.0.1" ];
+    nameservers = ["10.0.0.1"];
   };
 
   # Set your time zone.
@@ -117,7 +116,6 @@
     cloudflared.enable = true;
     media.enable = true;
     nvidia.enable = true;
-    mail.enable = false;
     adblock.enable = true;
     satisfactory = {
       enable = false;
@@ -125,6 +123,7 @@
     };
     nextcloud.enable = true;
     playit.enable = true;
+    lighthouse.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

@@ -1,18 +1,18 @@
-{ ... }:
-{
+{...}: {
   sops = {
     defaultSopsFile = ../../secrets/sops.yaml;
 
     age = {
-      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+      sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
       generateKey = true;
     };
 
     secrets = {
-      gemini = { };
-      github = { };
-      tailscale = { };
-      cf = { };
+      gemini = {};
+      github = {};
+      tailscale = {};
+      cf = {};
+
       sshcontrol = {
         sopsFile = ../../secrets/sshcontrol;
         format = "binary";
