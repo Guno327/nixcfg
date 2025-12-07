@@ -101,6 +101,14 @@
           }
         ];
       };
+      settings = {
+        firewall.unsafe_routes = [
+          {
+            route = "0.0.0.0/0";
+            via = "100.100.0.1";
+          }
+        ];
+      };
     };
 
     mullvad-vpn.enable = true;
@@ -142,7 +150,6 @@
 
   # Services
   srvs = {
-    cloudflared.enable = true;
     media.enable = true;
     nvidia.enable = true;
     adblock.enable = true;
@@ -150,8 +157,7 @@
       enable = false;
       launchOptions = "-multihome=0.0.0.0";
     };
-    nextcloud.enable = true;
-    playit.enable = true;
+    nginx.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

@@ -1,24 +1,13 @@
-{ ... }:
-{
+{...}: {
   sops.secrets = {
-    cloudflare = { };
-    dns = { };
-    web = { };
-    nextcloud = { };
+    web = {};
 
-    bazarr = { };
-    jellyfin = { };
-    jellyseerr = { };
-    prowlarr = { };
-    radarr = { };
-    sonarr = { };
-
-    playit = {
-      sopsFile = ../../secrets/playit.toml;
-      format = "binary";
-      owner = "playit";
-      mode = "0600";
-    };
+    bazarr = {};
+    jellyfin = {};
+    jellyseerr = {};
+    prowlarr = {};
+    radarr = {};
+    sonarr = {};
 
     wireguard = {
       sopsFile = ../../secrets/wg0.conf;
@@ -27,12 +16,6 @@
 
     transmission = {
       sopsFile = ../../secrets/transmission.json;
-      format = "json";
-      key = "";
-    };
-
-    tunnel = {
-      sopsFile = ../../secrets/tunnel.json;
       format = "json";
       key = "";
     };
