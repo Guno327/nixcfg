@@ -13,6 +13,10 @@
       tailscale = {};
       cf = {};
 
+      "nebula/desktop.key" = {owner = "nebula-mesh";};
+      "nebula/desktop.crt" = {owner = "nebula-mesh";};
+      "nebula/ca.crt" = {owner = "nebula-mesh";};
+
       sshcontrol = {
         sopsFile = ../../secrets/sshcontrol;
         format = "binary";

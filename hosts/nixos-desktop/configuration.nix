@@ -1,6 +1,6 @@
 {
   pkgs,
-  lib,
+  config,
   ...
 }: {
   imports = [./hardware-configuration.nix];
@@ -153,6 +153,31 @@
         pkgs.hplip
         pkgs.gutenprint
       ];
+    };
+
+    # Nebula Mesh
+    nebula.networks."mesh" = {
+      staticHostMap."192.168.100.1" = ["10.0.0.3:4242"];
+      lighthouses = ["192.168.100.1"];
+      key = config.sops.secrets."nebula/desktop.key".path;
+      cert = config.sops.secrets."nebula/desktop.crt".path;
+      ca = config.sops.secrets."nebula/ca.crt".path;
+      firewall = {
+        inbound = [
+          {
+            host = "any";
+            proto = "any";
+            port = "any";
+          }
+        ];
+        outbound = [
+          {
+            host = "any";
+            proto = "any";
+            port = "any";
+          }
+        ];
+      };
     };
 
     blueman.enable = true;
