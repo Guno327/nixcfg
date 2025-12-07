@@ -12,17 +12,21 @@ in {
       enable = true;
       enableDefaultConfig = false;
       matchBlocks = {
-        "vps" = {
+        vps = {
           host = "vps";
-          hostname = "192.168.100.1";
+          hostname = "100.100.0.1";
         };
-        "server" = {
+        server = {
           host = "server";
-          hostname = "192.168.100.3";
+          hostname = "100.100.0.2";
         };
-        "laptop" = {
+        desktop = {
+          host = "desktop";
+          hostname = "100.100.0.3";
+        };
+        laptop = {
           host = "laptop";
-          hostname = "192.168.100.9";
+          hostname = "100.100.0.4";
         };
       };
     };

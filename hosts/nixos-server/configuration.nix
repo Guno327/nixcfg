@@ -76,8 +76,8 @@
 
     # Nebula Mesh
     nebula.networks."mesh" = {
-      staticHostMap."192.168.100.1" = ["192.227.212.190:4242"];
-      lighthouses = ["192.168.100.1"];
+      staticHostMap."100.100.0.1" = ["192.227.212.190:4242"];
+      lighthouses = ["100.100.0.1"];
       key = config.sops.secrets."nebula/server.key".path;
       cert = config.sops.secrets."nebula/server.crt".path;
       ca = config.sops.secrets."nebula/ca.crt".path;
