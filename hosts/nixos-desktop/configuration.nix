@@ -2,9 +2,8 @@
   pkgs,
   lib,
   ...
-}:
-{
-  imports = [ ./hardware-configuration.nix ];
+}: {
+  imports = [./hardware-configuration.nix];
 
   # Boot.
   boot = {
@@ -68,8 +67,8 @@
   # xdg
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal ];
-    config.common.default = [ "gtk" ];
+    extraPortals = [pkgs.xdg-desktop-portal];
+    config.common.default = ["gtk"];
   };
 
   # Services
@@ -98,18 +97,16 @@
       };
 
       # Graphics
-      videoDrivers = [ "amdgpu" ];
+      videoDrivers = ["amdgpu"];
       enableTearFree = true;
       desktopManager.runXdgAutostartIfNone = true;
 
       # Disable sleep
-      config = lib.mkAfter ''
-        Section "ServerFlags"
-          Option "BlankTime" "10"
-          Option "StandbyTime" "0"
-          Option "SuspendTime" "0"
-          Option "OffTime" "0"
-        EndSection
+      displayManager.setupCommands = ''
+        xset -dpms
+        xset s off
+        xset s noblank
+        xset x 0 0
       '';
     };
 
@@ -168,7 +165,7 @@
   # Security
   security = {
     pam.services = {
-      hyprlock = { };
+      hyprlock = {};
       i3lock-color.enable = true;
     };
 
@@ -231,7 +228,7 @@
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-      extraCompatPackages = with pkgs; [ proton-ge-bin ];
+      extraCompatPackages = with pkgs; [proton-ge-bin];
     };
 
     wireshark.enable = true;
@@ -269,7 +266,7 @@
   };
 
   # Virt
-  users.groups.libvirtd.members = [ "gunnar" ];
+  users.groups.libvirtd.members = ["gunnar"];
   virtualisation = {
     libvirtd.enable = true;
     waydroid.enable = true;
