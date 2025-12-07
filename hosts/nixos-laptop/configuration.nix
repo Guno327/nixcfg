@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -69,6 +69,30 @@
         USB_AUTOSUSPEND_DISABLE = 1;
       };
     };
+
+    # Nebula Mesh
+    nebula.networks."mesh" = {
+      staticHostMap."192.168.100.1" = ["192.227.212.190:4242"];
+      lighthouses = ["192.168.100.1"];
+      key = config.sops.secrets."nebula/laptop.key".path;
+      cert = config.sops.secrets."nebula/laptop.crt".path;
+      ca = config.sops.secrets."nebula/ca.crt".path;
+      firewall = {
+        inbound = [
+          {
+            host = "any";
+            proto = "any";
+            port = "any";
+          }
+        ];
+        outbound = [
+          {
+            host = "any";
+            proto = "any";
+            port = "any";
+          }
+        ];
+      };
 
     blueman.enable = false;
   };

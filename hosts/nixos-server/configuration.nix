@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./srvs
@@ -74,6 +74,30 @@
       };
     };
 
+    # Nebula Mesh
+    nebula.networks."mesh" = {
+      staticHostMap."192.168.100.1" = ["192.227.212.190:4242"];
+      lighthouses = ["192.168.100.1"];
+      key = config.sops.secrets."nebula/server.key".path;
+      cert = config.sops.secrets."nebula/server.crt".path;
+      ca = config.sops.secrets."nebula/ca.crt".path;
+      firewall = {
+        inbound = [
+          {
+            host = "any";
+            proto = "any";
+            port = "any";
+          }
+        ];
+        outbound = [
+          {
+            host = "any";
+            proto = "any";
+            port = "any";
+          }
+        ];
+      };
+
     mullvad-vpn.enable = true;
     pcscd.enable = true;
     zfs.autoScrub.enable = true;
@@ -123,7 +147,6 @@
     };
     nextcloud.enable = true;
     playit.enable = true;
-    lighthouse.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
