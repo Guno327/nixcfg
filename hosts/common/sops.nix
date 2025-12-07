@@ -12,6 +12,10 @@
       github = {};
       cf = {};
 
+      "nebula/laptop.key" = {owner = "nebula-mesh";};
+      "nebula/laptop.crt" = {owner = "nebula-mesh";};
+      "nebula/server.key" = {owner = "nebula-mesh";};
+      "nebula/server.crt" = {owner = "nebula-mesh";};
       "nebula/desktop.key" = {owner = "nebula-mesh";};
       "nebula/desktop.crt" = {owner = "nebula-mesh";};
       "nebula/ca.crt" = {owner = "nebula-mesh";};

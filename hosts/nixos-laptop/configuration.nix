@@ -1,5 +1,8 @@
-{ pkgs, config, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ../common/gnome.nix
@@ -93,6 +96,7 @@
           }
         ];
       };
+    };
 
     blueman.enable = false;
   };
@@ -162,13 +166,13 @@
   };
 
   # Security
-  security.pam.services.hyprlock = { };
+  security.pam.services.hyprlock = {};
 
   # Set your time zone.
   time.timeZone = "America/New_York";
 
   # Graphics
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = ["amdgpu"];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -180,7 +184,7 @@
   };
 
   # KVM
-  users.groups.libvirtd.members = [ "gunnar" ];
+  users.groups.libvirtd.members = ["gunnar"];
   virtualisation.libvirtd.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
 

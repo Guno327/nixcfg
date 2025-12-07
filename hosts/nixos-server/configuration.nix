@@ -1,4 +1,8 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   imports = [
     ./hardware-configuration.nix
     ./srvs
@@ -97,6 +101,7 @@
           }
         ];
       };
+    };
 
     mullvad-vpn.enable = true;
     pcscd.enable = true;
