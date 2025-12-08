@@ -4,8 +4,7 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.features.desktop.i3;
   status = pkgs.bumblebee-status.override {
     plugins = p: [
@@ -13,8 +12,7 @@ let
       p.pipewire
     ];
   };
-in
-{
+in {
   options.features.desktop.i3 = {
     enable = mkEnableOption "enable and configure i3";
     desktop = mkEnableOption "enable i3 for desktop use";
@@ -23,6 +21,10 @@ in
       type = types.str;
       description = "Default Terminal";
       default = "xterm";
+    };
+    startup = mkOption {
+      type = types.path;
+      description = "Startup Script";
     };
   };
 
@@ -42,21 +44,27 @@ in
       xsession.windowManager.i3 = {
         enable = true;
         config = {
-          bars = [ ];
+          bars = [];
           window.titlebar = false;
           gaps = {
             inner = 0;
             outer = 0;
           };
 
+          startup = [
+            {
+              command = cfg.startup;
+              notification = false;
+            }
+          ];
           assigns = {
             "2" = [
-              { class = "zen"; }
-              { class = "zen-twilight"; }
-              { class = "zen-beta"; }
+              {class = "zen";}
+              {class = "zen-twilight";}
+              {class = "zen-beta";}
             ];
-            "3" = [ { class = "steam"; } ];
-            "6" = [ { class = "discord"; } ];
+            "3" = [{class = "steam";}];
+            "6" = [{class = "discord";}];
           };
 
           fonts = mkOptionDefault {
@@ -69,10 +77,9 @@ in
           };
 
           modifier = "Mod4";
-          keybindings =
-            let
-              mod = config.xsession.windowManager.i3.config.modifier;
-            in
+          keybindings = let
+            mod = config.xsession.windowManager.i3.config.modifier;
+          in
             mkOptionDefault {
               "${mod}+v" = "floating toggle";
               "${mod}+c" = "kill";
@@ -179,14 +186,6 @@ in
             output = "DisplayPort-1";
           }
         ];
-        startup = [
-          {
-            command = "feh --bg-center ${config.home.homeDirectory}/Pictures/Wallpapers/bg-0.png --bg-center ${config.home.homeDirectory}/Pictures/Wallpapers/bg-1.png";
-            notification = false;
-          }
-          { command = "discord"; }
-          { command = "zen"; }
-        ];
         bars = [
           {
             id = "main";
@@ -229,6 +228,6 @@ in
       };
     })
     (mkIf cfg.laptop {
-    })
+      })
   ];
 }

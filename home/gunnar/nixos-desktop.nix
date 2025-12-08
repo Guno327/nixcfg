@@ -2,8 +2,19 @@
   pkgs,
   inputs,
   ...
-}:
-{
+}: let
+  startupScript = pkgs.writeScript "startup.sh" ''
+    #!/usr/bin/env bash
+
+    sleep 3
+    xrandr --output DisplayPort-1 --mode 1920x1080 --rotate right
+    xrandr --output DisplayPort-0 --right-of DisplayPort-1 --mode 2560x1440 --rate 165
+    feh --bg-center /home/gunnar/Pictures/Wallpapers/bg.svg
+
+    discord &
+    zen &
+  '';
+in {
   imports = [
     ./home.nix
     ../features/cli
@@ -47,6 +58,7 @@
         enable = true;
         desktop = true;
         term = "alacritty";
+        startup = "${builtins.toString startupScript} > /home/gunnar/.scripts/startup.log";
       };
       alacritty.enable = true;
       minecraft.enable = true;
