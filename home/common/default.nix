@@ -4,8 +4,7 @@
   outputs,
   inputs,
   ...
-}:
-{
+}: {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
     inputs.caelestia-shell.homeManagerModules.default
@@ -22,6 +21,11 @@
     config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
+      packageOverrides = pkgs: {
+        nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/main.tar.gz") {
+          inherit pkgs;
+        };
+      };
     };
   };
 

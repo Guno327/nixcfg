@@ -12,7 +12,7 @@
     feh --bg-center /home/gunnar/Pictures/Wallpapers/bg.svg
 
     discord &
-    zen &
+    firefox &
   '';
 in {
   imports = [
@@ -72,7 +72,7 @@ in {
         enable = true;
         jellyfin.enable = true;
       };
-      zen.enable = true;
+      firefox.enable = true;
     };
   };
 

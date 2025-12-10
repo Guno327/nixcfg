@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   programs.nvf = {
     enable = true;
     settings = {
@@ -19,7 +18,7 @@
 
         spellcheck = {
           enable = true;
-          languages = [ "en" ];
+          languages = ["en"];
           programmingWordlist.enable = true;
         };
 
@@ -49,10 +48,6 @@
         lsp = {
           enable = true;
           formatOnSave = true;
-          otter-nvim = {
-            enable = true;
-            mappings.toggle = "<C-l>";
-          };
         };
 
         treesitter = {
@@ -62,7 +57,7 @@
           context.enable = true;
           indent = {
             enable = true;
-            disable = [ "yaml" ];
+            disable = ["yaml"];
           };
           highlight = {
             enable = true;

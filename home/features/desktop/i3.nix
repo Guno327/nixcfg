@@ -59,9 +59,7 @@ in {
           ];
           assigns = {
             "2" = [
-              {class = "zen";}
-              {class = "zen-twilight";}
-              {class = "zen-beta";}
+              {class = "firefox";}
             ];
             "3" = [{class = "steam";}];
             "6" = [{class = "discord";}];
