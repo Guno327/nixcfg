@@ -11,7 +11,6 @@
 
   # Bootloader.
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos-lts;
     supportedFilesystems = ["zfs"];
     zfs.forceImportRoot = false;
     loader = {

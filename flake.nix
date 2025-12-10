@@ -7,11 +7,9 @@
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
-      "https://chaotic-nyx.cachix.org/"
     ];
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
     ];
   };
 
@@ -27,11 +25,6 @@
 
     custom-pkgs = {
       url = "github:guno327/pkgs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    chaotic = {
-      url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -82,7 +75,6 @@
     nvf,
     stylix,
     nixarr,
-    chaotic,
     sops-nix,
     flakecraft,
     ...
@@ -106,7 +98,6 @@
 
           nvf.nixosModules.default
           stylix.nixosModules.stylix
-          chaotic.nixosModules.default
           sops-nix.nixosModules.sops
         ];
       };
@@ -121,7 +112,6 @@
 
           nvf.nixosModules.default
           stylix.nixosModules.stylix
-          chaotic.nixosModules.default
           sops-nix.nixosModules.sops
         ];
       };
@@ -134,7 +124,6 @@
           nvf.nixosModules.default
           stylix.nixosModules.stylix
           nixarr.nixosModules.default
-          chaotic.nixosModules.default
           sops-nix.nixosModules.sops
           flakecraft.nixosModules.default
         ];

@@ -10,7 +10,6 @@
 
   # Bootloader.
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos-lts;
     loader = {
       efi.canTouchEfiVariables = true;
       grub = {
