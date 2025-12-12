@@ -6,9 +6,8 @@
   lib,
   modulesPath,
   ...
-}:
-{
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+}: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot = {
     initrd = {
@@ -23,9 +22,9 @@
       luks.devices."cryptroot".device = "/dev/disk/by-label/NIXENCRYPTED";
     };
 
-    kernelModules = [ "amdgpu" ];
-    extraModulePackages = [ ];
-    supportedFilesystems = [ "ntfs" ];
+    kernelModules = ["amdgpu"];
+    extraModulePackages = [];
+    supportedFilesystems = ["ntfs"];
     tmp.tmpfsSize = "75%";
   };
 
@@ -59,7 +58,7 @@
     };
   };
 
-  swapDevices = [ { device = "/dev/disk/by-label/NIXSWAP"; } ];
+  swapDevices = [{device = "/dev/disk/by-label/NIXSWAP";}];
 
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

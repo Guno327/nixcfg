@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./eza.nix
     ./zoxide.nix
@@ -37,6 +36,7 @@
     unrar
     android-file-transfer
     usbutils
+    pciutils
     octave
     ntfs3g
     nix-index

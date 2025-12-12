@@ -72,6 +72,7 @@ in {
             "browser.toolbars.bookmarks.visibility" = "never";
           };
           search = {
+            force = true;
             default = "brave";
             engines = {
               brave = {

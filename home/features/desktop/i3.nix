@@ -40,6 +40,24 @@ in {
         playerctl
       ];
 
+      home.file.".xinitrc" = {
+        enable = true;
+        executable = true;
+        force = true;
+        text = ''
+          if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
+            eval $(dbus-launch --exit-with-session --sh-syntax)
+          fi
+          systemctl --user import-environment DISPLAY XAUTHORITY
+
+          if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+                  dbus-update-activation-environment DISPLAY XAUTHORITY
+          fi
+
+          exec i3
+        '';
+      };
+
       services.picom.enable = true;
       xsession.windowManager.i3 = {
         enable = true;
@@ -145,43 +163,43 @@ in {
         workspaceOutputAssign = [
           {
             workspace = "1";
-            output = "DisplayPort-0";
+            output = "DisplayPort-1";
           }
           {
             workspace = "2";
-            output = "DisplayPort-0";
+            output = "DisplayPort-1";
           }
           {
             workspace = "3";
-            output = "DisplayPort-0";
+            output = "DisplayPort-1";
           }
           {
             workspace = "4";
-            output = "DisplayPort-0";
+            output = "DisplayPort-1";
           }
           {
             workspace = "5";
-            output = "DisplayPort-0";
+            output = "DisplayPort-1";
           }
           {
             workspace = "6";
-            output = "DisplayPort-1";
+            output = "DisplayPort-2";
           }
           {
             workspace = "7";
-            output = "DisplayPort-1";
+            output = "DisplayPort-2";
           }
           {
             workspace = "8";
-            output = "DisplayPort-1";
+            output = "DisplayPort-2";
           }
           {
             workspace = "9";
-            output = "DisplayPort-1";
+            output = "DisplayPort-2";
           }
           {
             workspace = "0";
-            output = "DisplayPort-1";
+            output = "DisplayPort-2";
           }
         ];
         bars = [

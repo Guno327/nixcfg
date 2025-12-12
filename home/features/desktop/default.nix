@@ -31,5 +31,6 @@
     xclicker
     steam-tui
     steamcmd
+    nvtopPackages.amd
   ];
 }

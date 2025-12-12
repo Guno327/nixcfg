@@ -12,7 +12,7 @@
       limine = {
         enable = true;
         efiSupport = true;
-        maxGenerations = 3;
+        maxGenerations = 10;
         secureBoot.enable = true;
         extraEntries = ''
           /Windows
@@ -72,11 +72,6 @@
 
   # Services
   services = {
-    displayManager = {
-      defaultSession = "i3";
-      ly.enable = true;
-    };
-
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -85,9 +80,8 @@
     };
 
     xserver = {
-      # i3
       enable = true;
-      windowManager.i3.enable = true;
+      displayManager.startx.enable = true;
 
       # Configure keymap in X11
       xkb = {
@@ -99,14 +93,6 @@
       videoDrivers = ["amdgpu"];
       enableTearFree = true;
       desktopManager.runXdgAutostartIfNone = true;
-
-      # Disable sleep
-      displayManager.setupCommands = ''
-        xset -dpms
-        xset s off
-        xset s noblank
-        xset x 0 0
-      '';
     };
 
     # Enable the OpenSSH daemon.
