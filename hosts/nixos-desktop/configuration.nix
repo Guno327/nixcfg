@@ -81,8 +81,11 @@
 
     xserver = {
       enable = true;
-      displayManager.startx.enable = true;
-
+      windowManager.i3.enable = true;
+      displayManager = {
+        startx.enable = true;
+        defaultSession = "none+i3";
+      };
       # Configure keymap in X11
       xkb = {
         layout = "us";
