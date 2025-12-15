@@ -6,7 +6,7 @@
   startupScript = pkgs.writeScript "startup.sh" ''
     #!/usr/bin/env bash
     xrandr --output DisplayPort-2 --mode 1920x1080 --rotate right
-    xrandr --output DisplayPort-1 --right-of DisplayPort-2 --mode 2560x1440 --rate 165
+    xrandr --output DisplayPort-1 --right-of DisplayPort-2 --mode 2560x1440 --rate 165 --primary
     feh --bg-tile /home/gunnar/Pictures/Wallpapers/bg.svg
 
     discord &
