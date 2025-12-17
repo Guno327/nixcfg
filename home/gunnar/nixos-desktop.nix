@@ -5,12 +5,8 @@
 }: let
   startupScript = pkgs.writeScript "startup.sh" ''
     #!/usr/bin/env bash
-    xrandr --output DisplayPort-2 --mode 1920x1080 --rotate right
-    xrandr --output DisplayPort-1 --right-of DisplayPort-2 --mode 2560x1440 --rate 165 --primary
-    feh --bg-tile /home/gunnar/Pictures/Wallpapers/bg.svg
-
-    discord &
-    firefox &
+    webcord&
+    firefox&
   '';
 in {
   imports = [
@@ -21,8 +17,7 @@ in {
   ];
 
   home.packages = with pkgs; [
-    feh
-    discord
+    webcord
     r2modman
     protonup-qt
     pkgs.stable.godot_4
@@ -52,7 +47,7 @@ in {
       dev.enable = true;
     };
     desktop = {
-      i3 = {
+      sway = {
         enable = true;
         desktop = true;
         term = "alacritty";

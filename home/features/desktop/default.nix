@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./hyprutils.nix
     ./hyprland.nix
@@ -20,6 +19,7 @@
     ./alacritty.nix
     ./mpv.nix
     ./zen.nix
+    ./sway.nix
   ];
 
   home.packages = with pkgs; [

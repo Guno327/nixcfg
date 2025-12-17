@@ -66,36 +66,25 @@
   # xdg
   xdg.portal = {
     enable = true;
+    wlr.enable = true;
     extraPortals = [pkgs.xdg-desktop-portal];
     config.common.default = ["gtk"];
   };
 
   # Services
   services = {
+    # Auto-login since we have full disk encryption
+    getty = {
+      autologinUser = "gunnar";
+      autologinOnce = true;
+    };
+
+    # Pipewire
     pipewire = {
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-    };
-
-    xserver = {
-      enable = true;
-      windowManager.i3.enable = true;
-      displayManager = {
-        startx.enable = true;
-        defaultSession = "none+i3";
-      };
-      # Configure keymap in X11
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
-
-      # Graphics
-      videoDrivers = ["amdgpu"];
-      enableTearFree = true;
-      desktopManager.runXdgAutostartIfNone = true;
     };
 
     # Enable the OpenSSH daemon.
@@ -148,8 +137,7 @@
   # Security
   security = {
     pam.services = {
-      hyprlock = {};
-      i3lock-color.enable = true;
+      swaylock = {};
     };
 
     tpm2 = {
@@ -221,6 +209,11 @@
 
   # Environment
   environment = {
+    # Auto-start sway
+    loginShellInit = ''
+      [[ "$(tty)" == /dev/tty1 ]] && sway
+    '';
+
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
       STEAM_APP_DIR = "/home/gunnar/ssd/SteamLibrary/steamapps";
