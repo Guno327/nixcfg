@@ -22,7 +22,6 @@
       luks.devices."cryptroot".device = "/dev/disk/by-label/NIXENCRYPTED";
     };
 
-    kernelModules = ["amdgpu"];
     extraModulePackages = [];
     supportedFilesystems = ["ntfs"];
     tmp.tmpfsSize = "75%";

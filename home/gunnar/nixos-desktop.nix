@@ -30,6 +30,7 @@ in {
     tor-browser
     waydroid-helper
     rusty-path-of-building
+    orca-slicer
   ];
 
   features = {
@@ -66,17 +67,14 @@ in {
         jellyfin.enable = true;
       };
       firefox.enable = true;
+      lg.enable = true;
     };
   };
 
   programs = {
     fish.loginShellInit = ''
-       set -x NIX_PATH nixpkgs=channel:nixos-unstable
-       set -x NIX_LOG info
-
-      if test (tty) = "/dev/tty1"
-         exec startx &> /dev/null
-       end
+      set -x NIX_PATH nixpkgs=channel:nixos-unstable
+      set -x NIX_LOG info
     '';
   };
 }

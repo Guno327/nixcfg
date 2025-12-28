@@ -263,65 +263,69 @@ in {
     (mkIf cfg.desktop {
       wayland.windowManager.sway.config = {
         output = {
-          "DP-1" = {
+          "DP-4" = {
             mode = "2560x1440@165.080Hz";
             pos = "1080 220";
             adaptive_sync = "on";
           };
-          "DP-2" = {
+          "DP-5" = {
             mode = "1920x1080@60.000Hz";
             pos = "0 0";
             transform = "90";
+          };
+          "HDMI-A-1" = {
+            power = "off";
+            disable = "";
           };
         };
 
         workspaceOutputAssign = [
           {
             workspace = "1";
-            output = "DP-1";
+            output = "DP-4";
           }
           {
             workspace = "2";
-            output = "DP-1";
+            output = "DP-4";
           }
           {
             workspace = "3";
-            output = "DP-1";
+            output = "DP-4";
           }
           {
             workspace = "4";
-            output = "DP-1";
+            output = "DP-4";
           }
           {
             workspace = "5";
-            output = "DP-1";
+            output = "DP-4";
           }
           {
             workspace = "6";
-            output = "DP-2";
+            output = "DP-5";
           }
           {
             workspace = "7";
-            output = "DP-2";
+            output = "DP-5";
           }
           {
             workspace = "8";
-            output = "DP-2";
+            output = "DP-5";
           }
           {
             workspace = "9";
-            output = "DP-2";
+            output = "DP-5";
           }
           {
             workspace = "0";
-            output = "DP-2";
+            output = "DP-5";
           }
         ];
       };
 
       programs.waybar.settings = {
         mainbar = {
-          output = "DP-1";
+          output = "DP-4";
           modules-left = [
             "sway/workspaces"
           ];
@@ -338,7 +342,7 @@ in {
           ];
         };
         clockbar = {
-          output = "DP-2";
+          output = "DP-5";
           position = "bottom";
           modules-left = ["sway/workspaces"];
           modules-right = ["clock"];

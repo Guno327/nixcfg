@@ -28,7 +28,7 @@
   networking = {
     hostName = "nixos-desktop";
     useDHCP = false;
-    interfaces.enp7s0 = {
+    interfaces.enp9s0 = {
       ipv4.addresses = [
         {
           address = "10.0.0.100";
@@ -73,6 +73,9 @@
 
   # Services
   services = {
+    # Enable timesyncd
+    timesyncd.enable = true;
+
     # Auto-login since we have full disk encryption
     getty = {
       autologinUser = "gunnar";
@@ -215,6 +218,7 @@
     '';
 
     sessionVariables = {
+      WLR_DRM_DEVCIES = "/dev/dri/by-path/pci-0000:0a:00.0-card";
       NIXOS_OZONE_WL = "1";
       STEAM_APP_DIR = "/home/gunnar/ssd/SteamLibrary/steamapps";
     };

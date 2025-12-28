@@ -20,6 +20,7 @@
     ./mpv.nix
     ./zen.nix
     ./sway.nix
+    ./lg.nix
   ];
 
   home.packages = with pkgs; [
