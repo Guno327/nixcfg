@@ -263,12 +263,12 @@ in {
     (mkIf cfg.desktop {
       wayland.windowManager.sway.config = {
         output = {
-          "DP-4" = {
+          "DP-1" = {
             mode = "2560x1440@165.080Hz";
             pos = "1080 220";
             adaptive_sync = "on";
           };
-          "DP-5" = {
+          "DP-3" = {
             mode = "1920x1080@60.000Hz";
             pos = "0 0";
             transform = "90";
@@ -282,50 +282,50 @@ in {
         workspaceOutputAssign = [
           {
             workspace = "1";
-            output = "DP-4";
+            output = "DP-1";
           }
           {
             workspace = "2";
-            output = "DP-4";
+            output = "DP-1";
           }
           {
             workspace = "3";
-            output = "DP-4";
+            output = "DP-1";
           }
           {
             workspace = "4";
-            output = "DP-4";
+            output = "DP-1";
           }
           {
             workspace = "5";
-            output = "DP-4";
+            output = "DP-1";
           }
           {
             workspace = "6";
-            output = "DP-5";
+            output = "DP-3";
           }
           {
             workspace = "7";
-            output = "DP-5";
+            output = "DP-3";
           }
           {
             workspace = "8";
-            output = "DP-5";
+            output = "DP-3";
           }
           {
             workspace = "9";
-            output = "DP-5";
+            output = "DP-3";
           }
           {
             workspace = "0";
-            output = "DP-5";
+            output = "DP-3";
           }
         ];
       };
 
       programs.waybar.settings = {
         mainbar = {
-          output = "DP-4";
+          output = "DP-1";
           modules-left = [
             "sway/workspaces"
           ];
@@ -342,7 +342,7 @@ in {
           ];
         };
         clockbar = {
-          output = "DP-5";
+          output = "DP-3";
           position = "bottom";
           modules-left = ["sway/workspaces"];
           modules-right = ["clock"];

@@ -28,7 +28,7 @@
   networking = {
     hostName = "nixos-desktop";
     useDHCP = false;
-    interfaces.enp9s0 = {
+    interfaces.enp7s0 = {
       ipv4.addresses = [
         {
           address = "10.0.0.100";
