@@ -58,7 +58,16 @@ in {
         '';
       };
 
-      services.picom.enable = true;
+      services = {
+        picom.enable = true;
+        redshift = {
+          enable = true;
+          provider = "manual";
+          latitude = "35.0";
+          longitude = "-80.9";
+        };
+      };
+
       xsession.windowManager.i3 = {
         enable = true;
         config = {
@@ -80,7 +89,7 @@ in {
               {class = "firefox";}
             ];
             "3" = [{class = "steam";}];
-            "6" = [{class = "discord";}];
+            "6" = [{class = "discord";} {class = "WebCord";}];
           };
 
           fonts = mkOptionDefault {
@@ -163,43 +172,43 @@ in {
         workspaceOutputAssign = [
           {
             workspace = "1";
-            output = "DisplayPort-1";
+            output = "DisplayPort-0";
           }
           {
             workspace = "2";
-            output = "DisplayPort-1";
+            output = "DisplayPort-0";
           }
           {
             workspace = "3";
-            output = "DisplayPort-1";
+            output = "DisplayPort-0";
           }
           {
             workspace = "4";
-            output = "DisplayPort-1";
+            output = "DisplayPort-0";
           }
           {
             workspace = "5";
-            output = "DisplayPort-1";
+            output = "DisplayPort-0";
           }
           {
             workspace = "6";
-            output = "DisplayPort-2";
+            output = "DisplayPort-1";
           }
           {
             workspace = "7";
-            output = "DisplayPort-2";
+            output = "DisplayPort-1";
           }
           {
             workspace = "8";
-            output = "DisplayPort-2";
+            output = "DisplayPort-1";
           }
           {
             workspace = "9";
-            output = "DisplayPort-2";
+            output = "DisplayPort-1";
           }
           {
             workspace = "0";
-            output = "DisplayPort-2";
+            output = "DisplayPort-1";
           }
         ];
         bars = [

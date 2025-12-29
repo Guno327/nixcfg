@@ -66,7 +66,6 @@
   # xdg
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
     extraPortals = [pkgs.xdg-desktop-portal];
     config.common.default = ["gtk"];
   };
@@ -80,6 +79,18 @@
     getty = {
       autologinUser = "gunnar";
       autologinOnce = true;
+    };
+
+    # X11
+    displayManager.defaultSession = "none+i3";
+    xserver = {
+      enable = true;
+      windowManager.i3.enable = true;
+      videoDrivers = ["amdgpu"];
+      enableTearFree = true;
+      desktopManager.runXdgAutostartIfNone = true;
+
+      displayManager.startx.enable = true;
     };
 
     # Pipewire
@@ -140,7 +151,7 @@
   # Security
   security = {
     pam.services = {
-      swaylock = {};
+      i3lock-color = {};
     };
 
     tpm2 = {
@@ -212,16 +223,12 @@
 
   # Environment
   environment = {
-    # Auto-start sway
-    loginShellInit = ''
-      [[ "$(tty)" == /dev/tty1 ]] && sway
-    '';
-
     sessionVariables = {
-      WLR_DRM_DEVCIES = "/dev/dri/by-path/pci-0000:0a:00.0-card";
-      NIXOS_OZONE_WL = "1";
-      STEAM_APP_DIR = "/home/gunnar/ssd/SteamLibrary/steamapps";
     };
+
+    loginShellInit = ''
+      if [[ "$(tty)" == /dev/tty1 ]] && startx
+    '';
 
     systemPackages = with pkgs; [
       pavucontrol
@@ -238,6 +245,8 @@
       tpm2-tss
     ];
   };
+
+  # login shell
 
   # Graphics
   hardware.graphics = {

@@ -78,10 +78,7 @@
           enableFormat = true;
           enableTreesitter = true;
 
-          nix = {
-            enable = true;
-            lsp.server = "nixd";
-          };
+          nix.enable = true;
           csharp.enable = true;
           bash.enable = true;
           java.enable = true;
@@ -92,10 +89,7 @@
           clang.enable = true;
           go.enable = true;
           ts.enable = true;
-          python = {
-            enable = true;
-            lsp.server = "pyright";
-          };
+          python.enable = true;
         };
 
         autocomplete.blink-cmp = {

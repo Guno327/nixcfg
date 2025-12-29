@@ -4,7 +4,6 @@
     ./hyprland.nix
     ./kitty.nix
     ./minecraft.nix
-    ./gammastep.nix
     ./firefox.nix
     ./spotify.nix
     ./virt-manager.nix

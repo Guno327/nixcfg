@@ -4,9 +4,16 @@
   ...
 }: let
   startupScript = pkgs.writeScript "startup.sh" ''
-    #!/usr/bin/env bash
-    webcord&
-    firefox&
+     #!/usr/bin/env bash
+    xrandr --output DisplayPort-1 --mode 1920x1080 --rotate right
+    xrandr --output DisplayPort-0 --right-of DisplayPort-1 --mode 2560x1440 --rate 165 --primary
+    feh --bg-tile /flake/home/common/bg.svg
+
+    systemctl start --user jellyfin-mpv-shim
+    systemctl start --user redshift
+
+    webcord &
+    firefox &
   '';
 in {
   imports = [
@@ -48,15 +55,14 @@ in {
       dev.enable = true;
     };
     desktop = {
-      sway = {
+      i3 = {
         enable = true;
         desktop = true;
         term = "alacritty";
-        startup = "${builtins.toString startupScript} > /home/gunnar/.scripts/startup.log";
+        startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
       };
       alacritty.enable = true;
       minecraft.enable = true;
-      gammastep.enable = true;
       virt-manager.enable = true;
       ee2.enable = true;
       poetrade.enable = true;
