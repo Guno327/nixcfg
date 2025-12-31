@@ -6,9 +6,8 @@
   lib,
   modulesPath,
   ...
-}:
-{
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+}: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
   boot.initrd = {
     availableKernelModules = [
@@ -18,17 +17,22 @@
       "usb_storage"
       "sd_mod"
     ];
-    kernelModules = [ "kvm-amd" ];
+    luks.devices."cryptroot".device = "/dev/disk/by-label/NIXENCRYPTED";
   };
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/1d8aa4ef-93d8-40b0-b2ee-2bd34dbe7f62";
+      device = "/dev/disk/by-label/NIXROOT";
+      fsType = "ext4";
+    };
+
+    "/home" = {
+      device = "/dev/disk/by-label/NIXHOME";
       fsType = "ext4";
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/D0AD-7C6F";
+      device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";
       options = [
         "fmask=0077"
@@ -37,7 +41,7 @@
     };
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/b6730490-df8d-4c84-84f6-7c570f5d0995"; } ];
+  swapDevices = [{device = "/dev/disk/by-label/NIXSWAP";}];
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

@@ -12,37 +12,57 @@
   boot = {
     loader = {
       efi.canTouchEfiVariables = true;
-      grub = {
+      limine = {
         enable = true;
-        device = "nodev";
         efiSupport = true;
-        useOSProber = true;
-        gfxmodeBios = "auto";
-        extraEntries = ''
-           #UEFI
-           menuentry 'UEFI Firmware Settings' --id 'uefi-firmware' {
-           fwsetup
-          }
-        '';
+        maxGenerations = 10;
+        secureBoot.enable = false;
       };
     };
   };
 
   # Enable networking
-  networking.hostName = "nixos-laptop";
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "nixos-laptop";
+    networkmanager.enable = true;
+  };
 
-  # Bluetooth
+  # Hardware
   hardware = {
+    xpadneo.enable = true;
+
     bluetooth = {
       enable = true;
       powerOnBoot = true;
     };
-    xpadneo.enable = true;
+
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
   };
 
   # Services
   services = {
+    timesyncd.enable = true;
+
+    # Auto-login
+    getty = {
+      autologinUser = "gunnar";
+      autoLoginOnce = true;
+    };
+
+    # X11
+    displayManager.defaultSession = "none+i3";
+    xserver = {
+      enable = true;
+      windowManager.i3.enable = true;
+      videoDrivers = ["amdgpu"];
+      enableTearFree = true;
+      desktopManager.runXdgAutostartIfNone = true;
+      displayManager.startx.enable = true;
+    };
+
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -97,7 +117,8 @@
       };
     };
 
-    blueman.enable = false;
+    blueman.enable = true;
+    resolved.enable = true;
   };
 
   # Select internationalisation properties.
@@ -141,9 +162,9 @@
     };
 
     # Steam
-    hyprland = {
+    steam = {
       enable = true;
-      xwayland.enable = true;
+      extraCompatPackages = with pkgs; [proton-ge-bin];
     };
 
     fish.enable = true;
@@ -165,27 +186,15 @@
   };
 
   # Security
-  security.pam.services.hyprlock = {};
+  security.pam.services.i3lock-color = {};
 
   # Set your time zone.
   time.timeZone = "America/New_York";
-
-  # Graphics
-  boot.initrd.kernelModules = ["amdgpu"];
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
 
   hardware.nvidia.prime = {
     amdgpuBusId = "pci@0000:06:00.0";
     nvidiaBusId = "pci@0000:03:00.0";
   };
-
-  # KVM
-  users.groups.libvirtd.members = ["gunnar"];
-  virtualisation.libvirtd.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

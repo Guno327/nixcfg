@@ -33,7 +33,6 @@ in {
     xdg-desktop-portal-gtk
     inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-mobile-maker
     inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-multiplayer
-    syncthing
     tor-browser
     waydroid-helper
     rusty-path-of-building
@@ -73,7 +72,6 @@ in {
         jellyfin.enable = true;
       };
       firefox.enable = true;
-      lg.enable = true;
     };
   };
 

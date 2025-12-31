@@ -1,5 +1,8 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: let
+  startupScript = pkgs.writeScript "startup.sh" ''
+    feh --bg-tile /flake/home/common/bg.svg
+  '';
+in {
   imports = [
     ./home.nix
     ../features/cli
@@ -8,7 +11,7 @@
   ];
 
   home.packages = with pkgs; [
-    discord
+    webcord
     feh
   ];
 
@@ -22,21 +25,25 @@
       git.enable = true;
       gpg.enable = true;
       fzf.enable = true;
+      ssh.enable = true;
+      dev.enable = true;
     };
     desktop = {
-      gnome.enable = true;
-      foot.enable = true;
+      i3 = {
+        enable = true;
+        laptop = true;
+        term = "alacritty";
+        startup = "${toString startupScript} > /home/gunnar/.scripts/startup.log";
+      };
+      alacritty.enable = true;
       minecraft.enable = true;
       spotify.enable = true;
-      virt-manager.enable = true;
-      ee2.enable = true;
-      zen.enable = true;
+      firefox.enable = true;
     };
   };
 
   programs.fish.loginShellInit = ''
     set -x NIX_PATH nixpkgs=channel:nixos-unstable
     set -x NIX_LOG info
-    set -x TERM xterm-256color
   '';
 }

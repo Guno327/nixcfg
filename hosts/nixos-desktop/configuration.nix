@@ -44,23 +44,30 @@
     enableIPv6 = false;
   };
 
-  # Bluetooth
   hardware = {
+    xpadneo.enable = true;
+
+    # Bluetooth
     bluetooth = {
       enable = true;
       powerOnBoot = true;
     };
-    xpadneo.enable = true;
-  };
 
-  # Tablet Drivers
-  hardware.opentabletdriver = {
-    enable = true;
-    daemon.enable = true;
-    blacklistedKernelModules = [
-      "hid-uclogic"
-      "wacom"
-    ];
+    # Tablet Drivers
+    opentabletdriver = {
+      enable = true;
+      daemon.enable = true;
+      blacklistedKernelModules = [
+        "hid-uclogic"
+        "wacom"
+      ];
+    };
+
+    # Graphics
+    graphics = {
+      enable = true;
+      enable32Bit = true;
+    };
   };
 
   # xdg
@@ -106,6 +113,12 @@
       enable = true;
       settings.PermitRootLogin = "no";
       allowSFTP = true;
+    };
+
+    # Printing
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
     };
 
     printing = {
@@ -210,9 +223,6 @@
     # Steam
     steam = {
       enable = true;
-      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
       extraCompatPackages = with pkgs; [proton-ge-bin];
     };
 
@@ -227,7 +237,9 @@
     };
 
     loginShellInit = ''
-      if [[ "$(tty)" == /dev/tty1 ]] && startx
+      if [[ "$(tty)" == "/dev/tty1" ]]; then
+        exec startx
+      fi
     '';
 
     systemPackages = with pkgs; [
@@ -246,19 +258,10 @@
     ];
   };
 
-  # login shell
-
-  # Graphics
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
   # Virt
   users.groups.libvirtd.members = ["gunnar"];
   virtualisation = {
     libvirtd.enable = true;
-    waydroid.enable = true;
     spiceUSBRedirection.enable = true;
   };
 
