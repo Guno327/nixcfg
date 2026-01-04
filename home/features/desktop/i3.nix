@@ -6,12 +6,6 @@
 }:
 with lib; let
   cfg = config.features.desktop.i3;
-  status = pkgs.bumblebee-status.override {
-    plugins = p: [
-      p.nic
-      p.pipewire
-    ];
-  };
 in {
   options.features.desktop.i3 = {
     enable = mkEnableOption "enable and configure i3";
@@ -36,27 +30,8 @@ in {
         xclip
         i3lock-color
         feh
-        status
         playerctl
       ];
-
-      home.file.".xinitrc" = {
-        enable = true;
-        executable = true;
-        force = true;
-        text = ''
-          if test -z "$DBUS_SESSION_BUS_ADDRESS"; then
-            eval $(dbus-launch --exit-with-session --sh-syntax)
-          fi
-          systemctl --user import-environment DISPLAY XAUTHORITY
-
-          if command -v dbus-update-activation-environment >/dev/null 2>&1; then
-                  dbus-update-activation-environment DISPLAY XAUTHORITY
-          fi
-
-          exec i3
-        '';
-      };
 
       services = {
         picom.enable = true;
@@ -65,6 +40,108 @@ in {
           provider = "manual";
           latitude = "35.0";
           longitude = "-80.9";
+        };
+        polybar = {
+          enable = true;
+
+          package = pkgs.polybar.override {
+            i3Support = true;
+            alsaSupport = true;
+            iwSupport = true;
+            nlSupport = true;
+          };
+
+          settings = {
+            "module/alsa" = {
+              type = "internal/alsa";
+              format-volume = "vol: <label-volume>";
+              label-muted = "muted";
+            };
+
+            "module/backlight" = {
+              type = "internal/backlight";
+              format = "bl: <label>";
+              use-actual-brightness = true;
+              poll-interval = 0;
+            };
+
+            "module/battery" = {
+              type = "internal/battery";
+              poll-interval = 5;
+              time-format = "%H:%M";
+              format-charging = "bat: <label-charging>";
+              format-discharging = "bat: <label-discharging>";
+              label-charging = "+%percentage%%";
+              label-discharging = "%percentage%% %time%";
+            };
+
+            "module/date" = {
+              type = "internal/date";
+              date = "%a, %b %d";
+              time = "%H:%M";
+              format = "<label>";
+              label = "%date% %time%";
+            };
+
+            "module/i3" = {
+              type = "internal/i3";
+              format = "<label-state>";
+              pin-workspaces = true;
+
+              label-focused = "%index%";
+              label-focused-foreground = "#313244";
+              label-focused-background = "#89b4fa";
+              label-focused-padding = 1;
+
+              label-unfocused = "%index%";
+              label-unfocused-foreground = "#cdd6f4";
+              label-unfocused-background = "#313244";
+              label-unfocused-padding = 1;
+
+              label-urgent = "%index%";
+              label-urgent-foreground = "#313244";
+              label-urgent-background = "#f5c2e7";
+              label-urgent-padding = 1;
+
+              label-visible = "%index%";
+              label-visible-foreground = "#cdd6f4";
+              label-visible-background = "#313244";
+              label-visible-padding = 1;
+            };
+
+            "module/wireless" = {
+              type = "internal/network";
+              interface-type = "wireless";
+              format-connected = "<label-connected>";
+              format-disconnected = "<label-disconnected>";
+              format-packetloss = "!<label-connected>";
+              label-connected = "%essid%: %downspeed%";
+              label-disconnected = "%ifname%";
+            };
+
+            "module/wired" = {
+              type = "internal/network";
+              interface-type = "wired";
+              format-connected = "<label-connected>";
+              format-disconnected = "<label-disconnected>";
+              format-packetloss = "!<label-connected>";
+              label-connected = "%local_ip%: %downspeed%";
+              label-disconnected = "%ifname%";
+            };
+
+            "module/tray" = {
+              type = "internal/tray";
+              format-margin = "8px";
+              tray-spacing = "8px";
+            };
+
+            "module/window" = {
+              type = "internal/xwindow";
+              format = "<label>";
+              label = "%title%";
+              label-empty = "";
+            };
+          };
         };
       };
 
@@ -211,45 +288,38 @@ in {
             output = "DisplayPort-1";
           }
         ];
-        bars = [
-          {
-            id = "main";
-            position = "bottom";
-            trayOutput = "primary";
-            statusCommand = ''
-              ${status}/bin/bumblebee-status \
-                -m network ping pipewire datetime \
-                -p interval=1 datetime.format=" %a, %b %-d %H:%M" ping.address=1.1.1.1
-            '';
-            extraConfig = "output primary";
-            fonts = {
-              names = [
-                "FiraCode Nerd Font"
-                "Material Icons"
-              ];
-              style = "Regular";
-              size = 12.0;
-            };
-          }
-          {
-            id = "2";
-            position = "bottom";
-            trayOutput = "none";
-            statusCommand = ''
-              ${status}/bin/bumblebee-status \
-              -m datetime -p datetime.format="%a, %b %-d %H:%M"
-            '';
-            extraConfig = "output nonprimary";
-            fonts = {
-              names = [
-                "FiraCode Nerd Font"
-                "Material Icons"
-              ];
-              style = "Regular";
-              size = 12.0;
-            };
-          }
-        ];
+      };
+
+      services.polybar = {
+        settings = {
+          "module/wired" = {
+            interface = "enp7s0";
+          };
+
+          "bar/primary" = {
+            monitor = "DisplayPort-0";
+            bottom = true;
+            font-0 = "Fira Code:size=12;2";
+            background = "#11111b";
+            foreground = "#cdd6f4";
+            modules-left = "i3";
+            modules-center = "window";
+            modules-right = "wired network alsa date tray";
+            separator = " | ";
+          };
+
+          "bar/aux" = {
+            monitor = "DisplayPort-1";
+            bottom = true;
+            font-0 = "Fira Code:size=12;2";
+            background = "#11111b";
+            foreground = "#cdd6f4";
+            modules-left = "i3";
+            modules-right = "date";
+            separator = " | ";
+          };
+        };
+        script = "polybar primary & polybar aux &";
       };
     })
     (mkIf cfg.laptop {
@@ -296,27 +366,27 @@ in {
             output = "HDMI-A-1-0";
           }
         ];
-        bars = [
-          {
-            id = "main";
-            position = "bottom";
-            trayOutput = "primary";
-            statusCommand = ''
-              ${status}/bin/bumblebee-status \
-                -m network ping pipewire datetime \
-                -p interval=1 datetime.format=" %a, %b %-d %H:%M" ping.address=1.1.1.1
-            '';
-            extraConfig = "output primary";
-            fonts = {
-              names = [
-                "FiraCode Nerd Font"
-                "Material Icons"
-              ];
-              style = "Regular";
-              size = 12.0;
+
+        services.polybar = {
+          settings = {
+            "module/wireless" = {
+              interface = "wlan0";
             };
-          }
-        ];
+
+            "bar/primary" = {
+              monitor = "eDP";
+              bottom = true;
+              font-0 = "Fira Code:size=12;2";
+              background = "#11111b";
+              foreground = "#cdd6f4";
+              modules-left = "i3";
+              modules-center = "window";
+              modules-right = "wireless network alsa backlight battery date tray";
+              separator = " | ";
+            };
+          };
+          script = "polybar primary &";
+        };
       };
     })
   ];

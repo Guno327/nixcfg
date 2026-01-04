@@ -9,10 +9,7 @@
     xrandr --output DisplayPort-0 --right-of DisplayPort-1 --mode 2560x1440 --rate 165 --primary
     feh --bg-tile /flake/home/common/bg.svg
 
-    systemctl start --user jellyfin-mpv-shim
-    systemctl start --user redshift
-
-    webcord &
+    discord &
     firefox &
   '';
 in {
@@ -24,11 +21,10 @@ in {
   ];
 
   home.packages = with pkgs; [
-    webcord
+    discord
     r2modman
     protonup-qt
     pkgs.stable.godot_4
-    osu-lazer-bin
     wlr-randr
     xdg-desktop-portal-gtk
     inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-mobile-maker
@@ -63,8 +59,6 @@ in {
       alacritty.enable = true;
       minecraft.enable = true;
       virt-manager.enable = true;
-      ee2.enable = true;
-      poetrade.enable = true;
       recording.enable = true;
       spotify.enable = true;
       mpv = {
