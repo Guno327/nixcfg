@@ -253,6 +253,71 @@ in {
       };
     })
     (mkIf cfg.laptop {
-      })
+      xsession.windowManager.i3.config = {
+        workspaceOutputAssign = [
+          {
+            workspace = "1";
+            output = "eDP";
+          }
+          {
+            workspace = "2";
+            output = "eDP";
+          }
+          {
+            workspace = "3";
+            output = "eDP";
+          }
+          {
+            workspace = "4";
+            output = "eDP";
+          }
+          {
+            workspace = "5";
+            output = "eDP";
+          }
+          {
+            workspace = "6";
+            output = "eDP";
+          }
+          {
+            workspace = "7";
+            output = "eDP";
+          }
+          {
+            workspace = "8";
+            output = "eDP";
+          }
+          {
+            workspace = "9";
+            output = "eDP";
+          }
+          {
+            workspace = "0";
+            output = "HDMI-A-1-0";
+          }
+        ];
+        bars = [
+          {
+            id = "main";
+            position = "bottom";
+            trayOutput = "primary";
+            statusCommand = ''
+              ${status}/bin/bumblebee-status \
+                -m network ping pipewire datetime \
+                -p interval=1 datetime.format=" %a, %b %-d %H:%M" ping.address=1.1.1.1
+            '';
+            extraConfig = "output primary";
+            fonts = {
+              names = [
+                "FiraCode Nerd Font"
+                "Material Icons"
+              ];
+              style = "Regular";
+              size = 12.0;
+            };
+          }
+        ];
+      };
+    })
   ];
 }

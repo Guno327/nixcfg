@@ -26,11 +26,6 @@
       fsType = "ext4";
     };
 
-    "/home" = {
-      device = "/dev/disk/by-label/NIXHOME";
-      fsType = "ext4";
-    };
-
     "/boot" = {
       device = "/dev/disk/by-label/NIXBOOT";
       fsType = "vfat";

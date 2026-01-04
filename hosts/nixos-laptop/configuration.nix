@@ -5,8 +5,10 @@
 }: {
   imports = [
     ./hardware-configuration.nix
-    ../common/gnome.nix
   ];
+
+  # TEMP
+  services.logrotate.checkConfig = false;
 
   # Bootloader.
   boot = {
@@ -16,7 +18,7 @@
         enable = true;
         efiSupport = true;
         maxGenerations = 10;
-        secureBoot.enable = false;
+        secureBoot.enable = true;
       };
     };
   };
@@ -49,7 +51,7 @@
     # Auto-login
     getty = {
       autologinUser = "gunnar";
-      autoLoginOnce = true;
+      autologinOnce = true;
     };
 
     # X11
@@ -62,6 +64,7 @@
       desktopManager.runXdgAutostartIfNone = true;
       displayManager.startx.enable = true;
     };
+    libinput.touchpad.naturalScrolling = true;
 
     pipewire = {
       enable = true;
@@ -172,6 +175,12 @@
 
   # Environment
   environment = {
+    loginShellInit = ''
+      if [[ "$(tty)" == "/dev/tty1" ]]; then
+        exec startx
+      fi
+    '';
+
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
@@ -182,6 +191,7 @@
       git-crypt
       blueman
       nvtopPackages.amd
+      sbctl
     ];
   };
 
