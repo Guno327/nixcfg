@@ -7,6 +7,7 @@
      #!/usr/bin/env bash
     xrandr --output DisplayPort-1 --mode 1920x1080 --rotate right
     xrandr --output DisplayPort-0 --right-of DisplayPort-1 --mode 2560x1440 --rate 165 --primary
+    systemctl start --user polybar
     feh --bg-tile /flake/home/common/bg.svg
 
     discord &

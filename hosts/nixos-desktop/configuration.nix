@@ -82,10 +82,10 @@
     # Enable timesyncd
     timesyncd.enable = true;
 
-    # Auto-login since we have full disk encryption
-    getty = {
-      autologinUser = "gunnar";
-      autologinOnce = true;
+    # Auto login
+    displayManager.autoLogin = {
+      enable = true;
+      user = "gunnar";
     };
 
     # X11
@@ -95,9 +95,10 @@
       windowManager.i3.enable = true;
       videoDrivers = ["amdgpu"];
       enableTearFree = true;
-      desktopManager.runXdgAutostartIfNone = true;
-
-      displayManager.startx.enable = true;
+      displayManager.lightdm = {
+        enable = true;
+        greeter.enable = false;
+      };
     };
 
     # Pipewire
@@ -235,12 +236,6 @@
   environment = {
     sessionVariables = {
     };
-
-    loginShellInit = ''
-      if [[ "$(tty)" == "/dev/tty1" ]]; then
-        exec startx
-      fi
-    '';
 
     systemPackages = with pkgs; [
       pavucontrol
