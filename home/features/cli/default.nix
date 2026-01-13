@@ -49,7 +49,6 @@
     comma
     nixos-anywhere
     tmux
-    mtpfs
     arp-scan
     nmap
     wget
