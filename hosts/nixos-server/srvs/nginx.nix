@@ -33,6 +33,7 @@ in {
             "/".proxyPass = "http://127.0.0.1:${toString port}/";
           };
       in {
+        "about.ghov.net" = proxy 8080;
         "media.ghov.net" = proxy 8096;
         "request.ghov.net" = proxy 5000;
         "sonarr.ghov.net" = proxy 8989;

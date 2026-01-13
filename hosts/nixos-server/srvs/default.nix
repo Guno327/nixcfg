@@ -7,5 +7,6 @@
     ./nvidia.nix
     ./minecraft.nix
     ./nginx.nix
+    ./about.nix
   ];
 }

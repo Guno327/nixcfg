@@ -157,6 +157,7 @@
       launchOptions = "-multihome=0.0.0.0";
     };
     nginx.enable = true;
+    about.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
