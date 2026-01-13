@@ -55,14 +55,8 @@
           addDefaultGrammars = true;
           autotagHtml = true;
           context.enable = true;
-          indent = {
-            enable = true;
-            disable = ["yaml"];
-          };
-          highlight = {
-            enable = true;
-            additionalVimRegexHighlighting = true;
-          };
+          indent.enable = true;
+          highlight.enable = true;
         };
 
         visuals = {
