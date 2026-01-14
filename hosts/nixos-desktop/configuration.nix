@@ -15,10 +15,10 @@
         maxGenerations = 10;
         secureBoot.enable = true;
         extraEntries = ''
-          /Windows
-          comment: Windows Boot Manager
+          /Work
+          comment: Ubuntu LTS
           protocol: efi
-          path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+          path: fslabel(UBUNTUBOOT):/EFI/ubuntu/shimx64.efi
         '';
       };
     };
@@ -73,7 +73,8 @@
   # xdg
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal];
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [xdg-desktop-portal xdg-desktop-portal-gtk];
     config.common.default = ["gtk"];
   };
 
@@ -81,6 +82,12 @@
   services = {
     # Enable timesyncd
     timesyncd.enable = true;
+
+    # Enable flatpak
+    flatpak.enable = true;
+
+    # Enable dbus
+    dbus.enable = true;
 
     # Auto login
     displayManager.autoLogin = {
