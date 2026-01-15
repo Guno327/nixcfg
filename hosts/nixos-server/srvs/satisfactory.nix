@@ -38,13 +38,13 @@ in {
       if config.services.nebula.networks."mesh".enable
       then {
         interfaces."nebula0" = {
-          allowedTCPPorts = [7777];
-          allowedUDPPorts = [7777 8888];
+          allowedTCPPorts = [7777 8888];
+          allowedUDPPorts = [7777];
         };
       }
       else {
-        allowedTCPPorts = [7777];
-        allowedUDPPorts = [7777 8888];
+        allowedTCPPorts = [7777 8888];
+        allowedUDPPorts = [7777];
       };
 
     # Setup user
