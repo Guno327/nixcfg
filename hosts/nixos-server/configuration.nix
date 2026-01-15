@@ -165,9 +165,8 @@
   srvs = {
     media.enable = true;
     nvidia.enable = true;
-    adblock.enable = true;
     satisfactory = {
-      enable = false;
+      enable = true;
       launchOptions = "-multihome=0.0.0.0";
     };
     nginx.enable = true;
