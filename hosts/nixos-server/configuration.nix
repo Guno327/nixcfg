@@ -171,6 +171,7 @@
     };
     nginx.enable = true;
     about.enable = true;
+    nextcloud.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

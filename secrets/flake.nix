@@ -7,19 +7,27 @@
     sops-nix.url = "github:Mic92/sops-nix";
   };
 
-  outputs = { self, nixpkgs, flake-utils, sops-nix }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system}; in
-      {
-        devShells.default = pkgs.mkShell {
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    sops-nix,
+  }:
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      devShells.default = pkgs.mkShell {
         sopsPGPKeyDirs = [
           "${toString ./.}/keys/hosts"
           "${toString ./.}/keys/users"
         ];
         sopsGPGHome = "${toString ../.}/../gnupg";
         nativeBuildInputs = [
-          (pkgs.callPackage sops-nix { }).sops-import-keys-hook
+          (pkgs.callPackage sops-nix {}).sops-import-keys-hook
         ];
-        };
-      });
+        shellHook = ''
+          alias "nvim" "nix run github:guno327/nvf-flake"
+        '';
+      };
+    });
 }

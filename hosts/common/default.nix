@@ -59,6 +59,7 @@
     variables = {
       "NH_FLAKE" = "/flake";
       GPG_TTY = "$(tty)";
+      "EDITOR" = "nix run github:guno327/nvf-flake";
     };
     shellAliases = {
       "nvim" = "nix run github:guno327/nvf-flake";

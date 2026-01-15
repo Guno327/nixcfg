@@ -7,5 +7,6 @@
     ./minecraft.nix
     ./nginx.nix
     ./about.nix
+    ./nextcloud.nix
   ];
 }

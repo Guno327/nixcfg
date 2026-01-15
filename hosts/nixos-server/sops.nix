@@ -8,6 +8,7 @@
     prowlarr = {};
     radarr = {};
     sonarr = {};
+    nextcloud = {};
 
     wireguard = {
       sopsFile = ../../secrets/wg0.conf;
