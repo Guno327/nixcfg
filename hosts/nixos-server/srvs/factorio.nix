@@ -3,11 +3,9 @@
   lib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.srvs.steam;
-in
-{
+in {
   options.srvs.steam = {
     enable = mkEnableOption "Enable steam service";
     satisfactory.enable = mkEnableOption "Enable satisfactory server";
@@ -15,6 +13,20 @@ in
   };
 
   config = mkIf cfg.enable {
+    # Open Firewall
+    networking.firewall =
+      if config.services.nebula.networks."mesh".enable
+      then {
+        interfaces."nebula0" = {
+          allowedTCPPorts = [7777];
+          allowedUDPPorts = [7777];
+        };
+      }
+      else {
+        allowedTCPPorts = [7777];
+        allowedUDPPorts = [7777];
+      };
+
     users = {
       users.steam = {
         uid = 9000;
@@ -40,7 +52,7 @@ in
           "7777:7777/udp"
           "7777:7777/tcp"
         ];
-        volumes = [ "/home/steam/satisfactory:/config" ];
+        volumes = ["/home/steam/satisfactory:/config"];
         environment = {
           MAX_PLAYERS = "4";
           PGID = "9000";

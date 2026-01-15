@@ -28,21 +28,34 @@
   networking = {
     hostName = "nixos-server";
     hostId = "85eef91f";
-    firewall.enable = false;
     useDHCP = false;
     enableIPv6 = false;
-  };
+    defaultGateway = "10.0.0.1";
+    nameservers = ["10.0.0.1"];
 
-  # Setup bridge
-  networking = {
     interfaces."eno1".ipv4.addresses = [
       {
         address = "10.0.0.3";
         prefixLength = 24;
       }
     ];
-    defaultGateway = "10.0.0.1";
-    nameservers = ["10.0.0.1"];
+
+    firewall = {
+      enable = true;
+      interfaces = {
+        # Allow SSH on local network for troubleshooting
+        "eno1" = {
+          allowedTCPPorts = [22];
+          allowedUDPPorts = [];
+        };
+
+        # All ingress should come across the nebula mesh
+        "nebula0" = {
+          allowedTCPPorts = [22 80 443];
+          allowedUDPPorts = [80 443];
+        };
+      };
+    };
   };
 
   # Set your time zone.
@@ -79,6 +92,7 @@
 
     # Nebula Mesh
     nebula.networks."mesh" = {
+      tun.device = "nebula0";
       staticHostMap."100.100.0.1" = ["192.227.212.190:4242"];
       lighthouses = ["100.100.0.1"];
       key = config.sops.secrets."nebula/server.key".path;
