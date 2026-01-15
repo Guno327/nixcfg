@@ -3,11 +3,9 @@
   lib,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.features.cli.fish;
-in
-{
+in {
   options.features.cli.fish.enable = mkEnableOption "enable extended fish configuration";
   config = mkIf cfg.enable {
     programs.fish = {
@@ -17,13 +15,6 @@ in
         set -x NIX_LOG info
         direnv hook fish | source
       '';
-      shellAbbrs = {
-        ".." = "cd ..";
-        "..." = "cd ../..";
-        ps = "procs";
-        steam = "steam &> /dev/null & disown";
-        dcp = "rsync -r --partial --info=progress2";
-      };
     };
   };
 }

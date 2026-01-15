@@ -6,9 +6,8 @@
   ...
 }: {
   imports = [
-    ./users
     inputs.home-manager.nixosModules.home-manager
-    ./nvf-configuration.nix
+    ./users
     ./sops.nix
   ];
 
@@ -56,9 +55,18 @@
   programs.nix-ld.enable = true;
   users.defaultUserShell = pkgs.fish;
 
-  environment.variables = {
-    "NH_FLAKE" = "/flake";
-    GPG_TTY = "$(tty)";
+  environment = {
+    variables = {
+      "NH_FLAKE" = "/flake";
+      GPG_TTY = "$(tty)";
+    };
+    shellAliases = {
+      "nvim" = "nix run github:guno327/nvf-flake";
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "ps" = "procs";
+      "dcp" = "rsync -ar --partial --info=progress2";
+    };
   };
 
   networking.hosts = {

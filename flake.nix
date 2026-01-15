@@ -28,11 +28,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nvf = {
-      url = "github:notashelf/nvf";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -72,7 +67,6 @@
     home-manager,
     nixpkgs,
     nixos-hardware,
-    nvf,
     stylix,
     nixarr,
     sops-nix,
@@ -96,7 +90,6 @@
           nixos-hardware.nixosModules.common-gpu-amd
           nixos-hardware.nixosModules.common-pc-laptop
 
-          nvf.nixosModules.default
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
         ];
@@ -110,7 +103,6 @@
           nixos-hardware.nixosModules.common-gpu-amd
           nixos-hardware.nixosModules.common-pc-ssd
 
-          nvf.nixosModules.default
           stylix.nixosModules.stylix
           sops-nix.nixosModules.sops
         ];
@@ -121,7 +113,6 @@
         modules = [
           ./hosts/nixos-server
 
-          nvf.nixosModules.default
           stylix.nixosModules.stylix
           nixarr.nixosModules.default
           sops-nix.nixosModules.sops
