@@ -203,8 +203,8 @@ in {
               "${mod}+Control+Shift+Left" = "resize grow width 1 px or 1 ppt";
               "${mod}+Control+Shift+Right" = "resize shrink width 1 px or 1 ppt";
 
-              "XF86MonBrightnessDown" = "exec brightnessctl --quiet s 10-";
-              "XF86MonBrightnessUp" = "exec brightnessctl --quiet s +10";
+              "XF86MonBrightnessDown" = "exec brightnessctl --quiet s 10%-";
+              "XF86MonBrightnessUp" = "exec brightnessctl --quiet s +10%";
               "XF86AudioRaiseVolume" = "exec wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+";
               "XF86AudioLowerVolume" = "exec wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK 5%-";
               "XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
