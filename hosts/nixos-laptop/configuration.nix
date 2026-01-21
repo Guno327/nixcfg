@@ -7,9 +7,6 @@
     ./hardware-configuration.nix
   ];
 
-  # TEMP
-  services.logrotate.checkConfig = false;
-
   # Bootloader.
   boot = {
     loader = {
@@ -26,7 +23,12 @@
   # Enable networking
   networking = {
     hostName = "nixos-laptop";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      plugins = with pkgs; [
+        networkmanager-openvpn
+      ];
+    };
   };
 
   # Hardware
@@ -44,14 +46,29 @@
     };
   };
 
+  # xdg
+  xdg.portal = {
+    enable = true;
+    xdgOpenUsePortal = true;
+    extraPortals = with pkgs; [xdg-desktop-portal xdg-desktop-portal-gtk];
+    config.common.default = ["gtk"];
+  };
+
   # Services
   services = {
+    # Enable timesyncd
     timesyncd.enable = true;
 
-    # Auto-login
-    getty = {
-      autologinUser = "gunnar";
-      autologinOnce = true;
+    # Enable flatpak
+    flatpak.enable = true;
+
+    # Enable dbus
+    dbus.enable = true;
+
+    # Auto login
+    displayManager.autoLogin = {
+      enable = true;
+      user = "gunnar";
     };
 
     # X11
@@ -61,9 +78,12 @@
       windowManager.i3.enable = true;
       videoDrivers = ["amdgpu"];
       enableTearFree = true;
-      desktopManager.runXdgAutostartIfNone = true;
-      displayManager.startx.enable = true;
+      displayManager.lightdm = {
+        enable = true;
+        greeter.enable = false;
+      };
     };
+
     libinput.touchpad.naturalScrolling = true;
 
     pipewire = {
@@ -175,20 +195,12 @@
 
   # Environment
   environment = {
-    loginShellInit = ''
-      if [[ "$(tty)" == "/dev/tty1" ]]; then
-        exec startx
-      fi
-    '';
-
     sessionVariables = {
-      NIXOS_OZONE_WL = "1";
     };
 
     systemPackages = with pkgs; [
       pavucontrol
       nh
-      git-crypt
       blueman
       nvtopPackages.amd
       sbctl

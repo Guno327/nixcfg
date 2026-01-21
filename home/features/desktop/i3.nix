@@ -366,27 +366,31 @@ in {
             output = "HDMI-A-1-0";
           }
         ];
-
-        services.polybar = {
-          settings = {
-            "module/wireless" = {
-              interface = "wlan0";
-            };
-
-            "bar/primary" = {
-              monitor = "eDP";
-              bottom = true;
-              font-0 = "Fira Code:size=12;2";
-              background = "#11111b";
-              foreground = "#cdd6f4";
-              modules-left = "i3";
-              modules-center = "window";
-              modules-right = "wireless network alsa backlight battery date tray";
-              separator = " | ";
-            };
+      };
+      services.polybar = {
+        settings = {
+          "module/wireless" = {
+            interface = "wlp4s0";
           };
-          script = "polybar primary &";
+
+          "module/battery" = {
+            battery = "BAT1";
+            adapter = "ADP1";
+          };
+
+          "bar/primary" = {
+            monitor = "eDP";
+            bottom = true;
+            font-0 = "Fira Code:size=12;2";
+            background = "#11111b";
+            foreground = "#cdd6f4";
+            modules-left = "i3";
+            modules-center = "window";
+            modules-right = "wireless network alsa backlight battery date tray";
+            separator = " | ";
+          };
         };
+        script = "polybar primary &";
       };
     })
   ];

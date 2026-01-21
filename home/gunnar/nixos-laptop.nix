@@ -1,8 +1,13 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   startupScript = pkgs.writeScript "startup.sh" ''
     #!/usr/bin/env bash
     xrandr --output eDP --mode 1920x1080 --rate 240 --primary
     feh --bg-tile /flake/home/common/bg.svg
+    polybar primary &
   '';
 in {
   imports = [
@@ -13,7 +18,7 @@ in {
   ];
 
   home.packages = with pkgs; [
-    webcord
+    discord
     feh
   ];
 
@@ -48,4 +53,6 @@ in {
     set -x NIX_PATH nixpkgs=channel:nixos-unstable
     set -x NIX_LOG info
   '';
+
+  programs.alacritty.settings.font.size = lib.mkForce 12;
 }

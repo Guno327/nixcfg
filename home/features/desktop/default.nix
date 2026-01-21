@@ -32,5 +32,6 @@
     steam-tui
     steamcmd
     nvtopPackages.amd
+    mattermost
   ];
 }
