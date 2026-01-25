@@ -5,11 +5,6 @@
 }: let
   startupScript = pkgs.writeScript "startup.sh" ''
      #!/usr/bin/env bash
-    xrandr --output DisplayPort-1 --mode 1920x1080 --rotate right
-    xrandr --output DisplayPort-0 --right-of DisplayPort-1 --mode 2560x1440 --rate 165 --primary
-    systemctl start --user polybar
-    feh --bg-tile /flake/home/common/bg.svg
-
     discord &
     firefox &
   '';
@@ -24,14 +19,9 @@ in {
   home.packages = with pkgs; [
     discord
     r2modman
-    protonup-qt
     pkgs.stable.godot_4
-    wlr-randr
-    xdg-desktop-portal-gtk
     inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-mobile-maker
     inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-multiplayer
-    tor-browser
-    waydroid-helper
     rusty-path-of-building
     orca-slicer
   ];
@@ -51,7 +41,7 @@ in {
       dev.enable = true;
     };
     desktop = {
-      i3 = {
+      sway = {
         enable = true;
         desktop = true;
         term = "alacritty";
@@ -60,7 +50,6 @@ in {
       alacritty.enable = true;
       minecraft.enable = true;
       virt-manager.enable = true;
-      recording.enable = true;
       spotify.enable = true;
       mpv = {
         enable = true;

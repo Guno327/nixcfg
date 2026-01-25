@@ -74,38 +74,21 @@
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    extraPortals = with pkgs; [xdg-desktop-portal xdg-desktop-portal-gtk];
+    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
     config.common.default = ["gtk"];
   };
 
   # Services
   services = {
-    # Enable timesyncd
     timesyncd.enable = true;
-
-    # Enable flatpak
     flatpak.enable = true;
-
-    # Enable dbus
     dbus.enable = true;
+    gnome.gnome-keyring.enable = true;
 
     # Auto login
-    displayManager.autoLogin = {
-      enable = true;
-      user = "gunnar";
-    };
-
-    # X11
-    displayManager.defaultSession = "none+i3";
-    xserver = {
-      enable = true;
-      windowManager.i3.enable = true;
-      videoDrivers = ["amdgpu"];
-      enableTearFree = true;
-      displayManager.lightdm = {
-        enable = true;
-        greeter.enable = false;
-      };
+    getty = {
+      autologinUser = "gunnar";
+      autologinOnce = true;
     };
 
     # Pipewire
@@ -171,8 +154,11 @@
   '';
   # Security
   security = {
+    polkit.enable = true;
+
     pam.services = {
-      i3lock-color = {};
+      greetd.enableGnomeKeyring = true;
+      swaylock.enableGnomeKeyring = true;
     };
 
     tpm2 = {
@@ -236,11 +222,12 @@
 
     wireshark.enable = true;
     fish.enable = true;
-    adb.enable = true;
   };
 
   # Environment
   environment = {
+    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && sway'';
+
     sessionVariables = {
     };
 
@@ -257,6 +244,7 @@
       gamemode
       chromium
       tpm2-tss
+      android-tools
     ];
   };
 
