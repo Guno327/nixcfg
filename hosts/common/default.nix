@@ -62,12 +62,14 @@
       "EDITOR" = "nix run github:guno327/nvf-flake";
     };
     shellAliases = {
-      "nvim" = "nix run github:guno327/nvf-flake";
       ".." = "cd ..";
       "..." = "cd ../..";
       "ps" = "procs";
       "dcp" = "rsync -ar --partial --info=progress2";
     };
+    systemPackages = [
+      inputs.nvf-flake.packages.x86_64-linux.default
+    ];
   };
 
   networking.hosts = {
