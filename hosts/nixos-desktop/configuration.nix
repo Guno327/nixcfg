@@ -221,7 +221,12 @@
     };
 
     wireshark.enable = true;
-    fish.enable = true;
+    fish = {
+      enable = true;
+      interactiveShellInit = ''
+        setenv GEMINI_API_KEY $(cat ${config.sops.secrets."gemini".path})
+      '';
+    };
   };
 
   # Environment

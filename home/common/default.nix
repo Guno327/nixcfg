@@ -6,7 +6,6 @@
   ...
 }: {
   imports = [
-    inputs.sops-nix.homeManagerModules.sops
     inputs.caelestia-shell.homeManagerModules.default
     inputs.zen-browser.homeModules.twilight
   ];

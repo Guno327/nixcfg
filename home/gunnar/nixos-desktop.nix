@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: let
   startupScript = pkgs.writeScript "startup.sh" ''
@@ -24,6 +25,7 @@ in {
     inputs.custom-pkgs.packages."${stdenv.hostPlatform.system}".balatro-multiplayer
     rusty-path-of-building
     orca-slicer
+    gemini-cli
   ];
 
   features = {

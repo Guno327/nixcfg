@@ -58,7 +58,7 @@
   environment = {
     variables = {
       "NH_FLAKE" = "/flake";
-      GPG_TTY = "$(tty)";
+      "GPG_TTY" = "$(tty)";
       "EDITOR" = "nix run github:guno327/nvf-flake";
     };
     shellAliases = {

@@ -26,7 +26,7 @@
           (pkgs.callPackage sops-nix {}).sops-import-keys-hook
         ];
         shellHook = ''
-          alias "nvim" "nix run github:guno327/nvf-flake"
+          EDITOR="nix run github:guno327/nvf-flake"
         '';
       };
     });

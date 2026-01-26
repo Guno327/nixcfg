@@ -8,7 +8,6 @@
     };
 
     secrets = {
-      gemini = {};
       github = {};
       cf = {};
 
@@ -19,6 +18,12 @@
       "nebula/desktop.key" = {owner = "nebula-mesh";};
       "nebula/desktop.crt" = {owner = "nebula-mesh";};
       "nebula/ca.crt" = {owner = "nebula-mesh";};
+
+      gemini = {
+        owner = "gunnar";
+        path = "/home/gunnar/.gemini/api.key";
+        mode = "0600";
+      };
 
       sshcontrol = {
         sopsFile = ../../secrets/sshcontrol;

@@ -125,19 +125,25 @@
       "gunnar@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/gunnar/nixos-laptop.nix];
+        modules = [
+          ./home/gunnar/nixos-laptop.nix
+        ];
       };
 
       "gunnar@nixos-desktop" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/gunnar/nixos-desktop.nix];
+        modules = [
+          ./home/gunnar/nixos-desktop.nix
+        ];
       };
 
       "gunnar@nixos-server" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/gunnar/nixos-server.nix];
+        modules = [
+          ./home/gunnar/nixos-server.nix
+        ];
       };
     };
   };
