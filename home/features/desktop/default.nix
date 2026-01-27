@@ -33,5 +33,6 @@
     steamcmd
     nvtopPackages.amd
     mattermost
+    satisfactorymodmanager
   ];
 }
