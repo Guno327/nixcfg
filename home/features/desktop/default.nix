@@ -32,7 +32,7 @@
     steam-tui
     steamcmd
     nvtopPackages.amd
-    mattermost
+    mattermost-desktop
     satisfactorymodmanager
   ];
 }
