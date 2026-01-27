@@ -71,10 +71,14 @@
 
   # Services
   services = {
-    timesyncd.enable = true;
     flatpak.enable = true;
     dbus.enable = true;
     gnome.gnome-keyring.enable = true;
+
+    # Time
+    geoclue2.enable = true;
+    timesyncd.enable = true;
+    automatic-timezoned.enable = true;
 
     # Auto login
     getty = {
