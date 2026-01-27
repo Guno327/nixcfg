@@ -27,21 +27,12 @@
   # Networking
   networking = {
     hostName = "nixos-desktop";
-    useDHCP = false;
-    interfaces.enp7s0 = {
-      ipv4.addresses = [
-        {
-          address = "10.0.0.100";
-          prefixLength = 24;
-        }
+    networkmanager = {
+      enable = true;
+      plugins = with pkgs; [
+        networkmanager-openvpn
       ];
     };
-    defaultGateway = "10.0.0.1";
-    nameservers = [
-      "1.1.1.1"
-      "8.8.8.8"
-    ];
-    enableIPv6 = false;
   };
 
   hardware = {

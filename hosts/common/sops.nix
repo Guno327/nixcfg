@@ -32,6 +32,20 @@
         path = "/home/gunnar/.gnupg/sshcontrol";
         mode = "0600";
       };
+
+      # Canonical VPN
+      "canonical-guno327.crt" = {
+        sopsFile = ../../secrets/canonical-vpn.yaml;
+      };
+      "canonical-guno327.key" = {
+        sopsFile = ../../secrets/canonical-vpn.yaml;
+      };
+      "canonical_ca.crt" = {
+        sopsFile = ../../secrets/canonical-vpn.yaml;
+      };
+      "canonical_ta.key" = {
+        sopsFile = ../../secrets/canonical-vpn.yaml;
+      };
     };
   };
 }

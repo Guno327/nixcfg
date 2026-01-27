@@ -3,6 +3,7 @@
   lib,
   inputs,
   outputs,
+  config,
   ...
 }: {
   imports = [
@@ -77,6 +78,34 @@
     "10.0.0.2" = ["idrac"];
     "10.0.0.1" = ["router"];
     "10.0.0.100" = ["desktop"];
+  };
+
+  services.openvpn.servers = {
+    us-work = {
+      autoStart = false;
+      config = ''
+        client
+        nobind
+        remote us.sesame.canonical.com 17572
+        ca ${config.sops.secrets."canonical_ca.crt".path}
+        cert ${config.sops.secrets."canonical-guno327.crt".path}
+        key ${config.sops.secrets."canonical-guno327.key".path}
+        tls-auth ${config.sops.secrets."canonical_ta.key".path} 1
+        compress lzo
+        dev tun
+        proto udp
+        verify-x509-name 'access.is' name
+        remote-cert-tls server
+        cipher AES-128-CBC
+        persist-key
+        persist-tun
+        user nobody
+        group nogroup
+        keepalive 10 60
+        script-security 2
+        auth-nocache
+      '';
+    };
   };
 
   fonts = {
