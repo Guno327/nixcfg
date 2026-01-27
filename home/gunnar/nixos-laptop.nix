@@ -5,9 +5,6 @@
 }: let
   startupScript = pkgs.writeScript "startup.sh" ''
     #!/usr/bin/env bash
-    xrandr --output eDP --mode 1920x1080 --rate 240 --primary
-    feh --bg-tile /flake/home/common/bg.svg
-    polybar primary &
   '';
 in {
   imports = [
@@ -36,7 +33,7 @@ in {
       dev.enable = true;
     };
     desktop = {
-      i3 = {
+      sway = {
         enable = true;
         laptop = true;
         term = "alacritty";

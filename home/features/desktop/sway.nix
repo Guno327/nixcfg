@@ -37,6 +37,7 @@ in {
         swaybg
         mako
         sway-scratch
+        gemini-cli
       ];
 
       services = {
@@ -95,6 +96,12 @@ in {
               criteria = {app_id = "gemini_scratch";};
             }
           ];
+
+          input = {
+            "type:touchpad" = {
+              "natural_scroll" = "enabled";
+            };
+          };
 
           keybindings = let
             mod = config.wayland.windowManager.sway.config.modifier;
@@ -374,6 +381,59 @@ in {
       };
     })
     (mkIf cfg.laptop {
-      })
+      wayland.windowManager.sway.config = {
+        output = {
+          "eDP-1" = {
+            mode = "1920x10800@240.001Hz";
+            adaptive_sync = "on";
+          };
+        };
+
+        workspaceOutputAssign = [
+          {
+            workspace = "1";
+            output = "eDP-1";
+          }
+          {
+            workspace = "2";
+            output = "eDP-1";
+          }
+          {
+            workspace = "3";
+            output = "eDP-1";
+          }
+          {
+            workspace = "4";
+            output = "eDP-1";
+          }
+          {
+            workspace = "5";
+            output = "eDP-1";
+          }
+        ];
+      };
+
+      programs.waybar.settings = {
+        mainbar = {
+          output = "eDP-1";
+          modules-left = [
+            "sway/workspaces"
+          ];
+          modules-center = [
+            "mpris"
+          ];
+          modules-right = [
+            "pulseaudio"
+            "network"
+            "cpu"
+            "memory"
+            "battery"
+            "backlight"
+            "clock"
+            "tray"
+          ];
+        };
+      };
+    })
   ];
 }

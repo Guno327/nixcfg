@@ -50,42 +50,23 @@
   xdg.portal = {
     enable = true;
     xdgOpenUsePortal = true;
-    extraPortals = with pkgs; [xdg-desktop-portal xdg-desktop-portal-gtk];
+    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
     config.common.default = ["gtk"];
   };
 
   # Services
   services = {
-    # Enable timesyncd
     timesyncd.enable = true;
-
-    # Enable flatpak
     flatpak.enable = true;
-
-    # Enable dbus
     dbus.enable = true;
 
     # Auto login
-    displayManager.autoLogin = {
-      enable = true;
-      user = "gunnar";
+    getty = {
+      autologinUser = "gunnar";
+      autologinOnce = true;
     };
 
-    # X11
-    displayManager.defaultSession = "none+i3";
-    xserver = {
-      enable = true;
-      windowManager.i3.enable = true;
-      videoDrivers = ["amdgpu"];
-      enableTearFree = true;
-      displayManager.lightdm = {
-        enable = true;
-        greeter.enable = false;
-      };
-    };
-
-    libinput.touchpad.naturalScrolling = true;
-
+    # Pipewire
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -195,23 +176,28 @@
 
   # Environment
   environment = {
+    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && sway'';
+
     sessionVariables = {
     };
 
     systemPackages = with pkgs; [
       pavucontrol
       nh
-      blueman
       nvtopPackages.amd
       sbctl
+      android-tools
     ];
   };
 
   # Security
-  security.pam.services.i3lock-color = {};
+  security = {
+    polkit.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "America/New_York";
+    pam.services = {
+      swaylock.enableGnomeKeyring = true;
+    };
+  };
 
   hardware.nvidia.prime = {
     amdgpuBusId = "pci@0000:06:00.0";

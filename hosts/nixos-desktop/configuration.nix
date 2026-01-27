@@ -157,7 +157,6 @@
     polkit.enable = true;
 
     pam.services = {
-      greetd.enableGnomeKeyring = true;
       swaylock.enableGnomeKeyring = true;
     };
 
@@ -166,12 +165,6 @@
       pkcs11.enable = true;
       tctiEnvironment.enable = true;
     };
-  };
-
-  # Set your time zone.
-  time = {
-    timeZone = "America/New_York";
-    hardwareClockInLocalTime = true;
   };
 
   # Select internationalisation properties.
@@ -238,18 +231,11 @@
 
     systemPackages = with pkgs; [
       pavucontrol
-      xorg.xhost
-      gamescope
-      wine
       nh
-      git-crypt
-      wine64
-      wine-wayland
-      winetricks
-      gamemode
-      chromium
       tpm2-tss
+      nvtopPackages.amd
       android-tools
+      sbctl
     ];
   };
 
