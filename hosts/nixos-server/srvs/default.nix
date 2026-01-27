@@ -8,5 +8,6 @@
     ./nginx.nix
     ./about.nix
     ./nextcloud.nix
+    ./libvirt.nix
   ];
 }

@@ -42,13 +42,9 @@
 
     firewall = {
       enable = true;
+      # Allow local traffic
+      trustedInterfaces = ["eno1"];
       interfaces = {
-        # Allow SSH on local network for troubleshooting
-        "eno1" = {
-          allowedTCPPorts = [22];
-          allowedUDPPorts = [];
-        };
-
         # All ingress should come across the nebula mesh
         "nebula0" = {
           allowedTCPPorts = [22 80 443];
@@ -178,6 +174,7 @@
     nginx.enable = true;
     about.enable = true;
     nextcloud.enable = true;
+    libvirt.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
