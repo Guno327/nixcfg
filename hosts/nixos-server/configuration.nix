@@ -151,6 +151,7 @@
       git-crypt
       p7zip
       zfs
+      ficsit-cli
     ];
   };
 
@@ -158,7 +159,12 @@
   nixpkgs.config.allowUnfree = true;
 
   programs = {
-    fish.enable = true;
+    fish = {
+      enable = true;
+      shellAliases = {
+        "fcst" = "ficsit-cli";
+      };
+    };
   };
 
   # Services

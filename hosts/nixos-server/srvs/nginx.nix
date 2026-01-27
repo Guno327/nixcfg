@@ -39,6 +39,7 @@ in {
         "sonarr.ghov.net" = proxy 8989;
         "radarr.ghov.net" = proxy 7878;
         "prowlarr.ghov.net" = proxy 9117;
+        "factory.ghov.net" = proxy 9090;
       };
     };
   };
