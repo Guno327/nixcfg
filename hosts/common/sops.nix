@@ -35,16 +35,16 @@
 
       # Canonical VPN
       "canonical-guno327.crt" = {
-        sopsFile = ../../secrets/canonical-vpn.yaml;
+        sopsFile = ../../secrets/canonical.yaml;
       };
       "canonical-guno327.key" = {
-        sopsFile = ../../secrets/canonical-vpn.yaml;
+        sopsFile = ../../secrets/canonical.yaml;
       };
       "canonical_ca.crt" = {
-        sopsFile = ../../secrets/canonical-vpn.yaml;
+        sopsFile = ../../secrets/canonical.yaml;
       };
       "canonical_ta.key" = {
-        sopsFile = ../../secrets/canonical-vpn.yaml;
+        sopsFile = ../../secrets/canonical.yaml;
       };
     };
   };

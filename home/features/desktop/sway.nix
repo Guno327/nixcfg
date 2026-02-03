@@ -160,6 +160,7 @@ in {
 
               "${mod}+g" = "scratchpad show, move position center, sticky enable";
               "${mod}+d" = "exec wofi --show run";
+              "${mod}+Shift+d" = "exec wofi --show drun";
               "${mod}+n" = "exec swaync-client -t -sw";
               "${mod}+Return" = "exec ${cfg.term}";
               "${mod}+l" = ''

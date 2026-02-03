@@ -58,6 +58,7 @@ in {
         jellyfin.enable = true;
       };
       firefox.enable = true;
+      poetrade.enable = true;
     };
   };
 

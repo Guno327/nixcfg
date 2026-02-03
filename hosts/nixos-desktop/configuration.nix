@@ -3,7 +3,10 @@
   config,
   ...
 }: {
-  imports = [./hardware-configuration.nix];
+  imports = [
+    ./hardware-configuration.nix
+    ./orangebox.nix
+  ];
 
   # Boot.
   boot = {
@@ -27,8 +30,10 @@
   # Networking
   networking = {
     hostName = "nixos-desktop";
+    nameservers = ["1.1.1.1" "1.0.0.1" "8.8.8.8" "8.4.4.8"];
     networkmanager = {
       enable = true;
+      dns = "none";
       plugins = with pkgs; [
         networkmanager-openvpn
       ];
@@ -64,9 +69,8 @@
   # xdg
   xdg.portal = {
     enable = true;
-    xdgOpenUsePortal = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
-    config.common.default = ["gtk"];
+    wlr.enable = true;
+    config.common.default = "*";
   };
 
   # Services
@@ -141,7 +145,6 @@
     };
 
     blueman.enable = true;
-    resolved.enable = true;
   };
 
   boot.initrd.services.udev.rules = ''
@@ -222,6 +225,9 @@
     loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && sway'';
 
     sessionVariables = {
+      XDG_SESSION_TYPE = "wayland";
+      XDG_CURRENT_DESKTOP = "sway";
+      MOZ_ENABLE_WAYLAND = 1;
     };
 
     systemPackages = with pkgs; [
