@@ -57,5 +57,6 @@
     parted
     lsof
     plocate
+    sshuttle
   ];
 }
