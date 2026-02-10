@@ -9,5 +9,6 @@
     ./about.nix
     ./nextcloud.nix
     ./libvirt.nix
+    ./lxd.nix
   ];
 }

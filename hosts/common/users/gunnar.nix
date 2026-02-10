@@ -23,9 +23,14 @@
       "tss"
     ];
     packages = [inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default];
-    openssh.authorizedKeys.keyFiles = [
-      ./gpg.pub
-    ];
+    openssh.authorizedKeys = {
+      keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJXyEWDwsZrPxTm+EuU+JQ2XWkhlQApCl5kpIbTpmVDK root@maas"
+      ];
+      keyFiles = [
+        ./gpg.pub
+      ];
+    };
   };
   home-manager.users.gunnar = import ../../../home/gunnar/${config.networking.hostName}.nix;
 }

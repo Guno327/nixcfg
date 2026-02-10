@@ -33,17 +33,32 @@
     defaultGateway = "10.0.0.1";
     nameservers = ["10.0.0.1"];
 
-    interfaces."eno1".ipv4.addresses = [
-      {
-        address = "10.0.0.3";
-        prefixLength = 24;
-      }
-    ];
+    bridges."maasbr0".interfaces = [];
+    interfaces = {
+      "eno1".ipv4.addresses = [
+        {
+          address = "10.0.0.3";
+          prefixLength = 24;
+        }
+      ];
+      "maasbr0".ipv4.addresses = [
+        {
+          address = "10.1.1.1";
+          prefixLength = 24;
+        }
+      ];
+    };
+
+    nat = {
+      enable = true;
+      internalInterfaces = ["maasbr0"];
+      externalInterface = "eno1";
+    };
 
     firewall = {
       enable = true;
       # Allow local traffic
-      trustedInterfaces = ["eno1"];
+      trustedInterfaces = ["eno1" "maasbr0"];
       interfaces = {
         # All ingress should come across the nebula mesh
         "nebula0" = {
@@ -77,6 +92,7 @@
   #services
   services = {
     # Enable the OpenSSH daemon.
+    fail2ban.enable = true;
     openssh = {
       enable = true;
       settings.PermitRootLogin = "no";
@@ -174,8 +190,15 @@
     nginx.enable = true;
     about.enable = true;
     nextcloud.enable = true;
-    libvirt.enable = true;
+    virtualisation.lxd = {
+      enable = true;
+      zfsSupport = true;
+      ui.enable = false;
+    };
   };
+
+  # User changes
+  users.users.gunnar.extraGroups = ["lxd"];
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
 }
