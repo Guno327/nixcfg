@@ -67,9 +67,12 @@
       "..." = "cd ../..";
       "ps" = "procs";
       "dcp" = "rsync -ar --partial --info=progress2";
+
+      "vi" = "nix run github:guno327/nvf-flake";
+      "vim" = "nix run github:guno327/nvf-flake";
+      "nvim" = "nix run github:guno327/nvf-flake";
     };
     systemPackages = [
-      inputs.nvf-flake.packages.x86_64-linux.default
     ];
   };
 

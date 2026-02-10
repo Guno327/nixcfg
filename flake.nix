@@ -60,11 +60,6 @@
       url = "github:guno327/flakecraft";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nvf-flake = {
-      url = "github:guno327/nvf-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -76,7 +71,6 @@
     nixarr,
     sops-nix,
     flakecraft,
-    nvf-flake,
     ...
   } @ inputs: let
     inherit (self) outputs;
