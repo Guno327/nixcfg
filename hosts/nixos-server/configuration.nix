@@ -164,6 +164,9 @@
       p7zip
       zfs
       ficsit-cli
+      juju
+      kubectl
+      kubectx
     ];
   };
 
