@@ -145,6 +145,14 @@
           ./home/gunnar/nixos-server.nix
         ];
       };
+
+      "gunnar@work-laptop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = [
+          ./home/work/laptop.nix
+        ];
+      };
     };
   };
 }
