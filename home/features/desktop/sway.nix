@@ -37,27 +37,10 @@ in {
         swaybg
         mako
         sway-scratch
-        gemini-cli
       ];
 
       services = {
         gnome-keyring.enable = true;
-      };
-
-      home.file."gemini.conf" = {
-        enable = true;
-        target = ".gemini/alacritty.toml";
-        text = ''
-          [font]
-          size = 12
-
-          [window]
-          opacity = 0.8
-          decorations = "None"
-          class = "gemini_scratch"
-          dimensions = { columns = 200, lines = 60}
-
-        '';
       };
 
       wayland.windowManager.sway = {
@@ -73,7 +56,6 @@ in {
             {command = "waybar";}
             {command = "swaync";}
             {command = "swaybg -m center -i /flake/home/common/bg.svg";}
-            {command = "alacritty --class gemini_scratch --config-file ~/.gemini/alacritty.toml -e gemini";}
             {command = cfg.startup;}
           ];
 
@@ -90,10 +72,6 @@ in {
             {
               command = "inhibit_idle fullscreen";
               criteria = {app_id = "^.*";};
-            }
-            {
-              command = "move to scratchpad";
-              criteria = {app_id = "gemini_scratch";};
             }
           ];
 
@@ -158,7 +136,6 @@ in {
               "${mod}+r" = "reload";
               "${mod}+Shift+r" = "restart";
 
-              "${mod}+g" = "scratchpad show, move position center, sticky enable";
               "${mod}+d" = "exec wofi --show run";
               "${mod}+Shift+d" = "exec wofi --show drun";
               "${mod}+n" = "exec swaync-client -t -sw";

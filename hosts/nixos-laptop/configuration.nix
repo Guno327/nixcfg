@@ -49,9 +49,8 @@
   # xdg
   xdg.portal = {
     enable = true;
-    xdgOpenUsePortal = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
-    config.common.default = ["gtk"];
+    wlr.enable = true;
+    config.common.default = "*";
   };
 
   # Services
