@@ -17,7 +17,7 @@
     ];
 
     sessionVariables = {
-      EDITOR = "nvim";
+      EDITOR = "nix run github:guno327/nvf-flake";
     };
   };
 

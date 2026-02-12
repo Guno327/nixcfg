@@ -58,6 +58,7 @@ in {
         jellyfin.enable = true;
       };
       firefox.enable = true;
+      zen.enable = true;
       poetrade.enable = true;
     };
   };
