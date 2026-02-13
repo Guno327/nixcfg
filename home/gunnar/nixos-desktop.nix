@@ -7,7 +7,7 @@
   startupScript = pkgs.writeScript "startup.sh" ''
      #!/usr/bin/env bash
     discord &
-    firefox &
+    zen &
   '';
 in {
   imports = [
@@ -57,7 +57,6 @@ in {
         enable = true;
         jellyfin.enable = true;
       };
-      firefox.enable = true;
       zen.enable = true;
       poetrade.enable = true;
     };

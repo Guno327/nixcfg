@@ -60,7 +60,10 @@ in {
           ];
 
           assigns = {
-            "2" = [{app_id = "firefox";}];
+            "2" = [
+              {app_id = "firefox";}
+              {app_id = "zen";}
+            ];
             "3" = [{app_id = "steam";}];
             "6" = [
               {app_id = "discord";}
