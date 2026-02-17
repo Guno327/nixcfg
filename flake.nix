@@ -23,6 +23,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    home = {
+      url = "github:guno327/home";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     custom-pkgs = {
       url = "github:guno327/pkgs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,19 +36,6 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    caelestia-shell = {
-      url = "github:caelestia-dots/shell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
     };
 
     stylix = {
@@ -64,7 +56,6 @@
 
   outputs = {
     self,
-    home-manager,
     nixpkgs,
     nixos-hardware,
     stylix,
@@ -117,40 +108,6 @@
           nixarr.nixosModules.default
           sops-nix.nixosModules.sops
           flakecraft.nixosModules.default
-        ];
-      };
-    };
-
-    homeConfigurations = {
-      "gunnar@nixos-laptop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/gunnar/nixos-laptop.nix
-        ];
-      };
-
-      "gunnar@nixos-desktop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/gunnar/nixos-desktop.nix
-        ];
-      };
-
-      "gunnar@nixos-server" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/gunnar/nixos-server.nix
-        ];
-      };
-
-      "gunnar@work-laptop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          ./home/work/laptop.nix
         ];
       };
     };

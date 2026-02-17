@@ -32,5 +32,5 @@
       ];
     };
   };
-  home-manager.users.gunnar = import ../../../home/gunnar/${config.networking.hostName}.nix;
+  home-manager.users.gunnar = inputs.home.homeModules.${config.networking.hostName};
 }
