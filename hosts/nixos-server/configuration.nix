@@ -24,7 +24,7 @@
     };
   };
 
-  # Setup networking
+  # Networking
   networking = {
     hostName = "nixos-server";
     hostId = "85eef91f";
@@ -33,7 +33,6 @@
     defaultGateway = "10.0.0.1";
     nameservers = ["10.0.0.1"];
 
-    bridges."maasbr0".interfaces = [];
     interfaces = {
       "eno1".ipv4.addresses = [
         {
@@ -41,24 +40,17 @@
           prefixLength = 24;
         }
       ];
-      "maasbr0".ipv4.addresses = [
-        {
-          address = "10.1.1.1";
-          prefixLength = 24;
-        }
-      ];
     };
 
-    nat = {
-      enable = true;
-      internalInterfaces = ["maasbr0"];
-      externalInterface = "eno1";
+    bridges = {
+      "br0".interfaces = ["eno2"];
     };
 
     firewall = {
       enable = true;
       # Allow local traffic
-      trustedInterfaces = ["eno1" "maasbr0"];
+      checkReversePath = false;
+      trustedInterfaces = ["eno1" "lxdbr0" "br0"];
       interfaces = {
         # All ingress should come across the nebula mesh
         "nebula0" = {
