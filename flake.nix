@@ -14,18 +14,15 @@
   };
 
   inputs = {
-    self.submodules = true;
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    self.submodules = true;
+    home.url = "path:home";
+
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home = {
-      url = "path:./home";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
