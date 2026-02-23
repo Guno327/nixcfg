@@ -1,0 +1,3 @@
+[submodule "home"]
+	path = home
+	url = git@github.com:Guno327/home.git

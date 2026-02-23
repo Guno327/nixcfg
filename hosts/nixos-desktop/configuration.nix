@@ -222,7 +222,7 @@
 
   # Environment
   environment = {
-    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && sway'';
+    loginShellInit = ''[[ "$(tty)" == /dev/tty1 ]] && exec sway'';
 
     sessionVariables = {
       XDG_SESSION_TYPE = "wayland";
