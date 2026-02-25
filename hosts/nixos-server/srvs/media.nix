@@ -4,11 +4,9 @@
   pkgs,
   ...
 }:
-with lib;
-let
+with lib; let
   cfg = config.srvs.media;
-in
-{
+in {
   options.srvs.media = {
     enable = mkEnableOption "Setup and configure Nixarr";
   };
@@ -23,11 +21,11 @@ in
         "video"
         "media"
       ];
-      sonarr.extraGroups = [ "media" ];
-      radarr.extraGroups = [ "media" ];
-      bazarr.extraGroups = [ "media" ];
-      transmission.extraGroups = [ "media" ];
-      gunnar.extraGroups = [ "media" ];
+      sonarr.extraGroups = ["media"];
+      radarr.extraGroups = ["media"];
+      bazarr.extraGroups = ["media"];
+      transmission.extraGroups = ["media"];
+      gunnar.extraGroups = ["media"];
     };
 
     services.flaresolverr = {
@@ -53,7 +51,7 @@ in
         enable = true;
         vpn.enable = true;
         peerPort = 8999;
-        extraAllowedIps = [ "*" ];
+        extraAllowedIps = ["*"];
         credentialsFile = config.sops.secrets.transmission.path;
       };
 

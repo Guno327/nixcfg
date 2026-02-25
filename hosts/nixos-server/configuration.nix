@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   imports = [
@@ -33,6 +34,11 @@
     defaultGateway = "10.0.0.1";
     nameservers = ["10.0.0.1"];
 
+    bridges = {
+      "br0".interfaces = [];
+      "br-ex".interfaces = ["eno2"];
+    };
+
     interfaces = {
       "eno1".ipv4.addresses = [
         {
@@ -40,17 +46,28 @@
           prefixLength = 24;
         }
       ];
+      "br0".ipv4.addresses = [
+        {
+          address = "10.10.10.1";
+          prefixLength = 24;
+        }
+      ];
+
+      "br0".useDHCP = lib.mkForce false;
+      "br-ex".useDHCP = lib.mkForce false;
     };
 
-    bridges = {
-      "br0".interfaces = ["eno2"];
+    nat = {
+      enable = true;
+      internalInterfaces = ["br0"];
+      externalInterface = "eno1";
     };
 
     firewall = {
       enable = true;
       # Allow local traffic
       checkReversePath = false;
-      trustedInterfaces = ["eno1" "lxdbr0" "br0"];
+      trustedInterfaces = ["eno1" "lxdbr0" "br0" "br-ex"];
       interfaces = {
         # All ingress should come across the nebula mesh
         "nebula0" = {
@@ -159,6 +176,7 @@
       juju
       kubectl
       kubectx
+      qemu-utils
     ];
   };
 

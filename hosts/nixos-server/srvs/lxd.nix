@@ -72,8 +72,6 @@ in {
     # We use the pinned packages for everything
     environment.systemPackages = [cfg.package];
 
-    systemd.tmpfiles.rules = ["d /var/lib/lxc/rootfs 0755 root root -"];
-
     security.apparmor = {
       enable = true;
       packages = [cfg.lxcPackage];
@@ -83,30 +81,34 @@ in {
       };
     };
 
-    systemd.sockets.lxd = {
-      description = "LXD UNIX socket";
-      wantedBy = ["sockets.target"];
-      socketConfig = {
-        ListenStream = "/var/lib/lxd/unix.socket";
-        SocketMode = "0660";
-        SocketGroup = "lxd";
-        Service = "lxd.service";
+    systemd = {
+      tmpfiles.rules = ["d /var/lib/lxc/rootfs 0755 root root -"];
+
+      sockets.lxd = {
+        description = "LXD UNIX socket";
+        wantedBy = ["sockets.target"];
+        socketConfig = {
+          ListenStream = "/var/lib/lxd/unix.socket";
+          SocketMode = "0660";
+          SocketGroup = "lxd";
+          Service = "lxd.service";
+        };
       };
-    };
 
-    systemd.services.lxd = {
-      description = "LXD Container Management Daemon";
-      wantedBy = ["multi-user.target"];
-      after = ["network-online.target"];
-      requires = ["network-online.target" "lxd.socket"];
-      path = [pkgs.util-linux] ++ lib.optional cfg.zfsSupport lxdPkgs.zfs; # Pin ZFS too
+      services.lxd = {
+        description = "LXD Container Management Daemon";
+        wantedBy = ["multi-user.target"];
+        after = ["network-online.target"];
+        requires = ["network-online.target" "lxd.socket"];
+        path = [pkgs.util-linux] ++ lib.optional cfg.zfsSupport lxdPkgs.zfs; # Pin ZFS too
 
-      serviceConfig = {
-        ExecStart = "@${cfg.package}/bin/lxd lxd --group lxd";
-        ExecStartPost = "${cfg.package}/bin/lxd waitready --timeout=${cfg.startTimeout}";
-        ExecStop = "${cfg.package}/bin/lxd shutdown";
-        KillMode = "process";
-        Delegate = true;
+        serviceConfig = {
+          ExecStart = "@${cfg.package}/bin/lxd lxd --group lxd";
+          ExecStartPost = "${cfg.package}/bin/lxd waitready --timeout=${cfg.startTimeout}";
+          ExecStop = "${cfg.package}/bin/lxd shutdown";
+          KillMode = "process";
+          Delegate = true;
+        };
       };
     };
 
