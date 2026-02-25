@@ -18,8 +18,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    self.submodules = true;
-    home.url = "path:home";
+    home.url = "path:/flake/home";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -52,62 +51,65 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    nixos-hardware,
-    stylix,
-    nixarr,
-    sops-nix,
-    flakecraft,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {inherit system;};
-  in {
-    overlays = import ./overlays {inherit inputs;};
-    formatter."${system}" = pkgs.nixfmt-tree;
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixos-hardware,
+      stylix,
+      nixarr,
+      sops-nix,
+      flakecraft,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
+    in
+    {
+      overlays = import ./overlays { inherit inputs; };
+      formatter."${system}" = pkgs.nixfmt-tree;
 
-    nixosConfigurations = {
-      nixos-laptop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/nixos-laptop
+      nixosConfigurations = {
+        nixos-laptop = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/nixos-laptop
 
-          nixos-hardware.nixosModules.common-cpu-amd
-          nixos-hardware.nixosModules.common-gpu-amd
-          nixos-hardware.nixosModules.common-pc-laptop
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-gpu-amd
+            nixos-hardware.nixosModules.common-pc-laptop
 
-          stylix.nixosModules.stylix
-          sops-nix.nixosModules.sops
-        ];
-      };
-      nixos-desktop = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/nixos-desktop
+            stylix.nixosModules.stylix
+            sops-nix.nixosModules.sops
+          ];
+        };
+        nixos-desktop = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/nixos-desktop
 
-          nixos-hardware.nixosModules.common-cpu-amd
-          nixos-hardware.nixosModules.common-gpu-amd
-          nixos-hardware.nixosModules.common-pc-ssd
+            nixos-hardware.nixosModules.common-cpu-amd
+            nixos-hardware.nixosModules.common-gpu-amd
+            nixos-hardware.nixosModules.common-pc-ssd
 
-          stylix.nixosModules.stylix
-          sops-nix.nixosModules.sops
-        ];
-      };
+            stylix.nixosModules.stylix
+            sops-nix.nixosModules.sops
+          ];
+        };
 
-      nixos-server = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./hosts/nixos-server
+        nixos-server = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/nixos-server
 
-          stylix.nixosModules.stylix
-          nixarr.nixosModules.default
-          sops-nix.nixosModules.sops
-          flakecraft.nixosModules.default
-        ];
+            stylix.nixosModules.stylix
+            nixarr.nixosModules.default
+            sops-nix.nixosModules.sops
+            flakecraft.nixosModules.default
+          ];
+        };
       };
     };
-  };
 }

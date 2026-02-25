@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./orangebox.nix
@@ -30,7 +31,13 @@
   # Networking
   networking = {
     hostName = "nixos-desktop";
-    nameservers = ["1.1.1.1" "1.0.0.1" "8.8.8.8" "8.4.4.8"];
+    nftables.enable = true;
+    nameservers = [
+      "1.1.1.1"
+      "1.0.0.1"
+      "8.8.8.8"
+      "8.4.4.8"
+    ];
     networkmanager = {
       enable = true;
       dns = "none";
@@ -121,8 +128,8 @@
 
     # Nebula Mesh
     nebula.networks."mesh" = {
-      staticHostMap."100.100.0.1" = ["192.227.212.190:4242"];
-      lighthouses = ["100.100.0.1"];
+      staticHostMap."100.100.0.1" = [ "192.227.212.190:4242" ];
+      lighthouses = [ "100.100.0.1" ];
       key = config.sops.secrets."nebula/desktop.key".path;
       cert = config.sops.secrets."nebula/desktop.crt".path;
       ca = config.sops.secrets."nebula/ca.crt".path;
@@ -208,7 +215,7 @@
     # Steam
     steam = {
       enable = true;
-      extraCompatPackages = with pkgs; [proton-ge-bin];
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
 
     wireshark.enable = true;
@@ -241,8 +248,10 @@
   };
 
   # Virt
-  users.groups.libvirtd.members = ["gunnar"];
+  users.groups.libvirtd.members = [ "gunnar" ];
+  users.groups."incus-admin".members = [ "gunnar" ];
   virtualisation = {
+    incus.enable = true;
     libvirtd.enable = true;
     spiceUSBRedirection.enable = true;
   };
