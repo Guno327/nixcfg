@@ -6,17 +6,28 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  services.lvm = {
+    enable = true;
+    boot.thin.enable = true;
+  };
+
   boot = {
+    swraid = {
+      enable = true;
+      mdadmConf = ''
+        ARRAY /dev/md/0  metadata=1.2 UUID=8496037f:04ddcd65:496e9628:a9891237
+          MAILADDR admin@ghov.net
+      '';
+    };
+
     initrd = {
       systemd.enable = true;
-      services.swraid = {
-        enable = true;
-      };
       availableKernelModules = [
         "ehci_pci"
         "ahci"
@@ -26,11 +37,18 @@
         "usbhid"
         "sd_mod"
         "sr_mod"
+        "dm_thin_pool"
       ];
+
+      luks.devices."encrypted_raid" = {
+        device = "/dev/md0";
+        preLVM = true;
+      };
+
+      services.lvm.enable = true;
     };
-    kernelModules = ["kvm-intel"];
-    extraModulePackages = [];
-    zfs.extraPools = ["storage"];
+    kernelModules = [ "kvm-intel" ];
+    extraModulePackages = [ ];
   };
 
   fileSystems."/" = {
@@ -47,7 +65,29 @@
     ];
   };
 
-  swapDevices = [];
+  fileSystems."/media" = {
+    device = "/dev/disk/by-label/MEDIA";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "noatime"
+      "x-systemd.device-timeout=60s"
+      "x-systemd.after=lvm2-monitor.service"
+    ];
+  };
+
+  fileSystems."/data" = {
+    device = "/dev/disk/by-label/DATA";
+    fsType = "ext4";
+    options = [
+      "defaults"
+      "noatime"
+      "x-systemd.device-timeout=60s"
+      "x-systemd.after=lvm2-monitor.service"
+    ];
+  };
+
+  swapDevices = [ ];
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

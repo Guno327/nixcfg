@@ -4,10 +4,14 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.nextcloud;
-in {
+in
+{
   options.srvs.nextcloud.enable = mkEnableOption "Enable and configure nextcloud";
+  options.srvs.nextcloud.collabora.enable = mkEnableOption "Enable collabora integration";
+
   config = mkIf cfg.enable {
     # Configure nginx
     services.nginx.virtualHosts."${config.services.nextcloud.hostName}" = {
@@ -19,9 +23,9 @@ in {
       # Configure nextcloud
       nextcloud = {
         enable = true;
-        package = pkgs.nextcloud31;
+        package = pkgs.nextcloud33;
         hostName = "data.ghov.net";
-        home = "/storage/nextcloud";
+        home = "/data/nextcloud";
         database.createLocally = true;
 
         extraAppsEnable = true;
@@ -40,7 +44,7 @@ in {
       };
 
       # Configure collabora
-      collabora-online = {
+      collabora-online = mkIf cfg.collabora.enable {
         enable = true;
         port = 9980;
         settings = {
@@ -51,12 +55,15 @@ in {
 
           net = {
             listen = "0.0.0.0";
-            post_allow.host = ["127.0.0.1" "100.100.0.1"];
+            post_allow.host = [
+              "127.0.0.1"
+              "100.100.0.1"
+            ];
           };
 
           storage.wopi = {
             "@allow" = true;
-            host = ["data.ghov.net"];
+            host = [ "data.ghov.net" ];
           };
 
           server_name = "collabora.ghov.net";
@@ -64,7 +71,7 @@ in {
       };
     };
 
-    services.nginx.virtualHosts."collabora.ghov.net" = {
+    services.nginx.virtualHosts."collabora.ghov.net" = mkIf cfg.collabora.enable {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
@@ -73,27 +80,32 @@ in {
       };
     };
 
-    systemd.services.nextcloud-config-collabora = let
-      inherit (config.services.nextcloud) occ;
+    systemd.services.nextcloud-config-collabora =
+      let
+        inherit (config.services.nextcloud) occ;
 
-      wopi_url = "http://127.0.0.1:${toString config.services.collabora-online.port}";
-      public_wopi_url = "https://collabora.ghov.net";
-      wopi_allowlist = lib.concatStringsSep "," [
-        "127.0.0.1"
-        "100.100.0.1"
-      ];
-    in {
-      wantedBy = ["multi-user.target"];
-      after = ["nextcloud-setup.service" "coolwsd.service"];
-      script = ''
-        ${occ}/bin/nextcloud-occ config:app:set richdocuments wopi_url --value ${lib.escapeShellArg wopi_url}
-        ${occ}/bin/nextcloud-occ config:app:set richdocuments public_wopi_url --value ${lib.escapeShellArg public_wopi_url}
-        ${occ}/bin/nextcloud-occ config:app:set richdocuments wopi_allowlist --value ${lib.escapeShellArg wopi_allowlist}
-        ${occ}/bin/nextcloud-occ richdocuments:setup
-      '';
-      serviceConfig = {
-        Type = "oneshot";
+        wopi_url = "http://127.0.0.1:${toString config.services.collabora-online.port}";
+        public_wopi_url = "https://collabora.ghov.net";
+        wopi_allowlist = lib.concatStringsSep "," [
+          "127.0.0.1"
+          "100.100.0.1"
+        ];
+      in
+      mkIf cfg.collabora.enable {
+        wantedBy = [ "multi-user.target" ];
+        after = [
+          "nextcloud-setup.service"
+          "coolwsd.service"
+        ];
+        script = ''
+          ${occ}/bin/nextcloud-occ config:app:set richdocuments wopi_url --value ${lib.escapeShellArg wopi_url}
+          ${occ}/bin/nextcloud-occ config:app:set richdocuments public_wopi_url --value ${lib.escapeShellArg public_wopi_url}
+          ${occ}/bin/nextcloud-occ config:app:set richdocuments wopi_allowlist --value ${lib.escapeShellArg wopi_allowlist}
+          ${occ}/bin/nextcloud-occ richdocuments:setup
+        '';
+        serviceConfig = {
+          Type = "oneshot";
+        };
       };
-    };
   };
 }

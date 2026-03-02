@@ -1,23 +1,45 @@
-{...}: {
+{
+  config,
+  ...
+}:
+{
   sops = {
     defaultSopsFile = ../../secrets/sops.yaml;
 
     age = {
-      sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+      sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
       generateKey = true;
     };
 
     secrets = {
-      github = {};
-      cf = {};
+      github = { };
+      cf = { };
+      tmdb = { };
+      web = { };
+      onlyoffice = { };
+      onlyoffice_env = { };
 
-      "nebula/laptop.key" = {owner = "nebula-mesh";};
-      "nebula/laptop.crt" = {owner = "nebula-mesh";};
-      "nebula/server.key" = {owner = "nebula-mesh";};
-      "nebula/server.crt" = {owner = "nebula-mesh";};
-      "nebula/desktop.key" = {owner = "nebula-mesh";};
-      "nebula/desktop.crt" = {owner = "nebula-mesh";};
-      "nebula/ca.crt" = {owner = "nebula-mesh";};
+      "nebula/laptop.key" = {
+        owner = "nebula-mesh";
+      };
+      "nebula/laptop.crt" = {
+        owner = "nebula-mesh";
+      };
+      "nebula/server.key" = {
+        owner = "nebula-mesh";
+      };
+      "nebula/server.crt" = {
+        owner = "nebula-mesh";
+      };
+      "nebula/desktop.key" = {
+        owner = "nebula-mesh";
+      };
+      "nebula/desktop.crt" = {
+        owner = "nebula-mesh";
+      };
+      "nebula/ca.crt" = {
+        owner = "nebula-mesh";
+      };
 
       gemini = {
         owner = "gunnar";

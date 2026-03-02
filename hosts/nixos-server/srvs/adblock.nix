@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.adblock;
-in {
+in
+{
   options.srvs.adblock = {
     enable = mkEnableOption "Enable blocky service";
   };
@@ -13,17 +15,18 @@ in {
   config = mkIf cfg.enable {
     # Open Firewall
     networking.firewall =
-      if config.services.nebula.networks."mesh".enable
-      then {
-        interfaces."nebula0" = {
-          allowedTCPPorts = [53];
-          allowedUDPPorts = [53];
+      if config.services.nebula.networks."mesh".enable then
+        {
+          interfaces."nebula0" = {
+            allowedTCPPorts = [ 53 ];
+            allowedUDPPorts = [ 53 ];
+          };
+        }
+      else
+        {
+          allowedTCPPorts = [ 53 ];
+          allowedUDPPorts = [ 53 ];
         };
-      }
-      else {
-        allowedTCPPorts = [53];
-        allowedUDPPorts = [53];
-      };
 
     services.blocky = {
       enable = true;
@@ -42,10 +45,10 @@ in {
         };
         blocking = {
           blackLists = {
-            ads = ["https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt"];
+            ads = [ "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt" ];
           };
           clientGroupsBlock = {
-            default = ["ads"];
+            default = [ "ads" ];
           };
         };
         caching = {

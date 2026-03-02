@@ -3,9 +3,11 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.nginx;
-in {
+in
+{
   options.srvs.nginx.enable = mkEnableOption "Enable and configure nginx reverse proxy";
   config = mkIf cfg.enable {
     security.acme = {
@@ -21,26 +23,29 @@ in {
       recommendedProxySettings = true;
       recommendedTlsSettings = true;
 
-      virtualHosts = let
-        base = locations: {
-          inherit locations;
+      virtualHosts =
+        let
+          base = locations: {
+            inherit locations;
 
-          forceSSL = true;
-          enableACME = true;
-        };
-        proxy = port:
-          base {
-            "/".proxyPass = "http://127.0.0.1:${toString port}/";
+            forceSSL = true;
+            enableACME = true;
           };
-      in {
-        "about.ghov.net" = proxy 81;
-        "media.ghov.net" = proxy 8096;
-        "request.ghov.net" = proxy 5000;
-        "sonarr.ghov.net" = proxy 8989;
-        "radarr.ghov.net" = proxy 7878;
-        "prowlarr.ghov.net" = proxy 9117;
-        "factory.ghov.net" = proxy 9090;
-      };
+          proxy =
+            port:
+            base {
+              "/".proxyPass = "http://127.0.0.1:${toString port}/";
+            };
+        in
+        {
+          "about.ghov.net" = proxy 81;
+          "media.ghov.net" = proxy 8096;
+          "request.ghov.net" = proxy 5000;
+          "sonarr.ghov.net" = proxy 8989;
+          "radarr.ghov.net" = proxy 7878;
+          "prowlarr.ghov.net" = proxy 9117;
+          "factory.ghov.net" = proxy 9090;
+        };
     };
   };
 }

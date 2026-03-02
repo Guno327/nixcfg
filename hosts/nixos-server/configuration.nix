@@ -3,7 +3,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./srvs
@@ -12,7 +13,7 @@
 
   # Bootloader.
   boot = {
-    supportedFilesystems = ["zfs"];
+    supportedFilesystems = [ "zfs" ];
     zfs.forceImportRoot = false;
     loader = {
       efi.canTouchEfiVariables = true;
@@ -32,11 +33,12 @@
     useDHCP = false;
     enableIPv6 = false;
     defaultGateway = "10.0.0.1";
-    nameservers = ["10.0.0.1"];
+    nameservers = [ "10.0.0.1" ];
+    nftables.enable = true;
 
     bridges = {
-      "br0".interfaces = [];
-      "br-ex".interfaces = ["eno2"];
+      "br0".interfaces = [ ];
+      "br-ex".interfaces = [ "eno2" ];
     };
 
     interfaces = {
@@ -59,7 +61,7 @@
 
     nat = {
       enable = true;
-      internalInterfaces = ["br0"];
+      internalInterfaces = [ "br0" ];
       externalInterface = "eno1";
     };
 
@@ -67,12 +69,24 @@
       enable = true;
       # Allow local traffic
       checkReversePath = false;
-      trustedInterfaces = ["eno1" "lxdbr0" "br0" "br-ex"];
+      trustedInterfaces = [
+        "eno1"
+        "incusbr0"
+        "br0"
+        "br-ex"
+      ];
       interfaces = {
         # All ingress should come across the nebula mesh
         "nebula0" = {
-          allowedTCPPorts = [22 80 443];
-          allowedUDPPorts = [80 443];
+          allowedTCPPorts = [
+            22
+            80
+            443
+          ];
+          allowedUDPPorts = [
+            80
+            443
+          ];
         };
       };
     };
@@ -114,8 +128,8 @@
     # Nebula Mesh
     nebula.networks."mesh" = {
       tun.device = "nebula0";
-      staticHostMap."100.100.0.1" = ["192.227.212.190:4242"];
-      lighthouses = ["100.100.0.1"];
+      staticHostMap."100.100.0.1" = [ "192.227.212.190:4242" ];
+      lighthouses = [ "100.100.0.1" ];
       key = config.sops.secrets."nebula/server.key".path;
       cert = config.sops.secrets."nebula/server.crt".path;
       ca = config.sops.secrets."nebula/ca.crt".path;
@@ -158,6 +172,7 @@
 
     # Packages
     systemPackages = with pkgs; [
+      python315
       mullvad
       tmux
       nh
@@ -177,6 +192,7 @@
       kubectl
       kubectx
       qemu-utils
+      thin-provisioning-tools
     ];
   };
 
@@ -188,6 +204,7 @@
       enable = true;
       shellAliases = {
         "fcst" = "ficsit-cli";
+        "lxc" = "incus";
       };
     };
   };
@@ -203,15 +220,18 @@
     nginx.enable = true;
     about.enable = true;
     nextcloud.enable = true;
-    virtualisation.lxd = {
-      enable = true;
-      zfsSupport = true;
-      ui.enable = false;
-    };
+  };
+
+  # Incus
+  virtualisation.incus = {
+    enable = true;
   };
 
   # User changes
-  users.users.gunnar.extraGroups = ["lxd"];
+  users.users.gunnar.extraGroups = [
+    "incus"
+    "incus-admin"
+  ];
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
 }
