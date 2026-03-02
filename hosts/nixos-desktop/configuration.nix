@@ -244,6 +244,7 @@
       nvtopPackages.amd
       android-tools
       sbctl
+      python315
     ];
   };
 

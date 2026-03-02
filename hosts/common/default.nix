@@ -5,7 +5,8 @@
   outputs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
     ./users
@@ -14,7 +15,7 @@
 
   home-manager = {
     useUserPackages = true;
-    extraSpecialArgs = {inherit inputs outputs;};
+    extraSpecialArgs = { inherit inputs outputs; };
   };
 
   nixpkgs = {
@@ -47,14 +48,13 @@
       options = "--delete-older-than 7d";
     };
     optimise.automatic = true;
-    registry = (lib.mapAttrs (_: flake: {inherit flake;})) (
+    registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
       (lib.filterAttrs (_: lib.isType "flake")) inputs
     );
-    nixPath = ["/etc/nix/path"];
+    nixPath = [ "/etc/nix/path" ];
   };
 
   programs.nix-ld.enable = true;
-  users.defaultUserShell = pkgs.fish;
 
   environment = {
     variables = {
@@ -63,20 +63,16 @@
       "EDITOR" = "nvim";
     };
     shellAliases = {
-      ".." = "cd ..";
-      "..." = "cd ../..";
-      "ps" = "procs";
-      "dcp" = "rsync -ar --partial --info=progress2";
     };
     systemPackages = [
     ];
   };
 
   networking.hosts = {
-    "10.0.0.3" = ["server"];
-    "10.0.0.2" = ["idrac"];
-    "10.0.0.1" = ["router"];
-    "10.0.0.100" = ["desktop"];
+    "10.0.0.3" = [ "server" ];
+    "10.0.0.2" = [ "idrac" ];
+    "10.0.0.1" = [ "router" ];
+    "10.0.0.100" = [ "desktop" ];
   };
 
   services.openvpn.servers = {

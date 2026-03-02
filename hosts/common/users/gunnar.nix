@@ -3,11 +3,13 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   users.users.gunnar = {
     initialHashedPassword = "$y$j9T$f.RJFc9KNUp2D/m7akp1Q1$Bq95yANVIS.IDTpKN54HnA8fFKa1fsc9odiY.TbvlmD";
     isNormalUser = true;
     description = "gunnar";
+    shell = pkgs.bash;
     extraGroups = [
       "wheel"
       "networkmanager"
@@ -22,7 +24,7 @@
       "adbusers"
       "tss"
     ];
-    packages = [inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default];
+    packages = [ inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default ];
     openssh.authorizedKeys = {
       keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJXyEWDwsZrPxTm+EuU+JQ2XWkhlQApCl5kpIbTpmVDK root@maas"
