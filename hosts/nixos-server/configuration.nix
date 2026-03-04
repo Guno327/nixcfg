@@ -33,7 +33,6 @@
     useDHCP = false;
     enableIPv6 = false;
     defaultGateway = "10.0.0.1";
-    nameservers = [ "100.100.0.2" ];
     nftables.enable = true;
 
     bridges = {
@@ -49,7 +48,7 @@
       ];
       "br-ex".ipv4.addresses = [
         {
-          address = "10.10.10.1/24";
+          address = "10.10.10.1";
           prefixLength = 24;
         }
       ];

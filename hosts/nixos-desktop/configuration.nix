@@ -32,7 +32,6 @@
   networking = {
     hostName = "nixos-desktop";
     nftables.enable = true;
-    nameservers = [ "100.100.0.2" ];
     networkmanager = {
       enable = true;
       dns = "none";

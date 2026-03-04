@@ -57,6 +57,13 @@
   programs.nix-ld.enable = true;
 
   environment = {
+    etc."resolv.conf".text = ''
+      nameserver 127.0.0.1
+      nameserver 100.100.0.2
+      nameserver 192.227.212.190
+      nameserver 1.1.1.1 
+      nameserver 1.0.0.1
+    '';
     variables = {
       "NH_FLAKE" = "/flake";
       "GPG_TTY" = "$(tty)";
@@ -68,38 +75,33 @@
     ];
   };
 
-  networking.hosts = {
-    "10.0.0.3" = [ "server" ];
-    "10.0.0.2" = [ "idrac" ];
-    "10.0.0.1" = [ "router" ];
-    "10.0.0.100" = [ "desktop" ];
-  };
-
-  services.openvpn.servers = {
-    us-work = {
-      autoStart = false;
-      config = ''
-        client
-        nobind
-        remote us.sesame.canonical.com 17572
-        ca ${config.sops.secrets."canonical_ca.crt".path}
-        cert ${config.sops.secrets."canonical-guno327.crt".path}
-        key ${config.sops.secrets."canonical-guno327.key".path}
-        tls-auth ${config.sops.secrets."canonical_ta.key".path} 1
-        compress lzo
-        dev tun
-        proto udp
-        verify-x509-name 'access.is' name
-        remote-cert-tls server
-        cipher AES-128-CBC
-        persist-key
-        persist-tun
-        user nobody
-        group nogroup
-        keepalive 10 60
-        script-security 2
-        auth-nocache
-      '';
+  services = {
+    openvpn.servers = {
+      us-work = {
+        autoStart = false;
+        config = ''
+          client
+          nobind
+          remote us.sesame.canonical.com 17572
+          ca ${config.sops.secrets."canonical_ca.crt".path}
+          cert ${config.sops.secrets."canonical-guno327.crt".path}
+          key ${config.sops.secrets."canonical-guno327.key".path}
+          tls-auth ${config.sops.secrets."canonical_ta.key".path} 1
+          compress lzo
+          dev tun
+          proto udp
+          verify-x509-name 'access.is' name
+          remote-cert-tls server
+          cipher AES-128-CBC
+          persist-key
+          persist-tun
+          user nobody
+          group nogroup
+          keepalive 10 60
+          script-security 2
+          auth-nocache
+        '';
+      };
     };
   };
 

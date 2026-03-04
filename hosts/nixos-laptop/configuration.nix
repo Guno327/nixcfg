@@ -24,9 +24,6 @@
   # Enable networking
   networking = {
     hostName = "nixos-laptop";
-    nameservers = [
-      "100.100.0.2"
-    ];
     networkmanager = {
       enable = true;
       plugins = with pkgs; [
