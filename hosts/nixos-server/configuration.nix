@@ -37,7 +37,6 @@
     nftables.enable = true;
 
     bridges = {
-      "br0".interfaces = [ ];
       "br-ex".interfaces = [ "eno2" ];
     };
 
@@ -48,9 +47,9 @@
           prefixLength = 24;
         }
       ];
-      "br0".ipv4.addresses = [
+      "br-ex".ipv4.addresses = [
         {
-          address = "10.10.10.1";
+          address = "10.10.10.1/24";
           prefixLength = 24;
         }
       ];
@@ -61,7 +60,7 @@
 
     nat = {
       enable = true;
-      internalInterfaces = [ "br0" ];
+      internalInterfaces = [ "br-ex" ];
       externalInterface = "eno1";
     };
 
@@ -220,6 +219,7 @@
     nginx.enable = true;
     about.enable = true;
     nextcloud.enable = true;
+    adblock.enable = true;
   };
 
   # Incus

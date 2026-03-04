@@ -45,6 +45,7 @@ in
           "radarr.ghov.net" = proxy 7878;
           "prowlarr.ghov.net" = proxy 9117;
           "factory.ghov.net" = proxy 9090;
+          "ads.ghov.net" = proxy 5353;
         };
     };
   };
