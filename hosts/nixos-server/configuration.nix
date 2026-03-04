@@ -33,7 +33,7 @@
     useDHCP = false;
     enableIPv6 = false;
     defaultGateway = "10.0.0.1";
-    nameservers = [ "10.0.0.1" ];
+    nameservers = [ "100.100.0.2" ];
     nftables.enable = true;
 
     bridges = {

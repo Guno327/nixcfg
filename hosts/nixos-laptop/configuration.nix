@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
   ];
@@ -23,6 +24,9 @@
   # Enable networking
   networking = {
     hostName = "nixos-laptop";
+    nameservers = [
+      "100.100.0.2"
+    ];
     networkmanager = {
       enable = true;
       plugins = with pkgs; [
@@ -101,8 +105,8 @@
 
     # Nebula Mesh
     nebula.networks."mesh" = {
-      staticHostMap."100.100.0.1" = ["192.227.212.190:4242"];
-      lighthouses = ["100.100.0.1"];
+      staticHostMap."100.100.0.1" = [ "192.227.212.190:4242" ];
+      lighthouses = [ "100.100.0.1" ];
       key = config.sops.secrets."nebula/laptop.key".path;
       cert = config.sops.secrets."nebula/laptop.crt".path;
       ca = config.sops.secrets."nebula/ca.crt".path;
@@ -171,7 +175,7 @@
     # Steam
     steam = {
       enable = true;
-      extraCompatPackages = with pkgs; [proton-ge-bin];
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
 
     fish.enable = true;
