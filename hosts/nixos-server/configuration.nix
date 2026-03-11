@@ -52,8 +52,6 @@
           prefixLength = 24;
         }
       ];
-
-      "br0".useDHCP = lib.mkForce false;
       "br-ex".useDHCP = lib.mkForce false;
     };
 

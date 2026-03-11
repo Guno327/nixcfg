@@ -1,14 +1,19 @@
-{...}: {
+{ ... }:
+{
   sops.secrets = {
-    web = {};
+    web = { };
+    bazarr = { };
+    jellyfin = { };
+    jellyseerr = { };
+    prowlarr = { };
+    radarr = { };
+    sonarr = { };
+    nextcloud = { };
 
-    bazarr = {};
-    jellyfin = {};
-    jellyseerr = {};
-    prowlarr = {};
-    radarr = {};
-    sonarr = {};
-    nextcloud = {};
+    dns-01 = {
+      owner = "acme";
+      mode = "0600";
+    };
 
     wireguard = {
       sopsFile = ../../secrets/wg0.conf;

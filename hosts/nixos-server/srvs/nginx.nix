@@ -13,6 +13,13 @@ in
     security.acme = {
       acceptTerms = true;
       defaults.email = "acme@ghov.net";
+      certs."ghov.net" = {
+        domain = "ghov.net";
+        extraDomainNames = [ "*.ghov.net" ];
+        dnsProvider = "cloudflare";
+        environmentFile = config.sops.secrets.dns-01.path;
+        group = "nginx";
+      };
     };
 
     services.nginx = {
@@ -29,7 +36,17 @@ in
             inherit locations;
 
             forceSSL = true;
-            enableACME = true;
+            addSSL = false;
+            useACMEHost = "ghov.net";
+
+            listen = [
+              {
+                addr = "127.0.0.1";
+                port = 8443;
+                ssl = true;
+                proxyProtocol = true;
+              }
+            ];
           };
           proxy =
             port:
@@ -39,14 +56,42 @@ in
         in
         {
           "about.ghov.net" = proxy 81;
-          "media.ghov.net" = proxy 8096;
-          "request.ghov.net" = proxy 5000;
-          "sonarr.ghov.net" = proxy 8989;
-          "radarr.ghov.net" = proxy 7878;
-          "prowlarr.ghov.net" = proxy 9117;
-          "factory.ghov.net" = proxy 9090;
-          "ads.ghov.net" = proxy 5353;
+          "media.ghov.net" = mkIf config.srvs.media.enable (proxy 8096);
+          "request.ghov.net" = mkIf config.srvs.media.enable (proxy 5000);
+          "sonarr.ghov.net" = mkIf config.srvs.media.enable (proxy 8989);
+          "radarr.ghov.net" = mkIf config.srvs.media.enable (proxy 7878);
+          "prowlarr.ghov.net" = mkIf config.srvs.media.enable (proxy 9117);
+          "factory.ghov.net" = mkIf config.srvs.satisfactory.enable (proxy 9090);
+          "ads.ghov.net" = mkIf config.srvs.adblock.enable (proxy 5353);
+
+          "data.ghov.net" = mkIf config.srvs.nextcloud.enable (base { });
+          "collabora.ghov.net" = mkIf config.srvs.nextcloud.collabora.enable (base {
+            locations."/" = {
+              proxyPass = "http://127.0.0.1:${toString config.services.collabora-online.port}";
+              proxyWebsockets = true;
+            };
+          });
         };
+
+      streamConfig = ''
+        map $ssl_preread_server_name $backend_target {
+          hostnames;
+          landscape.ghov.net  10.1.1.21:443;
+          default             127.0.0.1:8444;
+        }
+
+        server {
+          listen 443;
+          proxy_pass $backend_target;
+          ssl_preread on;
+        }
+
+        server {
+          listen 127.0.0.1:8444;
+          proxy_pass 127.0.0.1:8443;
+          proxy_protocol on; 
+        }
+      '';
     };
   };
 }

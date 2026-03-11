@@ -13,12 +13,6 @@ in
   options.srvs.nextcloud.collabora.enable = mkEnableOption "Enable collabora integration";
 
   config = mkIf cfg.enable {
-    # Configure nginx
-    services.nginx.virtualHosts."${config.services.nextcloud.hostName}" = {
-      forceSSL = true;
-      enableACME = true;
-    };
-
     services = {
       # Configure nextcloud
       nextcloud = {
@@ -68,15 +62,6 @@ in
 
           server_name = "collabora.ghov.net";
         };
-      };
-    };
-
-    services.nginx.virtualHosts."collabora.ghov.net" = mkIf cfg.collabora.enable {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString config.services.collabora-online.port}";
-        proxyWebsockets = true;
       };
     };
 
