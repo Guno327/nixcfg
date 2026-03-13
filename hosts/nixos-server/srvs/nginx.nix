@@ -53,6 +53,14 @@ in
             base {
               "/".proxyPass = "http://127.0.0.1:${toString port}/";
             };
+          proxyWebsockets =
+            port:
+            base {
+              "/" = {
+                proxyPass = "http://127.0.0.1:${toString port}/";
+                proxyWebSockets = true;
+              };
+            };
         in
         {
           "about.ghov.net" = proxy 81;
@@ -65,12 +73,10 @@ in
           "ads.ghov.net" = mkIf config.srvs.adblock.enable (proxy 5353);
 
           "data.ghov.net" = mkIf config.srvs.nextcloud.enable (base { });
-          "collabora.ghov.net" = mkIf config.srvs.nextcloud.collabora.enable (base {
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:${toString config.services.collabora-online.port}";
-              proxyWebsockets = true;
-            };
-          });
+          "collabora.ghov.net" = mkIf config.srvs.nextcloud.collabora.enable (
+            proxyWebsockets config.services.collabora-online.port
+          );
+          "auth.ghov.net" = mkIf config.srvs.authentik.enable (proxyWebsockets 9000);
         };
 
       streamConfig = ''

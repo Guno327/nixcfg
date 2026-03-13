@@ -35,6 +35,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    authentik-nix = {
+      url = "github:nix-community/authentik-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,6 +65,7 @@
       nixarr,
       sops-nix,
       flakecraft,
+      authentik-nix,
       ...
     }@inputs:
     let
@@ -107,6 +113,7 @@
             stylix.nixosModules.stylix
             nixarr.nixosModules.default
             sops-nix.nixosModules.sops
+            authentik-nix.nixosModules.default
             flakecraft.nixosModules.default
           ];
         };

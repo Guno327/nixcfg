@@ -11,5 +11,6 @@
     ./nextcloud.nix
     ./libvirt.nix
     ./lxd.nix
+    ./authentik.nix
   ];
 }

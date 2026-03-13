@@ -9,6 +9,7 @@
     radarr = { };
     sonarr = { };
     nextcloud = { };
+    authentik = { };
 
     dns-01 = {
       owner = "acme";
