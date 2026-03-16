@@ -215,8 +215,12 @@
     };
     nginx.enable = true;
     about.enable = true;
-    nextcloud.enable = true;
+    nextcloud = {
+      enable = true;
+      collabora.enable = true;
+    };
     adblock.enable = true;
+    authentik.enable = true;
   };
 
   # Incus
