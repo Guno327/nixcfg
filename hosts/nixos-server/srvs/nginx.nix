@@ -58,11 +58,44 @@ in
             base {
               "/" = {
                 proxyPass = "http://127.0.0.1:${toString port}/";
-                proxyWebSockets = true;
+                proxyWebsockets = true;
               };
             };
         in
         {
+          "fallback" = mkMerge [
+            (base { })
+            ({
+              serverName = "_";
+              default = true;
+              extraConfig = ''
+                keepalive_timeout 0;
+                error_page 404 /index.html;
+                location = /index.html {
+                  internal;
+                  # This is a 'here-doc' style way to write a quick HTML page
+                  return 200 "<html><body><h1>SNI Match Failed</h1><p>The domain you requested is not configured on this proxy.</p></body></html>";
+                  add_header Content-Type text/html;
+                }
+              '';
+            })
+          ];
+
+          "landscape.ghov.net" = {
+            useACMEHost = "ghov.net";
+            listen = [
+              {
+                addr = "127.0.0.1";
+                port = 8443;
+                ssl = true;
+              }
+            ];
+            extraConfig = ''
+              add_header Connection close;
+              return 307 https://landscape.ghov.net$request_uri;
+            '';
+          };
+
           "about.ghov.net" = proxy 81;
           "media.ghov.net" = mkIf config.srvs.media.enable (proxy 8096);
           "request.ghov.net" = mkIf config.srvs.media.enable (proxy 5000);
