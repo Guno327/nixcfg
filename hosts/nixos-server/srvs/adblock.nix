@@ -18,14 +18,26 @@ in
       if config.services.nebula.networks."mesh".enable then
         {
           interfaces."nebula0" = {
-            allowedTCPPorts = [ 53 ];
-            allowedUDPPorts = [ 53 ];
+            allowedTCPPorts = [
+              53
+              853
+            ];
+            allowedUDPPorts = [
+              53
+              853
+            ];
           };
         }
       else
         {
-          allowedTCPPorts = [ 53 ];
-          allowedUDPPorts = [ 53 ];
+          allowedTCPPorts = [
+            53
+            853
+          ];
+          allowedUDPPorts = [
+            53
+            853
+          ];
         };
 
     services.adguardhome = {

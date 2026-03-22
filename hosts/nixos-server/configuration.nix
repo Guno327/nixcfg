@@ -217,7 +217,7 @@
     about.enable = true;
     nextcloud = {
       enable = true;
-      collabora.enable = true;
+      onlyoffice.enable = true;
     };
     adblock.enable = true;
     authentik.enable = true;

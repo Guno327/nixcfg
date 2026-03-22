@@ -10,6 +10,31 @@ in
 {
   options.srvs.nginx.enable = mkEnableOption "Enable and configure nginx reverse proxy";
   config = mkIf cfg.enable {
+    networking.firewall =
+      if config.services.nebula.networks."mesh".enable then
+        {
+          interfaces."nebula0" = {
+            allowedTCPPorts = [
+              80
+              443
+            ];
+            allowedUDPPorts = [
+              80
+              443
+            ];
+          };
+        }
+      else
+        {
+          allowedTCPPorts = [
+            53
+            853
+          ];
+          allowedUDPPorts = [
+            53
+            853
+          ];
+        };
     security.acme = {
       acceptTerms = true;
       defaults.email = "acme@ghov.net";
@@ -106,10 +131,10 @@ in
           "ads.ghov.net" = mkIf config.srvs.adblock.enable (proxy 5353);
 
           "data.ghov.net" = mkIf config.srvs.nextcloud.enable (base { });
-          "collabora.ghov.net" = mkIf config.srvs.nextcloud.collabora.enable (
-            proxyWebsockets config.services.collabora-online.port
-          );
           "auth.ghov.net" = mkIf config.srvs.authentik.enable (proxyWebsockets 9000);
+          "office.ghov.net" = mkIf config.srvs.nextcloud.onlyoffice.enable (
+            lib.mkForce (proxyWebsockets 8458)
+          );
         };
 
       streamConfig = ''
