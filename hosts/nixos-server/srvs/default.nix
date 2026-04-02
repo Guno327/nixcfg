@@ -8,7 +8,6 @@
     ./nvidia.nix
     ./minecraft.nix
     ./about.nix
-    ./nextcloud.nix
     ./lxd.nix
     ./authentik.nix
     ./opencloud.nix
