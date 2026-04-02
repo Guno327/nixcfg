@@ -58,9 +58,6 @@
 
   environment = {
     etc."resolv.conf".text = ''
-      nameserver 127.0.0.1
-      nameserver 100.100.0.2
-      nameserver 192.227.212.190
       nameserver 1.1.1.1 
       nameserver 1.0.0.1
     '';

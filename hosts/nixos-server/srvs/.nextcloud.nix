@@ -60,7 +60,7 @@ in
             host = [ "data.ghov.net" ];
           };
 
-          server_name = "collabora.ghov.net";
+          server_name = "office.ghov.net";
         };
       };
     };
@@ -70,7 +70,7 @@ in
         inherit (config.services.nextcloud) occ;
 
         wopi_url = "http://127.0.0.1:${toString config.services.collabora-online.port}";
-        public_wopi_url = "https://collabora.ghov.net";
+        public_wopi_url = "https://office.ghov.net";
         wopi_allowlist = lib.concatStringsSep "," [
           "127.0.0.1"
           "100.100.0.1"

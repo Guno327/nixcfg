@@ -16,8 +16,6 @@
       cf = { };
       tmdb = { };
       web = { };
-      onlyoffice = { };
-      onlyoffice_env = { };
 
       "nebula/laptop.key" = {
         owner = "nebula-mesh";

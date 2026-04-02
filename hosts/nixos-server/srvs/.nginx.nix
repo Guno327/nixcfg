@@ -34,17 +34,14 @@ in
         let
           base = locations: {
             inherit locations;
-
             forceSSL = true;
-            addSSL = false;
             useACMEHost = "ghov.net";
 
             listen = [
               {
-                addr = "127.0.0.1";
-                port = 8443;
+                addr = "100.100.0.2";
+                port = 443;
                 ssl = true;
-                proxyProtocol = true;
               }
             ];
           };
@@ -81,21 +78,6 @@ in
             })
           ];
 
-          "landscape.ghov.net" = {
-            useACMEHost = "ghov.net";
-            listen = [
-              {
-                addr = "127.0.0.1";
-                port = 8443;
-                ssl = true;
-              }
-            ];
-            extraConfig = ''
-              add_header Connection close;
-              return 307 https://landscape.ghov.net$request_uri;
-            '';
-          };
-
           "about.ghov.net" = proxy 81;
           "media.ghov.net" = mkIf config.srvs.media.enable (proxy 8096);
           "request.ghov.net" = mkIf config.srvs.media.enable (proxy 5000);
@@ -106,31 +88,8 @@ in
           "ads.ghov.net" = mkIf config.srvs.adblock.enable (proxy 5353);
 
           "data.ghov.net" = mkIf config.srvs.nextcloud.enable (base { });
-          "collabora.ghov.net" = mkIf config.srvs.nextcloud.collabora.enable (
-            proxyWebsockets config.services.collabora-online.port
-          );
           "auth.ghov.net" = mkIf config.srvs.authentik.enable (proxyWebsockets 9000);
         };
-
-      streamConfig = ''
-        map $ssl_preread_server_name $backend_target {
-          hostnames;
-          landscape.ghov.net  10.1.1.21:443;
-          default             127.0.0.1:8444;
-        }
-
-        server {
-          listen 443;
-          proxy_pass $backend_target;
-          ssl_preread on;
-        }
-
-        server {
-          listen 127.0.0.1:8444;
-          proxy_pass 127.0.0.1:8443;
-          proxy_protocol on; 
-        }
-      '';
     };
   };
 }

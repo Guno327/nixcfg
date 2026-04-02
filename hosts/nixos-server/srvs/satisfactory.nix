@@ -4,9 +4,11 @@
   pkgs,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.srvs.satisfactory;
-in {
+in
+{
   options.srvs.satisfactory = {
     enable = mkEnableOption "Satisfactory Dedicated Server";
 
@@ -33,21 +35,43 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # Open Firewall
-    networking.firewall =
-      if config.services.nebula.networks."mesh".enable
-      then {
-        interfaces."nebula0" = {
-          allowedTCPPorts = [7777 8888];
-          allowedUDPPorts = [7777];
+    services.traefik.dynamicConfigOptions = mkIf config.srvs.traefik.enable {
+      http = {
+        routers.factory-router = {
+          rule = "Host(`factory.ghov.net`)";
+          entryPoints = [ "websecure" ];
+          priority = 10;
+          service = "factory-service";
         };
-      }
-      else {
-        allowedTCPPorts = [7777 8888];
-        allowedUDPPorts = [7777];
+        services.factory-service.loadBalancer.servers = [
+          {
+            url = "http://127.0.0.1:9090";
+            preservePath = true;
+          }
+        ];
       };
+    };
 
-    # Setup user
+    networking.firewall =
+      if config.services.nebula.networks."mesh".enable then
+        {
+          interfaces."nebula0" = {
+            allowedTCPPorts = [
+              7777
+              8888
+            ];
+            allowedUDPPorts = [ 7777 ];
+          };
+        }
+      else
+        {
+          allowedTCPPorts = [
+            7777
+            8888
+          ];
+          allowedUDPPorts = [ 7777 ];
+        };
+
     users.users.satisfactory = {
       description = "Satisfactory server service user";
       home = cfg.dataDir;
@@ -55,28 +79,29 @@ in {
       isSystemUser = true;
       group = "satisfactory";
     };
-    users.groups.satisfactory = {};
+    users.groups.satisfactory = { };
 
-    # Configure service
-    systemd.services.satisfactory = let
-      steamcmd = "${cfg.steamcmdPackage}/bin/steamcmd";
-      steam-run = "${pkgs.steam-run}/bin/steam-run";
-    in {
-      description = "Satisfactory Dedicated Server";
-      wantedBy = ["multi-user.target"];
-      after = ["network.target"];
+    systemd.services.satisfactory =
+      let
+        steamcmd = "${cfg.steamcmdPackage}/bin/steamcmd";
+        steam-run = "${pkgs.steam-run}/bin/steam-run";
+      in
+      {
+        description = "Satisfactory Dedicated Server";
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" ];
 
-      serviceConfig = {
-        TimeoutSec = "15min";
-        ExecStart = "${steam-run} ${cfg.dataDir}/FactoryServer.sh ${cfg.launchOptions}";
-        Restart = "always";
-        User = "satisfactory";
-        WorkingDirectory = cfg.dataDir;
+        serviceConfig = {
+          TimeoutSec = "15min";
+          ExecStart = "${steam-run} ${cfg.dataDir}/FactoryServer.sh ${cfg.launchOptions}";
+          Restart = "always";
+          User = "satisfactory";
+          WorkingDirectory = cfg.dataDir;
+        };
+
+        preStart = ''
+          ${steamcmd} +force_install_dir "${cfg.dataDir}" +login anonymous +app_update 1690800 validate +quit
+        '';
       };
-
-      preStart = ''
-        ${steamcmd} +force_install_dir "${cfg.dataDir}" +login anonymous +app_update 1690800 validate +quit
-      '';
-    };
   };
 }

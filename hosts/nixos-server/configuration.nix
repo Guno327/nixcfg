@@ -8,7 +8,6 @@
   imports = [
     ./hardware-configuration.nix
     ./srvs
-    ./sops.nix
   ];
 
   # Bootloader.
@@ -29,6 +28,7 @@
   # Networking
   networking = {
     hostName = "nixos-server";
+    hosts."127.0.0.1" = [ "nixos-server" ];
     hostId = "85eef91f";
     useDHCP = false;
     enableIPv6 = false;
@@ -210,13 +210,17 @@
     media.enable = true;
     nvidia.enable = true;
     satisfactory = {
-      enable = true;
+      enable = false;
       launchOptions = "-multihome=0.0.0.0";
     };
-    nginx.enable = true;
+    traefik.enable = true;
     about.enable = true;
-    nextcloud.enable = true;
+    opencloud = {
+      enable = true;
+      office = true;
+    };
     adblock.enable = true;
+    authentik.enable = true;
   };
 
   # Incus

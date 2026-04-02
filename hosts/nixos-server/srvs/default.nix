@@ -1,16 +1,16 @@
 { ... }:
 {
   imports = [
+    ./traefik.nix
     ./media.nix
     ./adblock.nix
     ./satisfactory.nix
     ./nvidia.nix
     ./minecraft.nix
-    ./nginx.nix
     ./about.nix
     ./nextcloud.nix
-    ./libvirt.nix
     ./lxd.nix
     ./authentik.nix
+    ./opencloud.nix
   ];
 }

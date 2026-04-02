@@ -45,6 +45,94 @@ in
   };
 
   config = mkIf cfg.enable {
+    services.traefik.dynamicConfigOptions = mkIf config.srvs.traefik.enable {
+      http = {
+        routers = {
+          media-router = {
+            rule = "Host(`media.ghov.net`)";
+            entryPoints = [ "websecure" ];
+            priority = 10;
+            service = "media-service";
+          };
+          request-router = {
+            rule = "Host(`request.ghov.net`)";
+            entryPoints = [ "websecure" ];
+            priority = 10;
+            service = "request-service";
+          };
+          sonarr-router = {
+            rule = "Host(`sonarr.ghov.net`)";
+            entryPoints = [ "websecure" ];
+            priority = 10;
+            service = "sonarr-service";
+          };
+          radarr-router = {
+            rule = "Host(`radarr.ghov.net`)";
+            entryPoints = [ "websecure" ];
+            priority = 10;
+            service = "radarr-service";
+          };
+          prowlarr-router = {
+            rule = "Host(`prowlarr.ghov.net`)";
+            entryPoints = [ "websecure" ];
+            priority = 10;
+            service = "prowlarr-service";
+          };
+        };
+        services = {
+          media-service.loadBalancer.servers = [
+            {
+              url = "http://127.0.0.1:8096";
+              preservePath = true;
+            }
+          ];
+          request-service.loadBalancer.servers = [
+            {
+              url = "http://127.0.0.1:5000";
+              preservePath = true;
+            }
+          ];
+          sonarr-service.loadBalancer.servers = [
+            {
+              url = "http://127.0.0.1:8989";
+              preservePath = true;
+            }
+          ];
+          radarr-service.loadBalancer.servers = [
+            {
+              url = "http://127.0.0.1:7878";
+              preservePath = true;
+            }
+          ];
+          prowlarr-service.loadBalancer.servers = [
+            {
+              url = "http://127.0.0.1:9117";
+              preservePath = true;
+            }
+          ];
+        };
+      };
+    };
+
+    sops.secrets = {
+      bazarr = { };
+      jellyfin = { };
+      jellyseerr = { };
+      prowlarr = { };
+      radarr = { };
+      sonarr = { };
+      wireguard = {
+        sopsFile = ../../../secrets/wg0.conf;
+        format = "binary";
+      };
+
+      transmission = {
+        sopsFile = ../../../secrets/transmission.json;
+        format = "json";
+        key = "";
+      };
+    };
+
     networking.firewall.trustedInterfaces = [ "wg-br" ];
 
     environment.systemPackages = with pkgs; [
@@ -63,10 +151,7 @@ in
       gunnar.extraGroups = [ "media" ];
     };
 
-    services.flaresolverr = {
-      enable = true;
-      port = 8191;
-    };
+    services.flaresolverr.enable = true;
 
     nixarr = {
       enable = true;
