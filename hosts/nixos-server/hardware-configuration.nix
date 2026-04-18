@@ -40,10 +40,10 @@
         "dm_thin_pool"
       ];
 
-      luks.devices."encrypted_raid" = {
-        device = "/dev/md0";
-        preLVM = true;
-      };
+      #      luks.devices."encrypted_raid" = {
+      #        device = "/dev/md0";
+      #        preLVM = true;
+      #      };
 
       services.lvm.enable = true;
     };
@@ -52,12 +52,12 @@
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/98ae9690-fe34-4fe6-a8d9-6bc97d083d26";
+    device = "/dev/disk/by-label/NIXROOT";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/455C-EF79";
+    device = "/dev/disk/by-label/NIXBOOT";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -71,8 +71,9 @@
     options = [
       "defaults"
       "noatime"
-      "x-systemd.device-timeout=60s"
+      "x-systemd.device-timeout=10s"
       "x-systemd.after=lvm2-monitor.service"
+      "nofail"
     ];
   };
 
@@ -82,8 +83,9 @@
     options = [
       "defaults"
       "noatime"
-      "x-systemd.device-timeout=60s"
+      "x-systemd.device-timeout=10s"
       "x-systemd.after=lvm2-monitor.service"
+      "nofail"
     ];
   };
 

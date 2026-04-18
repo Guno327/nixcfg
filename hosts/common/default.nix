@@ -57,10 +57,6 @@
   programs.nix-ld.enable = true;
 
   environment = {
-    etc."resolv.conf".text = ''
-      nameserver 1.1.1.1 
-      nameserver 1.0.0.1
-    '';
     variables = {
       "NH_FLAKE" = "/flake";
       "GPG_TTY" = "$(tty)";

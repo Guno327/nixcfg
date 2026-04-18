@@ -28,62 +28,75 @@
   # Networking
   networking = {
     hostName = "nixos-server";
-    hosts."127.0.0.1" = [ "nixos-server" ];
     hostId = "85eef91f";
-    useDHCP = false;
-    enableIPv6 = false;
-    defaultGateway = "10.0.0.1";
     nftables.enable = true;
-
-    bridges = {
-      "br-ex".interfaces = [ "eno2" ];
-    };
-
-    interfaces = {
-      "eno1".ipv4.addresses = [
-        {
-          address = "10.0.0.3";
-          prefixLength = 24;
-        }
-      ];
-      "br-ex".ipv4.addresses = [
-        {
-          address = "10.10.10.1";
-          prefixLength = 24;
-        }
-      ];
-      "br-ex".useDHCP = lib.mkForce false;
-    };
-
+    nameservers = [
+      "100.100.0.2"
+      "1.1.1.1"
+    ];
     nat = {
       enable = true;
       internalInterfaces = [ "br-ex" ];
-      externalInterface = "eno1";
+      externalInterface = "bond0";
     };
+  };
 
-    firewall = {
-      enable = true;
-      # Allow local traffic
-      checkReversePath = false;
-      trustedInterfaces = [
-        "eno1"
-        "incusbr0"
-        "br0"
-        "br-ex"
-      ];
-      interfaces = {
-        # All ingress should come across the nebula mesh
-        "nebula0" = {
-          allowedTCPPorts = [
-            22
-            80
-            443
-          ];
-          allowedUDPPorts = [
-            80
-            443
-          ];
+  systemd.network = {
+    enable = true;
+    netdevs = {
+      "10-bond0" = {
+        netdevConfig = {
+          Kind = "bond";
+          Name = "bond0";
         };
+        bondConfig = {
+          Mode = "802.3ad";
+          TransmitHashPolicy = "layer3+4";
+        };
+      };
+      "20-br-ex" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "br-ex";
+        };
+      };
+      "20-br-maas" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "br-maas";
+        };
+      };
+    };
+    networks = {
+      "30-eno1" = {
+        matchConfig.Name = "eno1";
+        networkConfig.Bond = "bond0";
+      };
+      "30-eno2" = {
+        matchConfig.Name = "eno2";
+        networkConfig.Bond = "bond0";
+      };
+      "40-bond0" = {
+        matchConfig.Name = "bond0";
+        linkConfig.RequiredForOnline = "routable";
+        networkConfig.LinkLocalAddressing = "no";
+
+        address = [ "10.0.0.3/24" ];
+        routes = [
+          { Gateway = "10.0.0.1"; }
+        ];
+      };
+      "40-br-ex" = {
+        matchConfig.Name = "br-ex";
+        bridgeConfig = { };
+        linkConfig.RequiredForOnline = "routable";
+
+        address = [ "10.1.1.1" ];
+      };
+      "40-br-maas" = {
+        matchConfig.Name = "br-maas";
+        bridgeConfig = { };
+        linkConfig.RequiredForOnline = "carrier";
       };
     };
   };
@@ -124,7 +137,7 @@
     # Nebula Mesh
     nebula.networks."mesh" = {
       tun.device = "nebula0";
-      staticHostMap."100.100.0.1" = [ "192.227.212.190:4242" ];
+      staticHostMap."100.100.0.1" = [ "157.151.180.100:4242" ];
       lighthouses = [ "100.100.0.1" ];
       key = config.sops.secrets."nebula/server.key".path;
       cert = config.sops.secrets."nebula/server.crt".path;
@@ -158,6 +171,7 @@
     mullvad-vpn.enable = true;
     pcscd.enable = true;
     zfs.autoScrub.enable = true;
+    resolved.enable = true;
   };
 
   # Environment
@@ -207,7 +221,7 @@
 
   # Services
   srvs = {
-    media.enable = true;
+    media.enable = false;
     nvidia.enable = true;
     satisfactory = {
       enable = false;
@@ -221,6 +235,7 @@
     };
     adblock.enable = true;
     authentik.enable = true;
+    valheim.enable = true;
   };
 
   # Incus
