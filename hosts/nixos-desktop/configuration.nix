@@ -34,7 +34,7 @@
     nftables.enable = true;
     networkmanager = {
       enable = true;
-      dns = "none";
+      dns = "100.100.0.2";
       plugins = with pkgs; [
         networkmanager-openvpn
       ];
@@ -122,7 +122,7 @@
 
     # Nebula Mesh
     nebula.networks."mesh" = {
-      staticHostMap."100.100.0.1" = [ "192.227.212.190:4242" ];
+      staticHostMap."100.100.0.1" = [ "157.151.180.100:4242" ];
       lighthouses = [ "100.100.0.1" ];
       key = config.sops.secrets."nebula/desktop.key".path;
       cert = config.sops.secrets."nebula/desktop.crt".path;
