@@ -11,5 +11,6 @@
     ./lxd.nix
     ./authentik.nix
     ./opencloud.nix
+    ./valheim.nix
   ];
 }
