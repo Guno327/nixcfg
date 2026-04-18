@@ -30,10 +30,6 @@
     hostName = "nixos-server";
     hostId = "85eef91f";
     nftables.enable = true;
-    nameservers = [
-      "100.100.0.2"
-      "1.1.1.1"
-    ];
     nat = {
       enable = true;
       internalInterfaces = [ "br-ex" ];
@@ -171,7 +167,10 @@
     mullvad-vpn.enable = true;
     pcscd.enable = true;
     zfs.autoScrub.enable = true;
-    resolved.enable = true;
+    resolved = {
+      enable = true;
+      settings.Resolve.DNS = [ "100.100.0.2" ];
+    };
   };
 
   # Environment

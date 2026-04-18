@@ -26,7 +26,6 @@
     hostName = "nixos-laptop";
     networkmanager = {
       enable = true;
-      dns = "100.100.0.2";
       plugins = with pkgs; [
         networkmanager-openvpn
       ];
@@ -127,7 +126,10 @@
     };
 
     blueman.enable = true;
-    resolved.enable = true;
+    resolved = {
+      enable = true;
+      settings.Resolve.DNS = [ "100.100.0.2" ];
+    };
   };
 
   # Select internationalisation properties.
