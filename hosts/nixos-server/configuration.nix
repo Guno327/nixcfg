@@ -29,11 +29,36 @@
   networking = {
     hostName = "nixos-server";
     hostId = "85eef91f";
-    nftables.enable = true;
-    nat = {
+    useNetworkd = false;
+    useDHCP = false;
+    firewall.enable = false;
+    nftables = {
       enable = true;
-      internalInterfaces = [ "br-ex" ];
-      externalInterface = "bond0";
+      tables = {
+        filter = {
+          family = "inet";
+          content = ''
+            chain input {
+              type filter hook input priority 0; policy accept;
+            }
+            chain forward {
+              type filter hook forward priority 0; policy accept;
+            }
+            chain output {
+              type filter hook output priority 0; policy accept;
+            }
+          '';
+        };
+        nat = {
+          family = "ip";
+          content = ''
+            chain postrouting {
+              type nat hook postrouting priority 100;
+              ip saddr 10.0.0.0/8 iifname "br-ex" oifname "bond0" masquerade
+            }
+          '';
+        };
+      };
     };
   };
 
@@ -76,23 +101,19 @@
         matchConfig.Name = "bond0";
         linkConfig.RequiredForOnline = "routable";
         networkConfig.LinkLocalAddressing = "no";
-
         address = [ "10.0.0.3/24" ];
         routes = [
           { Gateway = "10.0.0.1"; }
         ];
       };
-      "40-br-ex" = {
+      "50-br-ex" = {
         matchConfig.Name = "br-ex";
-        bridgeConfig = { };
-        linkConfig.RequiredForOnline = "routable";
-
-        address = [ "10.1.1.1" ];
+        networkConfig.ConfigureWithoutCarrier = true;
+        address = [ "10.10.10.10/24" ];
       };
-      "40-br-maas" = {
+      "50-br-maas" = {
         matchConfig.Name = "br-maas";
-        bridgeConfig = { };
-        linkConfig.RequiredForOnline = "carrier";
+        networkConfig.ConfigureWithoutCarrier = true;
       };
     };
   };
@@ -164,7 +185,6 @@
       };
     };
 
-    mullvad-vpn.enable = true;
     pcscd.enable = true;
     zfs.autoScrub.enable = true;
     resolved = {
@@ -220,7 +240,7 @@
 
   # Services
   srvs = {
-    media.enable = false;
+    media.enable = true;
     nvidia.enable = true;
     satisfactory = {
       enable = false;

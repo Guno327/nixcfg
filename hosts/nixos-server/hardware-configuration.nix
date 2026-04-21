@@ -12,20 +12,29 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  services.lvm = {
-    enable = true;
-    boot.thin.enable = true;
+  systemd.services.zfs-load-key-tank = {
+    description = "Load ZFS encryption key for tank";
+    before = [ "zfs-mount.service" ];
+    after = [
+      "zfs-import.target"
+      "boot.mount"
+    ];
+    requires = [ "zfs-import.target" ];
+    wants = [
+      "zfs-import.target"
+      "boot.mount"
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      zpool import -N tank || true
+      zfs load-key -L file /boot/zfs.key tank
+    '';
   };
 
   boot = {
-    swraid = {
-      enable = true;
-      mdadmConf = ''
-        ARRAY /dev/md/0  metadata=1.2 UUID=8496037f:04ddcd65:496e9628:a9891237
-          MAILADDR admin@ghov.net
-      '';
-    };
-
     initrd = {
       systemd.enable = true;
       availableKernelModules = [
@@ -35,58 +44,27 @@
         "nvme"
         "usb_storage"
         "usbhid"
-        "sd_mod"
-        "sr_mod"
-        "dm_thin_pool"
       ];
-
-      #      luks.devices."encrypted_raid" = {
-      #        device = "/dev/md0";
-      #        preLVM = true;
-      #      };
-
-      services.lvm.enable = true;
     };
+    zfs.extraPools = [ "tank" ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
   };
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/NIXROOT";
-    fsType = "ext4";
-  };
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/NIXROOT";
+      fsType = "ext4";
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-label/NIXBOOT";
-    fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
-    ];
-  };
-
-  fileSystems."/media" = {
-    device = "/dev/disk/by-label/MEDIA";
-    fsType = "ext4";
-    options = [
-      "defaults"
-      "noatime"
-      "x-systemd.device-timeout=10s"
-      "x-systemd.after=lvm2-monitor.service"
-      "nofail"
-    ];
-  };
-
-  fileSystems."/data" = {
-    device = "/dev/disk/by-label/DATA";
-    fsType = "ext4";
-    options = [
-      "defaults"
-      "noatime"
-      "x-systemd.device-timeout=10s"
-      "x-systemd.after=lvm2-monitor.service"
-      "nofail"
-    ];
+    "/boot" = {
+      device = "/dev/disk/by-label/NIXBOOT";
+      fsType = "vfat";
+      options = [
+        "fmask=0022"
+        "dmask=0022"
+      ];
+    };
   };
 
   swapDevices = [ ];
