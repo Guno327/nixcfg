@@ -67,6 +67,31 @@ in
             stores = [ "default" ];
           }
         ];
+        http.middlewares.authentik.forwardAuth = {
+          address = "http://127.0.0.1:9000/outpost.goauthentik.io/auth/traefik";
+          trustForwardHeader = true;
+          authRequestHeaders = [
+            "Accept"
+            "Cookie"
+            "X-Forwarded-For"
+            "X-Forwarded-Host"
+            "X-Forwarded-Proto"
+            "X-Forwarded-Uri"
+          ];
+          authResponseHeaders = [
+            "X-authentik-username"
+            "X-authentik-groups"
+            "X-authentik-email"
+            "X-authentik-name"
+            "X-authentik-uid"
+            "X-authentik-jwt"
+            "X-authentik-meta-jwks"
+            "X-authentik-meta-outpost"
+            "X-authentik-meta-provider"
+            "X-authentik-meta-app"
+            "X-authentik-meta-version"
+          ];
+        };
       };
     };
   };

@@ -63,20 +63,23 @@ in
           sonarr-router = {
             rule = "Host(`sonarr.ghov.net`)";
             entryPoints = [ "websecure" ];
+            middlewares = [ "authentik" ];
             priority = 10;
             service = "sonarr-service";
           };
           radarr-router = {
             rule = "Host(`radarr.ghov.net`)";
             entryPoints = [ "websecure" ];
+            middlewares = [ "authentik" ];
             priority = 10;
             service = "radarr-service";
           };
-          prowlarr-router = {
-            rule = "Host(`prowlarr.ghov.net`)";
+          jackett-router = {
+            rule = "Host(`jackett.ghov.net`)";
             entryPoints = [ "websecure" ];
+            middlewares = [ "authentik" ];
             priority = 10;
-            service = "prowlarr-service";
+            service = "jackett-service";
           };
         };
         services = {
@@ -104,7 +107,7 @@ in
               preservePath = true;
             }
           ];
-          prowlarr-service.loadBalancer.servers = [
+          jackett-service.loadBalancer.servers = [
             {
               url = "http://127.0.0.1:9117";
               preservePath = true;
@@ -118,7 +121,6 @@ in
       bazarr = { };
       jellyfin = { };
       jellyseerr = { };
-      prowlarr = { };
       radarr = { };
       sonarr = { };
       wireguard = {
@@ -143,6 +145,7 @@ in
       jellyfin.extraGroups = [
         "video"
         "media"
+        "render"
       ];
       sonarr.extraGroups = [ "media" ];
       radarr.extraGroups = [ "media" ];
@@ -187,15 +190,17 @@ in
         enable = true;
       };
 
-      prowlarr = {
-        enable = true;
-        port = 9117;
-      };
-
       jellyseerr = {
         enable = true;
         port = 5000;
       };
+    };
+
+    services.jackett = {
+      enable = true;
+      user = "jackett";
+      dataDir = "/media/.state/jackett";
+      port = 9117;
     };
 
     # Bitmagnet
