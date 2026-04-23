@@ -90,7 +90,7 @@ in
           export VALHEIM_PASSWD=$(cat /run/secrets/valheim)
 
           echo "Starting server PRESS CTRL-C to exit"  
-          ${steam-run} /var/lib/valheim/valheim_server.x86_64 -name "scrungus" -port 2456 -nographics -batchmode -world "scrungus" -password "$VALHEIM_PASSWD" -public 1  
+          ${steam-run} /var/lib/valheim/valheim_server.x86_64 -name "scrungus" -port 2456 -nographics -batchmode -world "scrungus" -password "$VALHEIM_PASSWD" -public 1 -savedir /var/lib/valheim/save_data 
           export LD_LIBRARY_PATH=$templdpath
         '';
       };
