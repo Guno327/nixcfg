@@ -7,6 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./fancontrol.nix
     ./srvs
   ];
 
@@ -109,7 +110,7 @@
       "50-br-ex" = {
         matchConfig.Name = "br-ex";
         networkConfig.ConfigureWithoutCarrier = true;
-        address = [ "10.10.10.10/24" ];
+        address = [ "10.10.10.1/24" ];
       };
       "50-br-maas" = {
         matchConfig.Name = "br-maas";
@@ -248,10 +249,7 @@
     };
     traefik.enable = true;
     about.enable = true;
-    opencloud = {
-      enable = true;
-      office = true;
-    };
+    opencloud.enable = true;
     adblock.enable = true;
     authentik.enable = true;
     valheim.enable = true;
