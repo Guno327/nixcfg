@@ -67,30 +67,62 @@ in
             stores = [ "default" ];
           }
         ];
-        http.middlewares.authentik.forwardAuth = {
-          address = "http://127.0.0.1:9000/outpost.goauthentik.io/auth/traefik";
-          trustForwardHeader = true;
-          authRequestHeaders = [
-            "Accept"
-            "Cookie"
-            "X-Forwarded-For"
-            "X-Forwarded-Host"
-            "X-Forwarded-Proto"
-            "X-Forwarded-Uri"
-          ];
-          authResponseHeaders = [
-            "X-authentik-username"
-            "X-authentik-groups"
-            "X-authentik-email"
-            "X-authentik-name"
-            "X-authentik-uid"
-            "X-authentik-jwt"
-            "X-authentik-meta-jwks"
-            "X-authentik-meta-outpost"
-            "X-authentik-meta-provider"
-            "X-authentik-meta-app"
-            "X-authentik-meta-version"
-          ];
+        http = {
+          routers = {
+            printer-router = {
+              rule = "Host(`printer.ghov.net`)";
+              entryPoints = [ "websecure" ];
+              middlewares = [ "authentik" ];
+              priority = 10;
+              service = "printer-service";
+            };
+            idrac-router = {
+              rule = "Host(`idrac.ghov.net`)";
+              entryPoints = [ "websecure" ];
+              middlewares = [ "authentik" ];
+              priority = 10;
+              service = "idrac-service";
+            };
+          };
+          services = {
+            printer-service.loadBalancer.servers = [
+              {
+                url = "http://100.100.0.8";
+                preservePath = true;
+              }
+            ];
+            idrac-service.loadBalancer.servers = [
+              {
+                url = "http://10.0.0.2";
+                preservePath = true;
+              }
+            ];
+          };
+          middlewares.authentik.forwardAuth = {
+            address = "http://127.0.0.1:9000/outpost.goauthentik.io/auth/traefik";
+            trustForwardHeader = true;
+            authRequestHeaders = [
+              "Accept"
+              "Cookie"
+              "X-Forwarded-For"
+              "X-Forwarded-Host"
+              "X-Forwarded-Proto"
+              "X-Forwarded-Uri"
+            ];
+            authResponseHeaders = [
+              "X-authentik-username"
+              "X-authentik-groups"
+              "X-authentik-email"
+              "X-authentik-name"
+              "X-authentik-uid"
+              "X-authentik-jwt"
+              "X-authentik-meta-jwks"
+              "X-authentik-meta-outpost"
+              "X-authentik-meta-provider"
+              "X-authentik-meta-app"
+              "X-authentik-meta-version"
+            ];
+          };
         };
       };
     };
