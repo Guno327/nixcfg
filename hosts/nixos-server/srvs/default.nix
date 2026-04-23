@@ -12,5 +12,6 @@
     ./authentik.nix
     ./opencloud.nix
     ./valheim.nix
+    ./finance.nix
   ];
 }

@@ -253,6 +253,7 @@
     adblock.enable = true;
     authentik.enable = true;
     valheim.enable = true;
+    finance.enable = true;
   };
 
   # Incus

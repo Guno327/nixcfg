@@ -558,8 +558,8 @@
         "zen-browser": "zen-browser"
       },
       "locked": {
-        "lastModified": 1776550080,
-        "narHash": "sha256-IVxj/RVzfKlY5NxLdRhRpMgW4/KF568ZRA1qWJcK8iU=",
+        "lastModified": 1776549437,
+        "narHash": "sha256-dDz0SeoT5cxOU56wARZlRv5p5Gl64bk0igmkZuv38yw=",
         "path": "/flake/home",
         "type": "path"
       },
