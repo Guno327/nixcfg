@@ -13,5 +13,6 @@
     ./opencloud.nix
     ./valheim.nix
     ./finance.nix
+    ./windrose.nix
   ];
 }

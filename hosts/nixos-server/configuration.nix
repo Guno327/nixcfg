@@ -254,6 +254,10 @@
     authentik.enable = true;
     valheim.enable = true;
     finance.enable = true;
+    windrose = {
+      enable = true;
+      inviteCode = "windroseghov";
+    };
   };
 
   # Incus
