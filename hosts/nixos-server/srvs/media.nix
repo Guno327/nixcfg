@@ -81,6 +81,13 @@ in
             priority = 10;
             service = "jackett-service";
           };
+          torrent-router = {
+            rule = "Host(`torrent.ghov.net`)";
+            entryPoints = [ "websecure" ];
+            middlewares = [ "authentik" ];
+            priority = 10;
+            service = "torrent-service";
+          };
         };
         services = {
           media-service.loadBalancer.servers = [
@@ -110,6 +117,12 @@ in
           jackett-service.loadBalancer.servers = [
             {
               url = "http://127.0.0.1:9117";
+              preservePath = true;
+            }
+          ];
+          torrent-service.loadBalancer.servers = [
+            {
+              url = "http://127.0.0.1:9091";
               preservePath = true;
             }
           ];
