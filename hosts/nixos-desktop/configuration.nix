@@ -246,15 +246,6 @@
     ];
   };
 
-  # Virt
-  users.groups.libvirtd.members = [ "gunnar" ];
-  users.groups."incus-admin".members = [ "gunnar" ];
-  virtualisation = {
-    incus.enable = true;
-    libvirtd.enable = true;
-    spiceUSBRedirection.enable = true;
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
