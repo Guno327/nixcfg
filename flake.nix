@@ -30,6 +30,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nvim-flake = {
+      url = "github:guno327/nvim-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -66,6 +71,7 @@
       sops-nix,
       flakecraft,
       authentik-nix,
+      nvim-flake,
       ...
     }@inputs:
     let

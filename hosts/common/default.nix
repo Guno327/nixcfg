@@ -63,8 +63,11 @@
       "EDITOR" = "nvim";
     };
     shellAliases = {
+      "vi" = "nvim";
+      "vim" = "nvim";
     };
     systemPackages = [
+      inputs.nvim-flake.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
   };
 
