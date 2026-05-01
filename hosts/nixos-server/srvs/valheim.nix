@@ -61,38 +61,57 @@ in
       mode = "0600";
     };
 
-    systemd.services.valheim =
-      let
-        steamcmd = "${cfg.steamcmdPackage}/bin/steamcmd";
-        steam-run = "${pkgs.steam-run}/bin/steam-run";
-      in
-      {
-        description = "valheim Dedicated Server";
-        wantedBy = [ "multi-user.target" ];
-        after = [ "network.target" ];
+    systemd = {
+      services.valheim =
+        let
+          steamcmd = "${cfg.steamcmdPackage}/bin/steamcmd";
+          steam-run = "${pkgs.steam-run}/bin/steam-run";
+        in
+        {
+          description = "valheim Dedicated Server";
+          wantedBy = [ "multi-user.target" ];
+          after = [ "network.target" ];
 
-        serviceConfig = {
-          TimeoutSec = "15min";
-          Restart = "always";
-          User = "valheim";
-          WorkingDirectory = cfg.dataDir;
+          serviceConfig = {
+            TimeoutSec = "15min";
+            Restart = "always";
+            User = "valheim";
+            WorkingDirectory = cfg.dataDir;
+          };
+
+          preStart = ''
+            ${steamcmd} +force_install_dir "${cfg.dataDir}" +login anonymous +app_update 896660 -beta public validate +quit
+          '';
+
+          script = ''
+            #! /usr/bin/env bash
+            export templdpath=$LD_LIBRARY_PATH  
+            export LD_LIBRARY_PATH=./linux64:$LD_LIBRARY_PATH  
+            export SteamAppID=892970
+            export VALHEIM_PASSWD=$(cat /run/secrets/valheim)
+
+            echo "Starting server PRESS CTRL-C to exit"  
+            ${steam-run} /var/lib/valheim/valheim_server.x86_64 -name "scrungus" -port 2456 -nographics -batchmode -world "scrungus" -password "$VALHEIM_PASSWD" -public 1 -savedir /var/lib/valheim/save_data 
+            export LD_LIBRARY_PATH=$templdpath
+          '';
         };
-
-        preStart = ''
-          ${steamcmd} +force_install_dir "${cfg.dataDir}" +login anonymous +app_update 896660 -beta public validate +quit
-        '';
-
-        script = ''
-          #! /usr/bin/env bash
-          export templdpath=$LD_LIBRARY_PATH  
-          export LD_LIBRARY_PATH=./linux64:$LD_LIBRARY_PATH  
-          export SteamAppID=892970
-          export VALHEIM_PASSWD=$(cat /run/secrets/valheim)
-
-          echo "Starting server PRESS CTRL-C to exit"  
-          ${steam-run} /var/lib/valheim/valheim_server.x86_64 -name "scrungus" -port 2456 -nographics -batchmode -world "scrungus" -password "$VALHEIM_PASSWD" -public 1 -savedir /var/lib/valheim/save_data 
-          export LD_LIBRARY_PATH=$templdpath
-        '';
+      services.restart-valheim = {
+        description = "Restart valheim daily";
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.systemd}/bin/systemctl restart valheim.service";
+        };
       };
+
+      timers.restart-valheim = {
+        description = "Timer to restart valheim daily at 3AM";
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "*-*-* 03:00:00";
+          Persistent = true;
+          Unit = "restart-valheim.service";
+        };
+      };
+    };
   };
 }

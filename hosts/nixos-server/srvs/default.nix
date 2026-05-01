@@ -14,5 +14,6 @@
     ./valheim.nix
     ./finance.nix
     ./windrose.nix
+    ./incus.nix
   ];
 }

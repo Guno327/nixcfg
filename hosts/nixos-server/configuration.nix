@@ -234,13 +234,20 @@
       enable = true;
       shellAliases = {
         "fcst" = "ficsit-cli";
-        "lxc" = "incus";
       };
     };
   };
 
   # Services
   srvs = {
+    incus = {
+      enable = true;
+      user = "gunnar";
+      webhook = {
+        enable = true;
+        bind = "192.168.0.1:5555";
+      };
+    };
     media.enable = true;
     nvidia.enable = true;
     satisfactory = {
@@ -259,17 +266,6 @@
       inviteCode = "windroseghov";
     };
   };
-
-  # Incus
-  virtualisation.incus = {
-    enable = true;
-  };
-
-  # User changes
-  users.users.gunnar.extraGroups = [
-    "incus"
-    "incus-admin"
-  ];
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
 }

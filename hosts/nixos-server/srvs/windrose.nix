@@ -1,4 +1,5 @@
 {
+  pkgs,
   config,
   lib,
   ...
@@ -14,7 +15,7 @@ in
     dataDir = mkOption {
       type = types.path;
       description = "Directory to store game server";
-      default = "/data/windrose";
+      default = "/var/lib/windrose";
     };
 
     inviteCode = mkOption {
@@ -44,7 +45,12 @@ in
     virtualisation.oci-containers.containers.windrose = {
       image = "indifferentbroccoli/windrose-server-docker:latest";
       autoStart = true;
-      extraOptions = [ "--stop-timeout=30" ];
+      extraOptions = [
+        "--stop-timeout=30"
+        "--network=host"
+      ];
+
+      ports = [ "8780:8780" ];
 
       environment = {
         PUID = "976";
@@ -55,6 +61,8 @@ in
         MAX_PLAYERS = "10";
         GENERATE_SETTINGS = "true";
         INVITE_CODE = cfg.inviteCode;
+        WINDROSE_PLUS_ENABLED = "true";
+        P2P_PROXY_ADDRESS = "10.0.0.3";
       };
 
       environmentFiles = [ config.sops.secrets.windrose-env.path ];
@@ -64,8 +72,25 @@ in
       ];
     };
 
-    networking.firewall.allowedTCPPorts = [ cfg.port ];
-    networking.firewall.allowedUDPPorts = [ cfg.port ];
+    systemd = {
+      services.restart-podman-windrose = {
+        description = "Restart podman-windrose daily";
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${pkgs.systemd}/bin/systemctl restart podman-windrose.service";
+        };
+      };
+
+      timers.restart-podman-windrose = {
+        description = "Timer to restart podman-windrose daily at 3AM";
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "*-*-* 03:00:00";
+          Persistent = true;
+          Unit = "restart-podman-windrose.service";
+        };
+      };
+    };
   };
 
 }
