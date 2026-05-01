@@ -235,11 +235,11 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1777478896,
-        "narHash": "sha256-nhqZ6jJ5jjByCR6JdaT6jayKmVTEPkStV6Z8Hn9mB+Q=",
+        "lastModified": 1777553262,
+        "narHash": "sha256-M6D7hjjyC2iDqpRp1Wm++uLe3h9HyrNvIYLVVTTjdB8=",
         "owner": "caelestia-dots",
         "repo": "shell",
-        "rev": "a2b7ce6d404e3f6108efdcd518ef72a7cadb671a",
+        "rev": "efc08759ceaeddc2c571d868c623995270ac365d",
         "type": "github"
       },
       "original": {
@@ -558,8 +558,8 @@
         "zen-browser": "zen-browser"
       },
       "locked": {
-        "lastModified": 1777521226,
-        "narHash": "sha256-r2XsKz+9B8GeXssDKgIjNeJEUnjXuajLfe1kPqzZQdc=",
+        "lastModified": 1777586329,
+        "narHash": "sha256-Yqi2ejorGoOXEbZIfnBAmzyQiCyAG7KtB5lJxPFkq90=",
         "path": "/flake/home",
         "type": "path"
       },
@@ -1034,11 +1034,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1777501441,
-        "narHash": "sha256-+QWZ2/LvtEfbI4a5OiJmfv8aypBdm0u4Ui9t6LNHkRc=",
+        "lastModified": 1777580129,
+        "narHash": "sha256-6buSTzDtHYCJP1JNAIZCmgNcOs76oN03j+21CxdijVo=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "0bd266569c03b74234b8a2ae73d05055fb02a35f",
+        "rev": "20ff51f523e2dd67e5f31a321719d30708c1b771",
         "type": "github"
       },
       "original": {
@@ -1359,11 +1359,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1777484394,
-        "narHash": "sha256-03QK/lM/m4f1FjC4ldYtp8NobTGRdwGC24XBY6Vcdqo=",
+        "lastModified": 1777564084,
+        "narHash": "sha256-O9VRkxg+2j+sh+c73wi4VeIBECoqW2PlnCR9Qe1nQKA=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "274e039947393bc90f45b8fc6d1af23e45937af0",
+        "rev": "d93443c0f6fdb3b179bed68856f322dba4842612",
         "type": "github"
       },
       "original": {
