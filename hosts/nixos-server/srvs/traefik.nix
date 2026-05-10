@@ -83,6 +83,13 @@ in
               priority = 10;
               service = "idrac-service";
             };
+            apollo-router = {
+              rule = "Host(`apollo.ghov.net`)";
+              entryPoints = [ "websecure" ];
+              middlewares = [ "authentik" ];
+              priority = 10;
+              service = "apollo-service";
+            };
           };
           services = {
             printer-service.loadBalancer.servers = [

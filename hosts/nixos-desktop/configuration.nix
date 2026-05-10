@@ -122,27 +122,9 @@
 
     # Nebula Mesh
     nebula.networks."mesh" = {
-      staticHostMap."100.100.0.1" = [ "157.151.180.100:4242" ];
-      lighthouses = [ "100.100.0.1" ];
       key = config.sops.secrets."nebula/desktop.key".path;
       cert = config.sops.secrets."nebula/desktop.crt".path;
       ca = config.sops.secrets."nebula/ca.crt".path;
-      firewall = {
-        inbound = [
-          {
-            host = "any";
-            proto = "any";
-            port = "any";
-          }
-        ];
-        outbound = [
-          {
-            host = "any";
-            proto = "any";
-            port = "any";
-          }
-        ];
-      };
     };
 
     blueman.enable = true;

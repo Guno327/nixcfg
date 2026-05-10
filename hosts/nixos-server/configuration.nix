@@ -11,6 +11,9 @@
     ./srvs
   ];
 
+  #tmp
+  nixpkgs.config.permittedInsecurePackages = [ "minio-2025-10-15T17-29-55Z" ];
+
   # Bootloader.
   boot = {
     supportedFilesystems = [ "zfs" ];
@@ -154,44 +157,13 @@
 
     # Nebula Mesh
     nebula.networks."mesh" = {
-      tun.device = "nebula0";
-      staticHostMap."100.100.0.1" = [ "157.151.180.100:4242" ];
-      lighthouses = [ "100.100.0.1" ];
       key = config.sops.secrets."nebula/server.key".path;
       cert = config.sops.secrets."nebula/server.crt".path;
       ca = config.sops.secrets."nebula/ca.crt".path;
-      firewall = {
-        inbound = [
-          {
-            host = "any";
-            proto = "any";
-            port = "any";
-          }
-        ];
-        outbound = [
-          {
-            host = "any";
-            proto = "any";
-            port = "any";
-          }
-        ];
-      };
-      settings = {
-        firewall.unsafe_routes = [
-          {
-            route = "0.0.0.0/0";
-            via = "100.100.0.1";
-          }
-        ];
-      };
     };
 
     pcscd.enable = true;
     zfs.autoScrub.enable = true;
-    resolved = {
-      enable = true;
-      settings.Resolve.DNS = [ "100.100.0.2" ];
-    };
   };
 
   # Environment

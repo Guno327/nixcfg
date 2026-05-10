@@ -11,6 +11,7 @@
     inputs.home-manager.nixosModules.home-manager
     ./users
     ./sops.nix
+    ./nebula.nix
   ];
 
   home-manager = {
@@ -72,6 +73,10 @@
   };
 
   services = {
+    resolved = {
+      enable = true;
+      settings.Resolve.DNS = [ "129.159.121.119" ];
+    };
     openvpn.servers = {
       us-work = {
         autoStart = false;
