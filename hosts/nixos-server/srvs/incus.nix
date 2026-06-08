@@ -20,7 +20,6 @@ let
       ''
         from flask import Flask, jsonify
         import subprocess
-        import json
 
         app = Flask(__name__)
 
@@ -32,29 +31,9 @@ let
             except subprocess.CalledProcessError as e:
                 return False, e.stderr.strip()
 
-        def get_vm_project(vm_name):
-            """Searches all Incus projects to find which one the VM belongs to."""
-            try:
-                result = subprocess.run(
-                    ['incus', 'list', vm_name, '--all-projects', '--format=json'],
-                    capture_output=True, text=True, check=True
-                )
-                instances = json.loads(result.stdout)
-
-                for inst in instances:
-                    if inst['name'] == vm_name:
-                        return inst['project']
-                return None
-            except Exception:
-                return None
-
-        @app.route('/powerstatus/<vm_name>', methods=['GET'])
-        def power_status(vm_name):
+        @app.route('/powerstatus/<project>/<vm_name>', methods=['GET'])
+        def power_status(project, vm_name):
             """Queries the current power status of the Incus VM."""
-            project = get_vm_project(vm_name)
-            if not project:
-                return jsonify({"status": "unknown", "error": "VM not found in any project"}), 404
-
             success, output = run_incus_command(['incus', 'info', vm_name, '--project', project])
             if not success:
                 return jsonify({"status": "unknown", "error": output}), 400
@@ -66,27 +45,18 @@ let
             else:
                 return jsonify({"status": "unknown", "raw_output": output}), 200
 
-        @app.route('/poweron/<vm_name>', methods=['POST', 'PUT'])
-        def power_on(vm_name):
+        @app.route('/poweron/<project>/<vm_name>', methods=['POST', 'PUT'])
+        def power_on(project, vm_name):
             """Starts the Incus VM."""
-            project = get_vm_project(vm_name)
-            if not project:
-                return jsonify({"status": "error", "error": "VM not found in any project"}), 404
-
             success, output = run_incus_command(['incus', 'start', vm_name, '--project', project])
             if success or "The instance is already running" in output:
                 return jsonify({"status": "on"}), 200
             else:
                 return jsonify({"status": "error", "error": output}), 500
 
-        @app.route('/poweroff/<vm_name>', methods=['POST', 'PUT'])
-        def power_off(vm_name):
+        @app.route('/poweroff/<project>/<vm_name>', methods=['POST', 'PUT'])
+        def power_off(project, vm_name):
             """Force stops the Incus VM."""
-            project = get_vm_project(vm_name)
-            if not project:
-                return jsonify({"status": "error", "error": "VM not found in any project"}), 404
-
-            # Append the discovered project to the stop command
             success, output = run_incus_command(['incus', 'stop', '-f', vm_name, '--project', project])
             if success or "The instance is already stopped" in output:
                 return jsonify({"status": "off"}), 200
@@ -139,7 +109,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    virtualisation.incus.enable = true;
+    virtualisation.incus = {
+      enable = true;
+    };
     users.users."${cfg.user}".extraGroups = [ "incus-admin" ];
 
     systemd.services.incus-webhook = lib.mkIf cfg.webhook.enable {

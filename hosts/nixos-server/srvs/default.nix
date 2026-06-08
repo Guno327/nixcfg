@@ -3,10 +3,9 @@
   imports = [
     ./traefik.nix
     ./media.nix
-    ./adblock.nix
+    ./dns.nix
     ./satisfactory.nix
     ./nvidia.nix
-    ./minecraft.nix
     ./about.nix
     ./lxd.nix
     ./authentik.nix
@@ -15,5 +14,6 @@
     ./finance.nix
     ./windrose.nix
     ./incus.nix
+    ./discmod.nix
   ];
 }

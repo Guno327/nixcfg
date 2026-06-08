@@ -76,7 +76,7 @@
   services = {
     resolved = {
       enable = true;
-      settings.Resolve.DNS = [ "129.159.121.119" ];
+      settings.Resolve.DNS = lib.mkDefault [ "129.159.121.119" ];
     };
     openvpn.servers = {
       us-work = {

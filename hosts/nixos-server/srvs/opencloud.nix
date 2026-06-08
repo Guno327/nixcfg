@@ -127,6 +127,7 @@ in
           OC_EXCLUDE_RUN_SERVICES = "idp";
           GRAPH_USERNAME_MATCH = "none";
           PROXY_CSP_CONFIG_FILE_LOCATION = "/etc/opencloud/csp.yaml";
+          OC_SHARING_PUBLIC_SHARE_MUST_HAVE_PASSWORD = "false";
         };
       };
     };

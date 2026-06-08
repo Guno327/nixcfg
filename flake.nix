@@ -55,8 +55,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flakecraft = {
-      url = "github:guno327/flakecraft";
+    discmod = {
+      url = "github:guno327/discmod";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -69,9 +69,9 @@
       stylix,
       nixarr,
       sops-nix,
-      flakecraft,
       authentik-nix,
       nvim-flake,
+      discmod,
       ...
     }@inputs:
     let
@@ -120,7 +120,7 @@
             nixarr.nixosModules.default
             sops-nix.nixosModules.sops
             authentik-nix.nixosModules.default
-            flakecraft.nixosModules.default
+            discmod.nixosModules.default
           ];
         };
       };

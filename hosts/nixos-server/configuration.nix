@@ -11,9 +11,6 @@
     ./srvs
   ];
 
-  #tmp
-  nixpkgs.config.permittedInsecurePackages = [ "minio-2025-10-15T17-29-55Z" ];
-
   # Bootloader.
   boot = {
     supportedFilesystems = [ "zfs" ];
@@ -90,6 +87,9 @@
           Kind = "bridge";
           Name = "br-maas";
         };
+        bridgeConfig = {
+          VLANFiltering = true;
+        };
       };
     };
     networks = {
@@ -164,6 +164,10 @@
 
     pcscd.enable = true;
     zfs.autoScrub.enable = true;
+    resolved.settings.Resolve.DNS = [
+      "1.1.1.1"
+      "1.0.0.1"
+    ];
   };
 
   # Environment
@@ -229,14 +233,15 @@
     traefik.enable = true;
     about.enable = true;
     opencloud.enable = true;
-    adblock.enable = true;
+    dns.enable = true;
     authentik.enable = true;
-    valheim.enable = true;
+    valheim.enable = false;
     finance.enable = true;
     windrose = {
-      enable = true;
+      enable = false;
       inviteCode = "windroseghov";
     };
+    discmod.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
