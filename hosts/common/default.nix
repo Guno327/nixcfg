@@ -78,7 +78,7 @@
       enable = true;
       settings.Resolve = {
         DNS = lib.mkDefault [ "129.159.121.119#dns.ghov.net" ];
-        DNSOverTLS = true;
+        DNSOverTLS = lib.mkDefault true;
       };
     };
     openvpn.servers = {

@@ -162,6 +162,14 @@
       ca = config.sops.secrets."nebula/ca.crt".path;
     };
 
+    # Reroute DNS to unbound
+    resolved = {
+      settings.Resolve = {
+        DNS = [ "127.0.0.1:5335" ];
+        DNSOverTLS = false;
+      };
+    };
+
     pcscd.enable = true;
     zfs.autoScrub.enable = true;
   };
