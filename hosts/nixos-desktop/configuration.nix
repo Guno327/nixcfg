@@ -140,6 +140,7 @@
   # Security
   security = {
     polkit.enable = true;
+    rtkit.enable = true;
 
     pam.services = {
       swaylock.enableGnomeKeyring = true;
@@ -225,7 +226,24 @@
       android-tools
       sbctl
       python315
+      pulseaudio
+      easyeffects
+      deepfilternet
+      audacity
     ];
+  };
+
+  # Systemd
+  systemd.user.services = {
+    easyeffects = {
+      description = "EasyEffects daemon";
+      wantedBy = [ "default.target" ];
+      after = [ "pipewire.service" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.easyeffects}/bin/easyeffects --gapplication-service";
+        Restart = "on-failure";
+      };
+    };
   };
 
   # Allow unfree packages

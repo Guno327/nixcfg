@@ -11,6 +11,9 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
+    kernelParams = [
+      "video=DP-1:2560x1440@144"
+    ];
     initrd = {
       availableKernelModules = [
         "nvme"
