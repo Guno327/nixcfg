@@ -165,7 +165,7 @@
     # Reroute DNS to unbound
     resolved = {
       settings.Resolve = {
-        DNS = [ "127.0.0.1:5335" ];
+        DNS = [ "100.100.0.2" ];
         DNSOverTLS = false;
       };
     };

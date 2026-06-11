@@ -77,7 +77,7 @@ in
 
           blocking = {
             denylists.ads = [
-              "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt"
+              "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.plus.txt"
             ];
             clientGroupsBlock.default = [ "ads" ];
           };
