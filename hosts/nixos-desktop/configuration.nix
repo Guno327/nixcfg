@@ -128,10 +128,6 @@
     };
 
     blueman.enable = true;
-    resolved = {
-      enable = true;
-      settings.Resolve.DNS = [ "100.100.0.2" ];
-    };
   };
 
   boot.initrd.services.udev.rules = ''
