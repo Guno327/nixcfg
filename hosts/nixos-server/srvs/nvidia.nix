@@ -15,6 +15,7 @@ in
 
   config = mkIf cfg.enable {
     hardware.graphics.enable = true;
+    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
     services.xserver.videoDrivers = [ "nvidia" ];
 
     hardware.nvidia = {

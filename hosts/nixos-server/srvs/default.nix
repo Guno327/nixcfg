@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./ai.nix
     ./traefik.nix
     ./media.nix
     ./dns.nix
@@ -15,5 +16,6 @@
     ./windrose.nix
     ./incus.nix
     ./discmod.nix
+    ./mattermost.nix
   ];
 }

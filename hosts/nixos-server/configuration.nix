@@ -222,11 +222,7 @@
   srvs = {
     incus = {
       enable = true;
-      user = "gunnar";
-      webhook = {
-        enable = true;
-        bind = "192.168.0.1:5555";
-      };
+      webhook.enable = true;
     };
     media.enable = true;
     nvidia.enable = true;
@@ -246,6 +242,8 @@
       inviteCode = "windroseghov";
     };
     discmod.enable = true;
+    mattermost.enable = true;
+    ai.enable = true;
   };
 
   system.stateVersion = "24.11"; # DO NOT CHANGE

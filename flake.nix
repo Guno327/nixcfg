@@ -59,6 +59,11 @@
       url = "github:guno327/discmod";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    incus-redfish = {
+      url = "github:guno327/incus-redfish";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -72,6 +77,7 @@
       authentik-nix,
       nvim-flake,
       discmod,
+      incus-redfish,
       ...
     }@inputs:
     let
@@ -121,6 +127,7 @@
             sops-nix.nixosModules.sops
             authentik-nix.nixosModules.default
             discmod.nixosModules.default
+            incus-redfish.nixosModules.default
           ];
         };
       };

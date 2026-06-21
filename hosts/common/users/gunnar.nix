@@ -23,6 +23,7 @@
       "qemu-libvirtd"
       "adbusers"
       "tss"
+      "incus-admin"
     ];
     packages = [ inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.default ];
     openssh.authorizedKeys = {
