@@ -7,58 +7,19 @@
 with lib;
 let
   cfg = config.srvs.ai;
-  openclawConfig = pkgs.writeText "openclaw.json" (
-    builtins.toJSON {
-      secrets.providers.gateway_token_file = {
-        source = "file";
-        path = "/home/node/.openclaw/gateway-token";
-        mode = "singleValue";
-      };
+  hermesModelfile = pkgs.writeText "qwen-agent.modelfile" ''
+    FROM qwen3.5:9b
 
-      gateway = {
-        mode = "local";
-        bind = "lan";
-        port = 18789;
-        auth.token = {
-          source = "file";
-          provider = "gateway_token_file";
-          id = "value";
-        };
-        controlUi.allowedOrigins = [
-          "https://ai.ghov.net"
-          "http://localhost:18789"
-          "http://127.0.0.1:18789"
-        ];
-      };
+    PARAMETER num_ctx 65536
+    PARAMETER num_predict -1
 
-      models.providers.ollama = {
-        api = "ollama";
-        baseUrl = "http://host.containers.internal:11434";
-        apiKey = "ollama";
-        models = [
-          {
-            id = "qwen3.5:9b";
-            name = "Qwen3.5";
-            params = {
-              temperature = 0.3;
-              top_p = 0.9;
-              top_k = 20;
-              repeat_penalty = 1.1;
-              min_p = 0.05;
-              num_ctx = 98304;
-            };
-          }
-        ];
-      };
-      agents.defaults.model.primary = "ollama/qwen3.5:9b";
-
-      plugins.entries.searxng = {
-        enabled = true;
-        config.webSearch.baseUrl = "http://searxng:8080";
-      };
-      tools.web.search.provider = "searxng";
-    }
-  );
+    PARAMETER temperature 0.3
+    PARAMETER top_p 0.9
+    PARAMETER top_k 20
+    PARAMETER min_p 0.05
+    PARAMETER repeat_penalty 1.1
+    PARAMETER repeat_last_n 64
+  '';
 in
 {
   options.srvs.ai = {
@@ -72,21 +33,28 @@ in
           rule = "Host(`ai.ghov.net`)";
           entryPoints = [ "websecure" ];
           priority = 10;
-          middlewares = [ "authentik" ];
           service = "ai-service";
         };
-        services.ai-service.loadBalancer.servers = [
-          {
-            url = "http://127.0.0.1:18789";
-            preservePath = true;
-          }
-        ];
+        services.ai-service.loadBalancer = {
+          servers = [
+            {
+              url = "http://127.0.0.1:1119";
+              preservePath = true;
+            }
+          ];
+        };
       };
     };
 
-    sops.secrets.openclaw-token = {
-      owner = "gunnar";
-      mode = "0400";
+    sops.secrets = {
+      searx-env = {
+        owner = "searx";
+        mode = "0400";
+      };
+      hermes-env = {
+        owner = config.services.hermes-agent.user;
+        mode = "0400";
+      };
     };
 
     networking.firewall.extraInputRules = ''
@@ -115,38 +83,100 @@ in
         environmentVariables = {
           OLLAMA_VULKAN = "1";
           GGML_VK_VISIBLE_DEVICES = "0";
-          OLLAMA_FLASH_ATTENTION = "0";
+          OLLAMA_FLASH_ATTENTION = "1";
+          OLLAMA_CONTEXT_LENGTH = "65536";
+          OLLAMA_KV_CACHE_TYPE = "q8_0";
         };
         loadModels = [ "qwen3.5:9b" ];
       };
-    };
 
-    virtualisation = {
-      podman.enable = true;
-      oci-containers = {
-        backend = "podman";
-        containers.openclaw = {
-          image = "ghcr.io/openclaw/openclaw:latest";
-          ports = [ "127.0.0.1:18789:18789" ];
-          volumes = [
-            "openclaw:/home/node/.openclaw"
-            "${openclawConfig}:/home/node/.openclaw/openclaw.json:ro"
-            "${config.sops.secrets.openclaw-token.path}:/home/node/.openclaw/gateway-token:ro"
+      searx = {
+        enable = true;
+        redisCreateLocally = true;
+        environmentFile = config.sops.secrets.searx-env.path;
+        settings = {
+          search.formats = [
+            "html"
+            "json"
           ];
-          extraOptions = [ "--network=ollama-net" ];
-          environment = {
-            OLLAMA_HOST = "http://host.containers.internal:11434";
-            OPENCLAW_GATEWAY_MODE = "local";
+          search.server = {
+            bind_address = "127.0.0.1";
+            port = 8888;
+            secret_key = "placeholder";
           };
         };
-        containers.searxng = {
-          image = "docker.io/searxng/searxng:latest";
-          volumes = [ "searxng:/etc/searxng" ];
-          environment.SEARXNG_BASE_URL = "http://searxng:8080/";
-          extraOptions = [
-            "--network=ollama-net"
-            "--security-opt=no-new-privileges"
+      };
+
+      hermes-agent = {
+        enable = true;
+        addToSystemPackages = true;
+        container = {
+          enable = true;
+          hostUsers = [ "gunnar" ];
+        };
+        extraDependencyGroups = [ "web" ];
+        settings = {
+          model = {
+            default = "qwen3.5-agent";
+            provider = "custom";
+            base_url = "http://127.0.0.1:11434/v1";
+            context_length = 65536;
+          };
+          web.search_backend = "searxng";
+          dashboard = {
+            public_url = "https://ai.ghov.net";
+            oauth = {
+              provider = "self-hosted";
+              self_hosted = {
+                issuer = "https://auth.ghov.net/application/o/hermes/";
+                client_id = "hermes-agent";
+              };
+            };
+          };
+        };
+        environmentFiles = [ config.sops.secrets.hermes-env.path ];
+      };
+    };
+
+    systemd.services = {
+      ollama-hermes-model = {
+        description = "Create tuned qwen3.5-agent Ollama model";
+        after = [
+          "ollama.service"
+          "ollama-model-loader.service"
+        ];
+        requires = [ "ollama.service" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          User = "ollama";
+          Environment = [
+            "OLLAMA_HOST=127.0.0.1:11434"
+            "HOME=/var/lib/ollama"
           ];
+        };
+        script = ''
+          until ${pkgs.ollama}/bin/ollama list | grep -q 'qwen3.5:9b'; do sleep 2; done
+          ${pkgs.ollama}/bin/ollama create qwen3.5-agent -f ${hermesModelfile}
+        '';
+      };
+      hermes-dashboard = {
+        description = "Hermes Agent Web Dashboard";
+        after = [
+          "network.target"
+          "hermes-agent.service"
+        ];
+        wants = [ "hermes-agent.service" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          Type = "simple";
+          User = config.services.hermes-agent.user;
+          Group = config.services.hermes-agent.group;
+          EnvironmentFile = config.sops.secrets."hermes-env".path;
+          ExecStart = "${config.services.hermes-agent.package}/bin/hermes dashboard --host=0.0.0.0 --port=1119 --no-open";
+          Restart = "on-failure";
+          RestartSec = 10;
         };
       };
     };

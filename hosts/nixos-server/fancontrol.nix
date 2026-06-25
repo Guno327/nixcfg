@@ -26,7 +26,7 @@ with lib;
     environment = {
       MANUAL_MODE = "0x30 0x30 0x01 0x00";
       SET_FAN = "0x30 0x30 0x02 0xff";
-      SPEED = "0x1E";
+      SPEED = "0x28";
     };
 
     serviceConfig = {

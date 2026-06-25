@@ -34,6 +34,11 @@ in
       };
     };
 
+    sops.secrets.opencloud-env = {
+      owner = "opencloud";
+      mode = "0600";
+    };
+
     services = {
       opencloud = {
         enable = true;
@@ -107,6 +112,7 @@ in
             };
           };
         };
+        environmentFile = config.sops.secrets.opencloud-env.path;
         environment = {
           # defaults
           LOG_LEVEL = "error";

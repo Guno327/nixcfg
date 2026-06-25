@@ -64,6 +64,11 @@
       url = "github:guno327/incus-redfish";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hermes-agent = {
+      url = "github:NousResearch/hermes-agent";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -78,6 +83,7 @@
       nvim-flake,
       discmod,
       incus-redfish,
+      hermes-agent,
       ...
     }@inputs:
     let
@@ -128,6 +134,7 @@
             authentik-nix.nixosModules.default
             discmod.nixosModules.default
             incus-redfish.nixosModules.default
+            hermes-agent.nixosModules.default
           ];
         };
       };

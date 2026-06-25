@@ -86,6 +86,7 @@
         netdevConfig = {
           Kind = "bridge";
           Name = "br-maas";
+          MTUBytes = "9000";
         };
         bridgeConfig = {
           VLANFiltering = true;
@@ -117,8 +118,21 @@
       };
       "50-br-maas" = {
         matchConfig.Name = "br-maas";
+        linkConfig.MTUBytes = "9000";
         networkConfig.ConfigureWithoutCarrier = true;
       };
+    };
+  };
+
+  systemd.services.br-maas-lldp-forward = {
+    description = "Allow LLDP forwarding on br-maas";
+    after = [ "systemd-networkd.service" ];
+    wants = [ "systemd-networkd.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.iproute2}/bin/ip link set br-maas type bridge group_fwd_mask 0x4000";
     };
   };
 

@@ -49,6 +49,9 @@
     zfs.extraPools = [ "tank" ];
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
+    extraModprobeConfig = ''
+      options zfs zfs_arc_max=17179869184
+    '';
   };
 
   fileSystems = {
