@@ -51,6 +51,10 @@ in
               "127.0.0.1"
               "100.100.0.1"
             ];
+            transport.respondingTimeouts = {
+              readTimeout = "0s";
+              idleTimeout = "0s";
+            };
           };
         };
       };

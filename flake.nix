@@ -16,6 +16,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-owui.url = "github:NixOS/nixpkgs/0a0bf409f3593f415d0a554f33acc63dc7dccb43";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home.url = "path:/flake/home";
@@ -64,11 +65,6 @@
       url = "github:guno327/incus-redfish";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    hermes-agent = {
-      url = "github:NousResearch/hermes-agent";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -83,7 +79,7 @@
       nvim-flake,
       discmod,
       incus-redfish,
-      hermes-agent,
+      nixpkgs-owui,
       ...
     }@inputs:
     let
@@ -134,7 +130,18 @@
             authentik-nix.nixosModules.default
             discmod.nixosModules.default
             incus-redfish.nixosModules.default
-            hermes-agent.nixosModules.default
+
+            # Pin open-webui: gh#25710
+            (
+              { pkgs, ... }:
+              {
+                services.open-webui.package =
+                  (import nixpkgs-owui {
+                    inherit (pkgs) system;
+                    config.allowUnfree = true;
+                  }).open-webui;
+              }
+            )
           ];
         };
       };

@@ -24,6 +24,17 @@
         gfxmodeBios = "auto";
       };
     };
+    kernel.sysctl = {
+      "fs.aio-max-nr" = 524288;
+      "fs.inotify.max_queued_events" = 1048576;
+      "fs.inotify.max_user_instances" = 1048576;
+      "fs.inotify.max_user_watches" = 1048576;
+      "kernel.keys.maxbytes" = 2000000;
+      "kernel.keys.maxkeys" = 2000;
+      "net.ipv4.neigh.default.gc_thresh3" = 8192;
+      "net.ipv6.neigh.default.gc_thresh3" = 8192;
+      "vm.max_map_count" = 262144;
+    };
   };
 
   # Networking
@@ -249,7 +260,7 @@
     opencloud.enable = true;
     dns.enable = true;
     authentik.enable = true;
-    valheim.enable = false;
+    valheim.enable = true;
     finance.enable = true;
     windrose = {
       enable = false;
@@ -257,6 +268,7 @@
     };
     discmod.enable = true;
     mattermost.enable = true;
+    search.enable = true;
     ai.enable = true;
   };
 

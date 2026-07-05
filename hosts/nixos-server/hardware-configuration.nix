@@ -50,7 +50,9 @@
     kernelModules = [ "kvm-intel" ];
     extraModulePackages = [ ];
     extraModprobeConfig = ''
-      options zfs zfs_arc_max=17179869184
+      options zfs zfs_arc_max=68719476736
+      options zfs zfs_dirty_data_max=4294967296
+      options zfs zfs_txg_timeout=15
     '';
   };
 

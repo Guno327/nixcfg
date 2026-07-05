@@ -7,7 +7,7 @@
 with lib;
 let
   cfg = config.srvs.ai;
-  hermesModelfile = pkgs.writeText "qwen-agent.modelfile" ''
+  customModelfile = pkgs.writeText "qwen-agent.modelfile" ''
     FROM qwen3.5:9b
 
     PARAMETER num_ctx 65536
@@ -38,7 +38,7 @@ in
         services.ai-service.loadBalancer = {
           servers = [
             {
-              url = "http://127.0.0.1:1119";
+              url = "http://127.0.0.1:3080";
               preservePath = true;
             }
           ];
@@ -47,19 +47,13 @@ in
     };
 
     sops.secrets = {
-      searx-env = {
-        owner = "searx";
+      librechat-env = {
         mode = "0400";
       };
-      hermes-env = {
-        owner = config.services.hermes-agent.user;
+      meilisearch-master-key = {
         mode = "0400";
       };
     };
-
-    networking.firewall.extraInputRules = ''
-      ip saddr 10.89.0.0/24 tcp dport 11434 accept
-    '';
 
     boot = {
       initrd.kernelModules = [ "amdgpu" ];
@@ -69,9 +63,7 @@ in
         "amdgpu.runpm=0"
       ];
     };
-    environment.systemPackages = [ pkgs.ollama-rocm ];
 
-    nixpkgs.config.rocmSupport = true;
     hardware.graphics.enable = true;
     hardware.amdgpu.opencl.enable = true;
 
@@ -85,62 +77,95 @@ in
           GGML_VK_VISIBLE_DEVICES = "0";
           OLLAMA_FLASH_ATTENTION = "1";
           OLLAMA_CONTEXT_LENGTH = "65536";
-          OLLAMA_KV_CACHE_TYPE = "q8_0";
+          OLLAMA_MAX_LOADED_MODELS = "2";
+          OLLAMA_NUM_PARALLEL = "2";
         };
-        loadModels = [ "qwen3.5:9b" ];
+        loadModels = [
+          "qwen3.5:9b"
+          "llama3.2:3b"
+        ];
       };
 
-      searx = {
-        enable = true;
-        redisCreateLocally = true;
-        environmentFile = config.sops.secrets.searx-env.path;
-        settings = {
-          search.formats = [
-            "html"
-            "json"
-          ];
-          search.server = {
-            bind_address = "127.0.0.1";
-            port = 8888;
-            secret_key = "placeholder";
-          };
-        };
+      meilisearch = {
+        masterKeyFile = config.sops.secrets.meilisearch-master-key.path;
       };
 
-      hermes-agent = {
+      librechat = {
         enable = true;
-        addToSystemPackages = true;
-        container = {
-          enable = true;
-          hostUsers = [ "gunnar" ];
-        };
-        extraDependencyGroups = [ "web" ];
+        meilisearch.enable = true;
+        enableLocalDB = true;
+        credentialsFile = config.sops.secrets.librechat-env.path;
+
         settings = {
-          model = {
-            default = "qwen3.5-agent";
-            provider = "custom";
-            base_url = "http://127.0.0.1:11434/v1";
-            context_length = 65536;
+          version = "1.3.12";
+          cache = true;
+
+          registration.socialLogins = [ "openid" ];
+
+          endpoints = {
+            custom = [
+              {
+                name = "Ollama";
+                apiKey = "ollama"; # unused, required by schema
+                baseURL = "http://127.0.0.1:11434/v1";
+                models = {
+                  default = [
+                    "qwen3.5-custom"
+                    "llama3.2:3b"
+                  ];
+                  fetch = true;
+                };
+                titleConvo = true;
+                titleModel = "qwen3.5-custom";
+              }
+              {
+                name = "OpenRouter";
+                apiKey = "\${OPENROUTER_KEY}";
+                baseURL = "https://openrouter.ai/api/v1";
+                addParams = {
+                  reasoning.exclude = true;
+                };
+                dropParams = [
+                  "stop"
+                  "reasoning_effort"
+                ];
+                modelDisplayLabel = "OpenRouter";
+                models = {
+                  default = [ "deepseek/deepseek-v4-flash" ];
+                  fetch = true;
+                };
+              }
+            ];
           };
-          web.search_backend = "searxng";
-          dashboard = {
-            public_url = "https://ai.ghov.net";
-            oauth = {
-              provider = "self-hosted";
-              self_hosted = {
-                issuer = "https://auth.ghov.net/application/o/hermes/";
-                client_id = "hermes-agent";
-              };
+
+          webSearch = {
+            searchProvider = "searxng";
+            searxngInstanceUrl = "\${SEARXNG_INSTANCE_URL}";
+            scraperProvider = "firecrawl";
+            firecrawlApiUrl = "\${FIRECRAWL_API_URL}";
+            firecrawlApiKey = "\${FIRECRAWL_API_KEY}";
+            rerankerType = "none";
+          };
+
+          memory = {
+            disabled = false;
+            personalize = true;
+            tokenLimit = 2000;
+            maxInputTokens = 12000;
+            messageWindowSize = 5;
+            agent = {
+              provider = "Ollama";
+              model = "llama3.2:3b";
+              enabled = true;
             };
           };
         };
-        environmentFiles = [ config.sops.secrets.hermes-env.path ];
       };
     };
 
     systemd.services = {
-      ollama-hermes-model = {
-        description = "Create tuned qwen3.5-agent Ollama model";
+      ollama-custom-model = {
+        description = "Create tuned qwen3.5-custom Ollama model";
         after = [
           "ollama.service"
           "ollama-model-loader.service"
@@ -158,26 +183,8 @@ in
         };
         script = ''
           until ${pkgs.ollama}/bin/ollama list | grep -q 'qwen3.5:9b'; do sleep 2; done
-          ${pkgs.ollama}/bin/ollama create qwen3.5-agent -f ${hermesModelfile}
+          ${pkgs.ollama}/bin/ollama create qwen3.5-custom -f ${customModelfile}
         '';
-      };
-      hermes-dashboard = {
-        description = "Hermes Agent Web Dashboard";
-        after = [
-          "network.target"
-          "hermes-agent.service"
-        ];
-        wants = [ "hermes-agent.service" ];
-        wantedBy = [ "multi-user.target" ];
-        serviceConfig = {
-          Type = "simple";
-          User = config.services.hermes-agent.user;
-          Group = config.services.hermes-agent.group;
-          EnvironmentFile = config.sops.secrets."hermes-env".path;
-          ExecStart = "${config.services.hermes-agent.package}/bin/hermes dashboard --host=0.0.0.0 --port=1119 --no-open";
-          Restart = "on-failure";
-          RestartSec = 10;
-        };
       };
     };
   };

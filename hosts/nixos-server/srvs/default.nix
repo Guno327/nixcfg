@@ -17,5 +17,6 @@
     ./incus.nix
     ./discmod.nix
     ./mattermost.nix
+    ./search.nix
   ];
 }
