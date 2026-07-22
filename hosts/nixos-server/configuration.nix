@@ -270,7 +270,10 @@
     mattermost.enable = true;
     search.enable = true;
     ai.enable = true;
+    vanillaplusplus.enable = true;
   };
+
+  virtualisation.docker.enable = true;
 
   system.stateVersion = "24.11"; # DO NOT CHANGE
 }

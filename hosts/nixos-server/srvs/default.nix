@@ -18,5 +18,6 @@
     ./discmod.nix
     ./mattermost.nix
     ./search.nix
+    ./vanillaplusplus.nix
   ];
 }

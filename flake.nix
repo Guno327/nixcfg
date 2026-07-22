@@ -65,6 +65,11 @@
       url = "github:guno327/incus-redfish";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    vanillaplusplus = {
+      url = "github:guno327/vanillaplusplus";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -80,6 +85,7 @@
       discmod,
       incus-redfish,
       nixpkgs-owui,
+      vanillaplusplus,
       ...
     }@inputs:
     let
@@ -130,6 +136,7 @@
             authentik-nix.nixosModules.default
             discmod.nixosModules.default
             incus-redfish.nixosModules.default
+            vanillaplusplus.nixosModules.default
 
             # Pin open-webui: gh#25710
             (
