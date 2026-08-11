@@ -33,11 +33,11 @@ in
     services.vanillaplusplus = {
       enable = true;
       eula = true;
+      releaseTag = "v0.6.1";
       serverProperties = {
         motd = "Vanilla++";
         max-players = "10";
         allow-flight = true;
-
       };
     };
 
