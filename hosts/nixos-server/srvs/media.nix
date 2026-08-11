@@ -133,7 +133,7 @@ in
     sops.secrets = {
       bazarr = { };
       jellyfin = { };
-      jellyseerr = { };
+      seerr = { };
       radarr = { };
       sonarr = { };
       wireguard = {
@@ -203,7 +203,7 @@ in
         enable = true;
       };
 
-      jellyseerr = {
+      seerr = {
         enable = true;
         port = 5000;
       };

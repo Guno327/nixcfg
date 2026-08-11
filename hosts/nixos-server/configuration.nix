@@ -266,7 +266,7 @@
       enable = false;
       inviteCode = "windroseghov";
     };
-    discmod.enable = true;
+    discmod.enable = false;
     mattermost.enable = true;
     search.enable = true;
     ai.enable = true;
