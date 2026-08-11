@@ -255,11 +255,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779679148,
-        "narHash": "sha256-4E9RB3SnhpGoyNym7HBlBdZVqgEwjV2oS3CeQ45JOzc=",
+        "lastModified": 1786458176,
+        "narHash": "sha256-QvLenuq7u9gAyo0E6ADyaFuJ91aIasvUuV5y46sT30Q=",
         "owner": "guno327",
         "repo": "pkgs",
-        "rev": "f3b74c2279e085829dc0dfc050068b128a57ffdc",
+        "rev": "64ce02782bd6daa5d9ada9f6f41b9d5a676ca61e",
         "type": "github"
       },
       "original": {
@@ -276,11 +276,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779679148,
-        "narHash": "sha256-4E9RB3SnhpGoyNym7HBlBdZVqgEwjV2oS3CeQ45JOzc=",
+        "lastModified": 1786458176,
+        "narHash": "sha256-QvLenuq7u9gAyo0E6ADyaFuJ91aIasvUuV5y46sT30Q=",
         "owner": "guno327",
         "repo": "pkgs",
-        "rev": "f3b74c2279e085829dc0dfc050068b128a57ffdc",
+        "rev": "64ce02782bd6daa5d9ada9f6f41b9d5a676ca61e",
         "type": "github"
       },
       "original": {
@@ -620,8 +620,8 @@
         "zen-browser": "zen-browser"
       },
       "locked": {
-        "lastModified": 1786456705,
-        "narHash": "sha256-vIYFVNkG21A2z11ENlGik7xoUdmj7xac3NCHan/y6Yc=",
+        "lastModified": 1786458195,
+        "narHash": "sha256-2FaC/ZMULNPVcNeauYVifUKSkdJIsxV6llqqQU4tdYA=",
         "path": "/flake/home",
         "type": "path"
       },
