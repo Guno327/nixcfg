@@ -271,6 +271,10 @@
     search.enable = true;
     ai.enable = true;
     vanillaplusplus.enable = true;
+    palworld = {
+      enable = true;
+      launchOptions = "-userperfthreads -UseMultithreadForDS -publiclobby -publicip=129.159.121.119 -port=8211";
+    };
   };
 
   virtualisation.docker.enable = true;

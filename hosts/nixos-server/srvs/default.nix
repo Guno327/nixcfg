@@ -19,5 +19,6 @@
     ./mattermost.nix
     ./search.nix
     ./vanillaplusplus.nix
+    ./palworld.nix
   ];
 }
