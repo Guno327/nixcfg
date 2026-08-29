@@ -9,7 +9,7 @@ let
 in
 {
   options.srvs.dns = {
-    enable = mkEnableOption "Enable adguardhome + unbound services";
+    enable = mkEnableOption "Enable blocky";
   };
 
   config = mkIf cfg.enable {
@@ -34,34 +34,12 @@ in
         };
 
     services = {
-      unbound = {
-        enable = true;
-        resolveLocalQueries = false;
-        settings.server = {
-          interface = [ "127.0.0.1" ];
-          port = 5335;
-          access-control = [ "127.0.0.1/32 allow" ];
-
-          qname-minimisation = true;
-          harden-glue = true;
-          harden-dnssec-stripped = true;
-          hide-identity = true;
-          hide-version = true;
-
-          prefetch = true;
-          prefetch-key = true;
-          cache-min-ttl = 300;
-          cache-max-ttl = 86400;
-          msg-cache-size = "128m";
-          rrset-cache-size = "256m";
-
-          edns-buffer-size = 1232;
-        };
-      };
-
       blocky = {
         enable = true;
+
         settings = {
+          ede.enable = true;
+
           ports = {
             dns = "100.100.0.2:53";
             tls = "100.100.0.2:853";
@@ -71,9 +49,28 @@ in
           keyFile = "/var/lib/acme/ghov.net/key.pem";
 
           upstreams = {
-            groups.default = [ "127.0.0.1:5335" ];
-            strategy = "strict";
+            init.strategy = "fast";
+            groups.default = [
+              "tcp-tls:dns.quad9.net:853"
+              "tcp-tls:dns.mullvad.net:853"
+            ];
+            strategy = "parallel_best";
+            timeout = "2s";
           };
+
+          bootstrapDns = [
+            {
+              upstream = "tcp-tls:dns.quad9.net:853";
+              ips = [
+                "9.9.9.9"
+                "149.112.112.112"
+              ];
+            }
+            {
+              upstream = "tcp-tls:dns.mullvad.net:853";
+              ips = [ "194.242.2.2" ];
+            }
+          ];
 
           blocking = {
             denylists.ads = [
@@ -84,8 +81,9 @@ in
 
           caching = {
             minTime = "5m";
-            maxTime = "30m";
+            maxTime = "24h";
             prefetching = true;
+            cacheTimeNegative = "1m";
           };
         };
       };
