@@ -31,7 +31,7 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJXyEWDwsZrPxTm+EuU+JQ2XWkhlQApCl5kpIbTpmVDK root@maas"
       ];
       keyFiles = [
-        ./gpg.pub
+        ../keys/gpg.pub
       ];
     };
   };

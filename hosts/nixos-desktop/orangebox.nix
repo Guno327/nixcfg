@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   sops.secrets."obadmin-id_rsa" = {
     sopsFile = ../../secrets/canonical.yaml;
   };
@@ -10,7 +11,7 @@
       PubkeyAuthentication yes
       PasswordAuthentication no
       User ubuntu
-      IdentityFile /flake/hosts/common/users/gpg.pub
+      IdentityFile /flake/hosts/common/keys/gpg.pub
       AddKeysToAgent yes
       AddressFamily inet
       CheckHostIP no
@@ -32,7 +33,7 @@
       PubkeyAuthentication yes
       PasswordAuthentication no
       User ubuntu
-      IdentityFile /flake/hosts/common/users/gpg.pub
+      IdentityFile /flake/hosts/common/keys/gpg.pub
       AddKeysToAgent yes
       AddressFamily inet
       CheckHostIP no

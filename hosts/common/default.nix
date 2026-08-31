@@ -13,6 +13,7 @@
     ./sops.nix
     ./nebula.nix
     ./stylix.nix
+    ./build.nix
   ];
 
   home-manager = {
