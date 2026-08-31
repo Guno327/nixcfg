@@ -6,18 +6,46 @@
   lib,
   modulesPath,
   ...
-}: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd = {
-    availableKernelModules = [
-      "nvme"
-      "xhci_pci"
-      "usbhid"
-      "usb_storage"
-      "sd_mod"
-    ];
-    luks.devices."cryptroot".device = "/dev/disk/by-label/NIXENCRYPTED";
+  boot = {
+    extraModulePackages = [ config.boot.kernelPackages.msi-ec ];
+    initrd = {
+      systemd = {
+        tpm2.enable = true;
+        enable = true;
+        emergencyAccess = true;
+      };
+
+      kernelModules = [
+        "amdgpu"
+        "nvme"
+        "xhci_pci"
+        "usbhid"
+        "usb_storage"
+        "sd_mod"
+        "tpm_crb"
+        "tpm_tis"
+        "msi-ec"
+      ];
+      luks.devices = {
+        usbkey = {
+          device = "/dev/disk/by-uuid/51038c86-41d6-4ce5-92d5-76e07186c503";
+          crypttabExtraOpts = [
+            "tpm2-device=auto"
+            "nofail"
+            "x-systemd.device-timeout=10s"
+          ];
+        };
+        cryptroot = {
+          device = "/dev/disk/by-uuid/680a0c22-aca0-4739-b515-691e1de8f5d0";
+          keyFile = "/root.key:/dev/mapper/usbkey";
+          crypttabExtraOpts = [ "keyfile-timeout=10s" ];
+        };
+      };
+    };
   };
 
   fileSystems = {
@@ -41,7 +69,7 @@
     };
   };
 
-  swapDevices = [{device = "/dev/disk/by-label/NIXSWAP";}];
+  swapDevices = [ { device = "/dev/disk/by-label/NIXSWAP"; } ];
   networking.useDHCP = lib.mkDefault true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
