@@ -12,6 +12,7 @@
 
   boot = {
     extraModulePackages = [ config.boot.kernelPackages.msi-ec ];
+    extraModprobeConfig = "options msi-ec debug=true";
     initrd = {
       systemd = {
         tpm2.enable = true;

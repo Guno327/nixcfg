@@ -260,12 +260,24 @@
       linkConfig.WakeOnLan = "magic";
     };
     services.msi-ec-profile = {
-      wantedBy = [ "multi-user.target" ];
-      after = [ "systemd-modules-load.service" ];
+      wantedBy = [
+        "multi-user.target"
+        "post-resume.target"
+      ];
+      after = [
+        "systemd-modules-load.service"
+        "post-resume.target"
+      ];
       serviceConfig.Type = "oneshot";
       script = ''
-        echo silent > /sys/devices/platform/msi-ec/fan_mode
-        echo comfort > /sys/devices/platform/msi-ec/shift_mode
+        ec=/sys/devices/platform/msi-ec
+        echo silent  > $ec/fan_mode
+        echo comfort > $ec/shift_mode
+        # GPU fan: thresholds 65/70/75/80/85/90 C
+        for kv in 82=41 83=46 84=4b 85=50 86=55 87=5a \
+                  8a=00 8b=2d 8c=37 8d=41 8e=4b 8f=50; do
+          echo $kv > $ec/debug/ec_set
+        done
       '';
     };
     user.services = {
