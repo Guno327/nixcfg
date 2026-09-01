@@ -127,12 +127,6 @@
         CPU_MIN_PERF_ON_BAT = 0;
         CPU_MAX_PERF_ON_BAT = 60;
 
-        # GPU
-        RADEON_DPM_PERF_LEVEL_ON_AC = "auto";
-        RADEON_DPM_PERF_LEVEL_ON_BAT = "low";
-        RADEON_DPM_STATE_ON_AC = "performance";
-        RADEON_DPM_STATE_ON_BAT = "battery";
-
         # PCIe / runtime PM
         RUNTIME_PM_ON_AC = "auto";
         RUNTIME_PM_ON_BAT = "auto";

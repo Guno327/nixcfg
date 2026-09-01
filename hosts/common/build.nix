@@ -18,15 +18,12 @@ lib.mkMerge [
       owner = "root";
       mode = "0400";
     };
-    programs.ssh.knownHosts."nixos-server" = {
-      publicKeyFile = ./keys/nixos-server-host.pub;
-    };
 
     nix = {
       distributedBuilds = true;
       buildMachines = [
         {
-          hostName = "nixos-server";
+          hostName = "100.100.0.2";
           sshUser = "nixbuild";
           sshKey = config.sops.secrets.id_nixbuild.path;
           system = "x86_64-linux";
