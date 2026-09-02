@@ -6,7 +6,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./orangebox.nix
+    ../common/orangebox.nix
   ];
 
   # Boot.

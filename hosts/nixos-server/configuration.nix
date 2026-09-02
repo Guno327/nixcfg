@@ -7,7 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./fancontrol.nix
-    ./srvs
+    ../common/srvs
   ];
 
   # Bootloader.
