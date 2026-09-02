@@ -148,7 +148,6 @@
         DISK_APM_LEVEL_ON_AC = "254";
         DISK_APM_LEVEL_ON_BAT = "128";
 
-        # Battery longevity (via msi-ec)
         START_CHARGE_THRESH_BAT0 = 75;
         STOP_CHARGE_THRESH_BAT0 = 80;
       };
@@ -244,35 +243,20 @@
       easyeffects
       deepfilternet
       audacity
+      ryzenadj
     ];
   };
 
   # Systemd
+  powerManagement.resumeCommands = ''
+    ${pkgs.systemd}/bin/systemctl restart msi-ec-profile.service
+    ${pkgs.systemd}/bin/systemctl restart ryzenadj.service
+  '';
+
   systemd = {
     network.links."10-dock-nic" = {
       matchConfig.MACAddress = "b0:7b:25:9a:18:7c";
       linkConfig.WakeOnLan = "magic";
-    };
-    services.msi-ec-profile = {
-      wantedBy = [
-        "multi-user.target"
-        "post-resume.target"
-      ];
-      after = [
-        "systemd-modules-load.service"
-        "post-resume.target"
-      ];
-      serviceConfig.Type = "oneshot";
-      script = ''
-        ec=/sys/devices/platform/msi-ec
-        echo silent  > $ec/fan_mode
-        echo comfort > $ec/shift_mode
-        # GPU fan: thresholds 65/70/75/80/85/90 C
-        for kv in 82=41 83=46 84=4b 85=50 86=55 87=5a \
-                  8a=00 8b=2d 8c=37 8d=41 8e=4b 8f=50; do
-          echo $kv > $ec/debug/ec_set
-        done
-      '';
     };
     user.services = {
       easyeffects = {
@@ -284,6 +268,26 @@
           Restart = "on-failure";
         };
       };
+    };
+    services.msi-ec-profile = {
+      wantedBy = [ "multi-user.target" ];
+      after = [ "systemd-modules-load.service" ];
+      serviceConfig.Type = "oneshot";
+      script = ''
+        ec=/sys/devices/platform/msi-ec
+        echo advanced > $ec/fan_mode
+        echo comfort  > $ec/shift_mode
+        for kv in 82=41 83=46 84=4b 85=50 86=55 87=5a 8a=00 8b=2d 8c=37 8d=41 8e=4b 8f=50; do
+          echo $kv > $ec/debug/ec_set
+        done
+      '';
+    };
+    services.ryzenadj = {
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig.Type = "oneshot";
+      script = ''
+        ${pkgs.ryzenadj}/bin/ryzenadj --stapm-limit=25000 --fast-limit=35000 --slow-limit=28000 --tctl-temp=85
+      '';
     };
   };
 
