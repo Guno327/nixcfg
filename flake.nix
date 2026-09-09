@@ -70,6 +70,11 @@
       url = "github:guno327/vanillaplusplus";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    scancal = {
+      url = "github:guno327/scancal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

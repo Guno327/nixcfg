@@ -1,11 +1,13 @@
 {
   pkgs,
+  inputs,
   config,
   ...
 }:
 {
   imports = [
     ./hardware-configuration.nix
+    ../common/scanner.nix
   ];
 
   # Bootloader.
@@ -244,6 +246,7 @@
       deepfilternet
       audacity
       ryzenadj
+      inputs.scancal.packages.${pkgs.system}.default
     ];
   };
 

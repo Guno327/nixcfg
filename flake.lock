@@ -1156,9 +1156,30 @@
         "nixpkgs-owui": "nixpkgs-owui",
         "nixpkgs-stable": "nixpkgs-stable",
         "nvim-flake": "nvim-flake_2",
+        "scancal": "scancal",
         "sops-nix": "sops-nix_2",
         "stylix": "stylix_2",
         "vanillaplusplus": "vanillaplusplus"
+      }
+    },
+    "scancal": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1788404767,
+        "narHash": "sha256-ZepsXToUJDLNFzZFqG9OXY7gZCyaDQDHo268U1NIgZY=",
+        "owner": "guno327",
+        "repo": "scancal",
+        "rev": "d2008ab701e6bb30ca78f02cc82b4129cd49ba64",
+        "type": "github"
+      },
+      "original": {
+        "owner": "guno327",
+        "repo": "scancal",
+        "type": "github"
       }
     },
     "sops-nix": {
