@@ -84,7 +84,7 @@ in
         };
 
         search = {
-          safe_search = 2;
+          safe_search = 0;
           autocomplete_min = 2;
           autocomplete = "duckduckgo";
           ban_time_on_fail = 5;
@@ -102,70 +102,23 @@ in
           secret_key = config.sops.secrets.searx.path;
           limiter = false;
           public_instance = false;
-          image_proxy = true;
+          image_proxy = false;
           method = "GET";
         };
 
         engines = lib.mapAttrsToList (name: value: { inherit name; } // value) {
+          "google" = {
+            disabled = false;
+            weight = 2;
+          };
           "duckduckgo".disabled = false;
-          "brave".disabled = true;
-          "bing".disabled = false;
-          "mojeek".disabled = true;
-          "mwmbl".disabled = false;
-          "mwmbl".weight = 0.4;
-          "qwant".disabled = true;
-          "crowdview".disabled = false;
-          "crowdview".weight = 0.5;
-          "curlie".disabled = true;
-          "ddg definitions".disabled = false;
-          "ddg definitions".weight = 2;
-          "wikibooks".disabled = true;
+          "brave".disabled = false;
+          "bing".disabled = true;
+          "mwmbl".disabled = true;
+          "crowdview".disabled = true;
+          "ddg definitions".disabled = true;
+          "wikipedia".disabled = false;
           "wikidata".disabled = true;
-          "wikiquote".disabled = true;
-          "wikisource".disabled = true;
-          "wikispecies".disabled = true;
-          "wikiversity".disabled = true;
-          "wikivoyage".disabled = true;
-          "currency".disabled = true;
-          "dictzone".disabled = true;
-          "lingva".disabled = true;
-          "bing images".disabled = false;
-          "brave.images".disabled = true;
-          "duckduckgo images".disabled = true;
-          "google images".disabled = false;
-          "qwant images".disabled = true;
-          "1x".disabled = true;
-          "artic".disabled = false;
-          "deviantart".disabled = false;
-          "flickr".disabled = true;
-          "imgur".disabled = false;
-          "library of congress".disabled = false;
-          "material icons".disabled = true;
-          "material icons".weight = 0.2;
-          "openverse".disabled = false;
-          "pinterest".disabled = true;
-          "svgrepo".disabled = false;
-          "unsplash".disabled = false;
-          "wallhaven".disabled = false;
-          "wikicommons.images".disabled = false;
-          "yacy images".disabled = true;
-          "bing videos".disabled = false;
-          "brave.videos".disabled = true;
-          "duckduckgo videos".disabled = true;
-          "google videos".disabled = false;
-          "qwant videos".disabled = false;
-          "dailymotion".disabled = true;
-          "google play movies".disabled = true;
-          "invidious".disabled = true;
-          "odysee".disabled = true;
-          "peertube".disabled = false;
-          "piped".disabled = true;
-          "rumble".disabled = false;
-          "sepiasearch".disabled = false;
-          "vimeo".disabled = true;
-          "youtube".disabled = false;
-          "brave.news".disabled = true;
-          "google news".disabled = true;
         };
 
         outgoing = {

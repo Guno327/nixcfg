@@ -135,6 +135,26 @@ in
             ];
           };
         };
+        tcp = {
+          routers = {
+            ssh-opencode = {
+              entryPoints = [ "websecure" ];
+              rule = "HostSNI(`opencode.ghov.net`)";
+              service = "ssh-opencode";
+              tls = { };
+            };
+            ssh-ck8s = {
+              entryPoints = [ "websecure" ];
+              rule = "HostSNI(`ck8s.ghov.net`)";
+              service = "ssh-ck8s";
+              tls = { };
+            };
+          };
+          services = {
+            ssh-opencode.loadBalancer.servers = [ { address = "192.168.0.198:22"; } ];
+            ssh-ck8s.loadBalancer.servers = [ { address = "192.168.0.162:22"; } ];
+          };
+        };
       };
     };
   };

@@ -251,8 +251,14 @@
     media.enable = true;
     nvidia.enable = true;
     satisfactory = {
-      enable = false;
-      launchOptions = "-multihome=0.0.0.0";
+      enable = true;
+      saveDir = "/data/satisfactory";
+      modded = {
+        enable = true;
+        mods = [
+          "PEP_Mod"
+        ];
+      };
     };
     traefik.enable = true;
     about.enable = true;
