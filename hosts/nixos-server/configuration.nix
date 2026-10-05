@@ -251,7 +251,7 @@
     media.enable = true;
     nvidia.enable = true;
     satisfactory = {
-      enable = true;
+      enable = false;
       saveDir = "/data/satisfactory";
       modded = {
         enable = true;
@@ -265,7 +265,7 @@
     opencloud.enable = true;
     dns.enable = true;
     authentik.enable = true;
-    valheim.enable = true;
+    valheim.enable = false;
     finance.enable = true;
     windrose = {
       enable = false;
@@ -275,9 +275,9 @@
     mattermost.enable = true;
     search.enable = true;
     ai.enable = true;
-    vanillaplusplus.enable = true;
+    vanillaplusplus.enable = false;
     palworld = {
-      enable = true;
+      enable = false;
       launchOptions = "-userperfthreads -UseMultithreadForDS -publiclobby -publicip=129.159.121.119 -port=8211";
     };
   };
