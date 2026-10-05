@@ -71,11 +71,27 @@
     flatpak.enable = true;
     dbus.enable = true;
     gnome.gnome-keyring.enable = true;
+    fwupd.enable = true;
 
     # Time
     geoclue2.enable = true;
     timesyncd.enable = true;
     automatic-timezoned.enable = true;
+
+    # Keyboard mapping
+    keyd = {
+      enable = true;
+      keyboards.internal = {
+        ids = [ "0001:0001:09650417" ];
+        settings.main = {
+          capslock = "leftcontrol";
+          backspace = "backslash";
+          backslash = "backspace";
+          leftalt = "leftmeta";
+          leftmeta = "leftalt";
+        };
+      };
+    };
 
     # Auto login
     getty = {

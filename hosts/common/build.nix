@@ -28,7 +28,7 @@ lib.mkMerge [
           sshKey = config.sops.secrets.id_nixbuild.path;
           system = "x86_64-linux";
           protocol = "ssh-ng";
-          maxJobs = 8;
+          maxJobs = 20;
           speedFactor = 4;
           supportedFeatures = [
             "big-parallel"
@@ -39,7 +39,7 @@ lib.mkMerge [
       ];
       settings = {
         builders-use-substitutes = true;
-        max-jobs = 1;
+        max-jobs = 0;
         fallback = true;
       };
     };
