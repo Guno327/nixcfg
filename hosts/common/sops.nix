@@ -19,24 +19,31 @@
 
       "nebula/laptop.key" = {
         owner = "nebula-mesh";
+        restartUnits = [ "nebula@mesh.service" ];
       };
       "nebula/laptop.crt" = {
         owner = "nebula-mesh";
+        restartUnits = [ "nebula@mesh.service" ];
       };
       "nebula/server.key" = {
         owner = "nebula-mesh";
+        restartUnits = [ "nebula@mesh.service" ];
       };
       "nebula/server.crt" = {
         owner = "nebula-mesh";
+        restartUnits = [ "nebula@mesh.service" ];
       };
       "nebula/desktop.key" = {
         owner = "nebula-mesh";
+        restartUnits = [ "nebula@mesh.service" ];
       };
       "nebula/desktop.crt" = {
         owner = "nebula-mesh";
+        restartUnits = [ "nebula@mesh.service" ];
       };
       "nebula/ca.crt" = {
         owner = "nebula-mesh";
+        restartUnits = [ "nebula@mesh.service" ];
       };
 
       gemini = {
