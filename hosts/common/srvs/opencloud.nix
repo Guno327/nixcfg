@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib;
@@ -42,6 +43,7 @@ in
     services = {
       opencloud = {
         enable = true;
+        package = pkgs.opencloud;
         url = "https://data.ghov.net";
         address = "127.0.0.1";
         port = 9200;

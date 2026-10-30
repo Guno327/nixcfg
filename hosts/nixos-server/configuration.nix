@@ -280,6 +280,11 @@
       enable = false;
       launchOptions = "-userperfthreads -UseMultithreadForDS -publiclobby -publicip=129.159.121.119 -port=8211";
     };
+    obico = {
+      enable = true;
+      address = "100.100.0.2";
+      gpu = true;
+    };
   };
 
   virtualisation.docker.enable = true;

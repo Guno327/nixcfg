@@ -15,6 +15,7 @@ in
         routers.auth-router = {
           rule = "Host(`auth.ghov.net`)";
           entryPoints = [ "websecure" ];
+          middlewares = [ "authentik-frame" ];
           priority = 10;
           service = "auth-service";
         };

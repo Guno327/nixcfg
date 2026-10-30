@@ -20,5 +20,6 @@
     ./search.nix
     ./vanillaplusplus.nix
     ./palworld.nix
+    ./obico.nix
   ];
 }
