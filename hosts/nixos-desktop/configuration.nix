@@ -1,12 +1,14 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 {
   imports = [
     ./hardware-configuration.nix
     ../common/orangebox.nix
+    ../common/scanner.nix
   ];
 
   # Boot.
@@ -34,7 +36,7 @@
     nftables.enable = true;
     networkmanager = {
       enable = true;
-      dns = "systemd-resolved";
+      dns = lib.mkForce "none";
       plugins = with pkgs; [
         networkmanager-openvpn
       ];
@@ -163,25 +165,10 @@
       LC_TELEPHONE = "en_US.UTF-8";
       LC_TIME = "en_US.UTF-8";
     };
-
-    # Japanese IME
-    inputMethod = {
-      type = "fcitx5";
-      enable = true;
-      fcitx5 = {
-        addons = with pkgs; [
-          fcitx5-mozc-ut
-          fcitx5-gtk
-        ];
-        waylandFrontend = true;
-      };
-    };
   };
 
   # Programs
   programs = {
-    virt-manager.enable = true;
-
     # Enable AppImage support
     appimage = {
       enable = true;
@@ -225,7 +212,6 @@
       pulseaudio
       easyeffects
       deepfilternet
-      audacity
     ];
   };
 

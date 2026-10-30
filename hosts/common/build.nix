@@ -39,7 +39,7 @@ lib.mkMerge [
       ];
       settings = {
         builders-use-substitutes = true;
-        max-jobs = 0;
+        max-jobs = 1;
         fallback = true;
       };
     };

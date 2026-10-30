@@ -2,6 +2,7 @@
   pkgs,
   inputs,
   config,
+  lib,
   ...
 }:
 {
@@ -28,7 +29,7 @@
     hostName = "nixos-laptop";
     networkmanager = {
       enable = true;
-      dns = "systemd-resolved";
+      dns = lib.mkForce "none";
       plugins = with pkgs; [
         networkmanager-openvpn
       ];
