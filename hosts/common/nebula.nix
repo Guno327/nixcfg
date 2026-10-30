@@ -2,7 +2,7 @@
 {
   services.nebula.networks."mesh" = {
     tun.device = "nebula0";
-    staticHostMap."100.100.0.1" = [ "lighthouse.ghov.net:4242" ];
+    staticHostMap."100.100.0.1" = [ "157.151.219.157:4242" ];
     lighthouses = [ "100.100.0.1" ];
     firewall = {
       inbound = [

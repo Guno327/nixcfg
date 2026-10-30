@@ -23,7 +23,7 @@ lib.mkMerge [
       distributedBuilds = true;
       buildMachines = [
         {
-          hostName = "100.100.0.2";
+          hostName = "100.100.0.3";
           sshUser = "nixbuild";
           sshKey = config.sops.secrets.id_nixbuild.path;
           system = "x86_64-linux";

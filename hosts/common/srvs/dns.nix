@@ -41,8 +41,8 @@ in
           ede.enable = true;
 
           ports = {
-            dns = "100.100.0.2:53";
-            tls = "100.100.0.2:853";
+            dns = "100.100.0.3:53";
+            tls = "100.100.0.3:853";
           };
 
           certFile = "/var/lib/acme/ghov.net/fullchain.pem";

@@ -189,7 +189,7 @@
     # Reroute DNS to unbound
     resolved = {
       settings.Resolve = {
-        DNS = [ "100.100.0.2" ];
+        DNS = [ "100.100.0.3" ];
         DNSOverTLS = false;
       };
     };
@@ -282,7 +282,7 @@
     };
     obico = {
       enable = true;
-      address = "100.100.0.2";
+      address = "100.100.0.3";
       gpu = true;
     };
   };
