@@ -116,7 +116,7 @@
         matchConfig.Name = "bond0";
         linkConfig.RequiredForOnline = "routable";
         networkConfig.LinkLocalAddressing = "no";
-        address = [ "10.0.0.3/24" ];
+        address = [ "192.168.1.3/24" ];
         routes = [
           { Gateway = "10.0.0.1"; }
         ];
@@ -184,14 +184,6 @@
       key = config.sops.secrets."nebula/server.key".path;
       cert = config.sops.secrets."nebula/server.crt".path;
       ca = config.sops.secrets."nebula/ca.crt".path;
-    };
-
-    # Reroute DNS to unbound
-    resolved = {
-      settings.Resolve = {
-        DNS = [ "100.100.0.3" ];
-        DNSOverTLS = false;
-      };
     };
 
     pcscd.enable = true;

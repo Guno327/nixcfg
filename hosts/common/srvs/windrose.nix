@@ -62,7 +62,7 @@ in
         GENERATE_SETTINGS = "true";
         INVITE_CODE = cfg.inviteCode;
         WINDROSE_PLUS_ENABLED = "true";
-        P2P_PROXY_ADDRESS = "10.0.0.3";
+        P2P_PROXY_ADDRESS = "192.168.1.3";
       };
 
       environmentFiles = [ config.sops.secrets.windrose-env.path ];
