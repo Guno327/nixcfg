@@ -36,7 +36,6 @@
 
   boot = {
     initrd = {
-      systemd.enable = true;
       availableKernelModules = [
         "ehci_pci"
         "ahci"

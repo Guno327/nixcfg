@@ -55,7 +55,6 @@ in
     };
 
     hardware.nvidia-container-toolkit.enable = mkIf cfg.gpu true;
-    virtualisation.containers.registries.search = [ "docker.io" ];
 
     networking.firewall.allowedTCPPorts = [ port ];
 

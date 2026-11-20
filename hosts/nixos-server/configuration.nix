@@ -65,7 +65,7 @@
           content = ''
             chain postrouting {
               type nat hook postrouting priority 100;
-              ip saddr 10.0.0.0/8 iifname "br-ex" oifname "bond0" masquerade
+              ip saddr 192.168.1.0/24 iifname "br-ex" oifname "bond0" masquerade
             }
           '';
         };
@@ -118,7 +118,7 @@
         networkConfig.LinkLocalAddressing = "no";
         address = [ "192.168.1.3/24" ];
         routes = [
-          { Gateway = "10.0.0.1"; }
+          { Gateway = "192.168.1.1"; }
         ];
       };
       "50-br-ex" = {
@@ -260,8 +260,9 @@
     valheim.enable = false;
     finance.enable = true;
     windrose = {
-      enable = false;
+      enable = true;
       inviteCode = "windroseghov";
+      steamLogin.enable = true;
     };
     discmod.enable = false;
     mattermost.enable = true;
